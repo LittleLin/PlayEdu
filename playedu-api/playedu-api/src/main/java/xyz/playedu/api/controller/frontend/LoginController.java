@@ -61,6 +61,8 @@ public class LoginController {
 
     @Autowired private LoginLockCache loginLockCache;
 
+    @Autowired private PasswordService passwordService;
+
     @PostMapping("/password")
     @SneakyThrows
     public JsonResponse password(@RequestBody @Validated LoginPasswordRequest req)
@@ -78,9 +80,10 @@ public class LoginController {
 
         loginLimitCache.check(email);
 
-        if (!HelperUtil.MD5(req.getPassword() + user.getSalt()).equals(user.getPassword())) {
+        if (!passwordService.matches(req.getPassword(), user.getPassword(), user.getSalt())) {
             return JsonResponse.error("電子郵件或密碼錯誤");
         }
+        userService.upgradePasswordHash(user, req.getPassword());
 
         if (user.getIsLock() == 1) {
             return JsonResponse.error("當前學員已鎖定無法登入");

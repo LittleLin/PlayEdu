@@ -29,11 +29,11 @@ import xyz.playedu.common.domain.UserDepartment;
 import xyz.playedu.common.exception.NotFoundException;
 import xyz.playedu.common.exception.ServiceException;
 import xyz.playedu.common.mapper.UserMapper;
+import xyz.playedu.common.service.PasswordService;
 import xyz.playedu.common.service.UserDepartmentService;
 import xyz.playedu.common.service.UserService;
 import xyz.playedu.common.types.paginate.PaginationResult;
 import xyz.playedu.common.types.paginate.UserPaginateFilter;
-import xyz.playedu.common.util.HelperUtil;
 
 /**
  * @author tengteng
@@ -44,6 +44,8 @@ import xyz.playedu.common.util.HelperUtil;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired private UserDepartmentService userDepartmentService;
+
+    @Autowired private PasswordService passwordService;
 
     @Override
     public boolean emailIsExists(String email) {
@@ -94,15 +96,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             String password,
             String idCard,
             Integer[] depIds) {
-        String salt = HelperUtil.randomString(6);
-        String passwordHashed = HelperUtil.MD5(password + salt);
-
         User user = new User();
         user.setEmail(email);
         user.setName(name);
         user.setAvatar(avatar);
-        user.setPassword(passwordHashed);
-        user.setSalt(salt);
+        user.setPassword(passwordService.hash(password));
+        user.setSalt("");
         user.setIdCard(idCard);
         user.setCredit1(0);
         user.setIsSetPassword(0);
@@ -141,7 +140,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         newUser.setIdCard(idCard);
 
         if (password != null && !password.isEmpty()) {
-            newUser.setPassword(HelperUtil.MD5(password + user.getSalt()));
+            newUser.setPassword(passwordService.hash(password));
+            newUser.setSalt("");
         }
 
         if (newUser.getName() != null
@@ -186,16 +186,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void passwordChange(User user, String oldPassword, String newPassword)
             throws ServiceException {
-        if (!HelperUtil.MD5(oldPassword + user.getSalt()).equals(user.getPassword())) {
+        if (!passwordService.matches(oldPassword, user.getPassword(), user.getSalt())) {
             throw new ServiceException("原密碼不正確");
         }
         updateById(
                 new User() {
                     {
                         setId(user.getId());
-                        setPassword(HelperUtil.MD5(newPassword + user.getSalt()));
+                        setPassword(passwordService.hash(newPassword));
+                        setSalt("");
                     }
                 });
+    }
+
+    @Override
+    public void upgradePasswordHash(User user, String rawPassword) {
+        if (!passwordService.isLegacyHash(user.getPassword())) {
+            return;
+        }
+        User newUser = new User();
+        newUser.setId(user.getId());
+        newUser.setPassword(passwordService.hash(rawPassword));
+        newUser.setSalt("");
+        updateById(newUser);
     }
 
     @Override

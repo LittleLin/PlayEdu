@@ -31,15 +31,17 @@ import xyz.playedu.common.exception.ServiceException;
 import xyz.playedu.common.mapper.AdminUserMapper;
 import xyz.playedu.common.service.AdminUserRoleService;
 import xyz.playedu.common.service.AdminUserService;
+import xyz.playedu.common.service.PasswordService;
 import xyz.playedu.common.types.paginate.AdminUserPaginateFilter;
 import xyz.playedu.common.types.paginate.PaginationResult;
-import xyz.playedu.common.util.HelperUtil;
 
 @Service
 public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser>
         implements AdminUserService {
 
     @Autowired private AdminUserRoleService userRoleService;
+
+    @Autowired private PasswordService passwordService;
 
     public PaginationResult<AdminUser> paginate(
             int page, int size, AdminUserPaginateFilter filter) {
@@ -105,13 +107,11 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
             throw new ServiceException("電子郵件已存在");
         }
 
-        String salt = HelperUtil.randomString(6);
-
         AdminUser adminUser = new AdminUser();
         adminUser.setName(name);
         adminUser.setEmail(email);
-        adminUser.setSalt(salt);
-        adminUser.setPassword(HelperUtil.MD5(password + salt));
+        adminUser.setSalt("");
+        adminUser.setPassword(passwordService.hash(password));
         adminUser.setIsBanLogin(isBanLogin);
         adminUser.setCreatedAt(new Date());
         adminUser.setUpdatedAt(new Date());
@@ -177,7 +177,8 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
         }
 
         if (password != null && password.length() > 0) { // 更換了密碼
-            updateAdminUser.setPassword(HelperUtil.MD5(password + user.getSalt()));
+            updateAdminUser.setPassword(passwordService.hash(password));
+            updateAdminUser.setSalt("");
         }
 
         updateById(updateAdminUser);
@@ -199,10 +200,22 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
 
     @Override
     public void passwordChange(AdminUser user, String password) {
-        String newPassword = HelperUtil.MD5(password + user.getSalt());
         AdminUser newUser = new AdminUser();
         newUser.setId(user.getId());
-        newUser.setPassword(newPassword);
+        newUser.setPassword(passwordService.hash(password));
+        newUser.setSalt("");
+        updateById(newUser);
+    }
+
+    @Override
+    public void upgradePasswordHash(AdminUser user, String rawPassword) {
+        if (!passwordService.isLegacyHash(user.getPassword())) {
+            return;
+        }
+        AdminUser newUser = new AdminUser();
+        newUser.setId(user.getId());
+        newUser.setPassword(passwordService.hash(rawPassword));
+        newUser.setSalt("");
         updateById(newUser);
     }
 

@@ -33,9 +33,9 @@ import xyz.playedu.common.context.BCtx;
 import xyz.playedu.common.domain.AdminUser;
 import xyz.playedu.common.service.AdminUserService;
 import xyz.playedu.common.service.BackendAuthService;
+import xyz.playedu.common.service.PasswordService;
 import xyz.playedu.common.service.RateLimiterService;
 import xyz.playedu.common.types.JsonResponse;
-import xyz.playedu.common.util.HelperUtil;
 import xyz.playedu.common.util.IpUtil;
 import xyz.playedu.common.util.MemoryCacheUtil;
 import xyz.playedu.common.util.RequestUtil;
@@ -56,6 +56,8 @@ public class LoginController {
 
     @Autowired private PlayEduConfig playEduConfig;
 
+    @Autowired private PasswordService passwordService;
+
     @PostMapping("/login")
     @Log(title = "管理員-登入", businessType = BusinessTypeConstant.LOGIN)
     public JsonResponse login(@RequestBody @Validated LoginRequest loginRequest) {
@@ -72,11 +74,11 @@ public class LoginController {
                     String.format("您的帳號已被鎖定，請%s後重試", exp > 60 ? exp / 60 + "分鐘" : exp + "秒"));
         }
 
-        String password =
-                HelperUtil.MD5(loginRequest.getPassword() + adminUser.getSalt()).toLowerCase();
-        if (!adminUser.getPassword().equals(password)) {
+        if (!passwordService.matches(
+                loginRequest.getPassword(), adminUser.getPassword(), adminUser.getSalt())) {
             return JsonResponse.error("電子郵件或密碼錯誤");
         }
+        adminUserService.upgradePasswordHash(adminUser, loginRequest.getPassword());
 
         MemoryCacheUtil.del(limitKey);
 
@@ -125,8 +127,7 @@ public class LoginController {
     @Log(title = "管理員-密碼修改", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse changePassword(@RequestBody @Validated PasswordChangeRequest req) {
         AdminUser user = BCtx.getAdminUser();
-        String password = HelperUtil.MD5(req.getOldPassword() + user.getSalt());
-        if (!password.equals(user.getPassword())) {
+        if (!passwordService.matches(req.getOldPassword(), user.getPassword(), user.getSalt())) {
             return JsonResponse.error("原密碼不正確");
         }
         adminUserService.passwordChange(user, req.getNewPassword());

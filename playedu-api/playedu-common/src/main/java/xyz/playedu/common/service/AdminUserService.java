@@ -65,6 +65,8 @@ public interface AdminUserService extends IService<AdminUser> {
 
     void passwordChange(AdminUser user, String password);
 
+    void upgradePasswordHash(AdminUser user, String rawPassword);
+
     List<AdminUser> chunks(List<Integer> ids);
 
     Long total();

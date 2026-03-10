@@ -47,7 +47,6 @@ import xyz.playedu.common.types.paginate.PaginationResult;
 import xyz.playedu.common.types.paginate.UserCourseHourRecordPaginateFilter;
 import xyz.playedu.common.types.paginate.UserCourseRecordPaginateFilter;
 import xyz.playedu.common.types.paginate.UserPaginateFilter;
-import xyz.playedu.common.util.HelperUtil;
 import xyz.playedu.common.util.StringUtil;
 import xyz.playedu.course.domain.*;
 import xyz.playedu.course.service.*;
@@ -64,6 +63,8 @@ import xyz.playedu.resource.service.ResourceService;
 public class UserController {
 
     @Autowired private UserService userService;
+
+    @Autowired private PasswordService passwordService;
 
     @Autowired private UserDepartmentService userDepartmentService;
 
@@ -377,10 +378,9 @@ public class UserController {
 
             // 待插入數據
             User tmpInsertUser = new User();
-            String tmpSalt = HelperUtil.randomString(6);
             tmpInsertUser.setEmail(userItem.getEmail());
-            tmpInsertUser.setPassword(HelperUtil.MD5(tmpPassword + tmpSalt));
-            tmpInsertUser.setSalt(tmpSalt);
+            tmpInsertUser.setPassword(passwordService.hash(tmpPassword));
+            tmpInsertUser.setSalt("");
             tmpInsertUser.setName(tmpName);
             tmpInsertUser.setAvatar(defaultAvatar);
             tmpInsertUser.setIdCard(userItem.getIdCard());
