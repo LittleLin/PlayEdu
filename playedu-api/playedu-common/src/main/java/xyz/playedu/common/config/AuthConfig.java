@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Data
 public class AuthConfig {
-    @Value("${sa-token.timeout}")
+    @Value("${playedu.auth.timeout}")
     private Integer expired;
+
+    @Value("${playedu.auth.jwt-secret-key}")
+    private String jwtSecretKey;
 }

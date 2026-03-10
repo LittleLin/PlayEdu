@@ -15,17 +15,19 @@
  */
 package xyz.playedu.common.util;
 
-import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.net.InetAddress;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.net.UnknownHostException;
-import java.util.HashMap;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class IpUtil {
+    private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
     /**
      * 獲取客戶端IP
@@ -75,21 +77,19 @@ public class IpUtil {
         }
 
         try {
+            HttpRequest request =
+                    HttpRequest.newBuilder()
+                            .uri(URI.create(IP_URL + "?ip=" + ip + "&json=true"))
+                            .GET()
+                            .build();
             String rspStr =
-                    HttpUtil.get(
-                            IP_URL,
-                            new HashMap<>() {
-                                {
-                                    put("ip", ip);
-                                    put("json", true);
-                                }
-                            });
+                    HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString()).body();
             if (StringUtil.isEmpty(rspStr)) {
                 log.error("獲取地理位置異常1 {}", ip);
                 return UNKNOWN;
             }
-            JSONObject json = JSONUtil.parseObj(rspStr);
-            return String.format("%s-%s", json.getStr("pro"), json.getStr("city"));
+            JsonNode json = JsonUtils.parse(rspStr);
+            return String.format("%s-%s", json.path("pro").asText(), json.path("city").asText());
         } catch (Exception e) {
             log.error("獲取地理位置異常2 {} msg {}", ip, e.getMessage());
         }

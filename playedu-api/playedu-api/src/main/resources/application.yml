@@ -40,18 +40,12 @@ mybatis-plus:
   global-config:
     banner: false
 
-sa-token:
-  is-print: false
-  token-name: "Authorization"
-  timeout: 1296000 #token有效期[單位:秒,預設15天]
-  is-concurrent: false #限制同時登入
-  is-share: false
-  jwt-secret-key: "playeduxyz"
-  token-prefix: "Bearer"
-  is-log: false
-  log-level: "warn"
-
 playedu:
+  auth:
+    token-name: "Authorization"
+    timeout: 1296000 #token有效期[單位:秒,預設15天]
+    jwt-secret-key: "playeduxyz-playedu-secret-key-2026"
+    token-prefix: "Bearer"
   core:
     testing: false
   limiter:

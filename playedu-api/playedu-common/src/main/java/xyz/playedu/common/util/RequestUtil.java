@@ -15,8 +15,6 @@
  */
 package xyz.playedu.common.util;
 
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
@@ -31,12 +29,12 @@ public class RequestUtil {
         return servletRequestAttributes == null ? null : servletRequestAttributes.getRequest();
     }
 
-    public static UserAgent ua() {
+    public static UserAgentInfo ua() {
         HttpServletRequest request = RequestUtil.handler();
         if (request == null) {
             return null;
         }
-        return UserAgentUtil.parse(request.getHeader("User-Agent"));
+        return UserAgentParser.parse(request.getHeader("User-Agent"));
     }
 
     public static String token() {

@@ -15,7 +15,8 @@
  */
 package xyz.playedu.api.controller.backend;
 
-import cn.hutool.core.date.DateTime;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 import lombok.Data;
@@ -621,10 +622,12 @@ public class UserController {
     @Log(title = "學員-學習統計", businessType = BusinessTypeConstant.GET)
     public JsonResponse learn(@PathVariable(name = "id") Integer id) {
         // 最近一個月的每天學習時長
-        String todayStr = DateTime.now().toDateStr();
-        String startDateStr = DateTime.of(DateTime.now().getTime() - 86400000L * 30).toDateStr();
-        long startTime = new DateTime(startDateStr).getTime();
-        long endTime = new DateTime(todayStr).getTime();
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusDays(30);
+        String todayStr = today.toString();
+        String startDateStr = startDate.toString();
+        long startTime = startDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        long endTime = today.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
         List<UserLearnDurationStats> monthRecords =
                 userLearnDurationStatsService.dateBetween(id, startDateStr, todayStr);
@@ -632,7 +635,12 @@ public class UserController {
                 monthRecords.stream()
                         .collect(
                                 Collectors.toMap(
-                                        e -> DateTime.of(e.getCreatedDate()).toDateStr(),
+                                        e ->
+                                                e.getCreatedDate()
+                                                        .toInstant()
+                                                        .atZone(ZoneId.systemDefault())
+                                                        .toLocalDate()
+                                                        .toString(),
                                         UserLearnDurationStats::getDuration));
 
         @Data
@@ -644,7 +652,12 @@ public class UserController {
         List<StatsItem> data = new ArrayList<>();
 
         while (startTime <= endTime) {
-            String dateKey = DateTime.of(startTime).toDateStr();
+            String dateKey =
+                    new Date(startTime)
+                            .toInstant()
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDate()
+                            .toString();
 
             Long duration = 0L;
             if (date2duration.get(dateKey) != null) {

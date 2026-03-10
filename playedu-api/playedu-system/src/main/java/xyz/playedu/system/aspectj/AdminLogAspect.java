@@ -15,11 +15,12 @@
  */
 package xyz.playedu.system.aspectj;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -38,6 +39,7 @@ import xyz.playedu.common.service.AdminLogService;
 import xyz.playedu.common.service.AdminUserService;
 import xyz.playedu.common.service.BackendAuthService;
 import xyz.playedu.common.util.IpUtil;
+import xyz.playedu.common.util.JsonUtils;
 import xyz.playedu.common.util.RequestUtil;
 import xyz.playedu.common.util.StringUtil;
 
@@ -116,7 +118,7 @@ public class AdminLogAspect {
             String params = "";
             Map<String, String[]> parameterMap = request.getParameterMap();
             if (StringUtil.isNotEmpty(parameterMap)) {
-                params = JSONUtil.toJsonStr(parameterMap);
+                params = JsonUtils.toJson(parameterMap);
             } else {
                 Object[] args = joinPoint.getArgs();
                 if (StringUtil.isNotNull(args)) {
@@ -124,12 +126,12 @@ public class AdminLogAspect {
                 }
             }
             if (StringUtil.isNotEmpty(params)) {
-                JSONObject paramObj = excludeProperties(params);
-                adminLog.setParam(JSONUtil.toJsonStr(paramObj));
+                JsonNode paramObj = excludeProperties(params);
+                adminLog.setParam(JsonUtils.toJson(paramObj));
             }
             if (null != jsonResult) {
-                jsonResult = excludeProperties(JSONUtil.toJsonStr(jsonResult));
-                adminLog.setResult(JSONUtil.toJsonStr(jsonResult));
+                jsonResult = excludeProperties(JsonUtils.toJson(jsonResult));
+                adminLog.setResult(JsonUtils.toJson(jsonResult));
             }
 
             adminLog.setIp(IpUtil.getIpAddress());
@@ -158,29 +160,28 @@ public class AdminLogAspect {
         return null;
     }
 
-    public JSONObject excludeProperties(String jsonData) {
-        JSONObject jsonObjectResult = new JSONObject();
-        // 把傳入String類型轉換成JSONObject對象
-        if (JSONUtil.isTypeJSONObject(jsonData)) {
-            JSONObject jsonObject = JSONUtil.parseObj(jsonData);
-            for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                if (StringUtil.isNotNull(value)) {
-                    // 如果value依舊是json類型的話繼續遞歸解析
-                    if (JSONUtil.isTypeJSONObject(value.toString())) {
-                        jsonObjectResult.put(key, excludeProperties(entry.getValue().toString()));
-                    } else {
-                        // 如果value是單純的數據,執行脫敏操作
-                        if (EXCLUDE_PROPERTIES.contains(key)) {
-                            jsonObjectResult.put(key, SystemConstant.CONFIG_MASK);
-                        } else {
-                            jsonObjectResult.put(key, value);
-                        }
-                    }
-                }
+    public JsonNode excludeProperties(String jsonData) throws Exception {
+        ObjectNode result = JsonUtils.objectMapper().createObjectNode();
+        if (!JsonUtils.isObject(jsonData)) {
+            return result;
+        }
+        JsonNode jsonObject = JsonUtils.parse(jsonData);
+        Iterator<Map.Entry<String, JsonNode>> fields = jsonObject.fields();
+        while (fields.hasNext()) {
+            Map.Entry<String, JsonNode> entry = fields.next();
+            String key = entry.getKey();
+            JsonNode value = entry.getValue();
+            if (value == null || value.isNull()) {
+                continue;
+            }
+            if (value.isObject()) {
+                result.set(key, excludeProperties(value.toString()));
+            } else if (EXCLUDE_PROPERTIES.contains(key)) {
+                result.put(key, SystemConstant.CONFIG_MASK);
+            } else {
+                result.set(key, value);
             }
         }
-        return jsonObjectResult;
+        return result;
     }
 }

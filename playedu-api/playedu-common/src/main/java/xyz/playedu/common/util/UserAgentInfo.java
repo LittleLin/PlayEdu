@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package xyz.playedu.common.config;
+package xyz.playedu.common.util;
 
-import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
-import cn.dev33.satoken.stp.StpLogic;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Configuration
-public class SaTokenConfig {
-    // Sa-Token 整合 jwt (Simple 簡單模式)
-    @Bean
-    public StpLogic getStpLogicJwt() {
-        return new StpLogicJwtForSimple();
-    }
+@Getter
+@AllArgsConstructor
+public class UserAgentInfo {
+    private final String browser;
+    private final String version;
+    private final String os;
 }

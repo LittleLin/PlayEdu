@@ -49,8 +49,8 @@ public class UserLoginListener {
                 exp,
                 event.getIp(),
                 ipArea,
-                event.getUserAgent().getBrowser().toString(),
+                event.getUserAgent().getBrowser(),
                 event.getUserAgent().getVersion(),
-                event.getUserAgent().getOs().toString());
+                event.getUserAgent().getOs());
     }
 }

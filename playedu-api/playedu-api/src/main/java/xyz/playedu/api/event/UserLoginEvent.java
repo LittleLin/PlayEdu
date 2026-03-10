@@ -15,11 +15,11 @@
  */
 package xyz.playedu.api.event;
 
-import cn.hutool.http.useragent.UserAgent;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
+import xyz.playedu.common.util.UserAgentInfo;
 
 /**
  * @Author 杭州白書科技有限公司
@@ -40,7 +40,7 @@ public class UserLoginEvent extends ApplicationEvent {
 
     private String ip;
 
-    private UserAgent userAgent;
+    private UserAgentInfo userAgent;
 
     public UserLoginEvent(
             Object source,
@@ -48,7 +48,7 @@ public class UserLoginEvent extends ApplicationEvent {
             String email,
             String token,
             String ip,
-            UserAgent userAgent) {
+            UserAgentInfo userAgent) {
         super(source);
         this.userId = userId;
         this.email = email;

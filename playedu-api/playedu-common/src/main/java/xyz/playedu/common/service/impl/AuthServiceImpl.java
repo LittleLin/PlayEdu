@@ -15,14 +15,21 @@
  */
 package xyz.playedu.common.service.impl;
 
-import cn.dev33.satoken.stp.SaLoginConfig;
-import cn.dev33.satoken.stp.StpUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
+import javax.crypto.SecretKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.playedu.common.config.AuthConfig;
 import xyz.playedu.common.service.AuthService;
+import xyz.playedu.common.util.RequestUtil;
 
 @Service
 @Slf4j
@@ -32,52 +39,93 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String loginUsingId(Integer userId, String loginUrl, String prv) {
-        StpUtil.login(
-                userId,
-                SaLoginConfig.setExtra("url", loginUrl)
-                        .setExtra("prv", prv)
-                        .setExtra(
-                                "exp",
-                                String.valueOf(
-                                        System.currentTimeMillis()
-                                                + authConfig.getExpired() * 1000L)));
-        return StpUtil.getTokenValue();
+        long expiredAt = System.currentTimeMillis() + authConfig.getExpired() * 1000L;
+        String jti = UUID.randomUUID().toString();
+
+        return Jwts.builder()
+                .subject(String.valueOf(userId))
+                .id(jti)
+                .claim("url", loginUrl)
+                .claim("prv", prv)
+                .claim("exp", String.valueOf(expiredAt))
+                .issuedAt(new Date())
+                .expiration(new Date(expiredAt))
+                .signWith(signingKey(), Jwts.SIG.HS256)
+                .compact();
     }
 
     @Override
     public boolean check(String prv) {
-        if (!StpUtil.isLogin()) {
+        Claims claims = parseCurrentClaims();
+        if (claims == null) {
             return false;
         }
-        String tokenPrv = (String) StpUtil.getExtra("prv");
+        String tokenPrv = claims.get("prv", String.class);
         return prv.equals(tokenPrv);
     }
 
     @Override
     public Integer userId() {
-        return StpUtil.getLoginIdAsInt();
+        Claims claims = requireCurrentClaims();
+        return Integer.parseInt(claims.getSubject());
     }
 
     @Override
     public void logout() {
-        StpUtil.logout();
+        // Stateless JWT logout is handled by the caller's login-record update.
     }
 
     @Override
     public String jti() {
-        return (String) StpUtil.getExtra("rnStr");
+        Claims claims = requireCurrentClaims();
+        return claims.getId();
     }
 
     @Override
     public Long expired() {
-        return (Long) StpUtil.getExtra("exp");
+        Claims claims = requireCurrentClaims();
+        return Long.parseLong(claims.get("exp", String.class));
     }
 
     @Override
     public HashMap<String, String> parse(String token) {
+        Claims claims = parseClaims(token);
         HashMap<String, String> data = new HashMap<>();
-        data.put("jti", (String) StpUtil.getExtra(token, "rnStr"));
-        data.put("exp", (String) StpUtil.getExtra(token, "exp"));
+        data.put("jti", claims.getId());
+        data.put("exp", claims.get("exp", String.class));
         return data;
+    }
+
+    private Claims requireCurrentClaims() {
+        Claims claims = parseCurrentClaims();
+        if (claims == null) {
+            throw new IllegalStateException("token is invalid");
+        }
+        return claims;
+    }
+
+    private Claims parseCurrentClaims() {
+        String token = RequestUtil.token();
+        if (token == null || token.isBlank()) {
+            return null;
+        }
+        try {
+            return parseClaims(token);
+        } catch (JwtException | IllegalArgumentException e) {
+            log.debug("Failed to parse current token", e);
+            return null;
+        }
+    }
+
+    private Claims parseClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(signingKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    private SecretKey signingKey() {
+        return Keys.hmacShaKeyFor(authConfig.getJwtSecretKey().getBytes(StandardCharsets.UTF_8));
     }
 }

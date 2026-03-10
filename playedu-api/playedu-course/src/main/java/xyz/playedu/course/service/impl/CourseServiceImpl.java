@@ -15,8 +15,9 @@
  */
 package xyz.playedu.course.service.impl;
 
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
@@ -161,7 +162,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         newCourse.setShortDesc(shortDesc);
 
         if (StringUtil.isNotEmpty(sortAt)) {
-            newCourse.setSortAt(DateUtil.parseDate(sortAt));
+            newCourse.setSortAt(
+                    Date.from(LocalDate.parse(sortAt).atStartOfDay(ZoneId.systemDefault()).toInstant()));
         }
 
         updateById(newCourse);

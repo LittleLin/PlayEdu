@@ -15,12 +15,11 @@
  */
 package xyz.playedu.course.service.impl;
 
-import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import xyz.playedu.course.domain.UserLearnDurationStats;
 import xyz.playedu.course.mapper.UserLearnDurationStatsMapper;
@@ -37,9 +36,9 @@ public class UserLearnDurationStatsServiceImpl
         implements UserLearnDurationStatsService {
 
     @Override
-    @SneakyThrows
     public void storeOrUpdate(Integer userId, Long startTime, Long endTime) {
-        String date = new DateTime().toDateStr();
+        LocalDate today = LocalDate.now();
+        String date = today.toString();
         Long duration = endTime - startTime;
 
         UserLearnDurationStats stats =
@@ -48,7 +47,7 @@ public class UserLearnDurationStatsServiceImpl
             UserLearnDurationStats newStats = new UserLearnDurationStats();
             newStats.setUserId(userId);
             newStats.setDuration(duration);
-            newStats.setCreatedDate(new DateTime(date));
+            newStats.setCreatedDate(Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant()));
             save(newStats);
             return;
         }
@@ -60,25 +59,20 @@ public class UserLearnDurationStatsServiceImpl
     }
 
     @Override
-    @SneakyThrows
     public Long todayTotal() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = simpleDateFormat.format(new Date());
+        String today = LocalDate.now().toString();
         return count(query().getWrapper().eq("created_date", today));
     }
 
     @Override
-    @SneakyThrows
     public Long yesterdayTotal() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String yesterday = simpleDateFormat.format(new Date(System.currentTimeMillis() - 86399000));
+        String yesterday = LocalDate.now().minusDays(1).toString();
         return count(query().getWrapper().eq("created_date", yesterday));
     }
 
     @Override
     public List<UserLearnDurationStats> top10() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = simpleDateFormat.format(new Date());
+        String today = LocalDate.now().toString();
         return list(
                 query().getWrapper()
                         .eq("created_date", today)
@@ -88,8 +82,7 @@ public class UserLearnDurationStatsServiceImpl
 
     @Override
     public Long todayUserDuration(Integer userId) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = simpleDateFormat.format(new Date());
+        String today = LocalDate.now().toString();
         UserLearnDurationStats stats =
                 getOne(query().getWrapper().eq("user_id", userId).eq("created_date", today));
         if (stats == null) {
