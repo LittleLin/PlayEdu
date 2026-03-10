@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/eclipse-temurin:17 AS builder
+FROM eclipse-temurin:17-jdk-jammy AS builder
 
 COPY . /app
 
@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN /app/mvnw -Dmaven.test.skip=true clean package
 
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/eclipse-temurin:17 AS base
+FROM eclipse-temurin:17-jre-jammy AS base
 
 WORKDIR /app
 

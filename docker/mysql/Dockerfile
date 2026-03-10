@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/mysql:8.1
+FROM mysql:8.1
 
 COPY my.cnf /etc/mysql/conf.d/my.cnf
 

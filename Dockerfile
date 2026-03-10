@@ -1,8 +1,10 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/node:20-alpine AS node-builder
+FROM node:20-alpine AS node-builder
 
 COPY playedu-admin /app/admin
 COPY playedu-pc /app/pc
 COPY playedu-h5 /app/h5
+
+RUN corepack enable
 
 WORKDIR /app/admin
 RUN pnpm i && VITE_APP_URL=/api/ pnpm build
@@ -13,7 +15,7 @@ RUN pnpm i && VITE_APP_URL=/api/ pnpm build
 WORKDIR /app/h5
 RUN pnpm i && VITE_APP_URL=/api/ pnpm build
 
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/eclipse-temurin:17 AS java-builder
+FROM eclipse-temurin:17-jdk-jammy AS java-builder
 
 COPY playedu-api /app
 
@@ -21,7 +23,11 @@ WORKDIR /app
 
 RUN /app/mvnw -Dmaven.test.skip=true clean package
 
-FROM registry.cn-hangzhou.aliyuncs.com/hzbs/eclipse-temurin:17 AS base
+FROM eclipse-temurin:17-jre-jammy AS base
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nginx \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=java-builder /app/playedu-api/target/playedu-api.jar /app/api/app.jar
 
