@@ -23,8 +23,8 @@ services:
       - DB_PORT=3306
       - DB_NAME=playedu
       - DB_USER=root
-      - DB_PASS=playeduxyz
-      - PLAYEDU_AUTH_JWT_SECRET_KEY=${PLAYEDU_JWT_KEY:-playeduxyz-playedu-secret-key-2026}
+      - DB_PASS=${PLAYEDU_DB_PASSWORD:?PLAYEDU_DB_PASSWORD is required}
+      - PLAYEDU_AUTH_JWT_SECRET_KEY=${PLAYEDU_AUTH_JWT_SECRET_KEY:?PLAYEDU_AUTH_JWT_SECRET_KEY is required}
     ports:
       - "${PLAYEDU_API_PORT:-9700}:9898"
       - "${PLAYEDU_PC_PORT:-9800}:9800"
@@ -41,7 +41,7 @@ services:
     restart: always
     environment:
       - MYSQL_DATABASE=playedu
-      - MYSQL_ROOT_PASSWORD=playeduxyz
+      - MYSQL_ROOT_PASSWORD=${PLAYEDU_DB_PASSWORD:?PLAYEDU_DB_PASSWORD is required}
       - TZ=UTC
     volumes:
       - mysql-data:/var/lib/mysql

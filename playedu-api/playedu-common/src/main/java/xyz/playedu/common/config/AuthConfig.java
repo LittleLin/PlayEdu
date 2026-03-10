@@ -15,7 +15,9 @@
  */
 package xyz.playedu.common.config;
 
+import jakarta.annotation.PostConstruct;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,4 +29,12 @@ public class AuthConfig {
 
     @Value("${playedu.auth.jwt-secret-key}")
     private String jwtSecretKey;
+
+    @PostConstruct
+    public void validate() {
+        if (StringUtils.isBlank(jwtSecretKey) || jwtSecretKey.length() < 32) {
+            throw new IllegalStateException(
+                    "playedu.auth.jwt-secret-key must be provided and be at least 32 characters long");
+        }
+    }
 }

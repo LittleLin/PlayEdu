@@ -44,7 +44,7 @@ playedu:
   auth:
     token-name: "Authorization"
     timeout: 1296000 #token有效期[單位:秒,預設15天]
-    jwt-secret-key: "playeduxyz-playedu-secret-key-2026"
+    jwt-secret-key: "${PLAYEDU_AUTH_JWT_SECRET_KEY:}"
     token-prefix: "Bearer"
   core:
     testing: false

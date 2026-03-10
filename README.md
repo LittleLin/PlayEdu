@@ -1,50 +1,201 @@
-<p align="center">
-<img src="https://meedu.cloud.oss.meedu.vip/playedu/%E5%A4%B4%E5%9B%BE.jpg"/>
-</p>
+# PlayEdu
 
-<h4 align="center">
-  <a href="http://www.playeduos.com">PlayEdu官網</a> |
-  <a href="https://www.playeduos.com/function.html">PlayEdu商業版</a> |
-  <a href="https://faq.playeduos.com/opensource-maintenance-handbook/article/t08o2iHfLR">部署文檔</a> |
-  <a href="https://www.playeduos.com/demo.html">開源版演示站</a>
-</h4>
+這個 repo 是 PlayEdu 2.0 的可本地開發版本，包含：
 
-PlayEdu 是由白書科技團隊經營多年線上教培領域打造出的一款業內領先的線上培訓解決方案。PlayEdu 基於 Java + MySQL 開發，採用前後端分離模式，前端核心框架爲 React18，後端核心框架爲 SpringBoot3。開源版本提供部門管理、學員管理、在線影片學習、學員進度追蹤、影片私有化存儲等基礎培訓功能。  
-**針對企業級培訓場景，我們精心打造了“功能更多、響應更快、併發更強”的企業版本，滿足企業多樣化的培訓需求。企業版本支持音影片學習、文檔在線預覽、線上考試、學習任務等多種學習方式，並提供多重安全防護，如影片轉碼加密、防盜鏈、學習防快進、防掛機等。同時，我們集成了企業微信、釘釘、飛書等主流辦公系統，幫助企業快速部署專屬培訓平臺！**
+- `playedu-admin`：管理後台
+- `playedu-pc`：PC 學員端
+- `playedu-h5`：H5 學員端
+- `playedu-api`：Spring Boot API
+- `compose.yml`：整套 Docker 啟動方式
 
-## 🚀 快速上手
+預設對外端口：
 
-拉取代碼：
+- 管理後台：`http://localhost:9900`
+- PC 學員端：`http://localhost:9800`
+- H5 學員端：`http://localhost:9801`
+- API：`http://localhost:9700`
 
+說明：
+
+- `9700` 是後端 API 端口，不是前端頁面
+- 直接打開 `http://localhost:9700`，正常會看到 `系統運作中...`
+- 前端頁面請使用 `9900`、`9800`、`9801`
+
+## 環境需求
+
+如果你要用 Docker 啟動整套服務：
+
+- Docker
+- Docker Compose
+
+如果你要本地分開開發前後端：
+
+- Node.js 20
+- `pnpm`
+- Java 17
+- Maven 或專案內 `./mvnw`
+- MySQL 8
+
+## 先準備環境變數
+
+專案不再內建可直接使用的密碼與 JWT secret。啟動前先建立 `.env`：
+
+```bash
+cp .env.example .env
 ```
-git clone --branch main https://gitee.com/playeduxyz/playedu.git playedu
+
+然後編輯 `.env`，至少填這兩個值：
+
+```env
+PLAYEDU_DB_PASSWORD=換成你的強密碼
+PLAYEDU_AUTH_JWT_SECRET_KEY=換成至少32字元的隨機字串
 ```
 
-構建鏡像：
+`.env.example` 也包含可調整的 port 設定。
 
+## 用 Docker 啟動整套服務
+
+第一次或有 Dockerfile / 前後端 / API 變更時：
+
+```bash
+docker compose up -d --build
 ```
-cd playedu && docker-compose up -d
+
+之後一般重啟：
+
+```bash
+docker compose up -d
 ```
 
-命令執行完成以後，打開您的瀏覽器，輸入 `http://localhost:9900` 即可訪問後台管理界面，預設管理員帳號和密碼 `admin@playedu.xyz / playedu` 。
+查看服務狀態：
 
-- PC 端口 `http://localhost:9800`
-- H5 端口 `http://localhost:9801`
-- API 端口 `http://localhost:9700`
+```bash
+docker compose ps
+```
 
-## 🔰️ 軟件安全
+查看日誌：
 
-安全問題應該通過郵件私下報告給 tengyongzhi@meedu.vip。 您將在 24 小時內收到回覆，如果因爲某些原因您沒有收到回覆，請通過回覆原始郵件的方式跟進，以確保我們收到了您的原始郵件。
+```bash
+docker compose logs -f
+```
 
-## 👁 界面預覽
+停止服務：
 
-![學員端口界面預覽](https://meedu.cloud.oss.meedu.vip/playedu/%E5%89%8D%E5%8F%B0%E9%A1%B5%E9%9D%A2.jpg)
+```bash
+docker compose down
+```
 
-![管理後台界面預覽](https://meedu.cloud.oss.meedu.vip/playedu/%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2.jpg)
+如果要連資料庫，預設是：
 
-## 📃 使用須知
+- Host: `127.0.0.1`
+- Port: `23307`
+- Database: `playedu`
+- Username: `root`
+- Password: `.env` 內的 `PLAYEDU_DB_PASSWORD`
 
-- **1.版權歸屬**： 杭州白書科技有限公司對 PlayEdu 開源版擁有完整版權，所有使用權保留。
-- **2.代碼修改**： 在遵守相關開源協議的嚴格前提下，允許對 PlayEdu 開源版代碼進行修改。修改時，必須在代碼中加入明確備註，詳細記錄每一處修改的具體內容。
-- **3.版權保護**： 嚴令禁止刪除、修改或篡改源代碼中的版權信息及開源說明檔案，侵犯版權的行爲將面臨法律追究。
-- 在任何使用場景下，必須嚴格保留 PlayEdu 開源版頁面及代碼中的原有版權信息，包括不限於 “Designed By PlayEdu” 頁面版權標識、官網連結以及代碼中的開源說明等，一旦出現侵犯版權的行爲，將承擔相應法律責任。
+## 本地開發
+
+### 1. 啟動 MySQL
+
+你可以自行準備 MySQL 8，或只啟動 repo 內的 MySQL：
+
+```bash
+docker compose up -d mysql
+```
+
+### 2. 啟動 API
+
+進入 API 專案：
+
+```bash
+cd playedu-api
+```
+
+編譯：
+
+```bash
+./mvnw -Dmaven.test.skip=true compile
+```
+
+啟動：
+
+```bash
+PLAYEDU_AUTH_JWT_SECRET_KEY=你的32字元以上secret \
+./mvnw spring-boot:run \
+  -Dspring-boot.run.profiles=dev \
+  -Dspring-boot.run.arguments="--spring.datasource.url=jdbc:mysql://127.0.0.1:23307/playedu?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true --spring.datasource.username=root --spring.datasource.password=你的資料庫密碼"
+```
+
+### 3. 啟動前端
+
+管理後台：
+
+```bash
+cd playedu-admin
+corepack enable
+pnpm i
+pnpm dev
+```
+
+PC 學員端：
+
+```bash
+cd playedu-pc
+corepack enable
+pnpm i
+pnpm dev
+```
+
+H5 學員端：
+
+```bash
+cd playedu-h5
+corepack enable
+pnpm i
+pnpm dev
+```
+
+如果需要讓前端 API 指向本地後端，請依各前端專案的 Vite 設定調整 `VITE_APP_URL`。
+
+## 常用指令
+
+重建整套 Docker 服務：
+
+```bash
+docker compose up -d --build --force-recreate
+```
+
+只看 API 日誌：
+
+```bash
+docker compose logs -f playedu
+```
+
+只看 MySQL 日誌：
+
+```bash
+docker compose logs -f mysql
+```
+
+API 健康檢查：
+
+```bash
+curl http://localhost:9700
+```
+
+## 安全提醒
+
+- 不要把 `.env` 提交到 git
+- `PLAYEDU_AUTH_JWT_SECRET_KEY` 請使用高強度隨機字串
+- 如果這套服務會對外，請進一步收斂 CORS、升級密碼雜湊策略、避免把 token 存在 `localStorage`
+
+## 目前已知狀態
+
+這個 repo 目前已完成：
+
+- 移除 aliyuncs image 依賴
+- 介面文案改為繁體中文
+- 移除 `hutool`
+- 移除 `sa-token`，改用 JWT
+
+如果你只是要快速跑起來，優先照「先準備環境變數」和「用 Docker 啟動整套服務」兩段操作即可。
