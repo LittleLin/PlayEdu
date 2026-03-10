@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,25 +38,25 @@ public class UserUploadImageLog implements Serializable {
     @JsonProperty("user_id")
     private Integer userId;
 
-    /** 图片类型 */
+    /** 圖片類型 */
     private String typed;
 
-    /** 上传场景 */
+    /** 上傳場景 */
     private String scene;
 
-    /** 驱动 */
+    /** 驅動 */
     private String driver;
 
-    /** 相对路径 */
+    /** 相對路徑 */
     private String path;
 
-    /** 访问地址 */
+    /** 訪問地址 */
     private String url;
 
-    /** 大小,单位:字节 */
+    /** 大小,單位:字節 */
     private Long size;
 
-    /** 文件名 */
+    /** 檔案名 */
     private String name;
 
     /** */

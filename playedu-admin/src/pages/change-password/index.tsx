@@ -26,7 +26,7 @@ const ChangePasswordPage = () => {
       <Row className="playedu-main-body">
         <Col>
           <div className="float-left mb-24">
-            <BackBartment title="修改密码" />
+            <BackBartment title="修改密碼" />
           </div>
           <div className="float-left">
             <Form
@@ -41,18 +41,18 @@ const ChangePasswordPage = () => {
               autoComplete="off"
             >
               <Form.Item
-                label="原密码"
+                label="原密碼"
                 name="old_password"
-                rules={[{ required: true, message: "请输入原密码!" }]}
+                rules={[{ required: true, message: "請輸入原密碼!" }]}
               >
-                <Input.Password placeholder="请输入原密码" allowClear />
+                <Input.Password placeholder="請輸入原密碼" allowClear />
               </Form.Item>
               <Form.Item
-                label="新密码"
+                label="新密碼"
                 name="new_password"
-                rules={[{ required: true, message: "请输入新密码!" }]}
+                rules={[{ required: true, message: "請輸入新密碼!" }]}
               >
-                <Input.Password placeholder="请输入新密码" allowClear />
+                <Input.Password placeholder="請輸入新密碼" allowClear />
               </Form.Item>
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button type="primary" htmlType="submit">

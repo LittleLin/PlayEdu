@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public class LoginBus {
             throws ServiceException {
         User user = ldapBus.singleUserSync(ldapTransformUser, appConfigService.defaultAvatar());
         if (user == null) {
-            throw new ServiceException("用户状态异常，无法登录！");
+            throw new ServiceException("使用者狀態異常，無法登入！");
         }
         return tokenByUser(user);
     }

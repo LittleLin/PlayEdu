@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public class BPermissionConstant {
     public static final String UPLOAD = "upload";
     public static final String CACHE_MANAGE = "cache-manage";
 
-    // ##### 友情分割线 ##################################################
+    // ##### 友情分割線 ##################################################
 
     public static final String DATA_USER_NAME = "data-user-name";
     public static final String DATA_USER_EMAIL = "data-user-email";

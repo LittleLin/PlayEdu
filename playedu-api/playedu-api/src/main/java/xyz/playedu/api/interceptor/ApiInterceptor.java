@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,14 +46,14 @@ public class ApiInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        // 当前api的请求路径
+        // 當前api的請求路徑
         String path = request.getRequestURI();
-        // 白名单过滤
+        // 白名單過濾
         if (BackendConstant.API_LIMIT_WHITELIST.contains(path)) {
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }
 
-        // 限流判断
+        // 限流判斷
         String reqCountKey = "api-limiter:" + IpUtil.getIpAddress();
         Long reqCount = rateLimiterService.current(reqCountKey, playEduConfig.getLimiterDuration());
         long limitCount = playEduConfig.getLimiterLimit();
@@ -63,7 +63,7 @@ public class ApiInterceptor implements HandlerInterceptor {
         if (limitRemaining <= 0) {
             response.setStatus(429);
             response.setContentType("application/json;charset=utf-8");
-            response.getWriter().print(HelperUtil.toJsonStr(JsonResponse.error("太多请求")));
+            response.getWriter().print(HelperUtil.toJsonStr(JsonResponse.error("太多請求")));
             return false;
         }
 

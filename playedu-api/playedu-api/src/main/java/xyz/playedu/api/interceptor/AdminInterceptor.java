@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public class AdminInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        // 读取全局配置
+        // 讀取全局設定
         Map<String, String> systemConfig = configService.keyValues();
         BCtx.setConfig(systemConfig);
 
@@ -59,15 +59,15 @@ public class AdminInterceptor implements HandlerInterceptor {
         }
 
         if (!authService.check()) {
-            return responseTransform(response, 401, "请登录");
+            return responseTransform(response, 401, "請登入");
         }
 
         AdminUser adminUser = adminUserService.findById(authService.userId());
         if (adminUser == null) {
-            return responseTransform(response, 401, "管理员不存在");
+            return responseTransform(response, 401, "管理員不存在");
         }
         if (adminUser.getIsBanLogin() == 1) {
-            return responseTransform(response, 403, "当前管理员禁止登录");
+            return responseTransform(response, 403, "當前管理員禁止登入");
         }
 
         BCtx.setId(authService.userId());

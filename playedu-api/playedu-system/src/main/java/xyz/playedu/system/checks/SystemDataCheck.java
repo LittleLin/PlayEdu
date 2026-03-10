@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,9 @@ public class SystemDataCheck implements CommandLineRunner {
             }
             Integer roleId = adminRoleService.initSuperAdminRole();
             adminUserService.createWithRoleIds(
-                    "超级管理员", "admin@playedu.xyz", "playedu", 0, new Integer[] {roleId});
+                    "超級管理員", "admin@playedu.xyz", "playedu", 0, new Integer[] {roleId});
         } catch (Exception e) {
-            log.error("超级管理员初始化失败,错误信息:{}", e.getMessage());
+            log.error("超級管理員初始化失敗,錯誤信息:{}", e.getMessage());
         }
     }
 }

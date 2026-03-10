@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ import xyz.playedu.resource.service.ResourceCategoryService;
 import xyz.playedu.resource.service.ResourceService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/23 09:46
  */
@@ -63,7 +63,7 @@ public class ResourceCategoryController {
     @Autowired private ApplicationContext ctx;
 
     @GetMapping("/index")
-    @Log(title = "资源-分类-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-分類-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index() {
         HashMap<String, Object> data = new HashMap<>();
         data.put("categories", categoryService.groupByParent());
@@ -71,7 +71,7 @@ public class ResourceCategoryController {
     }
 
     @GetMapping("/categories")
-    @Log(title = "资源-分类-全部分类", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-分類-全部分類", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(
             @RequestParam(name = "parent_id", defaultValue = "0") Integer parentId) {
         List<Category> categories = categoryService.listByParentId(parentId);
@@ -79,7 +79,7 @@ public class ResourceCategoryController {
     }
 
     @GetMapping("/create")
-    @Log(title = "资源-分类-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-分類-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create() {
         HashMap<String, Object> data = new HashMap<>();
         data.put("categories", categoryService.groupByParent());
@@ -88,7 +88,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @PostMapping("/create")
-    @Log(title = "资源-分类-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "資源-分類-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated ResourceCategoryRequest req)
             throws NotFoundException {
         categoryService.create(req.getName(), req.getParentId(), req.getSort());
@@ -97,7 +97,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @GetMapping("/{id}")
-    @Log(title = "资源-分类-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-分類-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable Integer id) throws NotFoundException {
         Category category = categoryService.findOrFail(id);
         return JsonResponse.data(category);
@@ -105,7 +105,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @PutMapping("/{id}")
-    @Log(title = "资源-分类-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "資源-分類-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(@PathVariable Integer id, @RequestBody ResourceCategoryRequest req)
             throws NotFoundException {
         Category category = categoryService.findOrFail(id);
@@ -115,7 +115,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @GetMapping("/{id}/destroy")
-    @Log(title = "资源-分类-批量删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "資源-分類-批量刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse preDestroy(@PathVariable Integer id) {
         List<Integer> courseIds = courseCategoryService.getCourseIdsByCategoryId(id);
         List<Integer> rids = resourceCategoryService.getRidsByCategoryId(id);
@@ -164,7 +164,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @DeleteMapping("/{id}")
-    @Log(title = "资源-分类-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "資源-分類-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable Integer id) throws NotFoundException {
         Category category = categoryService.findOrFail(id);
         categoryService.deleteById(category.getId());
@@ -174,7 +174,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @PutMapping("/update/sort")
-    @Log(title = "资源-分类-更新排序", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "資源-分類-更新排序", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse resort(@RequestBody @Validated ResourceCategorySortRequest req) {
         categoryService.resetSort(req.getIds());
         return JsonResponse.success();
@@ -182,7 +182,7 @@ public class ResourceCategoryController {
 
     @BackendPermission(slug = BPermissionConstant.RESOURCE_CATEGORY)
     @PutMapping("/update/parent")
-    @Log(title = "资源-分类-更新父级", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "資源-分類-更新父級", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse updateParent(@RequestBody @Validated ResourceCategoryParentRequest req)
             throws NotFoundException {
         categoryService.changeParent(req.getId(), req.getParentId(), req.getIds());

@@ -112,7 +112,7 @@ export const MemberUpdate: React.FC<PropInterface> = ({
       return;
     }
     // if (values.idCard !== "" && !ValidataCredentials(values.idCard)) {
-    //   message.error("请输入正确的身份证号！");
+    //   message.error("請輸入正確的身份證號！");
     //   return;
     // }
     setLoading(true);
@@ -146,7 +146,7 @@ export const MemberUpdate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="编辑学员"
+          title="編輯學員"
           centered
           forceRender
           open={true}
@@ -176,10 +176,10 @@ export const MemberUpdate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="学员头像"
+                label="學員頭像"
                 labelCol={{ style: { marginTop: 15, marginLeft: 46 } }}
                 name="avatar"
-                rules={[{ required: true, message: "请上传学员头像!" }]}
+                rules={[{ required: true, message: "請上傳學員頭像!" }]}
               >
                 <div className="d-flex">
                   {avatar && (
@@ -187,7 +187,7 @@ export const MemberUpdate: React.FC<PropInterface> = ({
                   )}
                   <div className="d-flex">
                     <UploadImageButton
-                      text="更换头像"
+                      text="更換頭像"
                       onSelected={(url, id) => {
                         setAvatar(url);
                         form.setFieldsValue({ avatar: id });
@@ -197,40 +197,40 @@ export const MemberUpdate: React.FC<PropInterface> = ({
                 </div>
               </Form.Item>
               <Form.Item
-                label="学员姓名"
+                label="學員姓名"
                 name="name"
-                rules={[{ required: true, message: "请输入学员姓名!" }]}
+                rules={[{ required: true, message: "請輸入學員姓名!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 274 }}
-                  placeholder="请填写学员姓名"
+                  placeholder="請填寫學員姓名"
                 />
               </Form.Item>
               <Form.Item
-                label="登录邮箱"
+                label="登入電子郵件"
                 name="email"
-                rules={[{ required: true, message: "请输入登录邮箱!" }]}
+                rules={[{ required: true, message: "請輸入登入電子郵件!" }]}
               >
                 <Input
                   autoComplete="off"
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="请输入学员登录邮箱"
+                  placeholder="請輸入學員登入電子郵件"
                 />
               </Form.Item>
-              <Form.Item label="登录密码" name="password">
+              <Form.Item label="登入密碼" name="password">
                 <Input.Password
                   autoComplete="off"
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="请输入登录密码"
+                  placeholder="請輸入登入密碼"
                 />
               </Form.Item>
               <Form.Item
-                label="所属部门"
+                label="所屬部門"
                 name="dep_ids"
-                rules={[{ required: true, message: "请选择学员所属部门!" }]}
+                rules={[{ required: true, message: "請選擇學員所屬部門!" }]}
               >
                 <TreeSelect
                   showCheckedStrategy={TreeSelect.SHOW_ALL}
@@ -239,7 +239,7 @@ export const MemberUpdate: React.FC<PropInterface> = ({
                   multiple
                   allowClear
                   treeDefaultExpandAll
-                  placeholder="请选择学员所属部门"
+                  placeholder="請選擇學員所屬部門"
                 />
               </Form.Item>
             </Form>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class CourseAttachment implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 课程ID */
+    /** 課程ID */
     @JsonProperty("course_id")
     private Integer courseId;
 
@@ -45,17 +45,17 @@ public class CourseAttachment implements Serializable {
     /** 附件名 */
     private String title;
 
-    /** 类型 */
+    /** 類型 */
     private String type;
 
-    /** 资源id */
+    /** 資源id */
     private Integer rid;
 
-    /** 资源url */
+    /** 資源url */
     @TableField(exist = false)
     private String url;
 
-    /** 资源类型 */
+    /** 資源類型 */
     @TableField(exist = false)
     private String ext;
 

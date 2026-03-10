@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ public class CourseChapter implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 课程ID */
+    /** 課程ID */
     @JsonProperty("course_id")
     private Integer courseId;
 
-    /** 章节名 */
+    /** 章節名 */
     private String name;
 
     /** 升序 */

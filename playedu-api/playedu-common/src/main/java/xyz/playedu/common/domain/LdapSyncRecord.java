@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,54 +31,54 @@ public class LdapSyncRecord implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 执行同步的管理员ID，0表示系统自动执行 */
+    /** 執行同步的管理員ID，0表示系統自動執行 */
     @JsonProperty("admin_id")
     private Integer adminId;
 
-    /** 状态：0-进行中，1-成功，2-失败 */
+    /** 狀態：0-進行中，1-成功，2-失敗 */
     private Integer status;
 
-    /** S3存储中的文件路径 */
+    /** S3存儲中的檔案路徑 */
     @JsonProperty("s3_file_path")
     private String s3FilePath;
 
-    /** 总部门数量 */
+    /** 總部門數量 */
     @JsonProperty("total_department_count")
     private Integer totalDepartmentCount;
 
-    /** 新增部门数量 */
+    /** 新增部門數量 */
     @JsonProperty("created_department_count")
     private Integer createdDepartmentCount;
 
-    /** 更新部门数量 */
+    /** 更新部門數量 */
     @JsonProperty("updated_department_count")
     private Integer updatedDepartmentCount;
 
-    /** 删除部门数量 */
+    /** 刪除部門數量 */
     @JsonProperty("deleted_department_count")
     private Integer deletedDepartmentCount;
 
-    /** 总用户数量 */
+    /** 總使用者數量 */
     @JsonProperty("total_user_count")
     private Integer totalUserCount;
 
-    /** 新增用户数量 */
+    /** 新增使用者數量 */
     @JsonProperty("created_user_count")
     private Integer createdUserCount;
 
-    /** 更新用户数量 */
+    /** 更新使用者數量 */
     @JsonProperty("updated_user_count")
     private Integer updatedUserCount;
 
-    /** 删除用户数量 */
+    /** 刪除使用者數量 */
     @JsonProperty("deleted_user_count")
     private Integer deletedUserCount;
 
-    /** 被禁止的用户数量 */
+    /** 被禁止的使用者數量 */
     @JsonProperty("banned_user_count")
     private Integer bannedUserCount;
 
-    /** 错误信息 */
+    /** 錯誤信息 */
     @JsonProperty("error_message")
     private String errorMessage;
 

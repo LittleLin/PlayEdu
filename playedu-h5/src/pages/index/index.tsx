@@ -33,7 +33,7 @@ const IndexPage = () => {
     Number(result.get("cid") || 0)
   );
   const [categoryText, setCategoryText] = useState<string>(
-    String(result.get("catName") || "所有分类")
+    String(result.get("catName") || "所有分類")
   );
   const [learnCourseRecords, setLearnCourseRecords] =
     useState<LocalUserLearnHourRecordModel>({});
@@ -51,24 +51,24 @@ const IndexPage = () => {
     },
     {
       key: "1",
-      label: `必修课`,
+      label: `必修課`,
     },
     {
       key: "2",
-      label: `选修课`,
+      label: `選修課`,
     },
     {
       key: "3",
-      label: `已学完`,
+      label: `已學完`,
     },
     {
       key: "4",
-      label: `未学完`,
+      label: `未學完`,
     },
   ];
 
   useEffect(() => {
-    document.title = systemConfig.systemName || "首页";
+    document.title = systemConfig.systemName || "首頁";
   }, [systemConfig]);
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const IndexPage = () => {
         const new_arr: any[] = checkArr(categories, 0);
         new_arr.unshift({
           key: 0,
-          title: "所有分类",
+          title: "所有分類",
         });
         setCategories(new_arr);
       }

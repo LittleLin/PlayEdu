@@ -3,16 +3,16 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { ConfigProvider } from "antd";
-import zhCN from "antd/locale/zh_CN";
+import zhTW from "antd/locale/zh_TW";
 import "./assets/iconfont/iconfont.css";
 import App from "./App";
-import "./index.scss"; //全局样式
+import "./index.scss"; //全局樣式
 import AutoScorllTop from "./AutoTop";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <ConfigProvider
-      locale={zhCN}
+      locale={zhTW}
       theme={{ token: { colorPrimary: "#ff4d4f" } }}
     >
       <BrowserRouter>

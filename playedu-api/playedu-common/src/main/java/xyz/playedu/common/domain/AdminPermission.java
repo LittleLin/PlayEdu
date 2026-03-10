@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,17 +34,17 @@ public class AdminPermission implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 类型[行为:action,数据:data] */
+    /** 類型[行爲:action,數據:data] */
     private String type;
 
-    /** 分组 */
+    /** 分組 */
     @JsonProperty("group_name")
     private String groupName;
 
     /** 升序 */
     private Integer sort;
 
-    /** 权限名 */
+    /** 權限名 */
     private String name;
 
     /** slug */

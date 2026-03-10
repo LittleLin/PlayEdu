@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,22 +34,22 @@ public class CourseAttachmentDownloadLog implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /** 学员ID */
+    /** 學員ID */
     @JsonProperty("user_id")
     private Integer userId;
 
-    /** 课程ID */
+    /** 課程ID */
     @JsonProperty("course_id")
     private Integer courseId;
 
-    /** 标题 */
+    /** 標題 */
     private String title;
 
-    /** 课程附件ID */
+    /** 課程附件ID */
     @JsonProperty("courser_attachment_id")
     private Integer courserAttachmentId;
 
-    /** 资源ID */
+    /** 資源ID */
     private Integer rid;
 
     /** IP */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,14 +64,14 @@ public class AppConfigServiceImpl extends ServiceImpl<AppConfigMapper, AppConfig
                     if (keyValueValue == null) {
                         return;
                     }
-                    if ("******".equals(keyNameValue)) { // 私密信息默认place
+                    if ("******".equals(keyNameValue)) { // 私密信息預設place
                         return;
                     }
                     AppConfig configItem = configs.get(keyNameValue);
-                    if (configItem == null) { // 不存在的配置
+                    if (configItem == null) { // 不存在的設定
                         return;
                     }
-                    if (keyValueValue.equals(configItem.getKeyValue())) { // 没有变化
+                    if (keyValueValue.equals(configItem.getKeyValue())) { // 沒有變化
                         return;
                     }
                     list.add(
@@ -96,7 +96,7 @@ public class AppConfigServiceImpl extends ServiceImpl<AppConfigMapper, AppConfig
 
     @Override
     public S3Config getS3Config() {
-        // 全部的系统配置
+        // 全部的系統設定
         Map<String, String> config = keyValues();
 
         S3Config s3Config = new S3Config();
@@ -153,14 +153,14 @@ public class AppConfigServiceImpl extends ServiceImpl<AppConfigMapper, AppConfig
         ldapConfig.setBaseDN(config.get(ConfigConstant.LDAP_BASE_DN));
 
         if (!ldapConfig.getEnabled()) {
-            throw new ServiceException("LDAP服务未启用");
+            throw new ServiceException("LDAP服務未啓用");
         }
 
         if (ldapConfig.getUrl().isEmpty()
                 || ldapConfig.getAdminUser().isEmpty()
                 || ldapConfig.getAdminPass().isEmpty()
                 || ldapConfig.getBaseDN().isEmpty()) {
-            throw new ServiceException("LDAP服务未配置");
+            throw new ServiceException("LDAP服務未設定");
         }
 
         return ldapConfig;

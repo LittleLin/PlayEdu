@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class AdminRoleController {
     @Autowired private AdminPermissionService permissionService;
 
     @GetMapping("/index")
-    @Log(title = "管理员角色-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員角色-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index() {
         List<AdminRole> data = roleService.list();
         return JsonResponse.data(data);
@@ -55,7 +55,7 @@ public class AdminRoleController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_ROLE)
     @GetMapping("/create")
-    @Log(title = "管理员角色-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員角色-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create() {
         List<AdminPermission> permissions = permissionService.listOrderBySortAsc();
 
@@ -69,7 +69,7 @@ public class AdminRoleController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_ROLE)
     @PostMapping("/create")
-    @Log(title = "管理员角色-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "管理員角色-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated AdminRoleRequest request) {
         roleService.createWithPermissionIds(request.getName(), request.getPermissionIds());
         return JsonResponse.success();
@@ -77,11 +77,11 @@ public class AdminRoleController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_ROLE)
     @GetMapping("/{id}")
-    @Log(title = "管理员角色-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員角色-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable(name = "id") Integer id) throws NotFoundException {
         AdminRole role = roleService.findOrFail(id);
 
-        // 关联的权限
+        // 關聯的權限
         List<Integer> permissionIds = roleService.getPermissionIdsByRoleId(role.getId());
         List<Integer> permAction = new ArrayList<>();
         List<Integer> permData = new ArrayList<>();
@@ -111,13 +111,13 @@ public class AdminRoleController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_ROLE)
     @PutMapping("/{id}")
-    @Log(title = "管理员角色-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "管理員角色-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "id") Integer id, @RequestBody @Validated AdminRoleRequest request)
             throws NotFoundException {
         AdminRole role = roleService.findOrFail(id);
         if (role.getSlug().equals(BackendConstant.SUPER_ADMIN_ROLE)) {
-            return JsonResponse.error("超级管理权限无法编辑");
+            return JsonResponse.error("超級管理權限無法編輯");
         }
 
         roleService.updateWithPermissionIds(role, request.getName(), request.getPermissionIds());
@@ -127,12 +127,12 @@ public class AdminRoleController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_ROLE)
     @DeleteMapping("/{id}")
-    @Log(title = "管理员角色-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "管理員角色-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable(name = "id") Integer id) throws NotFoundException {
         AdminRole role = roleService.findOrFail(id);
 
         if (role.getSlug().equals(BackendConstant.SUPER_ADMIN_ROLE)) {
-            return JsonResponse.error("超级管理角色无法删除");
+            return JsonResponse.error("超級管理角色無法刪除");
         }
 
         roleService.removeWithPermissions(role);

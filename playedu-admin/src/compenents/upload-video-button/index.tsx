@@ -34,7 +34,7 @@ export const UploadVideoButton = (props: PropsInterface) => {
           );
         }}
       >
-        上传视频
+        上傳影片
       </Button>
     </>
   );

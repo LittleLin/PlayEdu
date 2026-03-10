@@ -146,7 +146,7 @@ export const TreeDeps = (props: PropInterface) => {
   const onExpand = (expandedKeys: any, info: any) => {
     console.log("onExpand", expandedKeys, info);
     if (checkKeys.includes(info.node.key)) {
-      // 关闭该节点的展开
+      // 關閉該節點的展開
       return;
     }
     setExpandKeys(expandedKeys);
@@ -161,7 +161,7 @@ export const TreeDeps = (props: PropInterface) => {
     props.onUpdate(checkedKeys.checked, nodes);
     setCheckKeys(checkedKeys.checked);
     if (info.checked && info.node.children) {
-      setExpandKeys(expandKeys.filter((key) => key !== info.node.key)); // 关闭父节点的展开
+      setExpandKeys(expandKeys.filter((key) => key !== info.node.key)); // 關閉父節點的展開
     }
   };
 
@@ -170,9 +170,9 @@ export const TreeDeps = (props: PropInterface) => {
     if (e.target.checked) {
       const topLevelParentKeyList = treeData.map((node: any) => node.key);
       const topLevelParentNodes = treeData.map((node: any) => node);
-      // 设置最外层父级节点为勾选状态
+      // 設置最外層父級節點爲勾選狀態
       if (props.type === "single") {
-        console.log("全选");
+        console.log("全選");
         setSelectKeys([]);
         setExpandKeys([]);
       } else {
@@ -201,7 +201,7 @@ export const TreeDeps = (props: PropInterface) => {
             {props.type === "single" ? (
               <div className="playedu-old-tree">
                 <div style={{ height: 40 }} className="d-flex">
-                  <Checkbox onChange={onChange}>全选</Checkbox>
+                  <Checkbox onChange={onChange}>全選</Checkbox>
                 </div>
                 <Tree
                   onSelect={onSelect}
@@ -225,7 +225,7 @@ export const TreeDeps = (props: PropInterface) => {
                     }
                     onChange={onChange}
                   >
-                    全选
+                    全選
                   </Checkbox>
                 </div>
                 <Tree

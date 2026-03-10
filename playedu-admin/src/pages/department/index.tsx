@@ -37,7 +37,7 @@ const DepartmentPage = () => {
   const [modal, contextHolder] = Modal.useModal();
   const [syncModalVisible, setSyncModalVisible] = useState(false);
 
-  // 是否启用LDAP
+  // 是否啓用LDAP
   const ldapEnabled = useSelector(
     (state: any) => state.systemConfig.value["ldap-enabled"]
   );
@@ -204,27 +204,27 @@ const DepartmentPage = () => {
       } else {
         if (res.data.children && res.data.children.length > 0) {
           modal.warning({
-            title: "操作确认",
+            title: "操作確認",
             centered: true,
             okText: "好的",
             content: (
               <p>
-                此部门下包含
+                此部門下包含
                 <span className="c-red">
-                  （{res.data.children.length}个子部门）
+                  （{res.data.children.length}個子部門）
                 </span>
-                ，请先解除关联再删除！
+                ，請先解除關聯再刪除！
               </p>
             ),
           });
         } else {
           modal.warning({
-            title: "操作确认",
+            title: "操作確認",
             centered: true,
             okText: "好的",
             content: (
               <p>
-                此部门已关联
+                此部門已關聯
                 {res.data.courses && res.data.courses.length > 0 && (
                   <Button
                     style={{ paddingLeft: 4, paddingRight: 4 }}
@@ -234,7 +234,7 @@ const DepartmentPage = () => {
                       navigate("/course?did=" + id + "&label=" + label)
                     }
                   >
-                    （{res.data.courses.length}个线上课程），
+                    （{res.data.courses.length}個線上課程），
                   </Button>
                 )}
                 {res.data.users && res.data.users.length > 0 && (
@@ -246,10 +246,10 @@ const DepartmentPage = () => {
                       navigate("/member/index?did=" + id + "&label=" + label)
                     }
                   >
-                    （{res.data.users.length}个学员），
+                    （{res.data.users.length}個學員），
                   </Button>
                 )}
-                请先解除关联再删除！
+                請先解除關聯再刪除！
               </p>
             ),
           });
@@ -260,11 +260,11 @@ const DepartmentPage = () => {
 
   const delUser = (id: any) => {
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此部门？",
+      content: "確認刪除此部門？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         department.destroyDepartment(id).then((res: any) => {
@@ -280,7 +280,7 @@ const DepartmentPage = () => {
 
   const onDragEnter: TreeProps["onDragEnter"] = (info) => {
     console.log(info);
-    // expandedKeys 需要受控时设置
+    // expandedKeys 需要受控時設置
     // setExpandedKeys(info.expandedKeys)
   };
 
@@ -325,7 +325,7 @@ const DepartmentPage = () => {
       // Drop on the content
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
       });
     } else if (
@@ -335,7 +335,7 @@ const DepartmentPage = () => {
     ) {
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
         // in previous version, we use item.children.push(dragObj) to insert the
         // item to the tail of the children
@@ -409,7 +409,7 @@ const DepartmentPage = () => {
             {ldapEnabled ? (
               <PerButton
                 type="primary"
-                text="一键同步LDAP部门架构"
+                text="一鍵同步LDAP部門架構"
                 class="mr-16"
                 icon={null}
                 p="department-cud"
@@ -419,7 +419,7 @@ const DepartmentPage = () => {
             ) : (
               <PerButton
                 type="primary"
-                text="新建部门"
+                text="新增部門"
                 class="mr-16"
                 icon={<PlusOutlined />}
                 p="department-cud"

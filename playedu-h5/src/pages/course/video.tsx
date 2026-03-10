@@ -85,7 +85,7 @@ const CoursePlayPage = () => {
         setTotalHours(arr);
         totalHours = arr;
       }
-      //判断是否是最后的课时
+      //判斷是否是最後的課時
       const index = totalHours.findIndex(
         (i: any) => i.id === Number(params.hourId)
       );
@@ -164,7 +164,7 @@ const CoursePlayPage = () => {
       ban_drag: banDrag,
       last_see_pos: params,
     });
-    // 监听播放进度更新evt
+    // 監聽播放進度更新evt
     window.player.on("timeupdate", () => {
       let currentTime = parseInt(window.player.video.currentTime);
       if (
@@ -173,7 +173,7 @@ const CoursePlayPage = () => {
         currentTime - playRef.current >= 2 &&
         currentTime > watchRef.current
       ) {
-        Toast.show("首次学习禁止快进");
+        Toast.show("首次學習禁止快進");
         window.player.seek(watchRef.current);
       } else {
         setPlayingTime(currentTime);
@@ -218,7 +218,7 @@ const CoursePlayPage = () => {
     );
     if (index === totalHours.length - 1) {
       setIsLastpage(true);
-      Toast.show("已经是最后一节了！");
+      Toast.show("已經是最後一節了！");
     } else if (index < totalHours.length - 1) {
       setIsLastpage(false);
       navigate(`/course/${params.courseId}/hour/${totalHours[index + 1].id}`, {
@@ -269,7 +269,7 @@ const CoursePlayPage = () => {
                     navigate(-1);
                   }}
                 >
-                  恭喜你学完最后一节
+                  恭喜你學完最後一節
                 </div>
               )}
               {!isLastpage && (
@@ -281,7 +281,7 @@ const CoursePlayPage = () => {
                     goNextVideo();
                   }}
                 >
-                  播放下一节
+                  播放下一節
                 </div>
               )}
             </div>

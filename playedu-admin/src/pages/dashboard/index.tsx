@@ -68,15 +68,15 @@ const DashboardPage = () => {
       params.videos_count + params.images_count + params.courseware_count;
     let data = [
       {
-        name: "视频数",
+        name: "影片數",
         value: params.videos_count,
       },
       {
-        name: "图片数",
+        name: "圖片數",
         value: params.images_count,
       },
       {
-        name: "课件数",
+        name: "課件數",
         value: params.courseware_count,
       },
     ];
@@ -87,16 +87,16 @@ const DashboardPage = () => {
         textAlign: "center",
         x: "49.5%",
         y: "29%",
-        text: num, //主标题
-        subtext: "总资源数", //副标题
+        text: num, //主標題
+        subtext: "總資源數", //副標題
         textStyle: {
-          //标题样式
+          //標題樣式
           fontSize: 24,
           fontWeight: "bolder",
           color: "#333",
         },
         subtextStyle: {
-          //副标题样式
+          //副標題樣式
           fontSize: 14,
           fontWeight: "bolder",
           color: "rgba(0, 0, 0, 0.45)",
@@ -105,15 +105,15 @@ const DashboardPage = () => {
       },
       legend: [
         {
-          selectedMode: true, // 图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认开启图例选择，可以设成 false 关闭。
+          selectedMode: true, // 圖例選擇的模式，控制是否可以通過點選圖例改變系列的顯示狀態。預設開啓圖例選擇，可以設成 false 關閉。
           bottom: "10%",
           left: "center",
           textStyle: {
-            // 图例的公用文本样式。
+            // 圖例的公用文本樣式。
             fontSize: 14,
             color: " #333333",
           },
-          data: ["视频数", "图片数", "课件数"],
+          data: ["影片數", "圖片數", "課件數"],
         },
       ],
       tooltip: {
@@ -131,16 +131,16 @@ const DashboardPage = () => {
       series: [
         {
           type: "pie",
-          radius: ["40%", "60%"], // 环比 圈的大小
-          center: ["50%", "40%"], // 图形在整个canvas中的位置
-          color: ["#FE8650", "#FFB504", "#00cc66"], // item的取色盘
+          radius: ["40%", "60%"], // 環比 圈的大小
+          center: ["50%", "40%"], // 圖形在整個canvas中的位置
+          color: ["#FE8650", "#FFB504", "#00cc66"], // item的取色盤
           avoidLabelOverlap: true,
           itemStyle: {
-            borderColor: "#fff", // 白边
+            borderColor: "#fff", // 白邊
             borderWidth: 2,
           },
           emphasis: {
-            // 高亮item的样式
+            // 高亮item的樣式
             disabled: true,
           },
           label: {
@@ -195,14 +195,14 @@ const DashboardPage = () => {
           <div className="playedu-main-top">
             <div className="j-b-flex">
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>今日学习学员</div>
+                <div className={styles["label"]}>今日學習學員</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>
                     {basicData?.user_learn_today}
                   </div>
                   {basicData && (
                     <div className={styles["compare"]}>
-                      <span className="mr-5">较昨日</span>
+                      <span className="mr-5">較昨日</span>
                       {compareNum(
                         basicData.user_learn_today,
                         basicData.user_learn_yesterday
@@ -212,19 +212,19 @@ const DashboardPage = () => {
                 </div>
               </div>
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>总学员数</div>
+                <div className={styles["label"]}>總學員數</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>{basicData?.user_total}</div>
                   {basicData && (
                     <div className={styles["compare"]}>
-                      <span className="mr-5">较昨日</span>
+                      <span className="mr-5">較昨日</span>
                       {compareNum(basicData.user_today, 0)}
                     </div>
                   )}
                 </div>
               </div>
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>线上课数</div>
+                <div className={styles["label"]}>線上課數</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>{basicData?.course_total}</div>
                 </div>
@@ -244,7 +244,7 @@ const DashboardPage = () => {
                   className="iconfont icon-adduser"
                   style={{ color: "#FF9F32", fontSize: 36 }}
                 ></i>
-                <span>添加学员</span>
+                <span>添加學員</span>
               </div>
               <div
                 className={styles["link-mode"]}
@@ -256,7 +256,7 @@ const DashboardPage = () => {
                   className="iconfont icon-upvideo"
                   style={{ color: "#419FFF", fontSize: 36 }}
                 ></i>
-                <span>上传视频</span>
+                <span>上傳影片</span>
               </div>
               <div
                 className={styles["link-mode"]}
@@ -268,7 +268,7 @@ const DashboardPage = () => {
                   className="iconfont icon-onlinelesson"
                   style={{ color: "#B284FF", fontSize: 36 }}
                 ></i>
-                <span>线上课</span>
+                <span>線上課</span>
               </div>
               <div
                 className={styles["link-mode"]}
@@ -280,12 +280,12 @@ const DashboardPage = () => {
                   className="iconfont icon-department"
                   style={{ color: "#21C785", fontSize: 36 }}
                 ></i>
-                <span>新建部门</span>
+                <span>新增部門</span>
               </div>
             </div>
           </div>
           <div className="playedu-main-top mt-24" style={{ minHeight: 376 }}>
-            <div className={styles["large-title"]}>今日学习排行</div>
+            <div className={styles["large-title"]}>今日學習排行</div>
             <div className={styles["rank-list"]}>
               {basicData?.user_learn_top10 && (
                 <div className={styles["half-list"]}>
@@ -534,7 +534,7 @@ const DashboardPage = () => {
           <div className="playedu-main-top">
             <div className="j-b-flex">
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>部门数</div>
+                <div className={styles["label"]}>部門數</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>
                     {basicData?.department_total}
@@ -542,7 +542,7 @@ const DashboardPage = () => {
                 </div>
               </div>
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>分类数</div>
+                <div className={styles["label"]}>分類數</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>
                     {basicData?.resource_category_total}
@@ -550,7 +550,7 @@ const DashboardPage = () => {
                 </div>
               </div>
               <div className={styles["label-item"]}>
-                <div className={styles["label"]}>管理员</div>
+                <div className={styles["label"]}>管理員</div>
                 <div className={styles["info"]}>
                   <div className={styles["num"]}>
                     {basicData?.admin_user_total}
@@ -560,7 +560,7 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="playedu-main-top mt-24">
-            <div className={styles["large-title"]}>产品文档</div>
+            <div className={styles["large-title"]}>產品文檔</div>
             <div className={styles["usage-guide"]}>
               <img className={styles["banner"]} src={banner} alt="" />
               <Link
@@ -568,13 +568,13 @@ const DashboardPage = () => {
                 target="blank"
                 className={styles["link"]}
               >
-                点击查看产品文档，快速玩转Playedu！
+                點選查看產品文檔，快速玩轉Playedu！
                 <img className={styles["icon"]} src={icon} alt="" />
               </Link>
             </div>
           </div>
           <div className="playedu-main-top mt-24">
-            <div className={styles["large-title"]}>资源统计</div>
+            <div className={styles["large-title"]}>資源統計</div>
             <div className={styles["charts"]}>
               <div
                 ref={chartRef}

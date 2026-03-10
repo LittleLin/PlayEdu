@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class AppConfigController {
 
     @BackendPermission(slug = BPermissionConstant.SYSTEM_CONFIG)
     @GetMapping("")
-    @Log(title = "系统配置-读取", businessType = BusinessTypeConstant.GET)
+    @Log(title = "系統設定-讀取", businessType = BusinessTypeConstant.GET)
     public JsonResponse index() {
         List<AppConfig> configs = configService.allShow();
         List<AppConfig> appConfigList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class AppConfigController {
         HashMap<String, Object> data = new HashMap<>();
         data.put("app_config", appConfigList);
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(configService.getAllImageValue()));
@@ -65,19 +65,19 @@ public class AppConfigController {
 
     @BackendPermission(slug = BPermissionConstant.SYSTEM_CONFIG)
     @PutMapping("")
-    @Log(title = "系统配置-保存", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "系統設定-保存", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse save(@RequestBody AppConfigRequest req) {
         HashMap<String, String> data = req.getData();
-        // 预览地址
+        // 預覽地址
         String s3Endpoint = data.get(ConfigConstant.S3_ENDPOINT);
         if (StringUtil.isNotEmpty(s3Endpoint)) {
-            // 协议http:// https://
+            // 協議http:// https://
             if (s3Endpoint.length() < 7
                     || (!"http://".equalsIgnoreCase(s3Endpoint.substring(0, 7))
                             && !"https://".equalsIgnoreCase(s3Endpoint.substring(0, 8)))) {
                 s3Endpoint = "https://" + s3Endpoint;
             }
-            // 后缀
+            // 後綴
             if (s3Endpoint.endsWith("/")) {
                 s3Endpoint = s3Endpoint.substring(0, s3Endpoint.length() - 1);
             }
@@ -100,13 +100,13 @@ public class AppConfigController {
         HashMap<String, String> newConfig = new HashMap<>();
         data.forEach(
                 (key, value) -> {
-                    // 过滤掉未变动的private配置
+                    // 過濾掉未變動的private設定
                     if (SystemConstant.CONFIG_MASK.equals(value)) {
                         return;
                     }
                     String saveValue = value;
 
-                    // LDAP的url配置自动加ldap://处理
+                    // LDAP的url設定自動加ldap://處理
                     if (ConfigConstant.LDAP_URL.equals(key)
                             && StringUtil.isNotEmpty(value)
                             && !StringUtil.startsWithIgnoreCase(value, "ldap://")) {

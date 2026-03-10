@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class LdapSyncRecordServiceImpl extends ServiceImpl<LdapSyncRecordMapper,
     public LdapSyncRecord create(Integer adminId) {
         LdapSyncRecord record = new LdapSyncRecord();
         record.setAdminId(adminId);
-        record.setStatus(0); // 进行中
+        record.setStatus(0); // 進行中
         record.setTotalDepartmentCount(0);
         record.setCreatedDepartmentCount(0);
         record.setUpdatedDepartmentCount(0);
@@ -88,7 +88,7 @@ public class LdapSyncRecordServiceImpl extends ServiceImpl<LdapSyncRecordMapper,
     public void updateSyncFailed(Integer id, String errorMessage) {
         LdapSyncRecord record = new LdapSyncRecord();
         record.setId(id);
-        record.setStatus(2); // 失败
+        record.setStatus(2); // 失敗
         record.setErrorMessage(errorMessage);
         record.setUpdatedAt(new Date());
 

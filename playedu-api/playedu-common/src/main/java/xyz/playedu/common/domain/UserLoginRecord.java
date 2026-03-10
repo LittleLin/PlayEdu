@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,28 +39,28 @@ public class UserLoginRecord implements Serializable {
     /** JTI */
     private String jti;
 
-    /** 登录ip */
+    /** 登入ip */
     private String ip;
 
-    /** Ip解析区域 */
+    /** Ip解析區域 */
     private String ipArea;
 
-    /** 浏览器 */
+    /** 瀏覽器 */
     private String browser;
 
-    /** 浏览器版本 */
+    /** 瀏覽器版本 */
     private String browserVersion;
 
-    /** 操作系统 */
+    /** 操作系統 */
     private String os;
 
-    /** 过期时间 */
+    /** 過期時間 */
     private Long expired;
 
-    /** 是否注销 */
+    /** 是否註銷 */
     private Integer isLogout;
 
-    /** 创建时间 */
+    /** 建立時間 */
     private Date createdAt;
 
     @TableField(exist = false)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ import lombok.Data;
 
 @Data
 public class ResourceCategoryChangeRequest {
-    @NotNull(message = "参数为空")
+    @NotNull(message = "參數爲空")
     private List<Integer> ids;
 
-    @NotNull(message = "请选择分类")
+    @NotNull(message = "請選擇分類")
     @JsonProperty("category_id")
     private Integer categoryId;
 }

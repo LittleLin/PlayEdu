@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.playedu.common.mapper.LdapSyncDepartmentDetailMapper">
 
-    <!-- 通用映射结果集 -->
+    <!-- 通用映射結果集 -->
     <resultMap id="BaseResultMap" type="xyz.playedu.common.domain.LdapSyncDepartmentDetail">
         <id column="id" property="id"/>
         <result column="record_id" property="recordId"/>
@@ -14,7 +14,7 @@
         <result column="created_at" property="createdAt"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
+    <!-- 通用查詢結果列 -->
     <sql id="Base_Column_List">
         id, record_id, department_id, uuid, dn, name, action, created_at
     </sql>

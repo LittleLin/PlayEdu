@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class SystemController {
     @Autowired private AppConfigService appConfigService;
 
     @GetMapping("/config")
-    @Log(title = "其它-系统配置", businessType = BusinessTypeConstant.GET)
+    @Log(title = "其它-系統設定", businessType = BusinessTypeConstant.GET)
     public JsonResponse config() {
         Map<String, String> configData = BCtx.getConfig();
 
@@ -66,18 +66,18 @@ public class SystemController {
 
         data.put(ConfigConstant.MEMBER_DEFAULT_AVATAR, rid);
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(appConfigService.getAllImageValue()));
 
-        // LDAP登录
+        // LDAP登入
         data.put("ldap-enabled", "1".equals(configData.get(ConfigConstant.LDAP_ENABLED)));
 
-        // 全部部门
+        // 全部部門
         data.put("departments", departmentService.groupByParent());
 
-        // 全部资源分类
+        // 全部資源分類
         data.put("resource_categories", categoryService.groupByParent());
 
         return JsonResponse.data(data);

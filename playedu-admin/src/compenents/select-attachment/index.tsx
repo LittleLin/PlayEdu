@@ -31,10 +31,10 @@ export const SelectAttachment = (props: PropsInterface) => {
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: `课件`,
+      label: `課件`,
       children: (
         <UploadCoursewareSub
-          label="课件"
+          label="課件"
           defaultCheckedList={props.defaultKeys}
           open={refresh}
           onSelected={(arr: any[], videos: any[]) => {
@@ -54,7 +54,7 @@ export const SelectAttachment = (props: PropsInterface) => {
     <>
       {props.open ? (
         <Modal
-          title="资源素材库"
+          title="資源素材庫"
           centered
           closable={false}
           onCancel={() => {

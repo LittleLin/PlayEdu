@@ -18,17 +18,17 @@ spring:
     password: ""
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      minimum-idle: 1       # 最小连接数
-      maximum-pool-size: 10 # 最大连接数
-      auto-commit: true     # 自动提交
-  # 线程池配置
+      minimum-idle: 1       # 最小連接數
+      maximum-pool-size: 10 # 最大連接數
+      auto-commit: true     # 自動提交
+  # 線程池設定
   task:
     execution:
       pool:
-        max-size: 4 #最大线程数量
-        core-size: 2 #初始化线程数量
-        queue-capacity: 10000 #队列最大长度
-        keep-alive: 60s #线程终止前允许保存的最大时间
+        max-size: 4 #最大線程數量
+        core-size: 2 #初始化線程數量
+        queue-capacity: 10000 #隊列最大長度
+        keep-alive: 60s #線程終止前允許保存的最大時間
       shutdown:
         await-termination: true
       thread-name-prefix: "playedu-default-thread"
@@ -43,8 +43,8 @@ mybatis-plus:
 sa-token:
   is-print: false
   token-name: "Authorization"
-  timeout: 1296000 #token有效期[单位:秒,默认15天]
-  is-concurrent: false #限制同时登录
+  timeout: 1296000 #token有效期[單位:秒,預設15天]
+  is-concurrent: false #限制同時登入
   is-share: false
   jwt-secret-key: "playeduxyz"
   token-prefix: "Bearer"

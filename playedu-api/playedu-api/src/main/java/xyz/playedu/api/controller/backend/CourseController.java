@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class CourseController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/index")
-    @Log(title = "线上课-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);
@@ -91,7 +91,7 @@ public class CourseController {
         String categoryIds = MapUtils.getString(params, "category_ids");
         Integer isRequired = MapUtils.getInteger(params, "is_required");
 
-        // 获取所有子部门
+        // 獲取所有子部門
         Set<Integer> alldepIdsSet = new HashSet<>();
         if (StringUtil.isNotEmpty(depIds)) {
             String[] depIdArr = depIds.split(",");
@@ -99,7 +99,7 @@ public class CourseController {
                 for (String depIdStr : depIdArr) {
                     Integer depId = Integer.parseInt(depIdStr);
                     alldepIdsSet.add(depId);
-                    // 查询所有的子部门
+                    // 查詢所有的子部門
                     List<Department> departmentList =
                             departmentService.getChildDepartmentsByParentId(depId);
                     if (StringUtil.isNotEmpty(departmentList)) {
@@ -118,7 +118,7 @@ public class CourseController {
             alldepIds.addAll(alldepIdsSet);
         }
 
-        // 获取所有子类
+        // 獲取所有子類
         Set<Integer> allCategoryIdsSet = new HashSet<>();
         if (StringUtil.isNotEmpty(categoryIds)) {
             String[] categoryIdArr = categoryIds.split(",");
@@ -126,7 +126,7 @@ public class CourseController {
                 for (String categoryIdStr : categoryIdArr) {
                     Integer categoryId = Integer.parseInt(categoryIdStr);
                     allCategoryIdsSet.add(categoryId);
-                    // 查询所有的子分类
+                    // 查詢所有的子分類
                     List<Category> categoryList =
                             categoryService.getChildCategorysByParentId(categoryId);
                     if (StringUtil.isNotEmpty(categoryList)) {
@@ -180,7 +180,7 @@ public class CourseController {
             data.put("admin_users", adminUsers);
         }
 
-        // 课程封面资源ID
+        // 課程封面資源ID
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -200,10 +200,10 @@ public class CourseController {
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create")
     @Transactional
-    @Log(title = "线上课-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "線上課-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated CourseRequest req) throws ParseException {
         if (req.getShortDesc().length() > 200) {
-            return JsonResponse.error("课程简短介绍不能超过200字");
+            return JsonResponse.error("課程簡短介紹不能超過200字");
         }
         Course course =
                 courseService.createWithCategoryIdsAndDepIds(
@@ -219,7 +219,7 @@ public class CourseController {
         Date now = new Date();
         int classHourCount = 0;
 
-        if (!req.getHours().isEmpty()) { // 无章节课时配置
+        if (!req.getHours().isEmpty()) { // 無章節課時設定
             List<CourseHour> insertHours = new ArrayList<>();
             final Integer[] chapterSort = {0};
             for (CourseRequest.HourItem hourItem : req.getHours()) {
@@ -243,7 +243,7 @@ public class CourseController {
             }
         } else {
             if (req.getChapters().isEmpty()) {
-                return JsonResponse.error("请配置课时");
+                return JsonResponse.error("請設定課時");
             }
 
             List<CourseHour> insertHours = new ArrayList<>();
@@ -290,7 +290,7 @@ public class CourseController {
             courseService.updateClassHour(course.getId(), classHourCount);
         }
 
-        // 课程附件
+        // 課程附件
         if (null != req.getAttachments() && !req.getAttachments().isEmpty()) {
             List<CourseAttachment> insertAttachments = new ArrayList<>();
             final Integer[] sort = {0};
@@ -317,11 +317,11 @@ public class CourseController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/{id}")
-    @Log(title = "线上课-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable(name = "id") Integer id) throws NotFoundException {
         Course course = courseService.findOrFail(id);
         if (!backendBus.isSuperAdmin() && !course.getAdminId().equals(BCtx.getId())) {
-            return JsonResponse.error("无权限操作");
+            return JsonResponse.error("無權限操作");
         }
         List<Integer> rids = new ArrayList<>();
         rids.add(course.getThumb());
@@ -348,7 +348,7 @@ public class CourseController {
                     });
         }
 
-        // 部门名称
+        // 部門名稱
         Map<Integer, String> deps = new HashMap<>();
         if (StringUtil.isNotEmpty(depIds)) {
             deps =
@@ -358,13 +358,13 @@ public class CourseController {
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("course", course);
-        data.put("dep_ids", depIds); // 已关联的部门
-        data.put("category_ids", categoryIds); // 已关联的分类
+        data.put("dep_ids", depIds); // 已關聯的部門
+        data.put("category_ids", categoryIds); // 已關聯的分類
         data.put("chapters", chapters);
         data.put("hours", hours.stream().collect(Collectors.groupingBy(CourseHour::getChapterId)));
         data.put("attachments", attachments);
         data.put("deps", deps);
-        // 获取签名url
+        // 獲取簽名url
         data.put("resource_url", resourceService.chunksPreSignUrlByIds(rids));
         return JsonResponse.data(data);
     }
@@ -372,13 +372,13 @@ public class CourseController {
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PutMapping("/{id}")
     @Transactional
-    @Log(title = "线上课-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "id") Integer id, @RequestBody @Validated CourseRequest req)
             throws NotFoundException {
         Course course = courseService.findOrFail(id);
         if (!backendBus.isSuperAdmin() && !course.getAdminId().equals(BCtx.getId())) {
-            return JsonResponse.error("无权限操作");
+            return JsonResponse.error("無權限操作");
         }
 
         courseService.updateWithCategoryIdsAndDepIds(
@@ -397,12 +397,12 @@ public class CourseController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @DeleteMapping("/{id}")
-    @Log(title = "线上课-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "線上課-刪除", businessType = BusinessTypeConstant.DELETE)
     @SneakyThrows
     public JsonResponse destroy(@PathVariable(name = "id") Integer id) {
         Course course = courseService.findOrFail(id);
         if (!backendBus.isSuperAdmin() && !course.getAdminId().equals(BCtx.getId())) {
-            return JsonResponse.error("无权限操作");
+            return JsonResponse.error("無權限操作");
         }
 
         courseService.removeById(id);

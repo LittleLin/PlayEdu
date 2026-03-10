@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package xyz.playedu.common.util;
 
-/** Base64工具类 */
+/** Base64工具類 */
 public final class Base64Util {
     private static final int BASE_LENGTH = 128;
     private static final int LOOK_UP_LENGTH = 64;
@@ -65,10 +65,10 @@ public final class Base64Util {
     }
 
     /**
-     * 转码
+     * 轉碼
      *
-     * @param binaryData 未转码数据
-     * @return 转码后数据串
+     * @param binaryData 未轉碼數據
+     * @return 轉碼後數據串
      */
     public static String encode(byte[] binaryData) {
         if (binaryData == null) {
@@ -134,10 +134,10 @@ public final class Base64Util {
     }
 
     /**
-     * 解码
+     * 解碼
      *
-     * @param encoded 已转码数据
-     * @return 解码后数据
+     * @param encoded 已轉碼數據
+     * @return 解碼後數據
      */
     public static byte[] decode(String encoded) {
         if (encoded == null) {
@@ -245,7 +245,7 @@ public final class Base64Util {
     }
 
     /**
-     * 是否数据
+     * 是否數據
      *
      * @param octEct 位
      * @return Boolean
@@ -257,7 +257,7 @@ public final class Base64Util {
     /**
      * 移除空白
      *
-     * @param data 数据
+     * @param data 數據
      * @return int
      */
     private static int removeWhiteSpace(char[] data) {

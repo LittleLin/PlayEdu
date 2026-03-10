@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/19 09:43
  */
@@ -34,22 +34,22 @@ public class AdminUserRequest implements Serializable {
 
     @Serial private static final long serialVersionUID = 1L;
 
-    @NotBlank(message = "请输入管理员姓名")
-    @Length(min = 1, max = 12, message = "管理员姓名长度在1-12个字符之间")
+    @NotBlank(message = "請輸入管理員姓名")
+    @Length(min = 1, max = 12, message = "管理員姓名長度在1-12個字符之間")
     private String name;
 
-    @NotBlank(message = "请输入管理员邮箱")
-    @Email(message = "请输入合法邮箱")
+    @NotBlank(message = "請輸入管理員電子郵件")
+    @Email(message = "請輸入合法電子郵件")
     private String email;
 
-    @NotNull(message = "password参数不存在")
+    @NotNull(message = "password參數不存在")
     private String password;
 
     @JsonProperty("is_ban_login")
-    @NotNull(message = "is_ban_login参数不存在")
+    @NotNull(message = "is_ban_login參數不存在")
     private Integer isBanLogin;
 
     @JsonProperty("role_ids")
-    @NotNull(message = "role_ids参数不存在")
+    @NotNull(message = "role_ids參數不存在")
     private Integer[] roleIds;
 }

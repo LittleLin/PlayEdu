@@ -24,11 +24,11 @@ const LoginPage = () => {
 
   const loginSubmit = async () => {
     if (!email) {
-      message.error("请输入管理员邮箱账号");
+      message.error("請輸入管理員電子郵件帳號");
       return;
     }
     if (!password) {
-      message.error("请输入密码");
+      message.error("請輸入密碼");
       return;
     }
     await handleSubmit();
@@ -41,13 +41,13 @@ const LoginPage = () => {
     setLoading(true);
     try {
       let res: any = await loginApi.login(email, password);
-      setToken(res.data.token); //将token写入本地
-      await getSystemConfig(); //获取系统配置并写入store
-      await getUser(); //获取登录用户的信息并写入store
+      setToken(res.data.token); //將token寫入本地
+      await getSystemConfig(); //獲取系統設定並寫入store
+      await getUser(); //獲取登入使用者的信息並寫入store
 
       navigate("/", { replace: true });
     } catch (e) {
-      console.error("错误信息", e);
+      console.error("錯誤信息", e);
       setLoading(false);
     }
   };
@@ -90,7 +90,7 @@ const LoginPage = () => {
           <img className={styles["icon"]} src={icon} alt="" />
         </div>
         <div className={styles["right-box"]}>
-          <div className={styles["title"]}>后台登录</div>
+          <div className={styles["title"]}>後台登入</div>
           <div className="login-box d-flex mt-50">
             <Input
               value={email}
@@ -98,7 +98,7 @@ const LoginPage = () => {
                 setEmail(e.target.value);
               }}
               style={{ width: 400, height: 54 }}
-              placeholder="请输入管理员邮箱账号"
+              placeholder="請輸入管理員電子郵件帳號"
               allowClear
               onKeyUp={(e) => keyUp(e)}
             />
@@ -111,7 +111,7 @@ const LoginPage = () => {
               }}
               allowClear
               style={{ width: 400, height: 54 }}
-              placeholder="请输入密码"
+              placeholder="請輸入密碼"
               onKeyUp={(e) => keyUp(e)}
             />
           </div>
@@ -122,7 +122,7 @@ const LoginPage = () => {
               onClick={loginSubmit}
               loading={loading}
             >
-              立即登录
+              立即登入
             </Button>
           </div>
         </div>

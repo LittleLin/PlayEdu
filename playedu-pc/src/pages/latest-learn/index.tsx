@@ -45,7 +45,7 @@ type LastHourModel = {
 };
 
 const LatestLearnPage = () => {
-  document.title = "最近学习";
+  document.title = "最近學習";
   const navigate = useNavigate();
   const systemConfig = useSelector((state: any) => state.systemConfig.value);
   const [loading, setLoading] = useState<boolean>(false);
@@ -116,10 +116,10 @@ const LatestLearnPage = () => {
                   <div className={styles["item-info"]}>
                     <div className={styles["top"]}>
                       {item.course.is_required === 1 && (
-                        <div className={styles["type"]}>必修课</div>
+                        <div className={styles["type"]}>必修課</div>
                       )}
                       {item.course.is_required === 0 && (
-                        <div className={styles["active-type"]}>选修课</div>
+                        <div className={styles["active-type"]}>選修課</div>
                       )}
                       <div className={styles["title"]}>{item.course.title}</div>
                     </div>
@@ -127,7 +127,7 @@ const LatestLearnPage = () => {
                       <>
                         {item.last_learn_hour && (
                           <div className={styles["record"]}>
-                            上次学到：{item.last_learn_hour.title}
+                            上次學到：{item.last_learn_hour.title}
                           </div>
                         )}
                         <div className={styles["progress"]}>
@@ -148,7 +148,7 @@ const LatestLearnPage = () => {
                                 preview={false}
                               />
                               <span className={styles["tip"]}>
-                                恭喜你学完此课程!
+                                恭喜你學完此課程!
                               </span>
                             </>
                           )}
@@ -159,7 +159,7 @@ const LatestLearnPage = () => {
                       <>
                         {item.last_learn_hour && (
                           <div className={styles["record"]}>
-                            上次学到：{item.last_learn_hour.title}
+                            上次學到：{item.last_learn_hour.title}
                           </div>
                         )}
                         <div className={styles["progress"]}>

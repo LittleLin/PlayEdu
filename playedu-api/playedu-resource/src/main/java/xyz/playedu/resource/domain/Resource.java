@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,33 +39,33 @@ public class Resource implements Serializable {
     @JsonProperty("admin_id")
     private Integer adminId;
 
-    /** 类型 */
+    /** 類型 */
     private String type;
 
-    /** 资源名 */
+    /** 資源名 */
     private String name;
 
-    /** 文件类型 */
+    /** 檔案類型 */
     private String extension;
 
-    /** 大小[字节] */
+    /** 大小[字節] */
     private Long size;
 
-    /** 存储磁盘 */
+    /** 存儲磁盤 */
     private String disk;
 
-    /** 相对地址 */
+    /** 相對地址 */
     private String path;
 
     /** */
     @JsonProperty("created_at")
     private Date createdAt;
 
-    /** 所属素材 */
+    /** 所屬素材 */
     @JsonProperty("parent_id")
     private Integer parentId;
 
-    /** 隐藏[0:否,1:是] */
+    /** 隱藏[0:否,1:是] */
     @JsonIgnore private Integer isHidden;
 
     @TableField(exist = false)

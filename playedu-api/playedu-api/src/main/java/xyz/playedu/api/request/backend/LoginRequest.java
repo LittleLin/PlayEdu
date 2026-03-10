@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ public class LoginRequest implements Serializable {
 
     @Serial private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "请输入邮箱")
+    @NotNull(message = "請輸入電子郵件")
     public String email;
 
-    @NotNull(message = "请输入密码")
+    @NotNull(message = "請輸入密碼")
     public String password;
 }

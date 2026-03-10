@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/2 15:41
  */
@@ -28,10 +28,10 @@ import lombok.Data;
 public class PasswordChangeRequest {
 
     @JsonProperty("old_password")
-    @NotBlank(message = "请输入原密码")
+    @NotBlank(message = "請輸入原密碼")
     private String oldPassword;
 
     @JsonProperty("new_password")
-    @NotBlank(message = "请输入新密码")
+    @NotBlank(message = "請輸入新密碼")
     private String newPassword;
 }

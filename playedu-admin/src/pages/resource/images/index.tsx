@@ -45,7 +45,7 @@ const ResourceImagesPage = () => {
   const [visibleArr, setVisibleArr] = useState<boolean[]>([]);
   const [hoverArr, setHoverArr] = useState<boolean[]>([]);
   const [selLabel, setLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部图片"
+    result.get("label") ? String(result.get("label")) : "全部圖片"
   );
   const [loading, setLoading] = useState(false);
   const [cateId, setCateId] = useState(Number(result.get("cid")));
@@ -59,26 +59,26 @@ const ResourceImagesPage = () => {
     }
   }, [result.get("cid")]);
 
-  // 加载图片列表
+  // 載入圖片列表
   useEffect(() => {
     getImageList();
   }, [category_ids, refresh, page, size]);
 
-  // 删除图片
+  // 刪除圖片
   const removeResource = () => {
     if (selectKey.length === 0) {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除选中图片？",
+      content: "確認刪除選中圖片？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resource.destroyResourceMulti(selectKey).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetImageList();
         });
       },
@@ -88,7 +88,7 @@ const ResourceImagesPage = () => {
     });
   };
 
-  // 获取图片列表
+  // 獲取圖片列表
   const getImageList = () => {
     setLoading(true);
     let categoryIds = category_ids.join(",");
@@ -109,7 +109,7 @@ const ResourceImagesPage = () => {
       })
       .catch((err: any) => {
         setLoading(false);
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
   // 重置列表
@@ -166,7 +166,7 @@ const ResourceImagesPage = () => {
           <TreeCategory
             selected={category_ids}
             type="no-cate"
-            text={"图片"}
+            text={"圖片"}
             onUpdate={(keys: any, title: any) => {
               setPage(1);
               setCategoryIds(keys);
@@ -180,7 +180,7 @@ const ResourceImagesPage = () => {
         </div>
         <div className="right-box">
           <div className="d-flex playedu-main-title float-left mb-24">
-            图片 | {selLabel}
+            圖片 | {selLabel}
           </div>
           <Row gutter={16} style={{ marginBottom: 24 }}>
             <Col span={24}>
@@ -209,7 +209,7 @@ const ResourceImagesPage = () => {
                       type="primary"
                       onClick={() => removeResource()}
                     >
-                      删除
+                      刪除
                     </Button>
                   )}
                 </div>
@@ -225,7 +225,7 @@ const ResourceImagesPage = () => {
           {imageList.length === 0 && (
             <div className="d-flex">
               <Col span={24}>
-                <Empty description="暂无图片" />
+                <Empty description="暫無圖片" />
               </Col>
             </div>
           )}

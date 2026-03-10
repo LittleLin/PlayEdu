@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,16 +43,16 @@ public class Category implements Serializable {
     @JsonProperty("parent_chain")
     private String parentChain;
 
-    /** 分类名 */
+    /** 分類名 */
     private String name;
 
     /** 升序 */
     private Integer sort;
 
-    /** 创建时间 */
+    /** 建立時間 */
     @JsonIgnore private Date createdAt;
 
-    /** 更新时间 */
+    /** 更新時間 */
     @JsonIgnore private Date updatedAt;
 
     @TableField(exist = false)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,15 +46,15 @@ public class UserCourseHourRecord implements Serializable {
     @JsonProperty("hour_id")
     private Integer hourId;
 
-    /** 总时长 */
+    /** 總時長 */
     @JsonProperty("total_duration")
     private Integer totalDuration;
 
-    /** 已完成时长 */
+    /** 已完成時長 */
     @JsonProperty("finished_duration")
     private Integer finishedDuration;
 
-    /** 实际观看时长 */
+    /** 實際觀看時長 */
     @JsonProperty("real_duration")
     private Integer realDuration;
 
@@ -62,7 +62,7 @@ public class UserCourseHourRecord implements Serializable {
     @JsonProperty("is_finished")
     private Integer isFinished;
 
-    /** 看完时间 */
+    /** 看完時間 */
     @JsonProperty("finished_at")
     private Date finishedAt;
 

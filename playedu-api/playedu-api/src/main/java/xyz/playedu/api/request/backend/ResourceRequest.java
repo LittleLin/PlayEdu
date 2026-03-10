@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,39 +22,39 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/23 10:52
  */
 @Data
 public class ResourceRequest {
 
-    @NotNull(message = "category_id参数不存在")
+    @NotNull(message = "category_id參數不存在")
     @JsonProperty("category_id")
     private Integer categoryId;
 
-    @NotBlank(message = "请输入资源名")
-    @Length(min = 1, max = 254, message = "资源名长度在1-254个字符之间")
+    @NotBlank(message = "請輸入資源名")
+    @Length(min = 1, max = 254, message = "資源名長度在1-254個字符之間")
     private String name;
 
-    @NotBlank(message = "请输入资源扩展")
-    @Length(min = 1, max = 254, message = "资源扩展长度在1-20个字符之间")
+    @NotBlank(message = "請輸入資源擴展")
+    @Length(min = 1, max = 254, message = "資源擴展長度在1-20個字符之間")
     private String extension;
 
-    @NotNull(message = "size参数不存在")
+    @NotNull(message = "size參數不存在")
     private Long size;
 
-    @NotBlank(message = "disk值不能为空")
+    @NotBlank(message = "disk值不能爲空")
     private String disk;
 
-    @NotNull(message = "file_id参数不存在")
+    @NotNull(message = "file_id參數不存在")
     @JsonProperty("file_id")
     private String fileId;
 
-    @NotBlank(message = "path值不能为空")
+    @NotBlank(message = "path值不能爲空")
     private String path;
 
-    @NotNull(message = "url参数不存在")
+    @NotNull(message = "url參數不存在")
     private String url;
 
     private Integer duration;

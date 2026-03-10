@@ -151,7 +151,7 @@ const CoursePalyPage = () => {
       ban_drag: banDrag,
       last_see_pos: params,
     });
-    // 监听播放进度更新evt
+    // 監聽播放進度更新evt
     window.player.on("timeupdate", () => {
       let currentTime = parseInt(window.player.video.currentTime);
       if (
@@ -160,7 +160,7 @@ const CoursePalyPage = () => {
         currentTime - playRef.current >= 2 &&
         currentTime > watchRef.current
       ) {
-        message.warning("首次学习禁止快进");
+        message.warning("首次學習禁止快進");
         window.player.seek(watchRef.current);
       } else {
         setPlayingTime(currentTime);
@@ -222,7 +222,7 @@ const CoursePalyPage = () => {
     );
     if (index === totalHours.length - 1) {
       setIsLastpage(true);
-      message.error("已经是最后一节了！");
+      message.error("已經是最後一節了！");
     } else if (index < totalHours.length - 1) {
       navigate(`/course/${params.courseId}/hour/${totalHours[index + 1].id}`, {
         replace: true,
@@ -270,7 +270,7 @@ const CoursePalyPage = () => {
           {checkPlayerStatus && (
             <div className={styles["alert-message"]}>
               <div className={styles["des-video"]}>
-                您已打开新视频，暂停本视频播放
+                您已打開新影片，暫停本影片播放
               </div>
             </div>
           )}
@@ -281,7 +281,7 @@ const CoursePalyPage = () => {
                   className={styles["alert-button"]}
                   onClick={() => navigate(`/course/${params.courseId}`)}
                 >
-                  恭喜你学完最后一节
+                  恭喜你學完最後一節
                 </div>
               )}
               {!isLastpage && (
@@ -294,7 +294,7 @@ const CoursePalyPage = () => {
                     goNextVideo();
                   }}
                 >
-                  播放下一节
+                  播放下一節
                 </div>
               )}
             </div>

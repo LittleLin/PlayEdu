@@ -58,7 +58,7 @@ const CoursePage = () => {
   const getDetail = () => {
     vod.detail(Number(courseId)).then((res: any) => {
       let courseItem: CourseModel = res.data.course;
-      document.title = courseItem.title || "课程详情";
+      document.title = courseItem.title || "課程詳情";
       setCourse(courseItem);
       setChapters(res.data.chapters);
       setHours(res.data.hours);
@@ -72,13 +72,13 @@ const CoursePage = () => {
       let tabs = [
         {
           key: 1,
-          label: `课程目录`,
+          label: `課程目錄`,
         },
       ];
       if (arr.length > 0) {
         tabs.push({
           key: 2,
-          label: `课程附件`,
+          label: `課程附件`,
         });
         setAttachments(arr);
       }
@@ -88,7 +88,7 @@ const CoursePage = () => {
 
   useEffect(() => {
     if (course) {
-      setCourseTypeText(course.is_required === 1 ? "必修课" : "选修课");
+      setCourseTypeText(course.is_required === 1 ? "必修課" : "選修課");
     }
   }, [course]);
 
@@ -111,7 +111,7 @@ const CoursePage = () => {
       let url = res.data.resource_url[rid];
       if (isWechat()) {
         if (isIOS()) {
-          Toast.show("请点击右上角···浏览器打开下载");
+          Toast.show("請點選右上角···瀏覽器打開下載");
         }
         var input = document.createElement("input");
         input.value = url;
@@ -148,10 +148,10 @@ const CoursePage = () => {
           src={backIcon}
           onClick={() => {
             if (window.history.length <= 1) {
-              // 将页面跳转到首页
+              // 將頁面跳轉到首頁
               navigate("/");
             } else {
-              // 返回到前一个页面
+              // 返回到前一個頁面
               navigate(-1);
             }
           }}
@@ -162,7 +162,7 @@ const CoursePage = () => {
         <div className={styles["info-content"]}>
           <div className={styles["info"]}>
             <div className={styles["record"]}>
-              已学完课时{" "}
+              已學完課時{" "}
               <strong>
                 {learnRecord ? learnRecord.finished_count || 0 : 0}
               </strong>{" "}
@@ -280,7 +280,7 @@ const CoursePage = () => {
                         marginRight: 5,
                       }}
                     />
-                    <span>课件</span>
+                    <span>課件</span>
                   </div>
                   <div className={styles["title"]}>
                     {item.title}.{item.ext}
@@ -292,7 +292,7 @@ const CoursePage = () => {
                     downLoadFile(item.course_id, item.id, item.rid)
                   }
                 >
-                  下载
+                  下載
                 </div>
               </div>
             ))}

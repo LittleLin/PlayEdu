@@ -79,11 +79,11 @@ const SystemLogPage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -93,12 +93,12 @@ const SystemLogPage = () => {
   };
 
   const disabledDate = (current: any) => {
-    return current && current >= moment().add(0, "days"); // 选择时间要大于等于当前天。若今天不能被选择，去掉等号即可。
+    return current && current >= moment().add(0, "days"); // 選擇時間要大於等於當前天。若今天不能被選擇，去掉等號即可。
   };
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "管理员名称",
+      title: "管理員名稱",
       width: 150,
       render: (_, record: any) => <span>{record.admin_name}</span>,
     },
@@ -113,7 +113,7 @@ const SystemLogPage = () => {
       render: (ip: string) => <span>{ip}</span>,
     },
     {
-      title: "时间",
+      title: "時間",
       width: 200,
       dataIndex: "created_at",
       render: (created_at: string) => (
@@ -134,7 +134,7 @@ const SystemLogPage = () => {
             setVisiable(true);
           }}
         >
-          详情
+          詳情
         </Button>
       ),
     },
@@ -146,7 +146,7 @@ const SystemLogPage = () => {
         <div className="d-flex"></div>
         <div className="d-flex">
           <div className="d-flex mr-24">
-            <Typography.Text>管理员名称：</Typography.Text>
+            <Typography.Text>管理員名稱：</Typography.Text>
             <Input
               value={adminName}
               onChange={(e) => {
@@ -154,7 +154,7 @@ const SystemLogPage = () => {
               }}
               allowClear
               style={{ width: 160 }}
-              placeholder="请输入管理员名称"
+              placeholder="請輸入管理員名稱"
             />
           </div>
           <div className="d-flex mr-24">
@@ -166,11 +166,11 @@ const SystemLogPage = () => {
               }}
               allowClear
               style={{ width: 160 }}
-              placeholder="请输入操作"
+              placeholder="請輸入操作"
             />
           </div>
           <div className="d-flex mr-24">
-            <Typography.Text>时间：</Typography.Text>
+            <Typography.Text>時間：</Typography.Text>
             <RangePicker
               disabledDate={disabledDate}
               format={"YYYY-MM-DD"}
@@ -184,7 +184,7 @@ const SystemLogPage = () => {
                 setCreatedAt(dateString);
                 setCreatedAts(date);
               }}
-              placeholder={["时间-开始", "时间-结束"]}
+              placeholder={["時間-開始", "時間-結束"]}
             />
           </div>
           <div className="d-flex">
@@ -198,7 +198,7 @@ const SystemLogPage = () => {
                 setRefresh(!refresh);
               }}
             >
-              查 询
+              查 詢
             </Button>
           </div>
         </div>

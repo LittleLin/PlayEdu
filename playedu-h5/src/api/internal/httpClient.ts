@@ -20,7 +20,7 @@ export class HttpClient {
       },
     });
 
-    //拦截器注册
+    //攔截器註冊
     this.axios.interceptors.request.use(
       (config) => {
         const token = getToken();
@@ -34,8 +34,8 @@ export class HttpClient {
 
     this.axios.interceptors.response.use(
       (response: AxiosResponse) => {
-        let code = response.data.code; //业务返回代码
-        let msg = response.data.msg; //错误消息
+        let code = response.data.code; //業務返回代碼
+        let msg = response.data.msg; //錯誤消息
 
         if (code === 0) {
           return Promise.resolve(response);
@@ -46,21 +46,21 @@ export class HttpClient {
         }
         return Promise.reject(response);
       },
-      // 当http的状态码非0
+      // 當http的狀態碼非0
       (error) => {
         let status = error.response.status;
         if (status === 401) {
           Toast.show({
-            content: "请重新登录",
+            content: "請重新登入",
           });
           GoLogin();
         } else if (status === 404) {
-          // 跳转到404页面
+          // 跳轉到404頁面
           GoLogin();
         } else if (status === 403) {
-          // 跳转到无权限页面
+          // 跳轉到無權限頁面
         } else if (status === 500) {
-          // 跳转到500异常页面
+          // 跳轉到500異常頁面
         }
         return Promise.reject(error.response);
       }

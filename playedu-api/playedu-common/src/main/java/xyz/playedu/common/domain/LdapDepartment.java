@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ public class LdapDepartment implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     private String uuid;
 
-    /** 部门ID */
+    /** 部門ID */
     @JsonProperty("department_id")
     private Integer departmentId;
 
@@ -60,22 +60,22 @@ public class LdapDepartment implements Serializable {
         this.id = id;
     }
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     public String getUuid() {
         return uuid;
     }
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    /** 部门ID */
+    /** 部門ID */
     public Integer getDepartmentId() {
         return departmentId;
     }
 
-    /** 部门ID */
+    /** 部門ID */
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }

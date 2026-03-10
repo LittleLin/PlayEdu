@@ -2,25 +2,25 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import { system, user } from "../api";
 import { getToken } from "../utils";
-// 页面加载
+// 頁面載入
 import { InitPage } from "../pages/init";
 import LoginPage from "../pages/login";
 import WithFooter from "../pages/layouts/with-footer";
 import WithoutFooter from "../pages/layouts/without-footer";
 
-//用户中心页面
+//使用者中心頁面
 const MemberPage = lazy(() => import("../pages/member/index"));
-//主页
+//主頁
 const IndexPage = lazy(() => import("../pages/index/index"));
-//修改密码页面
+//修改密碼頁面
 const ChangePasswordPage = lazy(() => import("../pages/change-password/index"));
-//修改部门页面
+//修改部門頁面
 const ChangeDepartmentPage = lazy(
   () => import("../pages/change-department/index")
 );
-//学习页面
+//學習頁面
 const StudyPage = lazy(() => import("../pages/study/index"));
-//课程页面
+//課程頁面
 const CoursePage = lazy(() => import("../pages/course/index"));
 const CoursePlayPage = lazy(() => import("../pages/course/video"));
 
@@ -39,7 +39,7 @@ if (getToken()) {
           ),
         });
       } catch (e) {
-        console.error("系统初始化失败", e);
+        console.error("系統初始化失敗", e);
       }
     });
   });
@@ -52,7 +52,7 @@ if (getToken()) {
           default: <InitPage configData={configRes.data} />,
         });
       } catch (e) {
-        console.error("系统初始化失败", e);
+        console.error("系統初始化失敗", e);
       }
     });
   });

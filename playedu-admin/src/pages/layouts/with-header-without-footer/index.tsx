@@ -20,7 +20,7 @@ const HomePage = () => {
           </div>
           <div className={styles["right-main"]}>
             <Suspense fallback={<LoadingPage height="100vh" />}>
-              {/* 二级路由出口 */}
+              {/* 二級路由出口 */}
               <Outlet />{" "}
             </Suspense>
           </div>

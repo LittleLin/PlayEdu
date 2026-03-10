@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,18 +32,18 @@ public class AppConfigCheck implements CommandLineRunner {
     private static final HashMap<String, AppConfig[]> configs =
             new HashMap<>() {
                 {
-                    // 系统配置
+                    // 系統設定
                     put(
-                            "系统",
+                            "系統",
                             new AppConfig[] {
                                 new AppConfig() {
                                     {
-                                        setName("网站名");
+                                        setName("網站名");
                                         setSort(10);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_INPUT);
                                         setKeyName(ConfigConstant.SYSTEM_NAME);
                                         setKeyValue("");
-                                        setHelp("请输入网站名");
+                                        setHelp("請輸入網站名");
                                     }
                                 },
                                 new AppConfig() {
@@ -57,38 +57,38 @@ public class AppConfigCheck implements CommandLineRunner {
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("PC端口访问地址");
+                                        setName("PC端口訪問地址");
                                         setSort(40);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_INPUT);
                                         setKeyName(ConfigConstant.SYSTEM_PC_URL);
                                         setKeyValue("");
-                                        setHelp("请输入PC端访问地址");
+                                        setHelp("請輸入PC端訪問地址");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("H5端口访问地址");
+                                        setName("H5端口訪問地址");
                                         setSort(50);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_INPUT);
                                         setKeyName(ConfigConstant.SYSTEM_H5_URL);
                                         setKeyValue("");
-                                        setHelp("请输入H5端访问地址");
+                                        setHelp("請輸入H5端訪問地址");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("网站页脚");
+                                        setName("網站頁腳");
                                         setSort(60);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_INPUT);
                                         setKeyName("system.pc_index_footer_msg");
                                         setKeyValue("");
-                                        setHelp("自定义一句话显示在前台页脚");
+                                        setHelp("自定義一句話顯示在前台頁腳");
                                     }
                                 },
                             });
-                    // 播放配置
+                    // 播放設定
                     put(
-                            "播放配置",
+                            "播放設定",
                             new AppConfig[] {
                                 new AppConfig() {
                                     {
@@ -97,32 +97,32 @@ public class AppConfigCheck implements CommandLineRunner {
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_IMAGE);
                                         setKeyName("player.poster");
                                         setKeyValue("");
-                                        setHelp("播放器封面在学员观看视频时默认显示");
+                                        setHelp("播放器封面在學員觀看影片時預設顯示");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("启用跑马灯");
+                                        setName("啓用跑馬燈");
                                         setSort(20);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_SWITCH);
                                         setKeyName("player.is_enabled_bullet_secret");
                                         setKeyValue("0");
-                                        setHelp("开启之后视频播放器将会随机显示学员信息");
+                                        setHelp("開啓之後影片播放器將會隨機顯示學員信息");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("跑马灯内容");
+                                        setName("跑馬燈內容");
                                         setSort(30);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName("player.bullet_secret_text");
                                         setKeyValue("");
-                                        setHelp("请配置跑马灯显示的内容模板");
+                                        setHelp("請設定跑馬燈顯示的內容模板");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("跑马灯颜色");
+                                        setName("跑馬燈顏色");
                                         setSort(40);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName("player.bullet_secret_color");
@@ -131,7 +131,7 @@ public class AppConfigCheck implements CommandLineRunner {
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("跑马灯透明度");
+                                        setName("跑馬燈透明度");
                                         setSort(50);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName("player.bullet_secret_opacity");
@@ -149,11 +149,11 @@ public class AppConfigCheck implements CommandLineRunner {
                                 },
                             });
                     put(
-                            "学员配置",
+                            "學員設定",
                             new AppConfig[] {
                                 new AppConfig() {
                                     {
-                                        setName("默认头像");
+                                        setName("預設頭像");
                                         setSort(10);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_IMAGE);
                                         setKeyName(ConfigConstant.MEMBER_DEFAULT_AVATAR);
@@ -162,7 +162,7 @@ public class AppConfigCheck implements CommandLineRunner {
                                 },
                             });
                     put(
-                            "S3存储",
+                            "S3存儲",
                             new AppConfig[] {
                                 new AppConfig() {
                                     {
@@ -212,41 +212,41 @@ public class AppConfigCheck implements CommandLineRunner {
                                 },
                             });
                     put(
-                            "LDAP配置",
+                            "LDAP設定",
                             new AppConfig[] {
                                 new AppConfig() {
                                     {
-                                        setName("启用");
+                                        setName("啓用");
                                         setSort(10);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_SWITCH);
                                         setKeyName(ConfigConstant.LDAP_ENABLED);
                                         setKeyValue("0");
-                                        setHelp("注意：1.支持Window AD域和OpenLDAP 2.启用以后系统只能使用LDAP账号登录");
+                                        setHelp("注意：1.支持Window AD域和OpenLDAP 2.啓用以後系統只能使用LDAP帳號登入");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("服务地址");
+                                        setName("服務地址");
                                         setSort(20);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName(ConfigConstant.LDAP_URL);
                                         setKeyValue("");
-                                        setHelp("LDAP的对外服务地址。例如：ldap://ldap.example.com:389");
+                                        setHelp("LDAP的對外服務地址。例如：ldap://ldap.example.com:389");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("用户名");
+                                        setName("使用者名");
                                         setSort(40);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName(ConfigConstant.LDAP_ADMIN_USER);
                                         setKeyValue("");
-                                        setHelp("用户登录到LDAP。如：cn=admin,dc=example,dc=com");
+                                        setHelp("使用者登入到LDAP。如：cn=admin,dc=example,dc=com");
                                     }
                                 },
                                 new AppConfig() {
                                     {
-                                        setName("密码");
+                                        setName("密碼");
                                         setSort(50);
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName(ConfigConstant.LDAP_ADMIN_PASS);
@@ -261,7 +261,7 @@ public class AppConfigCheck implements CommandLineRunner {
                                         setFieldType(BackendConstant.APP_CONFIG_FIELD_TYPE_TEXT);
                                         setKeyName(ConfigConstant.LDAP_BASE_DN);
                                         setKeyValue("");
-                                        setHelp("从LDAP根节点搜索用户");
+                                        setHelp("從LDAP根節點搜索使用者");
                                     }
                                 },
                             });

@@ -101,7 +101,7 @@ export const CoursewareUpdateDialog: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="编辑课件"
+          title="編輯課件"
           centered
           forceRender
           open={true}
@@ -130,28 +130,28 @@ export const CoursewareUpdateDialog: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="课件分类"
+                label="課件分類"
                 name="category_id"
-                rules={[{ required: true, message: "请选择课件分类!" }]}
+                rules={[{ required: true, message: "請選擇課件分類!" }]}
               >
                 <TreeSelect
                   showCheckedStrategy={TreeSelect.SHOW_ALL}
                   allowClear
                   style={{ width: 200 }}
                   treeData={categories}
-                  placeholder="课件分类"
+                  placeholder="課件分類"
                   treeDefaultExpandAll
                 />
               </Form.Item>
               <Form.Item
-                label="课件名称"
+                label="課件名稱"
                 name="name"
-                rules={[{ required: true, message: "请输入课件名称!" }]}
+                rules={[{ required: true, message: "請輸入課件名稱!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 200 }}
-                  placeholder="请输入课件名称"
+                  placeholder="請輸入課件名稱"
                 />
               </Form.Item>
             </Form>

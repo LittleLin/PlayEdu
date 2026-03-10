@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public class ResourceController {
     @Autowired private CategoryService categoryService;
 
     @GetMapping("/index")
-    @Log(title = "资源-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);
@@ -75,10 +75,10 @@ public class ResourceController {
         String categoryIds = MapUtils.getString(params, "category_ids");
 
         if (type == null || type.trim().isEmpty()) {
-            return JsonResponse.error("请选择资源类型");
+            return JsonResponse.error("請選擇資源類型");
         }
 
-        // 获取所有子类
+        // 獲取所有子類
         Set<Integer> allCategoryIdsSet = new HashSet<>();
         if (StringUtil.isNotEmpty(categoryIds)) {
             String[] categoryIdArr = categoryIds.split(",");
@@ -86,7 +86,7 @@ public class ResourceController {
                 for (String categoryIdStr : categoryIdArr) {
                     Integer categoryId = Integer.parseInt(categoryIdStr);
                     allCategoryIdsSet.add(categoryId);
-                    // 查询所有的子分类
+                    // 查詢所有的子分類
                     List<Category> categoryList =
                             categoryService.getChildCategorysByParentId(categoryId);
                     if (StringUtil.isNotEmpty(categoryList)) {
@@ -113,7 +113,7 @@ public class ResourceController {
         filter.setCategoryIds(allCategoryIds);
         filter.setName(name);
 
-        if (!backendBus.isSuperAdmin()) { // 非超管只能读取它自己上传的资源
+        if (!backendBus.isSuperAdmin()) { // 非超管只能讀取它自己上傳的資源
             filter.setAdminId(BCtx.getId());
         }
 
@@ -132,7 +132,7 @@ public class ResourceController {
                 data.put("videos_extra", resourceVideosExtra);
             }
 
-            // 获取资源签名url
+            // 獲取資源簽名url
             data.put("resource_url", resourceService.chunksPreSignUrlByIds(ids));
         }
 
@@ -158,34 +158,34 @@ public class ResourceController {
     @DeleteMapping("/{id}")
     @Transactional
     @SneakyThrows
-    @Log(title = "资源-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "資源-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable(name = "id") Integer id) throws NotFoundException {
         Resource resource = resourceService.findOrFail(id);
 
         if (!backendBus.isSuperAdmin()) {
             if (!resource.getAdminId().equals(BCtx.getId())) {
-                throw new ServiceException("无权限");
+                throw new ServiceException("無權限");
             }
         }
 
-        // 删除文件
+        // 刪除檔案
         S3Util s3Util = new S3Util(appConfigService.getS3Config());
         s3Util.removeByPath(resource.getPath());
-        // 如果是视频资源文件则删除对应的时长关联记录
+        // 如果是影片資源檔案則刪除對應的時長關聯記錄
         if (BackendConstant.RESOURCE_TYPE_VIDEO.equals(resource.getType())) {
             resourceExtraService.removeByRid(resource.getId());
         }
-        // 删除资源记录
+        // 刪除資源記錄
         resourceService.removeById(resource.getId());
         return JsonResponse.success();
     }
 
     @PostMapping("/destroy-multi")
     @SneakyThrows
-    @Log(title = "资源-批量列表", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "資源-批量列表", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse multiDestroy(@RequestBody ResourceDestroyMultiRequest req) {
         if (req.getIds() == null || req.getIds().isEmpty()) {
-            return JsonResponse.error("请选择需要删除的资源");
+            return JsonResponse.error("請選擇需要刪除的資源");
         }
 
         List<Resource> resources = resourceService.chunks(req.getIds());
@@ -196,20 +196,20 @@ public class ResourceController {
         S3Util s3Util = new S3Util(appConfigService.getS3Config());
 
         for (Resource resourceItem : resources) {
-            // 权限校验
+            // 權限校驗
             if (!backendBus.isSuperAdmin()) {
                 if (!resourceItem.getAdminId().equals(BCtx.getId())) {
-                    throw new ServiceException("无权限");
+                    throw new ServiceException("無權限");
                 }
             }
 
-            // 删除资源源文件
+            // 刪除資源源檔案
             s3Util.removeByPath(resourceItem.getPath());
-            // 如果是视频资源的话还需要删除视频的关联资源，如: 封面截图
+            // 如果是影片資源的話還需要刪除影片的關聯資源，如: 封面截圖
             if (BackendConstant.RESOURCE_TYPE_VIDEO.equals(resourceItem.getType())) {
                 resourceExtraService.removeByRid(resourceItem.getId());
             }
-            // 删除数据库的记录
+            // 刪除資料庫的記錄
             resourceService.removeById(resourceItem.getId());
         }
         return JsonResponse.success();
@@ -217,20 +217,20 @@ public class ResourceController {
 
     @GetMapping("/{id}")
     @SneakyThrows
-    @Log(title = "资源-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "資源-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable(name = "id") Integer id) {
         Resource resource = resourceService.findOrFail(id);
 
         if (!backendBus.isSuperAdmin()) {
             if (!resource.getAdminId().equals(BCtx.getId())) {
-                throw new ServiceException("无权限");
+                throw new ServiceException("無權限");
             }
         }
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("resources", resource);
         data.put("category_ids", resourceService.categoryIds(id));
-        // 获取资源签名url
+        // 獲取資源簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -244,7 +244,7 @@ public class ResourceController {
 
     @PutMapping("/{id}")
     @SneakyThrows
-    @Log(title = "资源-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "資源-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @RequestBody @Validated ResourceUpdateRequest req,
             @PathVariable(name = "id") Integer id) {
@@ -252,7 +252,7 @@ public class ResourceController {
 
         if (!backendBus.isSuperAdmin()) {
             if (!resource.getAdminId().equals(BCtx.getId())) {
-                throw new ServiceException("无权限");
+                throw new ServiceException("無權限");
             }
         }
 

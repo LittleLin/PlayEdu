@@ -103,7 +103,7 @@ export const SystemAdministratorCreate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="添加管理员"
+          title="添加管理員"
           centered
           forceRender
           open={true}
@@ -133,56 +133,56 @@ export const SystemAdministratorCreate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="选择角色"
+                label="選擇角色"
                 name="roleIds"
-                rules={[{ required: true, message: "请选择角色!" }]}
+                rules={[{ required: true, message: "請選擇角色!" }]}
               >
                 <Select
                   style={{ width: 200 }}
                   mode="multiple"
                   allowClear
-                  placeholder="请选择角色"
+                  placeholder="請選擇角色"
                   onChange={handleChange}
                   options={roles}
                 />
               </Form.Item>
               <Form.Item
-                label="管理员姓名"
+                label="管理員姓名"
                 name="name"
-                rules={[{ required: true, message: "请输入管理员姓名!" }]}
+                rules={[{ required: true, message: "請輸入管理員姓名!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 200 }}
-                  placeholder="请输入管理员姓名"
+                  placeholder="請輸入管理員姓名"
                 />
               </Form.Item>
               <Form.Item
-                label="邮箱"
+                label="電子郵件"
                 name="email"
-                rules={[{ required: true, message: "请输入管理员邮箱!" }]}
+                rules={[{ required: true, message: "請輸入管理員電子郵件!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 200 }}
-                  placeholder="请输入管理员邮箱"
+                  placeholder="請輸入管理員電子郵件"
                 />
               </Form.Item>
               <Form.Item
-                label="密码"
+                label="密碼"
                 name="password"
-                rules={[{ required: true, message: "请输入登录密码!" }]}
+                rules={[{ required: true, message: "請輸入登入密碼!" }]}
               >
                 <Input.Password
                   autoComplete="new-password"
                   allowClear
                   style={{ width: 200 }}
-                  placeholder="请输入登录密码"
+                  placeholder="請輸入登入密碼"
                 />
               </Form.Item>
 
               <Form.Item
-                label="禁止登录"
+                label="禁止登入"
                 name="is_ban_login"
                 valuePropName="checked"
               >

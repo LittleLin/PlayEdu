@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,25 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/23 13:56
  */
 @Data
 public class UserRequest {
 
-    @NotBlank(message = "请输入邮箱")
-    @Email(message = "请输入正确的邮箱")
+    @NotBlank(message = "請輸入電子郵件")
+    @Email(message = "請輸入正確的電子郵件")
     private String email;
 
-    @NotBlank(message = "请输入姓名")
-    @Length(min = 1, max = 20, message = "姓名长度在1-20个字符之间")
+    @NotBlank(message = "請輸入姓名")
+    @Length(min = 1, max = 20, message = "姓名長度在1-20個字符之間")
     private String name;
 
-    @NotNull(message = "请上传头像")
+    @NotNull(message = "請上傳頭像")
     private Integer avatar;
 
-    @NotNull(message = "password参数不存在")
+    @NotNull(message = "password參數不存在")
     private String password;
 
     @JsonProperty("id_card")

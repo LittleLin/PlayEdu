@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class MemoryCacheUtil {
     private static final String cacheNamePrefix = SystemConstant.CACHE_NAME_PREFIX;
 
     static {
-        // 启动定时清理过期缓存的线程
+        // 啓動定時清理過期緩存的線程
         scheduler.scheduleAtFixedRate(
                 () -> {
                     cache.entrySet().removeIf(entry -> entry.getValue().isExpired());
@@ -74,9 +74,9 @@ public class MemoryCacheUtil {
     }
 
     /**
-     * 获取所有缓存键值对
+     * 獲取所有緩存鍵值對
      *
-     * @return 所有缓存键值对的Map，包含值和失效时间
+     * @return 所有緩存鍵值對的Map，包含值和失效時間
      */
     public Map<String, Map<String, Object>> getAllCache() {
         Map<String, Map<String, Object>> result = new HashMap<>();
@@ -91,15 +91,15 @@ public class MemoryCacheUtil {
     }
 
     /**
-     * 获取所有缓存键
+     * 獲取所有緩存鍵
      *
-     * @return 所有缓存键的列表
+     * @return 所有緩存鍵的列表
      */
     public List<String> getAllKeys() {
         return new ArrayList<>(cache.keySet());
     }
 
-    // 键操作
+    // 鍵操作
     public static Boolean exists(String key) {
         key = cacheNamePrefix + key;
         CacheObject cacheObject = cache.get(key);
@@ -144,7 +144,7 @@ public class MemoryCacheUtil {
         }
     }
 
-    // 内部方法
+    // 內部方法
     public static Long increment(String key, long delta, long expireSeconds) {
         key = cacheNamePrefix + key;
         CacheObject cacheObject = cache.get(key);
@@ -156,16 +156,16 @@ public class MemoryCacheUtil {
                             System.currentTimeMillis() + expireSeconds * 1000));
             return delta;
         }
-        // 检查值的类型，如果是Long类型，将其转换为AtomicLong
+        // 檢查值的類型，如果是Long類型，將其轉換爲AtomicLong
         Object value = cacheObject.getValue();
         AtomicLong counter;
         if (value instanceof Long) {
             counter = new AtomicLong((Long) value);
-            cacheObject.setValue(counter); // 更新缓存对象中的值为AtomicLong类型
+            cacheObject.setValue(counter); // 更新緩存對象中的值爲AtomicLong類型
         } else if (value instanceof AtomicLong) {
             counter = (AtomicLong) value;
         } else {
-            // 如果既不是Long也不是AtomicLong，重新初始化为delta
+            // 如果既不是Long也不是AtomicLong，重新初始化爲delta
             counter = new AtomicLong(delta);
             cacheObject.setValue(counter);
         }

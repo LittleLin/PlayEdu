@@ -125,7 +125,7 @@ export const SystemAdminrolesUpdate: React.FC<PropInterface> = ({
     let pids = [];
     let aids = [];
     if (values.permission_ids.length === 0 && values.action_ids.length === 0) {
-      message.error("必须选择至少一个权限！");
+      message.error("必須選擇至少一個權限！");
       return;
     }
     if (values.permission_ids) {
@@ -156,7 +156,7 @@ export const SystemAdminrolesUpdate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Drawer
-          title="编辑角色权限"
+          title="編輯角色權限"
           onClose={onCancel}
           maskClosable={false}
           open={true}
@@ -168,7 +168,7 @@ export const SystemAdminrolesUpdate: React.FC<PropInterface> = ({
                 onClick={() => form.submit()}
                 type="primary"
               >
-                确 认
+                確 認
               </Button>
             </Space>
           }
@@ -196,31 +196,31 @@ export const SystemAdminrolesUpdate: React.FC<PropInterface> = ({
               <Form.Item
                 label="角色名"
                 name="name"
-                rules={[{ required: true, message: "请输入角色名!" }]}
+                rules={[{ required: true, message: "請輸入角色名!" }]}
               >
                 <Input
                   style={{ width: 424 }}
                   allowClear
-                  placeholder="请输入角色名"
+                  placeholder="請輸入角色名"
                 />
               </Form.Item>
-              <Form.Item label="操作权限" name="action_ids">
+              <Form.Item label="操作權限" name="action_ids">
                 <TreeSelect
                   style={{ width: 424 }}
                   listHeight={600}
                   treeCheckable={true}
-                  placeholder="请选择权限"
+                  placeholder="請選擇權限"
                   multiple
                   allowClear
                   treeData={actions}
                 />
               </Form.Item>
-              <Form.Item label="数据权限" name="permission_ids">
+              <Form.Item label="數據權限" name="permission_ids">
                 <TreeSelect
                   style={{ width: 424 }}
                   listHeight={600}
                   treeCheckable={true}
-                  placeholder="请选择权限"
+                  placeholder="請選擇權限"
                   multiple
                   allowClear
                   treeData={permissions}

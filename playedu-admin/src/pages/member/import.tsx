@@ -31,7 +31,7 @@ const MemberImportPage = () => {
     },
   };
   const handleImpotedJson = (jsonArr: any[], file: any) => {
-    jsonArr.splice(0, 2); // 去掉表头[第一行规则描述,第二行表头名]
+    jsonArr.splice(0, 2); // 去掉表頭[第一行規則描述,第二行表頭名]
     let data: any[] = [];
     for (let i = 0; i < jsonArr.length; i++) {
       let tmpItem = jsonArr[i];
@@ -59,7 +59,7 @@ const MemberImportPage = () => {
       .storeBatch(2, data)
       .then(() => {
         setErrorData([]);
-        message.success("导入成功！");
+        message.success("導入成功！");
         navigate(-1);
       })
       .catch((e) => {
@@ -70,7 +70,7 @@ const MemberImportPage = () => {
   };
 
   const download = () => {
-    let url = getHost() + "template/学员批量导入模板.xlsx";
+    let url = getHost() + "template/學員批量導入模板.xlsx";
     window.open(url);
   };
 
@@ -79,14 +79,14 @@ const MemberImportPage = () => {
       <Row className="playedu-main-body">
         <Col>
           <div className="float-left mb-24">
-            <BackBartment title="学员批量导入" />
+            <BackBartment title="學員批量導入" />
           </div>
           <div className="float-left d-flex  mb-24">
             <Upload {...uploadProps}>
-              <Button type="primary">导入Excel</Button>
+              <Button type="primary">導入Excel</Button>
             </Upload>
             <Button type="link" className="ml-15" danger onClick={download}>
-              下载「学员批量导入模板」
+              下載「學員批量導入模板」
             </Button>
           </div>
           <div className="float-left c-flex">

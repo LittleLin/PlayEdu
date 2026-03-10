@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,13 +46,13 @@ public class PrivacyUtil {
     }
 
     /**
-     * 对字符串进行脱敏操作
+     * 對字符串進行脫敏操作
      *
      * @param origin 原始字符串
-     * @param prefixNoMaskLen 左侧需要保留几位明文字段
-     * @param suffixNoMaskLen 右侧需要保留几位明文字段
-     * @param maskStr 用于遮罩的字符串, 如'*'
-     * @return 脱敏后结果
+     * @param prefixNoMaskLen 左側需要保留幾位明文欄位
+     * @param suffixNoMaskLen 右側需要保留幾位明文欄位
+     * @param maskStr 用於遮罩的字符串, 如'*'
+     * @return 脫敏後結果
      */
     public static String desValue(
             String origin, int prefixNoMaskLen, int suffixNoMaskLen, String maskStr) {

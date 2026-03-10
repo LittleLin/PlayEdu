@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ import xyz.playedu.course.service.*;
 import xyz.playedu.resource.service.ResourceService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/23 09:48
  */
@@ -86,7 +86,7 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_INDEX)
     @GetMapping("/index")
-    @Log(title = "学员-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);
@@ -118,7 +118,7 @@ public class UserController {
                         } else {
                             parentChain = dep.getParentChain() + "," + dep.getId();
                         }
-                        // 获取所有子部门ID
+                        // 獲取所有子部門ID
                         List<Department> childDepartmentList =
                                 departmentService.getChildDepartmentsByParentChain(
                                         dep.getId(), parentChain);
@@ -164,7 +164,7 @@ public class UserController {
         data.put("pure_total", userService.total());
         data.put("dep_user_count", departmentService.getDepartmentsUserCount());
 
-        // 课程封面资源ID
+        // 課程封面資源ID
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -175,22 +175,22 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_STORE)
     @GetMapping("/create")
-    @Log(title = "学员-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create() {
         return JsonResponse.data(null);
     }
 
     @BackendPermission(slug = BPermissionConstant.USER_STORE)
     @PostMapping("/create")
-    @Log(title = "学员-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "學員-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated UserRequest req) {
         String email = req.getEmail();
         if (userService.emailIsExists(email)) {
-            return JsonResponse.error("邮箱已存在");
+            return JsonResponse.error("電子郵件已存在");
         }
         String password = req.getPassword();
         if (password.isEmpty()) {
-            return JsonResponse.error("请输入密码");
+            return JsonResponse.error("請輸入密碼");
         }
         userService.createWithDepIds(
                 email,
@@ -204,7 +204,7 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_UPDATE)
     @GetMapping("/{id}")
-    @Log(title = "学员-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable(name = "id") Integer id) throws NotFoundException {
         User user = userService.findOrFail(id);
 
@@ -214,7 +214,7 @@ public class UserController {
         data.put("user", user);
         data.put("dep_ids", depIds);
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -230,7 +230,7 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_UPDATE)
     @PutMapping("/{id}")
     @Transactional
-    @Log(title = "学员-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "學員-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "id") Integer id, @RequestBody @Validated UserRequest req)
             throws NotFoundException {
@@ -238,7 +238,7 @@ public class UserController {
 
         String email = req.getEmail();
         if (!email.equals(user.getEmail()) && userService.emailIsExists(email)) {
-            return JsonResponse.error("邮箱已存在");
+            return JsonResponse.error("電子郵件已存在");
         }
 
         userService.updateWithDepIds(
@@ -254,7 +254,7 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_DESTROY)
     @DeleteMapping("/{id}")
-    @Log(title = "学员-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "學員-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable(name = "id") Integer id) throws NotFoundException {
         User user = userService.findOrFail(id);
         userService.removeById(user.getId());
@@ -264,20 +264,20 @@ public class UserController {
 
     @PostMapping("/store-batch")
     @Transactional
-    @Log(title = "学员-批量导入", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "學員-批量導入", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse batchStore(@RequestBody @Validated UserImportRequest req) {
         List<UserImportRequest.UserItem> users = req.getUsers();
         if (users.isEmpty()) {
-            return JsonResponse.error("数据为空");
+            return JsonResponse.error("數據爲空");
         }
         if (users.size() > 1000) {
-            return JsonResponse.error("一次最多导入1000条数据");
+            return JsonResponse.error("一次最多導入1000條數據");
         }
 
-        // 导入表格的有效数据起始行-用于错误提醒
+        // 導入表格的有效數據起始行-用於錯誤提醒
         Integer startLine = req.getStartLine();
 
-        // 默认的学员头像
+        // 預設的學員頭像
         int defaultAvatar = CommonConstant.MINUS_ONE;
         String defaultAvatarConfig = BCtx.getConfig().get(ConfigConstant.MEMBER_DEFAULT_AVATAR);
         if (StringUtil.isNotEmpty(defaultAvatarConfig)) {
@@ -285,22 +285,22 @@ public class UserController {
         }
 
         List<String[]> errorLines = new ArrayList<>();
-        errorLines.add(new String[] {"错误行", "错误信息"}); // 错误表-表头
+        errorLines.add(new String[] {"錯誤行", "錯誤信息"}); // 錯誤表-表頭
 
-        // 读取存在的部门
+        // 讀取存在的部門
         List<Department> departments = departmentService.all();
         Map<Integer, String> depId2Name =
                 departments.stream()
                         .collect(Collectors.toMap(Department::getId, Department::getName));
         HashMap<String, Integer> depChainNameMap = new HashMap<>();
         for (Department tmpDepItem : departments) {
-            // 一级部门
+            // 一級部門
             if (tmpDepItem.getParentChain() == null || tmpDepItem.getParentChain().isEmpty()) {
                 depChainNameMap.put(tmpDepItem.getName(), tmpDepItem.getId());
                 continue;
             }
 
-            // 多级部门
+            // 多級部門
             String[] tmpChainIds = tmpDepItem.getParentChain().split(",");
             List<String> tmpChainNames = new ArrayList<>();
             for (int i = 0; i < tmpChainIds.length; i++) {
@@ -314,7 +314,7 @@ public class UserController {
             depChainNameMap.put(String.join("-", tmpChainNames), tmpDepItem.getId());
         }
 
-        // 邮箱输入重复检测 || 部门存在检测
+        // 電子郵件輸入重複檢測 || 部門存在檢測
         HashMap<String, Integer> emailRepeat = new HashMap<>();
         HashMap<String, Integer[]> depMap = new HashMap<>();
         List<String> emails = new ArrayList<>();
@@ -325,14 +325,14 @@ public class UserController {
             i++; // 索引值
 
             if (userItem.getEmail() == null || userItem.getEmail().trim().isEmpty()) {
-                errorLines.add(new String[] {"第" + (i + startLine) + "行", "未输入邮箱账号"});
+                errorLines.add(new String[] {"第" + (i + startLine) + "行", "未輸入電子郵件帳號"});
             } else {
-                // 邮箱重复判断
+                // 電子郵件重複判斷
                 Integer repeatLine = emailRepeat.get(userItem.getEmail());
                 if (repeatLine != null) {
                     errorLines.add(
                             new String[] {
-                                "第" + (i + startLine) + "行", "与第" + repeatLine + "行邮箱重复"
+                                "第" + (i + startLine) + "行", "與第" + repeatLine + "行電子郵件重複"
                             });
                 } else {
                     emailRepeat.put(userItem.getEmail(), i + startLine);
@@ -340,20 +340,20 @@ public class UserController {
                 emails.add(userItem.getEmail());
             }
 
-            // 部门数据检测
+            // 部門數據檢測
             if (userItem.getDeps() == null || userItem.getDeps().trim().isEmpty()) {
-                errorLines.add(new String[] {"第" + (i + startLine) + "行", "未选择部门"});
+                errorLines.add(new String[] {"第" + (i + startLine) + "行", "未選擇部門"});
             } else {
                 String[] tmpDepList = userItem.getDeps().trim().split("\\|");
                 Integer[] tmpDepIds = new Integer[tmpDepList.length];
                 for (int j = 0; j < tmpDepList.length; j++) {
-                    // 获取部门id
+                    // 獲取部門id
                     Integer tmpDepId = depChainNameMap.get(tmpDepList[j]);
-                    // 判断部门id是否存在
+                    // 判斷部門id是否存在
                     if (tmpDepId == null || tmpDepId == 0) {
                         errorLines.add(
                                 new String[] {
-                                    "第" + (i + startLine) + "行", "部门『" + tmpDepList[j] + "』不存在"
+                                    "第" + (i + startLine) + "行", "部門『" + tmpDepList[j] + "』不存在"
                                 });
                         continue;
                     }
@@ -362,19 +362,19 @@ public class UserController {
                 depMap.put(userItem.getEmail(), tmpDepIds);
             }
 
-            // 姓名为空检测
+            // 姓名爲空檢測
             String tmpName = userItem.getName();
             if (tmpName == null || tmpName.trim().isEmpty()) {
-                errorLines.add(new String[] {"第" + (i + startLine) + "行", "昵称为空"});
+                errorLines.add(new String[] {"第" + (i + startLine) + "行", "暱稱爲空"});
             }
 
-            // 密码为空检测
+            // 密碼爲空檢測
             String tmpPassword = userItem.getPassword();
             if (tmpPassword == null || tmpPassword.trim().isEmpty()) {
-                errorLines.add(new String[] {"第" + (i + startLine) + "行", "密码为空"});
+                errorLines.add(new String[] {"第" + (i + startLine) + "行", "密碼爲空"});
             }
 
-            // 待插入数据
+            // 待插入數據
             User tmpInsertUser = new User();
             String tmpSalt = HelperUtil.randomString(6);
             tmpInsertUser.setEmail(userItem.getEmail());
@@ -392,23 +392,23 @@ public class UserController {
         }
 
         if (errorLines.size() > 1) {
-            return JsonResponse.error("导入数据有误", errorLines);
+            return JsonResponse.error("導入數據有誤", errorLines);
         }
 
-        // 邮箱是否注册检测
+        // 電子郵件是否註冊檢測
         List<String> existsEmails = userService.existsEmailsByEmails(emails);
         if (!existsEmails.isEmpty()) {
             for (String tmpEmail : existsEmails) {
-                errorLines.add(new String[] {"第" + emailRepeat.get(tmpEmail) + "行", "邮箱已注册"});
+                errorLines.add(new String[] {"第" + emailRepeat.get(tmpEmail) + "行", "電子郵件已註冊"});
             }
         }
         if (errorLines.size() > 1) {
-            return JsonResponse.error("导入数据有误", errorLines);
+            return JsonResponse.error("導入數據有誤", errorLines);
         }
 
         userService.saveBatch(insertUsers);
 
-        // 部门关联
+        // 部門關聯
         List<UserDepartment> insertUserDepartments = new ArrayList<>();
         for (User tmpUser : insertUsers) {
             Integer[] tmpDepIds = depMap.get(tmpUser.getEmail());
@@ -433,7 +433,7 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_LEARN)
     @GetMapping("/{id}/learn-hours")
     @SneakyThrows
-    @Log(title = "学员-已学习课时列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-已學習課時列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse learnHours(
             @PathVariable(name = "id") Integer id, @RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
@@ -469,7 +469,7 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_LEARN)
     @GetMapping("/{id}/learn-courses")
-    @Log(title = "学员-已学习课程列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-已學習課程列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse latestLearnCourses(
             @PathVariable(name = "id") Integer id, @RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
@@ -496,7 +496,7 @@ public class UserController {
         data.put("total", result.getTotal());
         data.put("courses", courseList.stream().collect(Collectors.toMap(Course::getId, e -> e)));
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -507,9 +507,9 @@ public class UserController {
 
     @BackendPermission(slug = BPermissionConstant.USER_LEARN)
     @GetMapping("/{id}/all-courses")
-    @Log(title = "学员-课程", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-課程", businessType = BusinessTypeConstant.GET)
     public JsonResponse allCourses(@PathVariable(name = "id") Integer id) {
-        // 读取学员关联的部门
+        // 讀取學員關聯的部門
         List<Integer> depIds = userService.getDepIdsByUserId(id);
         List<Department> departments = new ArrayList<>();
         HashMap<Integer, List<Course>> depCourses = new HashMap<>();
@@ -526,7 +526,7 @@ public class UserController {
             Map<Integer, Department> finalDepartmentMap = departmentMap;
             depIds.forEach(
                     (depId) -> {
-                        // 查询所有的父级部门ID
+                        // 查詢所有的父級部門ID
                         List<Integer> allDepIds = new ArrayList<>();
                         allDepIds.add(depId);
                         Department department = finalDepartmentMap.get(depId);
@@ -550,20 +550,20 @@ public class UserController {
                     });
         }
 
-        // 未关联部门课程
+        // 未關聯部門課程
         List<Course> openCourses = courseService.getOpenCoursesAndShow(1000);
         if (openCourses != null && !openCourses.isEmpty()) {
             courseIds.addAll(openCourses.stream().map(Course::getId).toList());
             rids.addAll(openCourses.stream().map(Course::getThumb).toList());
         }
 
-        // 读取学员的线上课学习记录
+        // 讀取學員的線上課學習記錄
         List<UserCourseRecord> userCourseRecords = new ArrayList<>();
         if (!courseIds.isEmpty()) {
             userCourseRecords = userCourseRecordService.chunk(id, courseIds);
         }
 
-        // 获取学员线上课的课时学习数量(只要学习了就算，不一定需要已完成)
+        // 獲取學員線上課的課時學習數量(只要學習了就算，不一定需要已完成)
         Map<Integer, Integer> userCourseHourCount =
                 userCourseHourRecordService.getUserCourseHourCount(id, courseIds, null).stream()
                         .collect(
@@ -571,7 +571,7 @@ public class UserController {
                                         UserCourseHourRecordCourseCountMapper::getCourseId,
                                         UserCourseHourRecordCourseCountMapper::getTotal));
 
-        // 获取学员每个课程最早的学习课时记录
+        // 獲取學員每個課程最早的學習課時記錄
         List<UserCourseHourRecord> perCourseEarliestRecords =
                 userCourseHourRecordService.getUserPerCourseEarliestRecord(id);
 
@@ -588,7 +588,7 @@ public class UserController {
                 "per_course_earliest_records",
                 perCourseEarliestRecords.stream()
                         .collect(Collectors.toMap(UserCourseHourRecord::getCourseId, e -> e)));
-        // 获取签名url
+        // 獲取簽名url
         data.put("resource_url", resourceService.chunksPreSignUrlByIds(rids));
         return JsonResponse.data(data);
     }
@@ -596,13 +596,13 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_LEARN)
     @GetMapping("/{id}/learn-course/{courseId}")
     @SneakyThrows
-    @Log(title = "学员-单个课程的学习记录", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-單個課程的學習記錄", businessType = BusinessTypeConstant.GET)
     public JsonResponse learnCourseDetail(
             @PathVariable(name = "id") Integer id,
             @PathVariable(name = "courseId") Integer courseId) {
-        // 读取线上课下的所有课时
+        // 讀取線上課下的所有課時
         List<CourseHour> hours = courseHourService.getHoursByCourseId(courseId);
-        // 读取学员的课时学习记录
+        // 讀取學員的課時學習記錄
         List<UserCourseHourRecord> records = userCourseHourRecordService.getRecords(id, courseId);
 
         HashMap<String, Object> data = new HashMap<>();
@@ -618,9 +618,9 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_LEARN)
     @GetMapping("/{id}/learn-stats")
     @SneakyThrows
-    @Log(title = "学员-学习统计", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員-學習統計", businessType = BusinessTypeConstant.GET)
     public JsonResponse learn(@PathVariable(name = "id") Integer id) {
-        // 最近一个月的每天学习时长
+        // 最近一個月的每天學習時長
         String todayStr = DateTime.now().toDateStr();
         String startDateStr = DateTime.of(DateTime.now().getTime() - 86400000L * 30).toDateStr();
         long startTime = new DateTime(startDateStr).getTime();
@@ -666,7 +666,7 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_LEARN_DESTROY)
     @DeleteMapping("/{id}/learn-course/{courseId}")
     @SneakyThrows
-    @Log(title = "学员-线上课学习记录删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "學員-線上課學習記錄刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroyUserCourse(
             @PathVariable(name = "id") Integer id,
             @PathVariable(name = "courseId") Integer courseId) {
@@ -678,7 +678,7 @@ public class UserController {
     @BackendPermission(slug = BPermissionConstant.USER_LEARN_DESTROY)
     @DeleteMapping("/{id}/learn-course/{courseId}/hour/{hourId}")
     @SneakyThrows
-    @Log(title = "学员-线上课课时学习记录删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "學員-線上課課時學習記錄刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroyUserHour(
             @PathVariable(name = "id") Integer id,
             @PathVariable(name = "courseId") Integer courseId,

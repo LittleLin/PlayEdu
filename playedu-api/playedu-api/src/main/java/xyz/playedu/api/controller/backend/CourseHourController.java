@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ import xyz.playedu.course.service.CourseChapterService;
 import xyz.playedu.course.service.CourseHourService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/26 17:50
  */
@@ -59,9 +59,9 @@ public class CourseHourController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/create")
-    @Log(title = "线上课-课时-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-課時-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create(@PathVariable(name = "courseId") Integer courseId) {
-        // 课时类型
+        // 課時類型
         List<SelectOption<String>> typeItems = new ArrayList<>();
         for (int i = 0; i < BackendConstant.COURSE_HOUR_TYPE_WHITELIST.length; i++) {
             SelectOption<String> tmpTypeItem = new SelectOption<>();
@@ -71,7 +71,7 @@ public class CourseHourController {
             typeItems.add(tmpTypeItem);
         }
 
-        // 读取课程下的章节
+        // 讀取課程下的章節
         List<CourseChapter> chapters = chapterService.getChaptersByCourseId(courseId);
 
         HashMap<String, Object> data = new HashMap<>();
@@ -83,26 +83,26 @@ public class CourseHourController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create")
-    @Log(title = "线上课-课时-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "線上課-課時-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseHourRequest req)
             throws NotFoundException {
-        // 课时类型校验
+        // 課時類型校驗
         String type = req.getType();
         if (!Arrays.asList(BackendConstant.COURSE_HOUR_TYPE_WHITELIST).contains(type)) {
-            return JsonResponse.error("课时类型不支持");
+            return JsonResponse.error("課時類型不支持");
         }
-        // 章节id校验
+        // 章節id校驗
         Integer chapterId = req.getChapterId();
         chapterService.findOrFail(chapterId, courseId);
 
-        // 课时重复添加校验
+        // 課時重複添加校驗
         List<Integer> existsRids =
                 hourService.getRidsByCourseId(courseId, BackendConstant.RESOURCE_TYPE_VIDEO);
         if (existsRids != null) {
             if (existsRids.contains(req.getRid())) {
-                return JsonResponse.error("课时已存在");
+                return JsonResponse.error("課時已存在");
             }
         }
 
@@ -128,12 +128,12 @@ public class CourseHourController {
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create-batch")
     @Transactional
-    @Log(title = "线上课-课时-批量导入", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "線上課-課時-批量導入", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse storeMulti(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseHourMultiRequest req) {
         if (req.getHours().isEmpty()) {
-            return JsonResponse.error("参数为空");
+            return JsonResponse.error("參數爲空");
         }
 
         List<Integer> existsRids =
@@ -144,7 +144,7 @@ public class CourseHourController {
 
         for (CourseHourMultiRequest.HourItem item : req.getHours()) {
             if (existsRids.contains(item.getRid())) {
-                return JsonResponse.error("课时《" + item.getTitle() + "》已存在");
+                return JsonResponse.error("課時《" + item.getTitle() + "》已存在");
             }
 
             hours.add(
@@ -164,7 +164,7 @@ public class CourseHourController {
 
         hourService.saveBatch(hours);
 
-        // 只需要发布一次event就可以了
+        // 只需要發佈一次event就可以了
         CourseHour firstHour = hours.get(0);
         ctx.publishEvent(
                 new CourseHourCreatedEvent(
@@ -179,7 +179,7 @@ public class CourseHourController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/{id}")
-    @Log(title = "线上课-课时-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-課時-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
@@ -190,14 +190,14 @@ public class CourseHourController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PutMapping("/{id}")
-    @Log(title = "线上课-课时-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-課時-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id,
             @RequestBody @Validated CourseHourRequest req)
             throws NotFoundException {
         CourseHour courseHour = hourService.findOrFail(id, courseId);
-        // 章节id校验
+        // 章節id校驗
         Integer chapterId = req.getChapterId();
         chapterService.findOrFail(chapterId, courseId);
 
@@ -207,7 +207,7 @@ public class CourseHourController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @DeleteMapping("/{id}")
-    @Log(title = "线上课-课时-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "線上課-課時-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
@@ -225,7 +225,7 @@ public class CourseHourController {
     }
 
     @PutMapping("/update/sort")
-    @Log(title = "线上课-课时-更新排序", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-課時-更新排序", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse updateSort(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseHourSortRequest req) {

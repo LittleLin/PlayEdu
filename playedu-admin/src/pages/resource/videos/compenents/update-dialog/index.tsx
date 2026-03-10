@@ -104,7 +104,7 @@ export const VideosUpdateDialog: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="编辑视频"
+          title="編輯影片"
           centered
           forceRender
           open={true}
@@ -133,28 +133,28 @@ export const VideosUpdateDialog: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="视频分类"
+                label="影片分類"
                 name="category_id"
-                rules={[{ required: true, message: "请选择视频分类!" }]}
+                rules={[{ required: true, message: "請選擇影片分類!" }]}
               >
                 <TreeSelect
                   showCheckedStrategy={TreeSelect.SHOW_ALL}
                   allowClear
                   style={{ width: 200 }}
                   treeData={categories}
-                  placeholder="视频分类"
+                  placeholder="影片分類"
                   treeDefaultExpandAll
                 />
               </Form.Item>
               <Form.Item
-                label="视频名称"
+                label="影片名稱"
                 name="name"
-                rules={[{ required: true, message: "请输入视频名称!" }]}
+                rules={[{ required: true, message: "請輸入影片名稱!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 200 }}
-                  placeholder="请输入视频名称"
+                  placeholder="請輸入影片名稱"
                 />
               </Form.Item>
             </Form>

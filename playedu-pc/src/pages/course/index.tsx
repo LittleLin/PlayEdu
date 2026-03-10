@@ -85,13 +85,13 @@ const CoursePage = () => {
         let tabs: TabModel[] = [
           {
             key: 1,
-            label: `课程目录`,
+            label: `課程目錄`,
           },
         ];
         if (arr.length > 0) {
           tabs.push({
             key: 2,
-            label: `课程附件`,
+            label: `課程附件`,
           });
           setAttachments(arr);
         }
@@ -125,15 +125,15 @@ const CoursePage = () => {
             const a = document.createElement("a");
             a.style.display = "none";
             a.href = n_url;
-            a.download = fileName; // 设置下载的文件名
+            a.download = fileName; // 設置下載的檔案名
             document.body.appendChild(a);
-            a.click(); // 触发点击事件
-            // 释放 URL 对象
+            a.click(); // 觸發點選事件
+            // 釋放 URL 對象
             URL.revokeObjectURL(n_url);
             document.body.removeChild(a);
           })
           .catch((error) => {
-            console.error("下载文件时出错:", error);
+            console.error("下載檔案時出錯:", error);
           });
       } else {
         window.open(res.data.resource_url[rid]);
@@ -183,10 +183,10 @@ const CoursePage = () => {
                   <div className={styles["title"]}>{course?.title}</div>
                   <div className={styles["status"]}>
                     {course?.is_required === 1 && (
-                      <div className={styles["type"]}>必修课</div>
+                      <div className={styles["type"]}>必修課</div>
                     )}
                     {course?.is_required === 0 && (
-                      <div className={styles["active-type"]}>选修课</div>
+                      <div className={styles["active-type"]}>選修課</div>
                     )}
                     {learnRecord && learnRecord.progress / 100 >= 100 && (
                       <div className={styles["success"]}>
@@ -196,7 +196,7 @@ const CoursePage = () => {
                           src={mediaIcon}
                           preview={false}
                         />
-                        <span className="ml-8">恭喜你学完此课程!</span>
+                        <span className="ml-8">恭喜你學完此課程!</span>
                       </div>
                     )}
                   </div>
@@ -378,7 +378,7 @@ const CoursePage = () => {
                       )
                     }
                   >
-                    下载
+                    下載
                   </div>
                 </div>
               ))}

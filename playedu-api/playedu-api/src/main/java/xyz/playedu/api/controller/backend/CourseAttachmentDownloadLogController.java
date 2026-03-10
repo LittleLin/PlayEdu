@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class CourseAttachmentDownloadLogController {
     @Autowired private CourseAttachmentDownloadLogService courseAttachmentDownloadLogService;
 
     @GetMapping("/index")
-    @Log(title = "学员下载课件记录-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "學員下載課件記錄-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);

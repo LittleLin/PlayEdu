@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,11 @@ public class MemoryRateLimiterServiceImpl implements RateLimiterService {
         try {
             Object value = MemoryCacheUtil.get(key);
             if (value == null) {
-                // 第一次访问，设置初始值和过期时间
+                // 第一次訪問，設置初始值和過期時間
                 MemoryCacheUtil.set(key, 1L, duration);
                 return 1L;
             }
-            // 已存在计数器，直接自增，increment方法已经能处理Long和AtomicLong类型
+            // 已存在計數器，直接自增，increment方法已經能處理Long和AtomicLong類型
             return MemoryCacheUtil.increment(key, 1L, duration);
         } finally {
             lock.unlock();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,17 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/26 17:36
  */
 @Data
 public class CourseChapterRequest {
 
-    @NotBlank(message = "请输入章节名")
-    @Length(min = 1, max = 64, message = "章节名长度在1-64个字符之间")
+    @NotBlank(message = "請輸入章節名")
+    @Length(min = 1, max = 64, message = "章節名長度在1-64個字符之間")
     private String name;
 
-    @NotNull(message = "sort参数不存在")
+    @NotNull(message = "sort參數不存在")
     private Integer sort;
 }

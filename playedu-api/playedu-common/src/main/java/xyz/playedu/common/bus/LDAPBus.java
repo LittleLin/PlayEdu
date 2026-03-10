@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,56 +69,56 @@ public class LDAPBus {
         return appConfigService.enabledLdapLogin();
     }
 
-    /** 检查是否有进行中的同步任务 */
+    /** 檢查是否有進行中的同步任務 */
     public boolean hasSyncInProgress() {
         return ldapSyncRecordService.hasSyncInProgress();
     }
 
     /**
-     * 执行LDAP同步并记录同步数据
+     * 執行LDAP同步並記錄同步數據
      *
-     * @param adminId 执行同步的管理员ID，0为系统自动执行
-     * @return 同步记录ID
+     * @param adminId 執行同步的管理員ID，0爲系統自動執行
+     * @return 同步記錄ID
      */
     public Integer syncAndRecord(Integer adminId)
             throws NamingException, IOException, NotFoundException {
-        // 检查是否有进行中的同步任务
+        // 檢查是否有進行中的同步任務
         if (hasSyncInProgress()) {
-            throw new RuntimeException("有正在进行的LDAP同步任务，请稍后再试");
+            throw new RuntimeException("有正在進行的LDAP同步任務，請稍後再試");
         }
 
-        // 创建同步记录
+        // 建立同步記錄
         LdapSyncRecord record = ldapSyncRecordService.create(adminId);
 
         try {
-            // 获取LDAP配置
+            // 獲取LDAP設定
             LdapConfig ldapConfig = appConfigService.ldapConfig();
 
-            // 查询LDAP数据（只查询一次）
+            // 查詢LDAP數據（只查詢一次）
             List<LdapTransformDepartment> departments =
                     LdapUtil.departments(ldapConfig, ldapConfig.getBaseDN());
             List<LdapTransformUser> users = LdapUtil.users(ldapConfig, ldapConfig.getBaseDN());
 
-            // 使用查询的数据进行统计
+            // 使用查詢的數據進行統計
             Map<String, Object> result = collectSyncStatistics(departments, users);
 
-            // 将同步数据保存到S3
+            // 將同步數據保存到S3
             String s3FilePath = saveDataToS3(result, record.getId());
 
-            // 收集部门和用户的详细同步信息
+            // 收集部門和使用者的詳細同步信息
             List<LdapSyncDepartmentDetail> departmentDetails =
                     collectDepartmentSyncDetails(record.getId(), departments);
             List<LdapSyncUserDetail> userDetails = collectUserSyncDetails(record.getId(), users);
 
-            // 使用同样的数据执行实际同步
+            // 使用同樣的數據執行實際同步
             departmentSync(departments);
             userSync(users);
 
-            // 保存部门和用户的详细同步信息
+            // 保存部門和使用者的詳細同步信息
             ldapSyncDepartmentDetailService.batchCreate(departmentDetails);
             ldapSyncUserDetailService.batchCreate(userDetails);
 
-            // 更新同步记录
+            // 更新同步記錄
             ldapSyncRecordService.updateSyncResult(
                     record.getId(),
                     1, // 成功
@@ -135,31 +135,31 @@ public class LDAPBus {
 
             return record.getId();
         } catch (Exception e) {
-            // 记录同步失败
+            // 記錄同步失敗
             ldapSyncRecordService.updateSyncFailed(record.getId(), e.getMessage());
-            log.error("LDAP同步失败", e);
+            log.error("LDAP同步失敗", e);
             throw e;
         }
     }
 
     /**
-     * 收集部门同步详情
+     * 收集部門同步詳情
      *
-     * @param recordId 同步记录ID
-     * @param departments LDAP部门数据
-     * @return 部门同步详情列表
+     * @param recordId 同步記錄ID
+     * @param departments LDAP部門數據
+     * @return 部門同步詳情列表
      */
     private List<LdapSyncDepartmentDetail> collectDepartmentSyncDetails(
             Integer recordId, List<LdapTransformDepartment> departments) throws NotFoundException {
         List<LdapSyncDepartmentDetail> details = new ArrayList<>();
         Date now = new Date();
 
-        // 读取已经同步的记录
+        // 讀取已經同步的記錄
         Map<String, LdapDepartment> ldapDepartments =
                 ldapDepartmentService.all().stream()
                         .collect(Collectors.toMap(LdapDepartment::getUuid, e -> e));
 
-        // 记录新增和更新的部门
+        // 記錄新增和更新的部門
         for (LdapTransformDepartment dept : departments) {
             LdapDepartment existingDept = ldapDepartments.get(dept.getUuid());
             LdapSyncDepartmentDetail detail = new LdapSyncDepartmentDetail();
@@ -167,21 +167,21 @@ public class LDAPBus {
             detail.setUuid(dept.getUuid());
             detail.setDn(dept.getDn());
 
-            // 从DN中提取部门名称
+            // 從DN中提取部門名稱
             String[] parts = dept.getDn().split(",");
             String name = parts[parts.length - 1].replace("ou=", "");
             detail.setName(name);
             detail.setCreatedAt(now);
 
             if (existingDept == null) {
-                // 新增部门
+                // 新增部門
                 detail.setAction(1);
             } else if (!existingDept.getDn().equals(dept.getDn())) {
-                // 更新部门
+                // 更新部門
                 detail.setDepartmentId(existingDept.getDepartmentId());
                 detail.setAction(2);
             } else {
-                // 无变化
+                // 無變化
                 detail.setDepartmentId(existingDept.getDepartmentId());
                 detail.setAction(4);
             }
@@ -189,7 +189,7 @@ public class LDAPBus {
             details.add(detail);
         }
 
-        // 记录删除的部门
+        // 記錄刪除的部門
         List<String> uuidList = departments.stream().map(LdapTransformDepartment::getUuid).toList();
         List<LdapDepartment> deletedDepts = ldapDepartmentService.notChunkByUUIDList(uuidList);
         if (deletedDepts != null && !deletedDepts.isEmpty()) {
@@ -200,11 +200,11 @@ public class LDAPBus {
                 detail.setUuid(dept.getUuid());
                 detail.setDn(dept.getDn());
 
-                // 获取部门名称
+                // 獲取部門名稱
                 Department department = departmentService.findOrFail(dept.getDepartmentId());
                 detail.setName(department.getName());
 
-                detail.setAction(3); // 删除
+                detail.setAction(3); // 刪除
                 detail.setCreatedAt(now);
                 details.add(detail);
             }
@@ -214,18 +214,18 @@ public class LDAPBus {
     }
 
     /**
-     * 收集用户同步详情
+     * 收集使用者同步詳情
      *
-     * @param recordId 同步记录ID
-     * @param users LDAP用户数据
-     * @return 用户同步详情列表
+     * @param recordId 同步記錄ID
+     * @param users LDAP使用者數據
+     * @return 使用者同步詳情列表
      */
     private List<LdapSyncUserDetail> collectUserSyncDetails(
             Integer recordId, List<LdapTransformUser> users) {
         List<LdapSyncUserDetail> details = new ArrayList<>();
         Date now = new Date();
 
-        // 处理新增和更新的用户
+        // 處理新增和更新的使用者
         for (LdapTransformUser user : users) {
             LdapSyncUserDetail detail = new LdapSyncUserDetail();
             detail.setRecordId(recordId);
@@ -237,13 +237,13 @@ public class LDAPBus {
             detail.setOu(String.join(",", user.getOu()));
             detail.setCreatedAt(now);
 
-            // 查找现有用户
+            // 查找現有使用者
             LdapUser existingUser = ldapUserService.findByUUID(user.getId());
 
-            // 检查用户是否被禁止
+            // 檢查使用者是否被禁止
             if (user.isBan()) {
-                // 标记为禁止的用户
-                detail.setAction(5); // 5-禁止的用户
+                // 標記爲禁止的使用者
+                detail.setAction(5); // 5-禁止的使用者
                 if (existingUser != null) {
                     detail.setUserId(existingUser.getUserId());
                 }
@@ -252,10 +252,10 @@ public class LDAPBus {
             }
 
             if (existingUser == null) {
-                // 新增用户
+                // 新增使用者
                 detail.setAction(1);
             } else {
-                // 检查是否有变更
+                // 檢查是否有變更
                 boolean hasChanges = false;
                 if (!user.getCn().equals(existingUser.getCn())) {
                     hasChanges = true;
@@ -266,14 +266,14 @@ public class LDAPBus {
                     hasChanges = true;
                 }
 
-                // 设置用户ID
+                // 設置使用者ID
                 detail.setUserId(existingUser.getUserId());
 
                 if (hasChanges) {
-                    // 更新用户
+                    // 更新使用者
                     detail.setAction(2);
                 } else {
-                    // 无变化
+                    // 無變化
                     detail.setAction(4);
                 }
             }
@@ -281,14 +281,14 @@ public class LDAPBus {
             details.add(detail);
         }
 
-        // 处理删除的用户
+        // 處理刪除的使用者
         List<String> uuidList =
                 users.stream().filter(u -> !u.isBan()).map(LdapTransformUser::getId).toList();
 
-        // 获取所有现有的LDAP用户记录
+        // 獲取所有現有的LDAP使用者記錄
         List<LdapUser> allLdapUsers = ldapUserService.list();
 
-        // 过滤出不在当前LDAP用户列表中的用户
+        // 過濾出不在當前LDAP使用者列表中的使用者
         List<LdapUser> deletedUsers =
                 allLdapUsers.stream().filter(lu -> !uuidList.contains(lu.getUuid())).toList();
 
@@ -302,7 +302,7 @@ public class LDAPBus {
             detail.setUid(deletedUser.getUid());
             detail.setEmail(deletedUser.getEmail());
             detail.setOu(deletedUser.getOu());
-            detail.setAction(3); // 删除
+            detail.setAction(3); // 刪除
             detail.setCreatedAt(now);
 
             details.add(detail);
@@ -311,36 +311,36 @@ public class LDAPBus {
         return details;
     }
 
-    /** 收集同步统计数据 */
+    /** 收集同步統計數據 */
     private Map<String, Object> collectSyncStatistics(
             List<LdapTransformDepartment> departments, List<LdapTransformUser> users) {
         Map<String, Object> result = new HashMap<>();
         Map<String, Object> syncData = new HashMap<>();
 
-        // 部门同步统计
+        // 部門同步統計
         int totalDepartmentCount = 0;
         int createdDepartmentCount = 0;
         int updatedDepartmentCount = 0;
         int deletedDepartmentCount = 0;
 
-        // 用户同步统计
+        // 使用者同步統計
         int totalUserCount = 0;
         int createdUserCount = 0;
         int updatedUserCount = 0;
         int deletedUserCount = 0;
         int bannedUserCount = 0;
 
-        // 处理部门数据
+        // 處理部門數據
         if (departments != null && !departments.isEmpty()) {
             syncData.put("departments", departments);
             totalDepartmentCount = departments.size();
 
-            // 读取已经同步的记录
+            // 讀取已經同步的記錄
             Map<String, LdapDepartment> ldapDepartments =
                     ldapDepartmentService.all().stream()
                             .collect(Collectors.toMap(LdapDepartment::getUuid, e -> e));
 
-            // 计算新增和更新的部门
+            // 計算新增和更新的部門
             for (LdapTransformDepartment dept : departments) {
                 LdapDepartment existingDept = ldapDepartments.get(dept.getUuid());
                 if (existingDept == null) {
@@ -350,7 +350,7 @@ public class LDAPBus {
                 }
             }
 
-            // 计算删除的部门
+            // 計算刪除的部門
             List<String> uuidList =
                     departments.stream().map(LdapTransformDepartment::getUuid).toList();
             List<LdapDepartment> ldapDepartmentList =
@@ -358,15 +358,15 @@ public class LDAPBus {
             deletedDepartmentCount = ldapDepartmentList != null ? ldapDepartmentList.size() : 0;
         }
 
-        // 处理用户数据
+        // 處理使用者數據
         if (users != null && !users.isEmpty()) {
             syncData.put("users", users);
             totalUserCount = users.size();
 
-            // 计算被禁止的用户数量
+            // 計算被禁止的使用者數量
             bannedUserCount = (int) users.stream().filter(LdapTransformUser::isBan).count();
 
-            // 计算新增、更新的用户
+            // 計算新增、更新的使用者
             for (LdapTransformUser user : users) {
                 if (user.isBan()) {
                     continue;
@@ -376,7 +376,7 @@ public class LDAPBus {
                 if (existingUser == null) {
                     createdUserCount++;
                 } else {
-                    // 检查用户信息是否有变化
+                    // 檢查使用者信息是否有變化
                     boolean hasChanges = false;
                     if (!user.getCn().equals(existingUser.getCn())) {
                         hasChanges = true;
@@ -394,7 +394,7 @@ public class LDAPBus {
             }
         }
 
-        // 将同步结果数据存储到结果对象中
+        // 將同步結果數據存儲到結果對象中
         result.put("data", syncData);
         result.put("totalDepartmentCount", totalDepartmentCount);
         result.put("createdDepartmentCount", createdDepartmentCount);
@@ -409,14 +409,14 @@ public class LDAPBus {
         return result;
     }
 
-    /** 将同步数据保存到S3 */
+    /** 將同步數據保存到S3 */
     private String saveDataToS3(Map<String, Object> data, Integer recordId) throws IOException {
-        // 将数据转换为JSON
+        // 將數據轉換爲JSON
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         byte[] jsonBytes = jsonData.getBytes(StandardCharsets.UTF_8);
 
-        // 生成保存路径
+        // 生成保存路徑
         String filename = "ldap_sync_" + recordId + "_" + new Date().getTime() + ".json";
         String savePath = "ldap/sync/" + filename;
 
@@ -429,27 +429,27 @@ public class LDAPBus {
     }
 
     /**
-     * 执行部门同步 - 提供现有的LDAP部门数据
+     * 執行部門同步 - 提供現有的LDAP部門數據
      *
-     * @param ouList 已获取的LDAP部门数据
+     * @param ouList 已獲取的LDAP部門數據
      */
     public void departmentSync(List<LdapTransformDepartment> ouList) throws NotFoundException {
         if (ouList == null || ouList.isEmpty()) {
             return;
         }
 
-        // 读取已经同步的记录
+        // 讀取已經同步的記錄
         Map<String, LdapDepartment> ldapDepartments =
                 ldapDepartmentService.all().stream()
                         .collect(Collectors.toMap(LdapDepartment::getUuid, e -> e));
 
-        // 本地缓存表
+        // 本地緩存表
         HashMap<String, Integer> depIdKeyByName = new HashMap<>();
 
-        // 全局排序计数
+        // 全局排序計數
         Integer sort = 0;
 
-        // 新建+编辑的处理
+        // 新增+編輯的處理
         for (LdapTransformDepartment ldapTransformDepartment : ouList) {
             String uuid = ldapTransformDepartment.getUuid();
             String dn = ldapTransformDepartment.getDn();
@@ -458,20 +458,20 @@ public class LDAPBus {
 
             log.info("#####START#####[dn:{},uuid:{}]", dn, uuid);
 
-            // 同步记录
+            // 同步記錄
             LdapDepartment tmpLdapDepartment = ldapDepartments.get(uuid);
             if (tmpLdapDepartment != null && tmpLdapDepartment.getDn().equals(dn)) {
-                // 当前部门已经同步 && 未发生改变
-                log.info("LDAP-部门同步处理-未发生改变|dn:{}", dn);
+                // 當前部門已經同步 && 未發生改變
+                log.info("LDAP-部門同步處理-未發生改變|dn:{}", dn);
                 continue;
             }
 
-            // 执行到这里的有两种情况：
-            // 1.部门未同步
-            // 2.部门已同步，但是发生了变化
-            // |-2.1 部门名称修改
-            // |-2.2 部门上级名称修改
-            // |-2.3 层级发生变动(增加层级|减少层级)
+            // 執行到這裏的有兩種情況：
+            // 1.部門未同步
+            // 2.部門已同步，但是發生了變化
+            // |-2.1 部門名稱修改
+            // |-2.2 部門上級名稱修改
+            // |-2.3 層級發生變動(增加層級|減少層級)
 
             int length = tmpChains.length;
 
@@ -481,16 +481,16 @@ public class LDAPBus {
 
                 String tmpName = tmpChains[i];
 
-                // 部门的链名=>父部门1,父部门2,子部门
+                // 部門的鏈名=>父部門1,父部門2,子部門
                 String fullName = tmpName;
                 if (!prevName.isEmpty()) {
                     fullName = prevName + "," + tmpName;
-                    // 取父级ID
+                    // 取父級ID
                     parentId = depIdKeyByName.get(prevName);
                 }
 
                 log.info(
-                        "LDAP-部门同步处理-链处理|ctx=[dn={},fullName:{},tmpName:{},parentId:{},sort:{}]",
+                        "LDAP-部門同步處理-鏈處理|ctx=[dn={},fullName:{},tmpName:{},parentId:{},sort:{}]",
                         dn,
                         fullName,
                         tmpName,
@@ -498,12 +498,12 @@ public class LDAPBus {
                         sort);
 
                 if (i + 1 == length && tmpLdapDepartment != null) {
-                    // OU链发生了改变
-                    // 1.部门名改变
-                    // 2.上级部门名改变
-                    // 3.层级改变
+                    // OU鏈發生了改變
+                    // 1.部門名改變
+                    // 2.上級部門名改變
+                    // 3.層級改變
 
-                    log.info("LDAP-部门同步处理-OU链发生改变|ctx=[新:{},旧:{}]", dn, tmpLdapDepartment.getDn());
+                    log.info("LDAP-部門同步處理-OU鏈發生改變|ctx=[新:{},舊:{}]", dn, tmpLdapDepartment.getDn());
 
                     Department tmpDepartment =
                             departmentService.findOrFail(tmpLdapDepartment.getDepartmentId());
@@ -515,42 +515,42 @@ public class LDAPBus {
                         departmentService.update(tmpDepartment, tmpName, parentId, sort);
                     }
 
-                    // 更新同步记录
+                    // 更新同步記錄
                     tmpLdapDepartment.setDn(dn); // 最新的DN
                     ldapDepartmentService.updateDnById(tmpLdapDepartment.getId(), dn);
-                    // 更新本地缓存
+                    // 更新本地緩存
                     ldapDepartments.put(uuid, tmpLdapDepartment);
-                    // 更新本地缓存
+                    // 更新本地緩存
                     depIdKeyByName.put(fullName, tmpDepartment.getId());
                 } else {
-                    // 检查本地是否有缓存
+                    // 檢查本地是否有緩存
                     Integer depId = depIdKeyByName.get(fullName);
-                    log.info("LDAP-部门同步处理-从缓存查询depId|ctx=[fullName:{},depId:{}]", fullName, depId);
+                    log.info("LDAP-部門同步處理-從緩存查詢depId|ctx=[fullName:{},depId:{}]", fullName, depId);
                     if (depId == null) {
                         Department tmpDep = departmentService.findByName(tmpName, parentId);
                         if (tmpDep != null) {
                             depId = tmpDep.getId();
                             log.info(
-                                    "LDAP-部门同步处理-从数据库查询depId|ctx=[fullName:{},depId:{}]",
+                                    "LDAP-部門同步處理-從資料庫查詢depId|ctx=[fullName:{},depId:{}]",
                                     fullName,
                                     depId);
                         } else {
                             depId = departmentService.create(tmpName, parentId, sort);
                             log.info(
-                                    "LDAP-部门同步处理-新建部门|ctx=[fullName:{},depId:{}]", fullName, depId);
+                                    "LDAP-部門同步處理-新增部門|ctx=[fullName:{},depId:{}]", fullName, depId);
                         }
 
-                        // 写入本地缓存
+                        // 寫入本地緩存
                         depIdKeyByName.put(fullName, depId);
                     }
                 }
 
                 if (i + 1 == length && tmpLdapDepartment == null) {
                     Integer tmpDepId = depIdKeyByName.get(fullName);
-                    // 创建同步记录
+                    // 建立同步記錄
                     ldapDepartmentService.create(tmpDepId, uuid, dn);
 
-                    // 写入本地缓存
+                    // 寫入本地緩存
                     LdapDepartment storedLdapDepartment = new LdapDepartment();
                     storedLdapDepartment.setUuid(uuid);
                     storedLdapDepartment.setDn(dn);
@@ -558,29 +558,29 @@ public class LDAPBus {
                     ldapDepartments.put(uuid, storedLdapDepartment);
                 }
 
-                // 父级叠加
+                // 父級疊加
                 prevName = fullName;
             }
         }
 
-        // 删除的处理
+        // 刪除的處理
         List<String> uuidList = ouList.stream().map(LdapTransformDepartment::getUuid).toList();
         List<LdapDepartment> ldapDepartmentList =
                 ldapDepartmentService.notChunkByUUIDList(uuidList);
         if (ldapDepartmentList != null && !ldapDepartmentList.isEmpty()) {
             for (LdapDepartment ldapDepartment : ldapDepartmentList) {
-                // 删除本地部门
+                // 刪除本地部門
                 departmentService.destroy(ldapDepartment.getDepartmentId());
-                // 删除同步记录
+                // 刪除同步記錄
                 ldapDepartmentService.destroy(ldapDepartment.getId());
             }
         }
     }
 
     /**
-     * 执行用户同步 - 提供现有的LDAP用户数据
+     * 執行使用者同步 - 提供現有的LDAP使用者數據
      *
-     * @param userList 已获取的LDAP用户数据
+     * @param userList 已獲取的LDAP使用者數據
      */
     public void userSync(List<LdapTransformUser> userList) {
         if (userList == null || userList.isEmpty()) {
@@ -591,12 +591,12 @@ public class LDAPBus {
 
         for (LdapTransformUser ldapTransformUser : userList) {
             if (ldapTransformUser.isBan()) {
-                // 检查用户是否已在系统中存在
+                // 檢查使用者是否已在系統中存在
                 LdapUser existingLdapUser = ldapUserService.findByUUID(ldapTransformUser.getId());
                 if (existingLdapUser == null) {
-                    // 对于新的被禁止用户，不同步到系统
+                    // 對於新的被禁止使用者，不同步到系統
                     log.info(
-                            "LDAP-用户同步-新用户被禁止不同步|ctx=[dn:{},uuid={}]",
+                            "LDAP-使用者同步-新使用者被禁止不同步|ctx=[dn:{},uuid={}]",
                             ldapTransformUser.getDn(),
                             ldapTransformUser.getId());
                     continue;
@@ -609,36 +609,36 @@ public class LDAPBus {
 
     public User singleUserSync(LdapTransformUser ldapTransformUser, Integer defaultAvatar) {
         log.info(
-                "*****START*****LDAP-用户同步-开始|ctx=[dn:{},uuid:{}]",
+                "*****START*****LDAP-使用者同步-開始|ctx=[dn:{},uuid:{}]",
                 ldapTransformUser.getDn(),
                 ldapTransformUser.getId());
 
-        // LDAP用户的名字
+        // LDAP使用者的名字
         String ldapUserName = ldapTransformUser.getCn();
 
-        // 将LDAP用户所属的部门同步到本地
+        // 將LDAP使用者所屬的部門同步到本地
         Integer depId = departmentService.createWithChainList(ldapTransformUser.getOu());
         Integer[] depIds = depId == 0 ? null : new Integer[] {depId};
 
         User user;
 
-        // LDAP同步记录
+        // LDAP同步記錄
         LdapUser ldapUser = ldapUserService.findByUUID(ldapTransformUser.getId());
 
-        // 计算将LDAP用户关联到本地users表的email字段值
+        // 計算將LDAP使用者關聯到本地users表的email欄位值
         String localUserEmail = ldapTransformUser.getUid();
 
         if (ldapUser == null) {
-            // 检测localUserEmail是否存在
+            // 檢測localUserEmail是否存在
             if (userService.find(localUserEmail) != null) {
-                log.info("LDAP-用户同步-email重复|ctx=[email:{}]", localUserEmail);
+                log.info("LDAP-使用者同步-email重複|ctx=[email:{}]", localUserEmail);
                 return null;
             }
 
-            // 创建同步记录
+            // 建立同步記錄
             ldapUser = ldapUserService.store(ldapTransformUser);
 
-            // 创建本地user
+            // 建立本地user
             user =
                     userService.createWithDepIds(
                             localUserEmail,
@@ -648,23 +648,23 @@ public class LDAPBus {
                             "",
                             depIds);
 
-            // 将LDAP缓存数据与本地user关联
+            // 將LDAP緩存數據與本地user關聯
             ldapUserService.updateUserId(ldapUser.getId(), user.getId());
 
             log.info(
-                    "LDAP-用户同步-录入数据|ctx=[userId:{},ldapUserId:{}]", user.getId(), ldapUser.getId());
+                    "LDAP-使用者同步-錄入數據|ctx=[userId:{},ldapUserId:{}]", user.getId(), ldapUser.getId());
         } else {
             log.info(
-                    "LDAP-用户同步-检测变化值|ctx=[新dn:{},旧dn:{}]",
+                    "LDAP-使用者同步-檢測變化值|ctx=[新dn:{},舊dn:{}]",
                     ldapTransformUser.getDn(),
                     ldapUser.getDn());
 
             user = userService.find(ldapUser.getUserId());
 
             if (user == null) {
-                // 同步记录创建了，但是user却没创建
+                // 同步記錄建立了，但是user卻沒建立
                 log.info(
-                        "LDAP-用户同步-同步记录存在但user不存在|ctx=[dn:{},ldapUserId:{}]",
+                        "LDAP-使用者同步-同步記錄存在但user不存在|ctx=[dn:{},ldapUserId:{}]",
                         ldapTransformUser.getDn(),
                         ldapUser.getId());
                 user =
@@ -677,21 +677,21 @@ public class LDAPBus {
                                 depIds);
             }
 
-            // 账号修改[账号有可能是email也有可能是uid]
+            // 帳號修改[帳號有可能是email也有可能是uid]
             if (!localUserEmail.equals(user.getEmail())) {
-                // 检测localUserEmail是否存在
+                // 檢測localUserEmail是否存在
                 if (userService.find(localUserEmail) != null) {
                     localUserEmail = HelperUtil.randomString(5) + "_" + localUserEmail;
                 }
                 userService.updateEmail(user.getId(), localUserEmail);
             }
 
-            // ldap-email的变化
+            // ldap-email的變化
             if (!ldapUser.getEmail().equals(ldapTransformUser.getEmail())) {
                 ldapUserService.updateEmail(ldapUser.getId(), ldapTransformUser.getEmail());
             }
 
-            // ldap-uid的变化
+            // ldap-uid的變化
             if (!ldapUser.getUid().equals(ldapTransformUser.getUid())) {
                 ldapUserService.updateUid(ldapUser.getId(), ldapTransformUser.getUid());
             }
@@ -702,18 +702,18 @@ public class LDAPBus {
                 ldapUserService.updateCN(ldapUser.getId(), ldapUserName);
             }
 
-            // 部门修改同步
+            // 部門修改同步
             String newOU = String.join(",", ldapTransformUser.getOu());
             if (!newOU.equals(ldapUser.getOu())) {
                 userService.updateDepId(user.getId(), depIds);
                 ldapUserService.updateOU(ldapUser.getId(), newOU);
 
                 if (ldapTransformUser.isBan()) {
-                    log.info("LDAP-用户同步-被禁止用户部门已更新|ctx=[userId:{},新OU:{}]", user.getId(), newOU);
+                    log.info("LDAP-使用者同步-被禁止使用者部門已更新|ctx=[userId:{},新OU:{}]", user.getId(), newOU);
                 }
             }
 
-            // DN变化
+            // DN變化
             if (!ldapTransformUser.getDn().equals(ldapUser.getDn())) {
                 ldapUserService.updateDN(ldapUser.getId(), ldapTransformUser.getDn());
             }

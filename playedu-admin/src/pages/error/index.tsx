@@ -15,13 +15,13 @@ const ErrorPage = () => {
 
   useEffect(() => {
     if (code === 403) {
-      setError("无权限操作");
+      setError("無權限操作");
     } else if (code === 404) {
-      setError("URL或资源不存在");
+      setError("URL或資源不存在");
     } else if (code === 429) {
-      setError("请求次数过多，请稍后再试");
+      setError("請求次數過多，請稍後再試");
     } else {
-      setError("系统错误");
+      setError("系統錯誤");
     }
   }, [code]);
 
@@ -38,7 +38,7 @@ const ErrorPage = () => {
             navigate("/", { replace: true });
           }}
         >
-          返回首页
+          返回首頁
         </Button>
       }
     />

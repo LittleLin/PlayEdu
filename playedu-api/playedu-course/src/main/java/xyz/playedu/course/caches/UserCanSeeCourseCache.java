@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import xyz.playedu.common.util.StringUtil;
 import xyz.playedu.course.bus.UserBus;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/20 15:20
  */
@@ -49,7 +49,7 @@ public class UserCanSeeCourseCache {
             put(userId, courseId, result);
         }
         if (!result && isThrow) {
-            throw new ServiceException("无权限观看");
+            throw new ServiceException("無權限觀看");
         }
         return result;
     }

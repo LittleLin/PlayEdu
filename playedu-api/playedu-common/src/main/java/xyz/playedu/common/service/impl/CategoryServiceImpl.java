@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import xyz.playedu.common.service.CategoryService;
 
 /**
  * @author tengteng
- * @description 针对表【resource_categories】的数据库操作Service实现
+ * @description 針對表【resource_categories】的資料庫操作Service實現
  * @createDate 2023-02-23 09:50:18
  */
 @Service
@@ -51,7 +51,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     public Category findOrFail(Integer id) throws NotFoundException {
         Category category = getById(id);
         if (category == null) {
-            throw new NotFoundException("分类不存在");
+            throw new NotFoundException("分類不存在");
         }
         return category;
     }
@@ -62,7 +62,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
         Category category = findOrFail(id);
         // 更新parent_chain
         updateParentChain(category.getParentChain(), childrenParentChain(category));
-        // 删除记录
+        // 刪除記錄
         removeById(category.getId());
     }
 
@@ -89,7 +89,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
             data.setSort(sort);
         }
 
-        // 提交更换
+        // 提交更換
         updateById(data);
 
         category = getById(category.getId());
@@ -108,7 +108,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
             Category tmpUpdateResourceCategory = new Category();
             tmpUpdateResourceCategory.setId(tmpResourceCategory.getId());
 
-            // parentChain计算
+            // parentChain計算
             String pc = newChildrenPC;
             if (!tmpResourceCategory.getParentChain().equals(oldChildrenPC)) {
                 pc =
@@ -122,7 +122,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
             }
             tmpUpdateResourceCategory.setParentChain(pc);
 
-            // parentId计算
+            // parentId計算
             int parentId = 0;
             if (pc != null && pc.length() > 0) {
                 String[] parentIds = pc.split(",");
@@ -168,7 +168,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
         if (parentId != 0) {
             Category parentResourceCategory = getById(parentId);
             if (parentResourceCategory == null) {
-                throw new NotFoundException("父级分类不存在");
+                throw new NotFoundException("父級分類不存在");
             }
             String pc = parentResourceCategory.getParentChain();
             parentChain = pc == null || pc.length() == 0 ? parentId + "" : pc + "," + parentId;

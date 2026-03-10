@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,18 +61,18 @@ public class UploadController {
 
     @BackendPermission(slug = BPermissionConstant.UPLOAD)
     @PostMapping("/minio")
-    @Log(title = "上传-MinIO", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse uploadMinio(
             @RequestParam HashMap<String, Object> params, MultipartFile file)
             throws ServiceException {
-        // 校验存储配置是否完整
+        // 校驗存儲設定是否完整
         S3Config s3Config = appConfigService.getS3Config();
         if (StringUtil.isEmpty(s3Config.getAccessKey())
                 || StringUtil.isEmpty(s3Config.getSecretKey())
                 || StringUtil.isEmpty(s3Config.getBucket())
                 || StringUtil.isEmpty(s3Config.getEndpoint())
                 || StringUtil.isEmpty(s3Config.getRegion())) {
-            throw new ServiceException("存储服务未配置");
+            throw new ServiceException("存儲服務未設定");
         }
         String categoryIds = MapUtils.getString(params, "category_ids");
 
@@ -95,31 +95,31 @@ public class UploadController {
 
     @BackendPermission(slug = BPermissionConstant.UPLOAD)
     @GetMapping("/minio/upload-id")
-    @Log(title = "上传-MinIO-uploadId", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO-uploadId", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse minioUploadId(@RequestParam HashMap<String, Object> params) {
-        // 校验存储配置是否完整
+        // 校驗存儲設定是否完整
         S3Config s3Config = appConfigService.getS3Config();
         if (StringUtil.isEmpty(s3Config.getAccessKey())
                 || StringUtil.isEmpty(s3Config.getSecretKey())
                 || StringUtil.isEmpty(s3Config.getBucket())
                 || StringUtil.isEmpty(s3Config.getEndpoint())
                 || StringUtil.isEmpty(s3Config.getRegion())) {
-            throw new ServiceException("存储服务未配置");
+            throw new ServiceException("存儲服務未設定");
         }
 
         String extension = MapUtils.getString(params, "extension");
         if (extension == null || extension.trim().isEmpty()) {
-            return JsonResponse.error("extension参数为空");
+            return JsonResponse.error("extension參數爲空");
         }
         String type = BackendConstant.RESOURCE_EXT_2_TYPE.get(extension.toLowerCase());
         if (type == null) {
-            return JsonResponse.error("该格式文件不支持上传");
+            return JsonResponse.error("該格式檔案不支持上傳");
         }
 
         S3Util s3Util = new S3Util(s3Config);
 
-        String filename = HelperUtil.randomString(32) + "." + extension; // 文件名
-        String path = BackendConstant.RESOURCE_TYPE_2_DIR.get(type) + filename; // 存储路径
+        String filename = HelperUtil.randomString(32) + "." + extension; // 檔案名
+        String path = BackendConstant.RESOURCE_TYPE_2_DIR.get(type) + filename; // 存儲路徑
         String uploadId = s3Util.uploadId(path);
 
         HashMap<String, String> data = new HashMap<>();
@@ -131,7 +131,7 @@ public class UploadController {
     }
 
     @GetMapping("/minio/pre-sign-url")
-    @Log(title = "上传-MinIO-签名URL", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO-簽名URL", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse minioPreSignUrl(@RequestParam HashMap<String, Object> params) {
         String uploadId = MapUtils.getString(params, "upload_id");
         Integer partNumber = MapUtils.getInteger(params, "part_number");
@@ -148,7 +148,7 @@ public class UploadController {
     }
 
     @GetMapping("/minio/list-parts")
-    @Log(title = "上传-MinIO-已上传查询", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO-已上傳查詢", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse minioListParts(@RequestParam HashMap<String, Object> params) {
         String uploadId = MapUtils.getString(params, "upload_id");
         String filename = MapUtils.getString(params, "filename");
@@ -160,7 +160,7 @@ public class UploadController {
     }
 
     @GetMapping("/minio/purge-segments")
-    @Log(title = "上传-MinIO-已上传查询", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO-已上傳查詢", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse purgeIncompleteSegments(@RequestParam HashMap<String, Object> params) {
         String uploadId = MapUtils.getString(params, "upload_id");
         String filename = MapUtils.getString(params, "filename");
@@ -171,22 +171,22 @@ public class UploadController {
 
     @BackendPermission(slug = BPermissionConstant.UPLOAD)
     @PostMapping("/minio/merge-file")
-    @Log(title = "上传-MinIO-文件合并", businessType = BusinessTypeConstant.UPLOAD)
+    @Log(title = "上傳-MinIO-檔案合併", businessType = BusinessTypeConstant.UPLOAD)
     public JsonResponse minioMergeFile(@RequestBody @Validated UploadFileMergeRequest req)
             throws ServiceException {
         String type = BackendConstant.RESOURCE_EXT_2_TYPE.get(req.getExtension());
         if (type == null) {
-            return JsonResponse.error("当前格式不支持上传");
+            return JsonResponse.error("當前格式不支持上傳");
         }
         String extension = req.getExtension();
         String originalFilename = req.getOriginalFilename().replaceAll("(?i)." + extension, "");
 
-        // 合并资源文件
+        // 合併資源檔案
         S3Config s3Config = appConfigService.getS3Config();
         S3Util s3Util = new S3Util(s3Config);
         s3Util.merge(req.getFilename(), req.getUploadId());
 
-        // 资源素材保存
+        // 資源素材保存
         Resource resource =
                 resourceService.create(
                         BCtx.getId(),
@@ -200,18 +200,18 @@ public class UploadController {
                         CommonConstant.ZERO,
                         CommonConstant.ZERO);
 
-        // 记录资源详情信息
+        // 記錄資源詳情信息
         doSaveResourceExtra(resource, req.getPoster(), req.getDuration());
 
         return JsonResponse.success();
     }
 
-    /** 记录资源详情信息 */
+    /** 記錄資源詳情信息 */
     @SneakyThrows
     public void doSaveResourceExtra(Resource resource, String poster, Integer duration) {
-        log.info("资源文件,类型={},id={}", resource.getType(), resource.getId());
+        log.info("資源檔案,類型={},id={}", resource.getType(), resource.getId());
         String type = resource.getType();
-        // 视频资源特殊处理--视频封面资源
+        // 影片資源特殊處理--影片封面資源
         if (BackendConstant.RESOURCE_TYPE_VIDEO.equals(type)) {
             Integer posterId = 0;
             if (StringUtil.isNotEmpty(poster)) {

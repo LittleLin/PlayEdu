@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import xyz.playedu.common.util.HelperUtil;
 
 /**
  * @author tengteng
- * @description 针对表【admin_roles】的数据库操作Service实现
+ * @description 針對表【admin_roles】的資料庫操作Service實現
  * @createDate 2023-02-21 15:53:27
  */
 @Service
@@ -55,7 +55,7 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
     public Integer initSuperAdminRole() {
         AdminRole role = new AdminRole();
 
-        role.setName("超级管理员");
+        role.setName("超級管理員");
         role.setSlug(BackendConstant.SUPER_ADMIN_ROLE);
         role.setCreatedAt(new Date());
         role.setUpdatedAt(new Date());

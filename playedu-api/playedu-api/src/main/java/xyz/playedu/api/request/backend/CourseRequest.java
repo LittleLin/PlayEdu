@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,36 +22,36 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/24 14:38
  */
 @Data
 public class CourseRequest {
 
-    @NotBlank(message = "请输入课程标题")
+    @NotBlank(message = "請輸入課程標題")
     private String title;
 
-    @NotNull(message = "请上传课程封面")
+    @NotNull(message = "請上傳課程封面")
     private Integer thumb;
 
-    @NotNull(message = "short_desc参数不存在")
+    @NotNull(message = "short_desc參數不存在")
     @JsonProperty("short_desc")
     private String shortDesc;
 
-    @NotNull(message = "is_show参数不存在")
+    @NotNull(message = "is_show參數不存在")
     @JsonProperty("is_show")
     private Integer isShow;
 
-    @NotNull(message = "is_required参数不存在")
+    @NotNull(message = "is_required參數不存在")
     @JsonProperty("is_required")
     private Integer isRequired;
 
-    @NotNull(message = "dep_ids参数不存在")
+    @NotNull(message = "dep_ids參數不存在")
     @JsonProperty("dep_ids")
     private Integer[] depIds;
 
-    @NotNull(message = "category_ids参数不存在")
+    @NotNull(message = "category_ids參數不存在")
     @JsonProperty("category_ids")
     private Integer[] categoryIds;
 
@@ -82,38 +82,38 @@ public class CourseRequest {
     // 格式
     // [
     // {
-    // 'name' => '章节名',
+    // 'name' => '章節名',
     // 'hours' => [
     // [
-    // 'name' => '课时名',
-    // 'type' => '课时类型',
-    // 'duration' => '时长',
-    // 'rid' => '资源id',
+    // 'name' => '課時名',
+    // 'type' => '課時類型',
+    // 'duration' => '時長',
+    // 'rid' => '資源id',
     // ],...
     // ],
     // }...
     // ]
-    @NotNull(message = "chapters参数不存在")
+    @NotNull(message = "chapters參數不存在")
     private List<ChapterItem> chapters;
 
     // 格式
     // [
     // {
-    // 'name' => '课时名',
-    // 'type' => '课时类型',
-    // 'duration' => '时长',
-    // 'rid' => '资源id',
+    // 'name' => '課時名',
+    // 'type' => '課時類型',
+    // 'duration' => '時長',
+    // 'rid' => '資源id',
     // }...
     // ]
-    @NotNull(message = "hours参数不存在")
+    @NotNull(message = "hours參數不存在")
     private List<HourItem> hours;
 
     // 格式
     // [
     // {
     // 'name' => '附件名',
-    // 'type' => '附件类型',
-    // 'rid' => '资源id',
+    // 'type' => '附件類型',
+    // 'rid' => '資源id',
     // }...
     // ]
     private List<AttachmentItem> attachments;

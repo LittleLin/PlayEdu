@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import xyz.playedu.course.service.CourseChapterService;
 
 /**
  * @author tengteng
- * @description 针对表【course_chapters】的数据库操作Service实现
+ * @description 針對表【course_chapters】的資料庫操作Service實現
  * @createDate 2023-02-26 17:30:18
  */
 @Service
@@ -58,7 +58,7 @@ public class CourseChapterServiceImpl extends ServiceImpl<CourseChapterMapper, C
     public CourseChapter findOrFail(Integer id) throws NotFoundException {
         CourseChapter chapter = getOne(query().getWrapper().eq("id", id));
         if (chapter == null) {
-            throw new NotFoundException("章节不存在");
+            throw new NotFoundException("章節不存在");
         }
         return chapter;
     }
@@ -72,7 +72,7 @@ public class CourseChapterServiceImpl extends ServiceImpl<CourseChapterMapper, C
     public CourseChapter findOrFail(Integer id, Integer courseId) throws NotFoundException {
         CourseChapter chapter = getOne(query().getWrapper().eq("id", id).eq("course_id", courseId));
         if (chapter == null) {
-            throw new NotFoundException("章节不存在");
+            throw new NotFoundException("章節不存在");
         }
         return chapter;
     }

@@ -11,7 +11,7 @@ export const TabBarFooter: React.FC = () => {
   const tabs = [
     {
       key: "/",
-      title: "首页",
+      title: "首頁",
       icon: (active: boolean) =>
         active ? (
           <i
@@ -27,7 +27,7 @@ export const TabBarFooter: React.FC = () => {
     },
     {
       key: "/study",
-      title: "学习",
+      title: "學習",
       icon: (active: boolean) =>
         active ? (
           <i

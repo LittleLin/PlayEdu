@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,11 +36,11 @@ public class AppConfig implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /** 分组 */
+    /** 分組 */
     @JsonProperty("group_name")
     private String groupName;
 
-    /** 名称 */
+    /** 名稱 */
     private String name;
 
     /** 升序 */
@@ -50,7 +50,7 @@ public class AppConfig implements Serializable {
     @JsonProperty("field_type")
     private String fieldType;
 
-    /** 键 */
+    /** 鍵 */
     @JsonProperty("key_name")
     private String keyName;
 
@@ -58,7 +58,7 @@ public class AppConfig implements Serializable {
     @JsonProperty("key_value")
     private String keyValue;
 
-    /** 可选值 */
+    /** 可選值 */
     @JsonProperty("option_value")
     private String optionValue;
 
@@ -66,13 +66,13 @@ public class AppConfig implements Serializable {
     @JsonProperty("is_private")
     private Integer isPrivate;
 
-    /** 帮助信息 */
+    /** 幫助信息 */
     private String help;
 
     /** */
     @JsonIgnore private Date createdAt;
 
-    /** 1显示,0否 */
+    /** 1顯示,0否 */
     @JsonIgnore private Integer isHidden;
 
     @JsonGetter("key_value")

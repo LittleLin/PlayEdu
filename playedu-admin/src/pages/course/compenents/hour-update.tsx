@@ -120,7 +120,7 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
       });
     }
     if (hours.length === 0) {
-      message.error("请选择视频");
+      message.error("請選擇影片");
       return;
     }
     courseHour.storeCourseHourMulti(id, hours).then((res: any) => {
@@ -133,7 +133,7 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
   const selectChapterData = (arr: any, videos: any) => {
     const data = [...chapters];
     if (!data[addvideoCurrent].id) {
-      message.error("添加课时失败");
+      message.error("添加課時失敗");
       return;
     }
     const hours: any = [];
@@ -148,7 +148,7 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
       });
     }
     if (hours.length === 0) {
-      message.error("请选择视频");
+      message.error("請選擇影片");
       return;
     }
     courseHour.storeCourseHourMulti(id, hours).then((res: any) => {
@@ -161,11 +161,11 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
   const delHour = (hid: number) => {
     const data = [...treeData];
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此课时？",
+      content: "確認刪除此課時？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         const index = data.findIndex((i: any) => i.rid === hid);
@@ -253,11 +253,11 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
     const arr = [...chapters];
     const keys = [...chapterHours];
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除章节会清空已添加课时，确认删除？",
+      content: "刪除章節會清空已添加課時，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         if (arr[index].id) {
@@ -277,11 +277,11 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
     const keys = [...chapterHours];
     const data = [...chapters];
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此课时？",
+      content: "確認刪除此課時？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         const current = data[index].hours.findIndex((i: any) => i.rid === hid);
@@ -349,15 +349,15 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Drawer
-          title="课时管理"
+          title="課時管理"
           onClose={onCancel}
           maskClosable={false}
           open={true}
           width={634}
         >
           <div className={styles["top-content"]}>
-            <p>1.线上课课时调整及时生效，操作不可逆，请谨慎操作。</p>
-            <p>2.课时调整后，已有学习进度会在学员学习时重新计算。</p>
+            <p>1.線上課課時調整及時生效，操作不可逆，請謹慎操作。</p>
+            <p>2.課時調整後，已有學習進度會在學員學習時重新計算。</p>
           </div>
           <div className="float-left mt-24">
             <SelectResource
@@ -403,14 +403,14 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
                           onClick={() => setVideoVisible(true)}
                           type="primary"
                         >
-                          添加课时
+                          添加課時
                         </Button>
                       </div>
                     </Form.Item>
                     <div className={styles["hous-box"]}>
                       {treeData.length === 0 && (
                         <span className={styles["no-hours"]}>
-                          请点击上方按钮添加课时
+                          請點選上方按鈕添加課時
                         </span>
                       )}
                       {treeData.length > 0 && (
@@ -433,12 +433,12 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
                       chapters.map((item: any, index: number) => {
                         return (
                           <div
-                            key={item.hours.length + "章节" + index}
+                            key={item.hours.length + "章節" + index}
                             className={styles["chapter-item"]}
                           >
                             <div className="d-flex">
                               <div className={styles["label"]}>
-                                章节{index + 1}：
+                                章節{index + 1}：
                               </div>
                               <Input
                                 value={item.name}
@@ -449,7 +449,7 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
                                 onBlur={(e) => {
                                   saveChapterName(index, e.target.value);
                                 }}
-                                placeholder="请在此处输入章节名称"
+                                placeholder="請在此處輸入章節名稱"
                                 allowClear
                               />
                               <Button
@@ -461,16 +461,16 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
                                   setAddvideoCurrent(index);
                                 }}
                               >
-                                添加课时
+                                添加課時
                               </Button>
                               <Button onClick={() => delChapter(index)}>
-                                删除章节
+                                刪除章節
                               </Button>
                             </div>
                             <div className={styles["chapter-hous-box"]}>
                               {item.hours.length === 0 && (
                                 <span className={styles["no-hours"]}>
-                                  请点击上方按钮添加课时
+                                  請點選上方按鈕添加課時
                                 </span>
                               )}
                               {item.hours.length > 0 && (
@@ -491,7 +491,7 @@ export const CourseHourUpdate: React.FC<PropInterface> = ({
                     <Form.Item>
                       <div className="ml-42">
                         <Button onClick={() => addNewChapter()}>
-                          添加章节
+                          添加章節
                         </Button>
                       </div>
                     </Form.Item>

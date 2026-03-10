@@ -105,7 +105,7 @@ export const TreeAttachments = (props: PropInterface) => {
       // Drop on the content
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
       });
     } else if (
@@ -115,7 +115,7 @@ export const TreeAttachments = (props: PropInterface) => {
     ) {
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
         // in previous version, we use item.children.push(dragObj) to insert the
         // item to the tail of the children

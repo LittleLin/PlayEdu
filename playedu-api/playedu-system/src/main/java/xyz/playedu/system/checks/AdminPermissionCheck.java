@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,9 @@ public class AdminPermissionCheck implements CommandLineRunner {
                             BPermissionConstant.TYPE_ACTION,
                             new HashMap<>() {
                                 {
-                                    // 分类管理
+                                    // 分類管理
                                     put(
-                                            "分类管理",
+                                            "分類管理",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
@@ -51,16 +51,16 @@ public class AdminPermissionCheck implements CommandLineRunner {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(0);
-                                                        setName("新增|编辑|删除");
+                                                        setName("新增|編輯|刪除");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .RESOURCE_CATEGORY);
                                                     }
                                                 },
                                             });
-                                    // 资源管理
+                                    // 資源管理
                                     put(
-                                            "资源管理",
+                                            "資源管理",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
@@ -72,14 +72,14 @@ public class AdminPermissionCheck implements CommandLineRunner {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(10);
-                                                        setName("资源上传");
+                                                        setName("資源上傳");
                                                         setSlug(BPermissionConstant.UPLOAD);
                                                     }
                                                 },
                                             });
-                                    // 学员
+                                    // 學員
                                     put(
-                                            "学员",
+                                            "學員",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
@@ -98,58 +98,58 @@ public class AdminPermissionCheck implements CommandLineRunner {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(20);
-                                                        setName("编辑");
+                                                        setName("編輯");
                                                         setSlug(BPermissionConstant.USER_UPDATE);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(30);
-                                                        setName("删除");
+                                                        setName("刪除");
                                                         setSlug(BPermissionConstant.USER_DESTROY);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(40);
-                                                        setName("学习进度-查看");
+                                                        setName("學習進度-查看");
                                                         setSlug(BPermissionConstant.USER_LEARN);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(50);
-                                                        setName("学习进度-记录删除");
+                                                        setName("學習進度-記錄刪除");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .USER_LEARN_DESTROY);
                                                     }
                                                 },
                                             });
-                                    // 部门
+                                    // 部門
                                     put(
-                                            "部门",
+                                            "部門",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(0);
-                                                        setName("新增|编辑|删除");
+                                                        setName("新增|編輯|刪除");
                                                         setSlug(BPermissionConstant.DEPARTMENT_CUD);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(10);
-                                                        setName("查看部门学员学习进度");
+                                                        setName("查看部門學員學習進度");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .DEPARTMENT_USER_LEARN);
                                                     }
                                                 },
                                             });
-                                    // 线上课
+                                    // 線上課
                                     put(
-                                            "线上课",
+                                            "線上課",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
@@ -161,56 +161,56 @@ public class AdminPermissionCheck implements CommandLineRunner {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(5);
-                                                        setName("新增|编辑|删除");
+                                                        setName("新增|編輯|刪除");
                                                         setSlug(BPermissionConstant.COURSE_CUD);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(10);
-                                                        setName("学员学习记录-列表");
+                                                        setName("學員學習記錄-列表");
                                                         setSlug(BPermissionConstant.COURSE_USER);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(20);
-                                                        setName("学员学习记录-删除");
+                                                        setName("學員學習記錄-刪除");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .COURSE_USER_DESTROY);
                                                     }
                                                 },
                                             });
-                                    // 系统配置
+                                    // 系統設定
                                     put(
-                                            "系统",
+                                            "系統",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(0);
-                                                        setName("系统配置");
+                                                        setName("系統設定");
                                                         setSlug(BPermissionConstant.SYSTEM_CONFIG);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(10);
-                                                        setName("管理员日志");
+                                                        setName("管理員日誌");
                                                         setSlug(BPermissionConstant.ADMIN_LOG);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(15);
-                                                        setName("管理员角色");
+                                                        setName("管理員角色");
                                                         setSlug(BPermissionConstant.ADMIN_ROLE);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(20);
-                                                        setName("管理员-列表");
+                                                        setName("管理員-列表");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .ADMIN_USER_INDEX);
@@ -219,14 +219,14 @@ public class AdminPermissionCheck implements CommandLineRunner {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(25);
-                                                        setName("管理员-新增|编辑|删除");
+                                                        setName("管理員-新增|編輯|刪除");
                                                         setSlug(BPermissionConstant.ADMIN_USER_CUD);
                                                     }
                                                 },
                                                 new AdminPermission() {
                                                     {
                                                         setSort(30);
-                                                        setName("修改登录密码");
+                                                        setName("修改登入密碼");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .PASSWORD_CHANGE);
@@ -239,28 +239,28 @@ public class AdminPermissionCheck implements CommandLineRunner {
                             BPermissionConstant.TYPE_DATA,
                             new HashMap<>() {
                                 {
-                                    // 管理员
+                                    // 管理員
                                     put(
-                                            "管理员",
+                                            "管理員",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(0);
-                                                        setName("邮箱");
+                                                        setName("電子郵件");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .DATA_ADMIN_EMAIL);
                                                     }
                                                 },
                                             });
-                                    // 学员
+                                    // 學員
                                     put(
-                                            "学员",
+                                            "學員",
                                             new AdminPermission[] {
                                                 new AdminPermission() {
                                                     {
                                                         setSort(0);
-                                                        setName("邮箱");
+                                                        setName("電子郵件");
                                                         setSlug(
                                                                 BPermissionConstant
                                                                         .DATA_USER_EMAIL);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import xyz.playedu.resource.service.ResourceService;
 
 /**
  * @author tengteng
- * @description 针对表【resource】的数据库操作Service实现
+ * @description 針對表【resource】的資料庫操作Service實現
  * @createDate 2023-02-23 10:50:26
  */
 @Service
@@ -164,7 +164,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource>
     public Resource findOrFail(Integer id) throws NotFoundException {
         Resource resource = getById(id);
         if (resource == null) {
-            throw new NotFoundException("资源不存在");
+            throw new NotFoundException("資源不存在");
         }
         return resource;
     }

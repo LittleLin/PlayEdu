@@ -71,10 +71,10 @@ const CoursePage = () => {
   const [category_ids, setCategoryIds] = useState<number[]>([]);
   const [dep_ids, setDepIds] = useState<number[]>([]);
   const [selLabel, setLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部分类"
+    result.get("label") ? String(result.get("label")) : "全部分類"
   );
   const [selDepLabel, setDepLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部部门"
+    result.get("label") ? String(result.get("label")) : "全部部門"
   );
   const [course_category_ids, setCourseCategoryIds] =
     useState<CategoryIdsModel>({});
@@ -114,13 +114,13 @@ const CoursePage = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: `分类`,
+      label: `分類`,
       children: (
         <div className="float-left">
           <TreeCategory
             selected={category_ids}
             type=""
-            text={"分类"}
+            text={"分類"}
             onUpdate={(keys: any, title: any) => {
               resetLocalSearchParams({
                 page: 1,
@@ -138,14 +138,14 @@ const CoursePage = () => {
     },
     {
       key: "2",
-      label: `部门`,
+      label: `部門`,
       children: (
         <div className="float-left">
           <TreeDepartment
             selected={dep_ids}
             showNum={false}
             refresh={refresh}
-            text={"部门"}
+            text={"部門"}
             onUpdate={(keys: any, title: any) => {
               resetLocalSearchParams({
                 page: 1,
@@ -161,7 +161,7 @@ const CoursePage = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "课程名称",
+      title: "課程名稱",
       width: 350,
       render: (_, record: any) => (
         <div className="d-flex">
@@ -185,7 +185,7 @@ const CoursePage = () => {
       ),
     },
     {
-      title: "课程分类",
+      title: "課程分類",
       dataIndex: "id",
       render: (id: number) => (
         <div className="float-left">
@@ -202,7 +202,7 @@ const CoursePage = () => {
       ),
     },
     {
-      title: "指派部门",
+      title: "指派部門",
       dataIndex: "id",
       render: (id: number) => (
         <div className="float-left">
@@ -216,19 +216,19 @@ const CoursePage = () => {
                 </span>
               );
             })}
-          {!course_dep_ids[id] && <span>全部部门</span>}
+          {!course_dep_ids[id] && <span>全部部門</span>}
         </div>
       ),
     },
     {
-      title: "必修/选修",
+      title: "必修/選修",
       dataIndex: "is_required",
       render: (is_required: number) => (
-        <span>{is_required === 1 ? "必修课" : "选修课"}</span>
+        <span>{is_required === 1 ? "必修課" : "選修課"}</span>
       ),
     },
     {
-      title: "创建人",
+      title: "建立人",
       dataIndex: "admin_id",
       render: (text: number) =>
         adminUsers && JSON.stringify(adminUsers) !== "{}" ? (
@@ -238,7 +238,7 @@ const CoursePage = () => {
         ),
     },
     {
-      title: "上架时间",
+      title: "上架時間",
       dataIndex: "sort_at",
       render: (text: string) => <span>{dateFormat(text)}</span>,
     },
@@ -261,7 +261,7 @@ const CoursePage = () => {
                   setUpdateVisible(true);
                 }}
               >
-                编辑
+                編輯
               </Button>
             ),
           },
@@ -278,7 +278,7 @@ const CoursePage = () => {
                   setHourUpdateVisible(true);
                 }}
               >
-                课时
+                課時
               </Button>
             ),
           },
@@ -295,7 +295,7 @@ const CoursePage = () => {
                   setUpdateAttachmentVisible(true);
                 }}
               >
-                课件
+                課件
               </Button>
             ),
           },
@@ -308,7 +308,7 @@ const CoursePage = () => {
                 className="b-n-link c-red"
                 onClick={() => delItem(record.id)}
               >
-                删除
+                刪除
               </Button>
             ),
           },
@@ -318,7 +318,7 @@ const CoursePage = () => {
           <Space size="small">
             <PerButton
               type="link"
-              text="学员"
+              text="學員"
               class="b-link c-red"
               icon={null}
               p="course"
@@ -349,21 +349,21 @@ const CoursePage = () => {
     },
   ];
 
-  // 删除课程
+  // 刪除課程
   const delItem = (id: number) => {
     if (id === 0) {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此课程？",
+      content: "確認刪除此課程？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         course.destroyCourse(id).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetList();
         });
       },
@@ -373,7 +373,7 @@ const CoursePage = () => {
     });
   };
 
-  // 获取列表
+  // 獲取列表
   const getList = () => {
     setLoading(true);
     let categoryIds = "";
@@ -397,7 +397,7 @@ const CoursePage = () => {
         setLoading(false);
       })
       .catch((err: any) => {
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
   // 重置列表
@@ -412,11 +412,11 @@ const CoursePage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -463,13 +463,13 @@ const CoursePage = () => {
         </div>
         <div className="right-box">
           <div className="playedu-main-title float-left mb-24">
-            线上课 | {tabKey === "1" ? selLabel : selDepLabel}
+            線上課 | {tabKey === "1" ? selLabel : selDepLabel}
           </div>
           <div className="float-left j-b-flex mb-24">
             <div className="d-flex">
               <PerButton
                 type="primary"
-                text="新建课程"
+                text="新增課程"
                 class="mr-16"
                 icon={<PlusOutlined />}
                 p="course"
@@ -479,7 +479,7 @@ const CoursePage = () => {
             </div>
             <div className="d-flex">
               <div className="d-flex mr-24">
-                <Typography.Text>课程名称：</Typography.Text>
+                <Typography.Text>課程名稱：</Typography.Text>
                 <Input
                   value={title || ""}
                   onChange={(e) => {
@@ -489,7 +489,7 @@ const CoursePage = () => {
                   }}
                   allowClear
                   style={{ width: 160 }}
-                  placeholder="请输入名称关键字"
+                  placeholder="請輸入名稱關鍵字"
                 />
               </div>
               <div className="d-flex">
@@ -505,7 +505,7 @@ const CoursePage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

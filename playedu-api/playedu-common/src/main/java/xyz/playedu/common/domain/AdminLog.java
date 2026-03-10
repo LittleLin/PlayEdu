@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,37 +34,37 @@ public class AdminLog implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /** 管理员ID */
+    /** 管理員ID */
     @JsonProperty("admin_id")
     private Integer adminId;
 
-    /** 管理员姓名 */
+    /** 管理員姓名 */
     @JsonProperty("admin_name")
     private String adminName;
 
-    /** 模块 */
+    /** 模塊 */
     private String module;
 
-    /** 标题 */
+    /** 標題 */
     private String title;
 
     /** 操作指令 */
     private Integer opt;
 
-    /** 请求方法 */
+    /** 請求方法 */
     private String method;
 
-    /** 请求方式 POST,GET,PUT,DELETE */
+    /** 請求方式 POST,GET,PUT,DELETE */
     @JsonProperty("request_method")
     private String requestMethod;
 
-    /** 请求URL */
+    /** 請求URL */
     private String url;
 
-    /** 请求参数 */
+    /** 請求參數 */
     private String param;
 
-    /** 返回参数 */
+    /** 返回參數 */
     private String result;
 
     /** ip */
@@ -74,7 +74,7 @@ public class AdminLog implements Serializable {
     @JsonProperty("ip_area")
     private String ipArea;
 
-    /** 备注 */
+    /** 備註 */
     @JsonProperty("error_msg")
     private String errorMsg;
 

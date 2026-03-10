@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import xyz.playedu.common.domain.LdapSyncUserDetail;
 import xyz.playedu.common.mapper.LdapSyncUserDetailMapper;
 import xyz.playedu.common.service.LdapSyncUserDetailService;
 
-/** LDAP用户同步详情服务实现类 */
+/** LDAP使用者同步詳情服務實現類 */
 @Service
 public class LdapSyncUserDetailServiceImpl
         extends ServiceImpl<LdapSyncUserDetailMapper, LdapSyncUserDetail>

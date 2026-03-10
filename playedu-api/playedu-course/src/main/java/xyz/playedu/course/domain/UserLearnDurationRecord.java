@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,14 +42,14 @@ public class UserLearnDurationRecord implements Serializable {
     @JsonProperty("created_date")
     private Date createdDate;
 
-    /** 已学习时长[微秒] */
+    /** 已學習時長[微秒] */
     private Integer duration;
 
-    /** 开始时间 */
+    /** 開始時間 */
     @JsonProperty("start_at")
     private Date startAt;
 
-    /** 结束时间 */
+    /** 結束時間 */
     @JsonProperty("end_at")
     private Date endAt;
 

@@ -213,7 +213,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
       dep_ids = depIds;
     }
     if (chapters.length === 0 && treeData.length === 0) {
-      message.error("请配置课时");
+      message.error("請設定課時");
       return;
     }
     setLoading(true);
@@ -250,7 +250,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
 
   const selectData = (arr: any, videos: any) => {
     if (arr.length === 0) {
-      message.error("请选择视频");
+      message.error("請選擇影片");
       return;
     }
     let keys = [...hours];
@@ -264,7 +264,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
 
   const selectChapterData = (arr: any, videos: any) => {
     if (arr.length === 0) {
-      message.error("请选择视频");
+      message.error("請選擇影片");
       return;
     }
     const data = [...chapters];
@@ -278,7 +278,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
 
   const selectAttachmentData = (arr: any, videos: any) => {
     if (arr.length === 0) {
-      message.error("请选择课件");
+      message.error("請選擇課件");
       return;
     }
     let keys = [...attachments];
@@ -294,11 +294,11 @@ export const CourseCreate: React.FC<PropInterface> = ({
     const arr = [...chapters];
     if (arr.length > 0) {
       confirm({
-        title: "操作确认",
+        title: "操作確認",
         icon: <ExclamationCircleFilled />,
-        content: "切换列表选项会清空已添加课时，确认切换？",
+        content: "切換列表選項會清空已添加課時，確認切換？",
         centered: true,
-        okText: "确认",
+        okText: "確認",
         cancelText: "取消",
         onOk() {
           setChapterType(e.target.value);
@@ -404,11 +404,11 @@ export const CourseCreate: React.FC<PropInterface> = ({
     const arr = [...chapters];
     const keys = [...chapterHours];
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除章节会清空已添加课时，确认删除？",
+      content: "刪除章節會清空已添加課時，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         arr.splice(index, 1);
@@ -470,7 +470,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Drawer
-          title="新建课程"
+          title="新增課程"
           onClose={onCancel}
           maskClosable={false}
           open={true}
@@ -482,7 +482,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
                 onClick={() => form.submit()}
                 type="primary"
               >
-                确 认
+                確 認
               </Button>
             </Space>
           }
@@ -548,9 +548,9 @@ export const CourseCreate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="课程分类"
+                label="課程分類"
                 name="category_ids"
-                rules={[{ required: true, message: "请选择课程分类!" }]}
+                rules={[{ required: true, message: "請選擇課程分類!" }]}
               >
                 <TreeSelect
                   showCheckedStrategy={TreeSelect.SHOW_ALL}
@@ -558,49 +558,49 @@ export const CourseCreate: React.FC<PropInterface> = ({
                   multiple
                   style={{ width: 424 }}
                   treeData={categories}
-                  placeholder="请选择课程分类"
+                  placeholder="請選擇課程分類"
                   treeDefaultExpandAll
                 />
               </Form.Item>
               <Form.Item
-                label="课程名称"
+                label="課程名稱"
                 name="title"
-                rules={[{ required: true, message: "请在此处输入课程名称!" }]}
+                rules={[{ required: true, message: "請在此處輸入課程名稱!" }]}
               >
                 <Input
                   style={{ width: 424 }}
-                  placeholder="请在此处输入课程名称"
+                  placeholder="請在此處輸入課程名稱"
                   allowClear
                 />
               </Form.Item>
               <Form.Item
-                label="课程属性"
+                label="課程屬性"
                 name="isRequired"
-                rules={[{ required: true, message: "请选择课程属性!" }]}
+                rules={[{ required: true, message: "請選擇課程屬性!" }]}
               >
                 <Radio.Group>
-                  <Radio value={1}>必修课</Radio>
+                  <Radio value={1}>必修課</Radio>
                   <Radio value={0} style={{ marginLeft: 22 }}>
-                    选修课
+                    選修課
                   </Radio>
                 </Radio.Group>
               </Form.Item>
               <Form.Item
-                label="指派部门"
+                label="指派部門"
                 name="type"
-                rules={[{ required: true, message: "请选择指派部门!" }]}
+                rules={[{ required: true, message: "請選擇指派部門!" }]}
               >
                 <Radio.Group onChange={getType}>
-                  <Radio value="open">全部部门</Radio>
-                  <Radio value="elective">选择部门</Radio>
+                  <Radio value="open">全部部門</Radio>
+                  <Radio value="elective">選擇部門</Radio>
                 </Radio.Group>
               </Form.Item>
               {type === "elective" && (
                 <>
                   <Form.Item
-                    label="选择部门"
+                    label="選擇部門"
                     name="ids"
-                    rules={[{ required: true, message: "请选择部门!" }]}
+                    rules={[{ required: true, message: "請選擇部門!" }]}
                   >
                     <div
                       className="d-flex"
@@ -615,7 +615,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
                         style={{ marginBottom: 14 }}
                         onClick={() => setIdsVisible(true)}
                       >
-                        添加范围
+                        添加範圍
                       </Button>
                       <div
                         className="d-flex"
@@ -661,9 +661,9 @@ export const CourseCreate: React.FC<PropInterface> = ({
                 </>
               )}
               <Form.Item
-                label="课程封面"
+                label="課程封面"
                 name="thumb"
-                rules={[{ required: true, message: "请上传课程封面!" }]}
+                rules={[{ required: true, message: "請上傳課程封面!" }]}
               >
                 <div className="d-flex">
                   <Image
@@ -741,28 +741,28 @@ export const CourseCreate: React.FC<PropInterface> = ({
                     </div>
                     <div className="d-flex">
                       <UploadImageButton
-                        text="更换封面"
+                        text="更換封面"
                         onSelected={(url, id) => {
                           setThumb(url);
                           form.setFieldsValue({ thumb: id });
                         }}
                       ></UploadImageButton>
                       <span className="helper-text ml-8">
-                        （推荐尺寸:400x300px）
+                        （推薦尺寸:400x300px）
                       </span>
                     </div>
                   </div>
                 </div>
               </Form.Item>
               <Form.Item
-                label="课时列表"
+                label="課時列表"
                 name="hasChapter"
-                rules={[{ required: true, message: "请选择课时列表!" }]}
+                rules={[{ required: true, message: "請選擇課時列表!" }]}
               >
                 <Radio.Group onChange={getChapterType}>
-                  <Radio value={0}>无章节</Radio>
+                  <Radio value={0}>無章節</Radio>
                   <Radio value={1} style={{ marginLeft: 22 }}>
-                    有章节
+                    有章節
                   </Radio>
                 </Radio.Group>
               </Form.Item>
@@ -774,14 +774,14 @@ export const CourseCreate: React.FC<PropInterface> = ({
                         onClick={() => setVideoVisible(true)}
                         type="primary"
                       >
-                        添加课时
+                        添加課時
                       </Button>
                     </div>
                   </Form.Item>
                   <div className={styles["hous-box"]}>
                     {treeData.length === 0 && (
                       <span className={styles["no-hours"]}>
-                        请点击上方按钮添加课时
+                        請點選上方按鈕添加課時
                       </span>
                     )}
                     {treeData.length > 0 && (
@@ -804,12 +804,12 @@ export const CourseCreate: React.FC<PropInterface> = ({
                     chapters.map((item: any, index: number) => {
                       return (
                         <div
-                          key={item.hours.length + "章节" + index}
+                          key={item.hours.length + "章節" + index}
                           className={styles["chapter-item"]}
                         >
                           <div className="d-flex">
                             <div className={styles["label"]}>
-                              章节{index + 1}：
+                              章節{index + 1}：
                             </div>
                             <Input
                               value={item.name}
@@ -818,7 +818,7 @@ export const CourseCreate: React.FC<PropInterface> = ({
                                 setChapterName(index, e.target.value);
                               }}
                               allowClear
-                              placeholder="请在此处输入章节名称"
+                              placeholder="請在此處輸入章節名稱"
                             />
                             <Button
                               className="mr-16"
@@ -828,16 +828,16 @@ export const CourseCreate: React.FC<PropInterface> = ({
                                 setAddvideoCurrent(index);
                               }}
                             >
-                              添加课时
+                              添加課時
                             </Button>
                             <Button onClick={() => delChapter(index)}>
-                              删除章节
+                              刪除章節
                             </Button>
                           </div>
                           <div className={styles["chapter-hous-box"]}>
                             {item.hours.length === 0 && (
                               <span className={styles["no-hours"]}>
-                                请点击上方按钮添加课时
+                                請點選上方按鈕添加課時
                               </span>
                             )}
                             {item.hours.length > 0 && (
@@ -857,12 +857,12 @@ export const CourseCreate: React.FC<PropInterface> = ({
                     })}
                   <Form.Item>
                     <div className="ml-120">
-                      <Button onClick={() => addNewChapter()}>添加章节</Button>
+                      <Button onClick={() => addNewChapter()}>添加章節</Button>
                     </div>
                   </Form.Item>
                 </div>
               )}
-              <Form.Item label="更多选项">
+              <Form.Item label="更多選項">
                 <div
                   className={showDrop ? "drop-item active" : "drop-item"}
                   onClick={() => setShowDrop(!showDrop)}
@@ -871,33 +871,33 @@ export const CourseCreate: React.FC<PropInterface> = ({
                     style={{ fontSize: 14 }}
                     className="iconfont icon-icon-xiala c-red"
                   />
-                  <span>(课程简介、课件)</span>
+                  <span>(課程簡介、課件)</span>
                 </div>
               </Form.Item>
               <div
                 className="c-flex"
                 style={{ display: showDrop ? "block" : "none" }}
               >
-                <Form.Item label="课程简介" name="short_desc">
+                <Form.Item label="課程簡介" name="short_desc">
                   <Input.TextArea
                     style={{ width: 424, minHeight: 80 }}
                     allowClear
-                    placeholder="请输入课程简介（最多200字）"
+                    placeholder="請輸入課程簡介（最多200字）"
                     maxLength={200}
                   />
                 </Form.Item>
-                <Form.Item label="课程附件">
+                <Form.Item label="課程附件">
                   <Button
                     onClick={() => setAttachmentVisible(true)}
                     type="primary"
                   >
-                    添加课件
+                    添加課件
                   </Button>
                 </Form.Item>
                 <div className={styles["hous-box"]}>
                   {attachmentData.length === 0 && (
                     <span className={styles["no-hours"]}>
-                      请点击上方按钮添加课件
+                      請點選上方按鈕添加課件
                     </span>
                   )}
                   {attachmentData.length > 0 && (

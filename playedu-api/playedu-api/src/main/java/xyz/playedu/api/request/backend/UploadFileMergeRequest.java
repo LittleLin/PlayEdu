@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,31 +21,31 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/8 14:49
  */
 @Data
 public class UploadFileMergeRequest {
 
-    @NotBlank(message = "请输入课程标题")
+    @NotBlank(message = "請輸入課程標題")
     private String filename;
 
     @JsonProperty("upload_id")
-    @NotBlank(message = "请输入upload_id")
+    @NotBlank(message = "請輸入upload_id")
     private String uploadId;
 
     @JsonProperty("original_filename")
-    @NotBlank(message = "请输入original_filename")
+    @NotBlank(message = "請輸入original_filename")
     private String originalFilename;
 
-    @NotNull(message = "请输入size")
+    @NotNull(message = "請輸入size")
     private Long size;
 
-    @NotNull(message = "请输入duration")
+    @NotNull(message = "請輸入duration")
     private Integer duration;
 
-    @NotBlank(message = "请输入extension")
+    @NotBlank(message = "請輸入extension")
     private String extension;
 
     @JsonProperty("category_ids")

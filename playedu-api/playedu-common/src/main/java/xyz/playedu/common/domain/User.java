@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,33 +39,33 @@ public class User implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 邮件 */
+    /** 郵件 */
     private String email;
 
-    /** 真实姓名 */
+    /** 真實姓名 */
     private String name;
 
-    /** 头像 */
+    /** 頭像 */
     private Integer avatar;
 
-    /** 密码 */
+    /** 密碼 */
     @JsonIgnore private String password;
 
     /** salt */
     @JsonIgnore private String salt;
 
-    /** 身份证号 */
+    /** 身份證號 */
     @JsonProperty("id_card")
     private String idCard;
 
-    /** 学分 */
+    /** 學分 */
     private Integer credit1;
 
-    /** 注册Ip */
+    /** 註冊Ip */
     @JsonProperty("create_ip")
     private String createIp;
 
-    /** 注册城市 */
+    /** 註冊城市 */
     @JsonProperty("create_city")
     private String createCity;
 
@@ -73,23 +73,23 @@ public class User implements Serializable {
     @JsonProperty("is_active")
     private Integer isActive;
 
-    /** 锁定[1:是,0:否] */
+    /** 鎖定[1:是,0:否] */
     @JsonProperty("is_lock")
     private Integer isLock;
 
-    /** 实名认证[1:是,0:否] */
+    /** 實名認證[1:是,0:否] */
     @JsonProperty("is_verify")
     private Integer isVerify;
 
-    /** 实名认证时间 */
+    /** 實名認證時間 */
     @JsonProperty("verify_at")
     private Date verifyAt;
 
-    /** 设置密码[1:是,0:否] */
+    /** 設置密碼[1:是,0:否] */
     @JsonProperty("is_set_password")
     private Integer isSetPassword;
 
-    /** 登录时间 */
+    /** 登入時間 */
     @JsonProperty("login_at")
     private Date loginAt;
 

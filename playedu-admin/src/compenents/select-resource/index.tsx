@@ -30,7 +30,7 @@ export const SelectResource = (props: PropsInterface) => {
     <>
       {props.open ? (
         <Modal
-          title="视频库"
+          title="影片庫"
           centered
           closable={false}
           onCancel={() => {
@@ -50,7 +50,7 @@ export const SelectResource = (props: PropsInterface) => {
           <Row>
             <div className="float-left mt-24">
               <UploadVideoSub
-                label="视频"
+                label="影片"
                 defaultCheckedList={props.defaultKeys}
                 open={refresh}
                 onSelected={(arr: any[], videos: any[]) => {

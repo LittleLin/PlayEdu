@@ -85,7 +85,7 @@ export const CourseAttachmentUpdate: React.FC<PropInterface> = ({
       });
     }
     if (hours.length === 0) {
-      message.error("请选择课件");
+      message.error("請選擇課件");
       return;
     }
 
@@ -99,11 +99,11 @@ export const CourseAttachmentUpdate: React.FC<PropInterface> = ({
   const delAttachments = (hid: number) => {
     const data = [...attachmentData];
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此课件？",
+      content: "確認刪除此課件？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         const index = data.findIndex((i: any) => i.rid === hid);
@@ -154,14 +154,14 @@ export const CourseAttachmentUpdate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Drawer
-          title="课件管理"
+          title="課件管理"
           onClose={onCancel}
           maskClosable={false}
           open={true}
           width={634}
         >
           <div className={styles["top-content"]}>
-            <p>1.线上课课件调整及时生效，操作不可逆，请谨慎操作。</p>
+            <p>1.線上課課件調整及時生效，操作不可逆，請謹慎操作。</p>
           </div>
           <div className="float-left mt-24">
             <SelectAttachment
@@ -200,14 +200,14 @@ export const CourseAttachmentUpdate: React.FC<PropInterface> = ({
                         onClick={() => setAttachmentVisible(true)}
                         type="primary"
                       >
-                        添加课件
+                        添加課件
                       </Button>
                     </div>
                   </Form.Item>
                   <div className={styles["hous-box"]}>
                     {attachmentData.length === 0 && (
                       <span className={styles["no-hours"]}>
-                        请点击上方按钮添加课件
+                        請點選上方按鈕添加課件
                       </span>
                     )}
                     {attachmentData.length > 0 && (

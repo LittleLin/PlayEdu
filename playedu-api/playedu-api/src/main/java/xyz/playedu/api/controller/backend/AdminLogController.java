@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public class AdminLogController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_LOG)
     @GetMapping("/index")
-    @Log(title = "管理员日志-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員日誌-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);
@@ -93,7 +93,7 @@ public class AdminLogController {
 
         AdminLog log = adminLogService.find(id, adminId);
         if (log == null) {
-            throw new ServiceException("日志不存在");
+            throw new ServiceException("日誌不存在");
         }
         return JsonResponse.data(log);
     }

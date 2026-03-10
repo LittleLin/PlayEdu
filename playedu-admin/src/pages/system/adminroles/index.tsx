@@ -32,7 +32,7 @@ const SystemAdminrolesPage = () => {
       render: (text: string) => <span>{text}</span>,
     },
     {
-      title: "时间",
+      title: "時間",
       dataIndex: "created_at",
       render: (text: string) => <span>{text && dateFormat(text)}</span>,
     },
@@ -45,7 +45,7 @@ const SystemAdminrolesPage = () => {
         <Space size="small">
           <PerButton
             type="link"
-            text="编辑"
+            text="編輯"
             class="b-link c-red"
             icon={null}
             p="admin-role"
@@ -58,7 +58,7 @@ const SystemAdminrolesPage = () => {
           <div className="form-column"></div>
           <PerButton
             type="link"
-            text="删除"
+            text="刪除"
             class="b-link c-red"
             icon={null}
             p="admin-role"
@@ -92,11 +92,11 @@ const SystemAdminrolesPage = () => {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此角色？",
+      content: "確認刪除此角色？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         adminRole.destroyAdminRole(id).then((res: any) => {
@@ -121,7 +121,7 @@ const SystemAdminrolesPage = () => {
               type="primary"
               onClick={() => setCreateVisible(true)}
             >
-              新建角色
+              新增角色
             </Button>
           </div>
           <div className="d-flex"></div>

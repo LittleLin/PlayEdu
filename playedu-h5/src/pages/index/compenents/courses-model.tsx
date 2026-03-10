@@ -51,9 +51,9 @@ export const CoursesModel: React.FC<PropInterface> = ({
         <div className={styles["info"]}>
           <div className={styles["title"]}>{title}</div>
           <div className={styles["status-content"]}>
-            {isRequired === 1 && <div className={styles["type"]}>必修课</div>}
+            {isRequired === 1 && <div className={styles["type"]}>必修課</div>}
             {isRequired === 0 && (
-              <div className={styles["active-type"]}>选修课</div>
+              <div className={styles["active-type"]}>選修課</div>
             )}
             {userCourseProgress == 0 && (
               <>
@@ -67,7 +67,7 @@ export const CoursesModel: React.FC<PropInterface> = ({
                     "--text-width": "27px",
                   }}
                 />
-                <span className={styles["no-pro"]}>未学习</span>
+                <span className={styles["no-pro"]}>未學習</span>
               </>
             )}
             {userCourseProgress > 0 && userCourseProgress < 100 && (
@@ -91,7 +91,7 @@ export const CoursesModel: React.FC<PropInterface> = ({
                   src={mediaIcon}
                   style={{ marginRight: 5 }}
                 />
-                <span>恭喜你学完此课程!</span>
+                <span>恭喜你學完此課程!</span>
               </div>
             )}
           </div>

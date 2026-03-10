@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,16 +29,16 @@ import lombok.Data;
 @Data
 @TableName(value = "course_department_user")
 public class CourseDepartmentUser implements Serializable {
-    /** 任务ID */
+    /** 任務ID */
     @TableId(type = IdType.NONE)
     @JsonProperty("course_id")
     private Integer courseId;
 
-    /** 指派范围ID */
+    /** 指派範圍ID */
     @JsonProperty("range_id")
     private Integer rangeId;
 
-    /** 指派范围类型[0:部门,1:学员] */
+    /** 指派範圍類型[0:部門,1:學員] */
     private Integer type;
 
     @TableField(exist = false)

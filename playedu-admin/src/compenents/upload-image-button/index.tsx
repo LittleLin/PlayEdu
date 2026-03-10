@@ -53,7 +53,7 @@ export const UploadImageButton = (props: PropsInterface) => {
   const [resourceUrl, setResourceUrl] = useState<ResourceUrlModel>({});
   const [selectedKey, setSelectedKey] = useState<number>(0);
 
-  // 获取图片列表
+  // 獲取圖片列表
   const getImageList = () => {
     let categoryIds = category_ids.join(",");
     resource
@@ -64,7 +64,7 @@ export const UploadImageButton = (props: PropsInterface) => {
         setResourceUrl(res.data.resource_url);
       })
       .catch((err) => {
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
   // 重置列表
@@ -74,7 +74,7 @@ export const UploadImageButton = (props: PropsInterface) => {
     setRefresh(!refresh);
   };
 
-  // 加载图片列表
+  // 載入圖片列表
   useEffect(() => {
     if (showModal) {
       getImageList();
@@ -88,12 +88,12 @@ export const UploadImageButton = (props: PropsInterface) => {
           setShowModal(true);
         }}
       >
-        {props.text ? props.text : "上传图片"}
+        {props.text ? props.text : "上傳圖片"}
       </Button>
 
       {showModal && (
         <Modal
-          title="图片素材库"
+          title="圖片素材庫"
           closable={false}
           onCancel={() => {
             setShowModal(false);
@@ -103,7 +103,7 @@ export const UploadImageButton = (props: PropsInterface) => {
           maskClosable={false}
           onOk={() => {
             if (!selected) {
-              message.error("请选择图片后确定");
+              message.error("請選擇圖片後確定");
               return;
             }
             props.onSelected(selected, selectedKey);
@@ -115,7 +115,7 @@ export const UploadImageButton = (props: PropsInterface) => {
               <TreeCategory
                 selected={category_ids}
                 type="no-cate"
-                text={"图片"}
+                text={"圖片"}
                 onUpdate={(keys: any) => {
                   setSelected("");
                   setCategoryIds(keys);
@@ -135,7 +135,7 @@ export const UploadImageButton = (props: PropsInterface) => {
               </Row>
               {imageList.length === 0 && (
                 <Col span={24}>
-                  <Empty description="暂无图片" />
+                  <Empty description="暫無圖片" />
                 </Col>
               )}
               <div className="image-list-box">

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ import lombok.Data;
 @Data
 public class LoginPasswordRequest {
 
-    @NotBlank(message = "请输入邮箱")
+    @NotBlank(message = "請輸入電子郵件")
     private String email;
 
-    @NotBlank(message = "请输入密码")
+    @NotBlank(message = "請輸入密碼")
     private String password;
 }

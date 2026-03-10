@@ -55,7 +55,7 @@ const ResourceCoursewarePage = () => {
   const [title, setTitle] = useState("");
   const [multiConfig, setMultiConfig] = useState(false);
   const [selLabel, setLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部课件"
+    result.get("label") ? String(result.get("label")) : "全部課件"
   );
   const [cateId, setCateId] = useState(Number(result.get("cid")));
   const [updateId, setUpdateId] = useState(0);
@@ -80,7 +80,7 @@ const ResourceCoursewarePage = () => {
     }
   }, [result.get("cid")]);
 
-  // 加载课件列表
+  // 載入課件列表
   useEffect(() => {
     getList();
   }, [category_ids, refresh, page, size]);
@@ -99,13 +99,13 @@ const ResourceCoursewarePage = () => {
         setLoading(false);
       })
       .catch((err: any) => {
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "课件名称",
+      title: "課件名稱",
       render: (_, record: any) => (
         <div className="d-flex">
           <i
@@ -122,23 +122,23 @@ const ResourceCoursewarePage = () => {
       ),
     },
     {
-      title: "课件格式",
+      title: "課件格式",
       dataIndex: "type",
       render: (type: string) => <span>{type}</span>,
     },
     {
-      title: "课件大小",
+      title: "課件大小",
       dataIndex: "size",
       render: (size: number) => <span>{(size / 1024 / 1024).toFixed(2)}M</span>,
     },
     {
-      title: "创建人",
+      title: "建立人",
       dataIndex: "admin_id",
       render: (text: number) =>
         JSON.stringify(adminUsers) !== "{}" && <span>{adminUsers[text]}</span>,
     },
     {
-      title: "创建时间",
+      title: "建立時間",
       dataIndex: "created_at",
       render: (text: string) => <span>{dateFormat(text)}</span>,
     },
@@ -162,7 +162,7 @@ const ResourceCoursewarePage = () => {
                 );
               }}
             >
-              下载
+              下載
             </Button>
             <div className="form-column"></div>
             <Button
@@ -173,7 +173,7 @@ const ResourceCoursewarePage = () => {
                 setUpdateVisible(true);
               }}
             >
-              编辑
+              編輯
             </Button>
             <div className="form-column"></div>
             <Button
@@ -181,7 +181,7 @@ const ResourceCoursewarePage = () => {
               className="b-link c-red"
               onClick={() => removeResource(record.id)}
             >
-              删除
+              刪除
             </Button>
           </Space>
         );
@@ -190,11 +190,11 @@ const ResourceCoursewarePage = () => {
   ];
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -220,21 +220,21 @@ const ResourceCoursewarePage = () => {
     setRefresh(!refresh);
   };
 
-  // 删除课件
+  // 刪除課件
   const removeResource = (id: number) => {
     if (id === 0) {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除前请检查选中课件文件无关联课程，确认删除？",
+      content: "刪除前請檢查選中課件檔案無關聯課程，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resource.destroyResource(id).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetList();
         });
       },
@@ -244,21 +244,21 @@ const ResourceCoursewarePage = () => {
     });
   };
 
-  // 批量删除课件
+  // 批量刪除課件
   const removeResourceMulti = () => {
     if (selectedRowKeys.length === 0) {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除前请检查选中课件文件无关联课程，确认删除？",
+      content: "刪除前請檢查選中課件檔案無關聯課程，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resource.destroyResourceMulti(selectedRowKeys).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetList();
         });
       },
@@ -273,10 +273,10 @@ const ResourceCoursewarePage = () => {
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    a.download = `${name}.${extension}`; // 设置下载的文件名
+    a.download = `${name}.${extension}`; // 設置下載的檔案名
     document.body.appendChild(a);
-    a.click(); // 触发点击事件
-    // 释放 URL 对象
+    a.click(); // 觸發點選事件
+    // 釋放 URL 對象
     URL.revokeObjectURL(url);
     document.body.removeChild(a);
   };
@@ -288,7 +288,7 @@ const ResourceCoursewarePage = () => {
           <TreeCategory
             selected={category_ids}
             type="no-cate"
-            text={"课件"}
+            text={"課件"}
             onUpdate={(keys: any, title: any) => {
               setPage(1);
               setCategoryIds(keys);
@@ -302,7 +302,7 @@ const ResourceCoursewarePage = () => {
         </div>
         <div className="right-box">
           <div className="d-flex playedu-main-title float-left mb-24">
-            课件 | {selLabel}
+            課件 | {selLabel}
           </div>
           <div className="float-left  j-b-flex  mb-24">
             <div>
@@ -328,13 +328,13 @@ const ResourceCoursewarePage = () => {
                 onClick={() => removeResourceMulti()}
                 disabled={selectedRowKeys.length === 0}
               >
-                删除
+                刪除
               </Button>
             </div>
             <div className="d-flex">
               <div className="d-flex">
                 <div className="d-flex mr-24">
-                  <Typography.Text>名称：</Typography.Text>
+                  <Typography.Text>名稱：</Typography.Text>
                   <Input
                     value={title}
                     onChange={(e) => {
@@ -342,14 +342,14 @@ const ResourceCoursewarePage = () => {
                     }}
                     allowClear
                     style={{ width: 160 }}
-                    placeholder="请输入名称关键字"
+                    placeholder="請輸入名稱關鍵字"
                   />
                 </div>
                 <div className="d-flex mr-24">
                   <Typography.Text>格式：</Typography.Text>
                   <Select
                     style={{ width: 160 }}
-                    placeholder="请选择格式"
+                    placeholder="請選擇格式"
                     value={type}
                     onChange={(value: string) => setType(value)}
                     options={types}
@@ -365,7 +365,7 @@ const ResourceCoursewarePage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

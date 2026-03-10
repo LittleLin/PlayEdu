@@ -18,7 +18,7 @@ const ChangeDepartmentPage = () => {
   );
 
   useEffect(() => {
-    document.title = "切换部门";
+    document.title = "切換部門";
   }, []);
 
   const onDepClick = (value: any) => {
@@ -28,7 +28,7 @@ const ChangeDepartmentPage = () => {
       setDepKey(value);
       setDepName(it.name);
       Toast.show({
-        content: "部门切换成功",
+        content: "部門切換成功",
       });
       navigate("/member", { replace: true });
     }
@@ -42,9 +42,9 @@ const ChangeDepartmentPage = () => {
           src={backIcon}
           onClick={() => navigate(-1)}
         />
-        <div className="main-title">切换部门</div>
+        <div className="main-title">切換部門</div>
       </div>
-      <div className={styles["info"]}>点击部门名称切换部门</div>
+      <div className={styles["info"]}>點選部門名稱切換部門</div>
       <div className={styles["radio-box"]}>
         <Radio.Group onChange={onDepClick} defaultValue={currentDepId}>
           {departments.map((item: any) => (

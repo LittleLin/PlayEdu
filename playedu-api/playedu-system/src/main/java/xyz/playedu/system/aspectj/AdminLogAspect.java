@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,18 +52,18 @@ public class AdminLogAspect {
 
     @Autowired private AdminLogService adminLogService;
 
-    /** 排除敏感属性字段 */
+    /** 排除敏感屬性欄位 */
     public static final String EXCLUDE_PROPERTIES =
             "password,oldPassword,newPassword,confirmPassword,token";
 
-    /** Controller层切点 注解拦截 */
+    /** Controller層切點 註解攔截 */
     @Pointcut("@annotation(xyz.playedu.common.annotation.Log)")
     public void logPointCut() {}
 
     /**
-     * 处理完请求后执行
+     * 處理完請求後執行
      *
-     * @param joinPoint 切点
+     * @param joinPoint 切點
      */
     @AfterReturning(pointcut = "logPointCut()", returning = "jsonResult")
     public void doAfterReturning(JoinPoint joinPoint, Object jsonResult) {
@@ -71,10 +71,10 @@ public class AdminLogAspect {
     }
 
     /**
-     * 拦截异常操作
+     * 攔截異常操作
      *
-     * @param joinPoint 切点
-     * @param e 异常
+     * @param joinPoint 切點
+     * @param e 異常
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
@@ -83,7 +83,7 @@ public class AdminLogAspect {
 
     protected void handleLog(final JoinPoint joinPoint, final Exception e, Object jsonResult) {
         try {
-            // 获取注解信息
+            // 獲取註解信息
             Log controllerLog = getAnnotationLog(joinPoint);
             if (null == controllerLog) {
                 return;
@@ -94,7 +94,7 @@ public class AdminLogAspect {
                 return;
             }
 
-            // 日志
+            // 日誌
             AdminLog adminLog = new AdminLog();
             adminLog.setAdminId(adminUser.getId());
             adminLog.setAdminName(adminUser.getName());
@@ -102,7 +102,7 @@ public class AdminLogAspect {
             adminLog.setTitle(controllerLog.title());
             adminLog.setOpt(controllerLog.businessType().ordinal());
 
-            // 设置方法名称
+            // 設置方法名稱
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
             adminLog.setMethod(className + "." + methodName + "()");
@@ -139,15 +139,15 @@ public class AdminLogAspect {
                 adminLog.setErrorMsg(e.getMessage());
             }
             adminLog.setCreatedAt(new Date());
-            // 保存数据库
+            // 保存資料庫
             adminLogService.save(adminLog);
         } catch (Exception exp) {
-            // 记录本地异常日志
-            log.error("异常信息:" + exp.getMessage(), e);
+            // 記錄本地異常日誌
+            log.error("異常信息:" + exp.getMessage(), e);
         }
     }
 
-    /** 是否存在注解，如果存在就获取 */
+    /** 是否存在註解，如果存在就獲取 */
     private Log getAnnotationLog(JoinPoint joinPoint) throws Exception {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
@@ -160,18 +160,18 @@ public class AdminLogAspect {
 
     public JSONObject excludeProperties(String jsonData) {
         JSONObject jsonObjectResult = new JSONObject();
-        // 把传入String类型转换成JSONObject对象
+        // 把傳入String類型轉換成JSONObject對象
         if (JSONUtil.isTypeJSONObject(jsonData)) {
             JSONObject jsonObject = JSONUtil.parseObj(jsonData);
             for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
                 if (StringUtil.isNotNull(value)) {
-                    // 如果value依旧是json类型的话继续递归解析
+                    // 如果value依舊是json類型的話繼續遞歸解析
                     if (JSONUtil.isTypeJSONObject(value.toString())) {
                         jsonObjectResult.put(key, excludeProperties(entry.getValue().toString()));
                     } else {
-                        // 如果value是单纯的数据,执行脱敏操作
+                        // 如果value是單純的數據,執行脫敏操作
                         if (EXCLUDE_PROPERTIES.contains(key)) {
                             jsonObjectResult.put(key, SystemConstant.CONFIG_MASK);
                         } else {

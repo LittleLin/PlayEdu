@@ -39,19 +39,19 @@ export const HourCompenent: React.FC<PropInterface> = ({
         <div className={styles["top-item"]}>
           <div className="d-flex">
             <i className="iconfont icon-icon-video"></i>
-            <span className={styles["label"]}>视频</span>
+            <span className={styles["label"]}>影片</span>
           </div>
           {userProgress > 0 && userProgress < 100 && (
             <div className={styles["studying"]}>
               <span>
-                学习到
+                學習到
                 {durationFormat(Number(record.finished_duration || 0))}
               </span>
             </div>
           )}
           {userProgress >= 100 && (
             <div className={styles["complete"]}>
-              <span>已学完</span>{" "}
+              <span>已學完</span>{" "}
             </div>
           )}
         </div>

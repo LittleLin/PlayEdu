@@ -12,7 +12,7 @@ const ErrorPage = () => {
     <Result
       status="404"
       title={status}
-      subTitle="您访问的页面不存在"
+      subTitle="您訪問的頁面不存在"
       className={styles["main"]}
       extra={
         <Button
@@ -21,7 +21,7 @@ const ErrorPage = () => {
             navigate("/", { replace: true });
           }}
         >
-          返回首页
+          返回首頁
         </Button>
       }
     />

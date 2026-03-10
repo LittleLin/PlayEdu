@@ -41,14 +41,14 @@ const SystemAdministratorPage = () => {
   const [updateRoleVisible, setUpdateRoleVisible] = useState(false);
   const [cid, setCid] = useState(0);
   const [role_ids, setRoleIds] = useState<number[]>([]);
-  const [selLabel, setLabel] = useState("全部管理员");
+  const [selLabel, setLabel] = useState("全部管理員");
   const [roleDelSuccess, setRoleDelSuccess] = useState(false);
   const [isSuper, setIsSuper] = useState(false);
   const [name, setName] = useState("");
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "管理员",
+      title: "管理員",
       dataIndex: "name",
       render: (text: string) => <span>{text}</span>,
     },
@@ -73,21 +73,21 @@ const SystemAdministratorPage = () => {
       ),
     },
     {
-      title: "登录邮箱",
+      title: "登入電子郵件",
       dataIndex: "email",
     },
     {
-      title: "登录IP",
+      title: "登入IP",
       dataIndex: "login_ip",
       render: (text: string) => <span>{text}</span>,
     },
     {
-      title: "上次登录时间",
+      title: "上次登入時間",
       dataIndex: "login_at",
       render: (text: string) => <span>{text && dateFormat(text)}</span>,
     },
     {
-      title: "禁止登录",
+      title: "禁止登入",
       dataIndex: "is_ban_login",
       render: (text: number) =>
         text === 0 ? <span>否</span> : <span>是</span>,
@@ -101,7 +101,7 @@ const SystemAdministratorPage = () => {
         <Space size="small">
           <PerButton
             type="link"
-            text="编辑"
+            text="編輯"
             class="b-link c-red"
             icon={null}
             p="admin-user-cud"
@@ -114,7 +114,7 @@ const SystemAdministratorPage = () => {
           <div className="form-column"></div>
           <PerButton
             type="link"
-            text="删除"
+            text="刪除"
             class="b-link c-red"
             icon={null}
             p="admin-user-cud"
@@ -150,11 +150,11 @@ const SystemAdministratorPage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -168,11 +168,11 @@ const SystemAdministratorPage = () => {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此人员？",
+      content: "確認刪除此人員？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         adminUser.destroyAdminUser(id).then((res: any) => {
@@ -191,11 +191,11 @@ const SystemAdministratorPage = () => {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除此角色会同时删除管理员对应关联权限，确认删除？",
+      content: "刪除此角色會同時刪除管理員對應關聯權限，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         adminRole.destroyAdminRole(role_ids[0]).then((res: any) => {
@@ -218,7 +218,7 @@ const SystemAdministratorPage = () => {
             roleDelSuccess={roleDelSuccess}
             refresh={refresh}
             type=""
-            text={"管理员"}
+            text={"管理員"}
             onUpdate={(keys: any, title: any, isSuper: boolean) => {
               setRoleIds(keys);
               setLabel(title);
@@ -234,7 +234,7 @@ const SystemAdministratorPage = () => {
             <div className="d-flex">
               <PerButton
                 type="primary"
-                text="添加管理员"
+                text="添加管理員"
                 class="mr-16"
                 icon={<PlusOutlined />}
                 p="admin-user-cud"
@@ -243,7 +243,7 @@ const SystemAdministratorPage = () => {
               />
               {role_ids.length === 0 && (
                 <PerButton
-                  text="新建角色"
+                  text="新增角色"
                   icon={null}
                   class="mr-16"
                   type="default"
@@ -255,7 +255,7 @@ const SystemAdministratorPage = () => {
               {!isSuper && role_ids.length > 0 && (
                 <>
                   <PerButton
-                    text="角色权限"
+                    text="角色權限"
                     icon={null}
                     class="mr-16"
                     type="default"
@@ -266,7 +266,7 @@ const SystemAdministratorPage = () => {
                     disabled={null}
                   />
                   <PerButton
-                    text="删除角色"
+                    text="刪除角色"
                     icon={null}
                     class="mr-16"
                     type="default"
@@ -281,7 +281,7 @@ const SystemAdministratorPage = () => {
             </div>
             <div className="d-flex">
               <div className="d-flex mr-24">
-                <Typography.Text>管理员姓名：</Typography.Text>
+                <Typography.Text>管理員姓名：</Typography.Text>
                 <Input
                   value={name}
                   onChange={(e) => {
@@ -289,7 +289,7 @@ const SystemAdministratorPage = () => {
                   }}
                   allowClear
                   style={{ width: 160 }}
-                  placeholder="请输入管理员姓名"
+                  placeholder="請輸入管理員姓名"
                 />
               </div>
               <div className="d-flex">
@@ -303,7 +303,7 @@ const SystemAdministratorPage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

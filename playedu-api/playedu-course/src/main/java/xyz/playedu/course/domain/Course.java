@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,28 +35,28 @@ public class Course implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 课程标题 */
+    /** 課程標題 */
     private String title;
 
-    /** 课程封面 */
+    /** 課程封面 */
     private Integer thumb;
 
-    /** 课程价格(分) */
+    /** 課程價格(分) */
     private Integer charge;
 
-    /** 课程简介 */
+    /** 課程簡介 */
     @JsonProperty("short_desc")
     private String shortDesc;
 
-    /** 1:必修,0:选修 */
+    /** 1:必修,0:選修 */
     @JsonProperty("is_required")
     private Integer isRequired;
 
-    /** 课时数 */
+    /** 課時數 */
     @JsonProperty("class_hour")
     private Integer classHour;
 
-    /** 显示[1:是,0:否] */
+    /** 顯示[1:是,0:否] */
     @JsonProperty("is_show")
     private Integer isShow;
 
@@ -66,10 +66,10 @@ public class Course implements Serializable {
     @JsonProperty("sort_at")
     private Date sortAt;
 
-    /** 其它规则[课程设置] */
+    /** 其它規則[課程設置] */
     private String extra;
 
-    /** 管理员ID */
+    /** 管理員ID */
     @JsonProperty("admin_id")
     private Integer adminId;
 

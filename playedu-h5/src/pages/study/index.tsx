@@ -18,7 +18,7 @@ const StudyPage = () => {
   const [resourceUrl, setResourceUrl] = useState<ResourceUrlModel>({});
 
   useEffect(() => {
-    document.title = "最近学习";
+    document.title = "最近學習";
   }, []);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const StudyPage = () => {
 
   return (
     <div className="main-body">
-      <div className={styles["title"]}>最近学习</div>
+      <div className={styles["title"]}>最近學習</div>
       <div className="float-left" style={{ position: "relative" }}>
         <PullToRefresh
           onRefresh={async () => {

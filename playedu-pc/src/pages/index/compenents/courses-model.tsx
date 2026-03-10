@@ -38,9 +38,9 @@ export const CoursesModel: React.FC<PropInterface> = ({
         />
         <div className={styles["info"]}>
           <div className={styles["title"]}>{title}</div>
-          {isRequired === 1 && <div className={styles["type"]}>必修课</div>}
+          {isRequired === 1 && <div className={styles["type"]}>必修課</div>}
           {isRequired === 0 && (
-            <div className={styles["active-type"]}>选修课</div>
+            <div className={styles["active-type"]}>選修課</div>
           )}
         </div>
       </div>
@@ -54,7 +54,7 @@ export const CoursesModel: React.FC<PropInterface> = ({
               trailColor="#F6F6F6"
               showInfo={false}
             />
-            <span>未学习</span>
+            <span>未學習</span>
           </>
         )}
         {progress > 0 && progress < 100 && (
@@ -73,7 +73,7 @@ export const CoursesModel: React.FC<PropInterface> = ({
               src={mediaIcon}
               preview={false}
             />
-            <span className="ml-8">恭喜你学完此课程!</span>
+            <span className="ml-8">恭喜你學完此課程!</span>
           </div>
         )}
       </div>

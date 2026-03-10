@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class SystemConstant {
 
     public static final String INTERNAL_IP = "127.0.0.1";
 
-    public static final String INTERNAL_IP_AREA = "内网";
+    public static final String INTERNAL_IP_AREA = "內網";
 
     public static final String CONFIG_MASK = "********";
 }

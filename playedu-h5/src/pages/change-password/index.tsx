@@ -13,31 +13,31 @@ const ChangePasswordPage = () => {
   const [againPassword, setAgainPassword] = useState("");
 
   useEffect(() => {
-    document.title = "修改密码";
+    document.title = "修改密碼";
   }, []);
 
   const onFinish = () => {
     if (!oldPassword) {
       Toast.show({
-        content: "请输入原密码",
+        content: "請輸入原密碼",
       });
       return;
     }
     if (!newPassword) {
       Toast.show({
-        content: "请输入新密码",
+        content: "請輸入新密碼",
       });
       return;
     }
     if (!againPassword) {
       Toast.show({
-        content: "再次输入新密码",
+        content: "再次輸入新密碼",
       });
       return;
     }
     if (againPassword !== newPassword) {
       Toast.show({
-        content: "再次输入的新密码错误",
+        content: "再次輸入的新密碼錯誤",
       });
       return;
     }
@@ -56,7 +56,7 @@ const ChangePasswordPage = () => {
       .password(oldPassword, newPassword)
       .then((res: any) => {
         Toast.show({
-          content: "修改密码成功",
+          content: "修改密碼成功",
         });
         navigate(-1);
       })
@@ -73,7 +73,7 @@ const ChangePasswordPage = () => {
           src={backIcon}
           onClick={() => navigate(-1)}
         />
-        <div className="main-title">修改密码</div>
+        <div className="main-title">修改密碼</div>
       </div>
       <div className={styles["form-box"]}>
         <div className={styles["input-box"]}>
@@ -81,7 +81,7 @@ const ChangePasswordPage = () => {
             <Input
               type="password"
               className={styles["input-item"]}
-              placeholder="请输入原密码"
+              placeholder="請輸入原密碼"
               value={oldPassword}
               onChange={(val) => {
                 setOldPassword(val);
@@ -91,7 +91,7 @@ const ChangePasswordPage = () => {
             <Input
               type="password"
               className={styles["input-item"]}
-              placeholder="请输入新密码"
+              placeholder="請輸入新密碼"
               value={newPassword}
               onChange={(val) => {
                 setNewPassword(val);
@@ -103,7 +103,7 @@ const ChangePasswordPage = () => {
           <Input
             type="password"
             className={styles["input-item"]}
-            placeholder="请再次输入新密码"
+            placeholder="請再次輸入新密碼"
             value={againPassword}
             onChange={(val) => {
               setAgainPassword(val);
@@ -120,7 +120,7 @@ const ChangePasswordPage = () => {
             loading={loading}
             onClick={onFinish}
           >
-            确认修改
+            確認修改
           </Button>
         </div>
       </div>

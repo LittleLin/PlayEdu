@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class ResourceUpdateRequest {
 
-    @NotBlank(message = "请输入资源名")
-    @Length(min = 1, max = 254, message = "资源名长度在1-254个字符之间")
+    @NotBlank(message = "請輸入資源名")
+    @Length(min = 1, max = 254, message = "資源名長度在1-254個字符之間")
     private String name;
 
-    @NotNull(message = "category_id参数不存在")
+    @NotNull(message = "category_id參數不存在")
     @JsonProperty("category_id")
     private Integer categoryId;
 }

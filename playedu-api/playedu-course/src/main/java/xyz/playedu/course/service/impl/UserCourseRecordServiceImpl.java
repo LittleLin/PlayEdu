@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import xyz.playedu.course.service.UserCourseRecordService;
 
 /**
  * @author tengteng
- * @description 针对表【user_course_records】的数据库操作Service实现
+ * @description 針對表【user_course_records】的資料庫操作Service實現
  * @createDate 2023-03-20 16:41:04
  */
 @Service
@@ -161,7 +161,7 @@ public class UserCourseRecordServiceImpl
         newRecord.setCreatedAt(record.getCreatedAt());
         newRecord.setUpdatedAt(new Date());
 
-        // 删除老记录
+        // 刪除老記錄
         remove(query().getWrapper().eq("id", record.getId()));
 
         if (0 == finishedCount) {

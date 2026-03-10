@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class IpUtil {
 
     /**
-     * 获取客户端IP
+     * 獲取客戶端IP
      *
      * @return IP地址 (113.67.10.194)
      * @author fzr
@@ -60,10 +60,10 @@ public class IpUtil {
     }
 
     /**
-     * 根据IP获取所在地址
+     * 根據IP獲取所在地址
      *
      * @param ip Ip地址
-     * @return String (广州省-广州市)
+     * @return String (廣州省-廣州市)
      * @author fzr
      */
     public static String getRealAddressByIP(String ip) {
@@ -71,7 +71,7 @@ public class IpUtil {
         String UNKNOWN = "未知";
 
         if (IpUtil.internalIp(ip)) {
-            return "内网";
+            return "內網";
         }
 
         try {
@@ -85,22 +85,22 @@ public class IpUtil {
                                 }
                             });
             if (StringUtil.isEmpty(rspStr)) {
-                log.error("获取地理位置异常1 {}", ip);
+                log.error("獲取地理位置異常1 {}", ip);
                 return UNKNOWN;
             }
             JSONObject json = JSONUtil.parseObj(rspStr);
             return String.format("%s-%s", json.getStr("pro"), json.getStr("city"));
         } catch (Exception e) {
-            log.error("获取地理位置异常2 {} msg {}", ip, e.getMessage());
+            log.error("獲取地理位置異常2 {} msg {}", ip, e.getMessage());
         }
         return UNKNOWN;
     }
 
     /**
-     * 检查是否为内部IP地址
+     * 檢查是否爲內部IP地址
      *
      * @param ip IP地址
-     * @return 结果
+     * @return 結果
      */
     public static boolean internalIp(String ip) {
         byte[] address = textToNumericFormatV4(ip);
@@ -108,10 +108,10 @@ public class IpUtil {
     }
 
     /**
-     * 检查是否为内部IP地址
+     * 檢查是否爲內部IP地址
      *
      * @param address byte地址
-     * @return 结果
+     * @return 結果
      * @author fzr
      */
     private static boolean internalIp(byte[] address) {
@@ -146,10 +146,10 @@ public class IpUtil {
     }
 
     /**
-     * 将IPv4地址转换成字节
+     * 將IPv4地址轉換成字節
      *
      * @param text IPv4地址
-     * @return byte 字节
+     * @return byte 字節
      * @author fzr
      */
     public static byte[] textToNumericFormatV4(String text) {
@@ -221,7 +221,7 @@ public class IpUtil {
     }
 
     /**
-     * 获取IP地址
+     * 獲取IP地址
      *
      * @return 本地IP地址
      * @author fzr
@@ -235,10 +235,10 @@ public class IpUtil {
     }
 
     /**
-     * 从多级反向代理中获得第一个非unknown IP地址
+     * 從多級反向代理中獲得第一個非unknown IP地址
      *
-     * @param ip 获得的IP地址
-     * @return 第一个非unknown IP地址
+     * @param ip 獲得的IP地址
+     * @return 第一個非unknown IP地址
      * @author fzr
      */
     public static String getMultistageReverseProxyIp(String ip) {
@@ -255,9 +255,9 @@ public class IpUtil {
     }
 
     /**
-     * 检测给定字符串是否为未知,多用于检测HTTP请求相关
+     * 檢測給定字符串是否爲未知,多用於檢測HTTP請求相關
      *
-     * @param checkString 被检测的字符串
+     * @param checkString 被檢測的字符串
      * @return 是否未知
      * @author fzr
      */

@@ -138,12 +138,12 @@ const MemberLearnPage = () => {
 
   const minuteFormat = (duration: number) => {
     if (duration === 0) {
-      return "0小时0分0秒";
+      return "0小時0分0秒";
     }
     let h = Math.trunc(duration / 3600);
     let m = Math.trunc((duration % 3600) / 60);
     let s = Math.trunc((duration % 3600) % 60);
-    return h + "小时" + m + "分" + s + "秒";
+    return h + "小時" + m + "分" + s + "秒";
   };
 
   const renderView = (params: any) => {
@@ -159,7 +159,7 @@ const MemberLearnPage = () => {
       tooltip: {
         trigger: "axis",
         formatter: function (params: any) {
-          //  只粘贴formatter了
+          //  只粘貼formatter了
           let relVal = params[0].axisValueLabel;
           for (let i = 0; i < params.length; i++) {
             relVal +=
@@ -173,7 +173,7 @@ const MemberLearnPage = () => {
         },
       },
       legend: {
-        data: ["每日学习时长"],
+        data: ["每日學習時長"],
         x: "right",
       },
       grid: {
@@ -192,7 +192,7 @@ const MemberLearnPage = () => {
       },
       series: [
         {
-          name: "每日学习时长",
+          name: "每日學習時長",
           type: "line",
           data: valueData,
           color: "#ff4d4f",
@@ -237,7 +237,7 @@ const MemberLearnPage = () => {
 
   const column2: ColumnsType<DataType> = [
     {
-      title: "课程名称",
+      title: "課程名稱",
       dataIndex: "title",
       render: (_, record: any) => (
         <div className="d-flex">
@@ -271,12 +271,12 @@ const MemberLearnPage = () => {
       ),
     },
     {
-      title: "课程进度",
+      title: "課程進度",
       dataIndex: "total_duration",
       render: (_, record: any) => (
         <>
           <span>
-            已完成课时：
+            已完成課時：
             {(records[record.id] && records[record.id].finished_count) ||
               0} / {record.class_hour}
           </span>
@@ -284,7 +284,7 @@ const MemberLearnPage = () => {
       ),
     },
     {
-      title: "第一次学习时间",
+      title: "第一次學習時間",
       dataIndex: "created_at",
       render: (_, record: any) => (
         <>
@@ -297,7 +297,7 @@ const MemberLearnPage = () => {
       ),
     },
     {
-      title: "学习完成时间",
+      title: "學習完成時間",
       dataIndex: "finished_at",
       render: (_, record: any) => (
         <>
@@ -310,7 +310,7 @@ const MemberLearnPage = () => {
       ),
     },
     {
-      title: "学习进度",
+      title: "學習進度",
       render: (_, record: any) => (
         <>
           {records[record.id] ? (
@@ -354,7 +354,7 @@ const MemberLearnPage = () => {
             setVisiable(true);
           }}
         >
-          明细
+          明細
         </Button>
       ),
     },
@@ -373,7 +373,7 @@ const MemberLearnPage = () => {
           }}
         ></MemberLearnProgressDialog>
         <div className="float-left mb-24">
-          <BackBartment title={userName + "的学习明细"} />
+          <BackBartment title={userName + "的學習明細"} />
         </div>
         <div className={styles["charts"]}>
           <div
@@ -388,11 +388,11 @@ const MemberLearnPage = () => {
         <div className="float-left mt-24">
           {list2.length > 1 && (
             <div className="d-flex mb-24">
-              <span>切换部门：</span>
+              <span>切換部門：</span>
               <Select
                 style={{ width: 160 }}
                 allowClear
-                placeholder="请选择部门"
+                placeholder="請選擇部門"
                 value={String(depValue)}
                 onChange={(value: string) => setDepValue(Number(value))}
                 options={deps}

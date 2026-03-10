@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class LoginLimitCache {
         Long reqCount = rateLimiterService.current(limitKey, 600L);
         if (reqCount >= 10 && !playEduConfig.getTesting()) {
             Long exp = MemoryCacheUtil.ttlWithoutPrefix(limitKey);
-            String msg = String.format("您的账号已被锁定，请%s后重试", exp > 60 ? exp / 60 + "分钟" : exp + "秒");
+            String msg = String.format("您的帳號已被鎖定，請%s後重試", exp > 60 ? exp / 60 + "分鐘" : exp + "秒");
             throw new ServiceException(msg);
         }
     }

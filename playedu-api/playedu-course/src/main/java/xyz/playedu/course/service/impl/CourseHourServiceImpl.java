@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import xyz.playedu.course.service.CourseHourService;
 
 /**
  * @author tengteng
- * @description 针对表【course_hour】的数据库操作Service实现
+ * @description 針對表【course_hour】的資料庫操作Service實現
  * @createDate 2023-03-15 10:16:45
  */
 @Service
@@ -38,7 +38,7 @@ public class CourseHourServiceImpl extends ServiceImpl<CourseHourMapper, CourseH
     public CourseHour findOrFail(Integer id, Integer courseId) throws NotFoundException {
         CourseHour hour = getOne(query().getWrapper().eq("id", id).eq("course_id", courseId));
         if (hour == null) {
-            throw new NotFoundException("课时不存在");
+            throw new NotFoundException("課時不存在");
         }
         return hour;
     }

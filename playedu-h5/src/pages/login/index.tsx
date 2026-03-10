@@ -22,7 +22,7 @@ const LoginPage = () => {
   const systemConfig = useSelector((state: any) => state.systemConfig.value);
 
   useEffect(() => {
-    document.title = "登录";
+    document.title = "登入";
     let value = document.documentElement.clientHeight;
     setBodyHeight(value);
   }, []);
@@ -30,13 +30,13 @@ const LoginPage = () => {
   const loginSubmit = async (e: any) => {
     if (!email) {
       Toast.show({
-        content: "请输入邮箱或UID",
+        content: "請輸入電子郵件或UID",
       });
       return;
     }
     if (!password) {
       Toast.show({
-        content: "请输入密码",
+        content: "請輸入密碼",
       });
       return;
     }
@@ -51,25 +51,25 @@ const LoginPage = () => {
     if (systemConfig["ldap-enabled"] === "1") {
       try {
         let res: any = await login.loginLdap(email, password);
-        setToken(res.data.token); //将token写入本地
-        await getSystemConfig(); //获取系统配置并写入store
-        await getUser(); //获取登录用户的信息并写入store
+        setToken(res.data.token); //將token寫入本地
+        await getSystemConfig(); //獲取系統設定並寫入store
+        await getUser(); //獲取登入使用者的信息並寫入store
         setLoading(false);
         navigate("/member", { replace: true });
       } catch (e) {
-        console.error("错误信息", e);
+        console.error("錯誤信息", e);
         setLoading(false);
       }
     }else{
       try {
         let res: any = await login.login(email, password);
-        setToken(res.data.token); //将token写入本地
-        await getSystemConfig(); //获取系统配置并写入store
-        await getUser(); //获取登录用户的信息并写入store
+        setToken(res.data.token); //將token寫入本地
+        await getSystemConfig(); //獲取系統設定並寫入store
+        await getUser(); //獲取登入使用者的信息並寫入store
         setLoading(false);
         navigate("/member", { replace: true });
       } catch (e) {
-        console.error("错误信息", e);
+        console.error("錯誤信息", e);
         setLoading(false);
       }
     }
@@ -85,7 +85,7 @@ const LoginPage = () => {
     let configRes: any = await system.config();
     if (configRes.data) {
       let config: SystemConfigStoreInterface = {
-        //系统配置
+        //系統設定
         "ldap-enabled": configRes.data["ldap-enabled"],
         systemH5Url: configRes.data["system-h5-url"],
         systemLogo: configRes.data["system-logo"],
@@ -93,7 +93,7 @@ const LoginPage = () => {
         systemPcUrl: configRes.data["system-pc-url"],
         resourceUrl: configRes.data["resource_url"],
         pcIndexFooterMsg: configRes.data["system-pc-index-footer-msg"],
-        //播放器配置
+        //播放器設定
         playerPoster: configRes.data["player-poster"],
         playerIsEnabledBulletSecret:
           configRes.data["player-is-enabled-bullet-secret"] &&
@@ -120,14 +120,14 @@ const LoginPage = () => {
       style={{ height: bodyHeight + "px" }}
     >
       <div className={styles["top-content"]}>
-        <div className={styles["title"]}>学员登录</div>
+        <div className={styles["title"]}>學員登入</div>
         <Image src={banner} width={150} height={150} />
       </div>
       <div className={styles["form-box"]}>
         <div className={styles["input-box"]}>
           <Input
             className={styles["input-item"]}
-            placeholder="请输入邮箱或UID"
+            placeholder="請輸入電子郵件或UID"
             value={email}
             onChange={(val) => {
               setEmail(val);
@@ -137,7 +137,7 @@ const LoginPage = () => {
           <Input
             type="password"
             className={styles["input-item"]}
-            placeholder="请输入密码"
+            placeholder="請輸入密碼"
             value={password}
             onChange={(val) => {
               setPassword(val);
@@ -152,7 +152,7 @@ const LoginPage = () => {
             loading={loading}
             onClick={loginSubmit}
           >
-            登 录
+            登 入
           </Button>
         </div>
       </div>

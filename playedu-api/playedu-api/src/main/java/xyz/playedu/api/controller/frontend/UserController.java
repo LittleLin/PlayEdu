@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,7 +87,7 @@ public class UserController {
         data.put("user", user);
         data.put("departments", departments);
 
-        // 获取资源签名url
+        // 獲取資源簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -102,14 +102,14 @@ public class UserController {
 
     @PutMapping("/avatar")
     public JsonResponse changeAvatar(MultipartFile file) {
-        // 校验存储配置是否完整
+        // 校驗存儲設定是否完整
         S3Config s3Config = appConfigService.getS3Config();
         if (StringUtil.isEmpty(s3Config.getAccessKey())
                 || StringUtil.isEmpty(s3Config.getSecretKey())
                 || StringUtil.isEmpty(s3Config.getBucket())
                 || StringUtil.isEmpty(s3Config.getEndpoint())
                 || StringUtil.isEmpty(s3Config.getRegion())) {
-            throw new ServiceException("存储服务未配置");
+            throw new ServiceException("存儲服務未設定");
         }
 
         UploadFileInfo info = uploadService.upload(s3Config, file, null);
@@ -127,10 +127,10 @@ public class UserController {
                         CommonConstant.ZERO,
                         CommonConstant.ONE);
 
-        // 学员头像
+        // 學員頭像
         userService.changeAvatar(FCtx.getId(), resource.getId());
 
-        // 学员上传图片记录
+        // 學員上傳圖片記錄
         UserUploadImageLog log = new UserUploadImageLog();
         log.setUserId(FCtx.getId());
         log.setTyped(FrontendConstant.USER_UPLOAD_IMAGE_TYPE_AVATAR);
@@ -157,23 +157,23 @@ public class UserController {
     public JsonResponse courses(@RequestParam HashMap<String, Object> params) {
         Integer depId = MapUtils.getInteger(params, "dep_id");
         if (depId == null || depId == 0) {
-            return JsonResponse.error("请选择部门");
+            return JsonResponse.error("請選擇部門");
         }
 
         Integer categoryId = MapUtils.getInteger(params, "category_id");
 
         List<Integer> userJoinDepIds = userService.getDepIdsByUserId(FCtx.getId());
         if (userJoinDepIds == null) {
-            return JsonResponse.error("当前学员未加入任何部门");
+            return JsonResponse.error("當前學員未加入任何部門");
         }
         if (!userJoinDepIds.contains(depId)) {
-            return JsonResponse.error("当前学员未加入所选择部门");
+            return JsonResponse.error("當前學員未加入所選擇部門");
         }
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("learn_course_records", new HashMap<>());
 
-        // 查询所有的父级部门ID
+        // 查詢所有的父級部門ID
         List<Integer> allDepIds = new ArrayList<>();
         allDepIds.add(depId);
         Department department = departmentService.findOrFail(depId);
@@ -186,11 +186,11 @@ public class UserController {
             }
         }
 
-        // 获取所有子分类ID
+        // 獲取所有子分類ID
         List<Integer> allCategoryIds = new ArrayList<>();
         if (categoryId != null && categoryId > 0) {
             allCategoryIds.add(categoryId);
-            // 查询所有的子分类
+            // 查詢所有的子分類
             List<Category> categoryList = categoryService.getChildCategorysByParentId(categoryId);
             if (StringUtil.isNotEmpty(categoryList)) {
                 for (Category category : categoryList) {
@@ -199,20 +199,20 @@ public class UserController {
             }
         }
 
-        // -------- 读取当前学员可以参加的课程 ----------
+        // -------- 讀取當前學員可以參加的課程 ----------
         List<Course> courses = new ArrayList<>();
-        // 读取部门课
+        // 讀取部門課
         List<Course> depCourses = courseService.getDepCoursesAndShow(allDepIds, allCategoryIds);
-        // 全部部门课
+        // 全部部門課
         List<Course> openCourses = courseService.getOpenCoursesAndShow(500, allCategoryIds);
-        // 汇总到一个list中
+        // 彙總到一個list中
         if (depCourses != null && !depCourses.isEmpty()) {
             courses.addAll(depCourses);
         }
         if (openCourses != null && !openCourses.isEmpty()) {
             courses.addAll(openCourses);
         }
-        // 对结果进行排序->按照课程id倒序
+        // 對結果進行排序->按照課程id倒序
         if (!courses.isEmpty()) {
             courses =
                     courses.stream()
@@ -228,7 +228,7 @@ public class UserController {
 
         List<Integer> courseIds = courses.stream().map(Course::getId).toList();
 
-        // -------- 读取学习进度 ----------
+        // -------- 讀取學習進度 ----------
         Map<Integer, UserCourseRecord> learnCourseRecords = new HashMap<>();
         if (!courses.isEmpty()) {
             learnCourseRecords =
@@ -239,17 +239,17 @@ public class UserController {
 
         int requiredCourseCount = 0;
         int nunRequiredCourseCount = 0;
-        int requiredFinishedCourseCount = 0; // 已完成必修课
-        int nunRequiredFinishedCourseCount = 0; // 已完成选修课
-        int requiredHourCount = 0; // 必修课时
-        int nunRequiredHourCount = 0; // 选修课时
-        int requiredFinishedHourCount = 0; // 已完成必修课时
-        int nunRequiredFinishedHourCount = 0; // 已完成选修课时
+        int requiredFinishedCourseCount = 0; // 已完成必修課
+        int nunRequiredFinishedCourseCount = 0; // 已完成選修課
+        int requiredHourCount = 0; // 必修課時
+        int nunRequiredHourCount = 0; // 選修課時
+        int requiredFinishedHourCount = 0; // 已完成必修課時
+        int nunRequiredFinishedHourCount = 0; // 已完成選修課時
         Long todayLearnDuration =
-                userLearnDurationStatsService.todayUserDuration(FCtx.getId()); // 今日学习时长
-        Long learnDuration = userLearnDurationStatsService.userDuration(FCtx.getId()); // 学习总时长
+                userLearnDurationStatsService.todayUserDuration(FCtx.getId()); // 今日學習時長
+        Long learnDuration = userLearnDurationStatsService.userDuration(FCtx.getId()); // 學習總時長
 
-        // -------- 学习数据统计 ----------
+        // -------- 學習數據統計 ----------
         if (!courses.isEmpty()) {
             for (Course courseItem : courses) {
                 if (courseItem.getIsRequired() == 1) {
@@ -277,20 +277,20 @@ public class UserController {
             }
         }
         HashMap<String, Object> stats = new HashMap<>();
-        stats.put("required_course_count", requiredCourseCount); // 必修课数量
-        stats.put("nun_required_course_count", nunRequiredCourseCount); // 选修课数量
-        stats.put("required_finished_course_count", requiredFinishedCourseCount); // 必修已完成线上课数
+        stats.put("required_course_count", requiredCourseCount); // 必修課數量
+        stats.put("nun_required_course_count", nunRequiredCourseCount); // 選修課數量
+        stats.put("required_finished_course_count", requiredFinishedCourseCount); // 必修已完成線上課數
         stats.put(
-                "nun_required_finished_course_count", nunRequiredFinishedCourseCount); // 选修已完成线上课数
-        stats.put("required_hour_count", requiredHourCount); // 必修课时总数
-        stats.put("nun_required_hour_count", nunRequiredHourCount); // 选修课时总数
-        stats.put("required_finished_hour_count", requiredFinishedHourCount); // 必修已完成课时数
-        stats.put("nun_required_finished_hour_count", nunRequiredFinishedHourCount); // 选修已完成课时数
-        stats.put("today_learn_duration", todayLearnDuration); // 今日学习时长[单位:毫秒]
-        stats.put("learn_duration", learnDuration); // 学习总时长[单位:毫秒]
+                "nun_required_finished_course_count", nunRequiredFinishedCourseCount); // 選修已完成線上課數
+        stats.put("required_hour_count", requiredHourCount); // 必修課時總數
+        stats.put("nun_required_hour_count", nunRequiredHourCount); // 選修課時總數
+        stats.put("required_finished_hour_count", requiredFinishedHourCount); // 必修已完成課時數
+        stats.put("nun_required_finished_hour_count", nunRequiredFinishedHourCount); // 選修已完成課時數
+        stats.put("today_learn_duration", todayLearnDuration); // 今日學習時長[單位:毫秒]
+        stats.put("learn_duration", learnDuration); // 學習總時長[單位:毫秒]
         data.put("stats", stats);
 
-        // 当前学员每个线上课的学习课时数量(只要学习了就算，不一定需要完成)
+        // 當前學員每個線上課的學習課時數量(只要學習了就算，不一定需要完成)
         data.put(
                 "user_course_hour_count",
                 userCourseHourRecordService
@@ -301,7 +301,7 @@ public class UserController {
                                         UserCourseHourRecordCourseCountMapper::getCourseId,
                                         UserCourseHourRecordCourseCountMapper::getTotal)));
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -311,7 +311,7 @@ public class UserController {
 
     @GetMapping("/latest-learn")
     public JsonResponse latestLearn() {
-        // 读取当前学员最近100条学习的线上课
+        // 讀取當前學員最近100條學習的線上課
         List<UserCourseHourRecord> userCourseHourRecords =
                 userCourseHourRecordService.getLatestCourseIds(FCtx.getId(), 100);
         if (userCourseHourRecords == null || userCourseHourRecords.isEmpty()) {
@@ -332,7 +332,7 @@ public class UserController {
                                         UserCourseHourRecord::getCourseId,
                                         UserCourseHourRecord::getHourId));
 
-        // 线上课
+        // 線上課
         Map<Integer, Course> courses =
                 courseService
                         .chunks(
@@ -350,23 +350,23 @@ public class UserController {
                         .stream()
                         .collect(Collectors.toMap(Course::getId, e -> e));
 
-        // 线上课课时
+        // 線上課課時
         Map<Integer, CourseHour> hours =
                 hourService.chunk(hourIds).stream()
                         .collect(Collectors.toMap(CourseHour::getId, e -> e));
 
-        // 获取学员的线上课进度
+        // 獲取學員的線上課進度
         Map<Integer, UserCourseRecord> records =
                 userCourseRecordService.chunk(FCtx.getId(), courseIds).stream()
                         .collect(Collectors.toMap(UserCourseRecord::getCourseId, e -> e));
         List<UserLatestLearn> userLatestLearns = new ArrayList<>();
         List<Integer> rids = new ArrayList<>();
         for (Integer courseId : courseIds) {
-            UserCourseRecord record = records.get(courseId); // 线上课学习进度
-            Course tmpCourse = courses.get(courseId); // 线上课
-            Integer tmpHourId = course2hour.get(courseId); // 最近学习的课时id
-            UserCourseHourRecord tmpUserCourseHourRecord = hour2Record.get(tmpHourId); // 课时学习进度
-            CourseHour tmpHour = hours.get(tmpHourId); // 课时
+            UserCourseRecord record = records.get(courseId); // 線上課學習進度
+            Course tmpCourse = courses.get(courseId); // 線上課
+            Integer tmpHourId = course2hour.get(courseId); // 最近學習的課時id
+            UserCourseHourRecord tmpUserCourseHourRecord = hour2Record.get(tmpHourId); // 課時學習進度
+            CourseHour tmpHour = hours.get(tmpHourId); // 課時
 
             if (StringUtil.isNotNull(tmpCourse)) {
                 rids.add(tmpCourse.getThumb());
@@ -385,7 +385,7 @@ public class UserController {
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("user_latest_learns", userLatestLearns);
-        // 获取签名url
+        // 獲取簽名url
         data.put("resource_url", resourceService.chunksPreSignUrlByIds(rids));
 
         return JsonResponse.data(data);

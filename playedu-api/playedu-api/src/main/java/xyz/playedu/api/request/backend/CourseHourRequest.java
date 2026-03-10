@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,29 +21,29 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/26 18:00
  */
 @Data
 public class CourseHourRequest {
 
-    @NotNull(message = "chapter_id参数不存在")
+    @NotNull(message = "chapter_id參數不存在")
     @JsonProperty("chapter_id")
     private Integer chapterId;
 
-    @NotBlank(message = "请输入课时标题")
+    @NotBlank(message = "請輸入課時標題")
     private String title;
 
-    @NotNull(message = "duration参数不存在")
+    @NotNull(message = "duration參數不存在")
     private Integer duration;
 
-    @NotNull(message = "sort参数不存在")
+    @NotNull(message = "sort參數不存在")
     private Integer sort;
 
-    @NotBlank(message = "请选择课时类型")
+    @NotBlank(message = "請選擇課時類型")
     private String type;
 
-    @NotNull(message = "rid参数不存在")
+    @NotNull(message = "rid參數不存在")
     private Integer rid;
 }

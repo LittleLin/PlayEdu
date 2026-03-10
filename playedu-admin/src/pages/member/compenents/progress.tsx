@@ -57,7 +57,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
 
   const column: ColumnsType<DataType> = [
     {
-      title: "课时标题",
+      title: "課時標題",
       dataIndex: "title",
       render: (title: string) => (
         <>
@@ -66,7 +66,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
       ),
     },
     {
-      title: "总时长",
+      title: "總時長",
       dataIndex: "duration",
       render: (duration: number) => (
         <>
@@ -75,7 +75,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
       ),
     },
     {
-      title: "已学习时长",
+      title: "已學習時長",
       dataIndex: "finished_duration",
       render: (_, record: any) => (
         <>
@@ -92,22 +92,22 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
       ),
     },
     {
-      title: "是否学完",
+      title: "是否學完",
       dataIndex: "is_finished",
       render: (_, record: any) => (
         <>
           {records &&
           records[record.id] &&
           records[record.id].is_finished === 1 ? (
-            <span className="c-green">已学完</span>
+            <span className="c-green">已學完</span>
           ) : (
-            <span className="c-red">未学完</span>
+            <span className="c-red">未學完</span>
           )}
         </>
       ),
     },
     {
-      title: "开始时间",
+      title: "開始時間",
       dataIndex: "created_at",
       render: (_, record: any) => (
         <>
@@ -120,7 +120,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
       ),
     },
     {
-      title: "学完时间",
+      title: "學完時間",
       dataIndex: "finished_at",
       render: (_, record: any) => (
         <>
@@ -160,11 +160,11 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
 
   const clearProgress = () => {
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认重置此课程下所有课时的学习记录？",
+      content: "確認重置此課程下所有課時的學習記錄？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         member.destroyAllUserLearned(uid, id).then((res: any) => {
@@ -183,11 +183,11 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认重置此课时的学习记录？",
+      content: "確認重置此課時的學習記錄？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         member.destroyUserLearned(uid, id, hour_id).then((res: any) => {
@@ -205,7 +205,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="课时学习进度"
+          title="課時學習進度"
           centered
           forceRender
           open={true}
@@ -218,7 +218,7 @@ export const MemberLearnProgressDialog: React.FC<PropInterface> = ({
           <div className="mt-24">
             <PerButton
               type="primary"
-              text="重置学习记录"
+              text="重置學習記錄"
               class="c-white"
               icon={null}
               p="user-learn-destroy"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,10 +40,10 @@ public class ResourceExtra implements Serializable {
     /** 封面 */
     private Integer poster;
 
-    /** 音频时长[s] */
+    /** 音訊時長[s] */
     private Integer duration;
 
-    /** 创建时间 */
+    /** 建立時間 */
     @JsonProperty("created_at")
     private Date createdAt;
 

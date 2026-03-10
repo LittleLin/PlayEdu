@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ import xyz.playedu.course.service.UserCourseRecordService;
 import xyz.playedu.resource.service.ResourceService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/24 16:08
  */
@@ -72,7 +72,7 @@ public class CourseUserController {
     @BackendPermission(slug = BPermissionConstant.COURSE_USER)
     @GetMapping("/index")
     @SneakyThrows
-    @Log(title = "线上课-学习记录-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-學習記錄-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestParam HashMap<String, Object> params) {
@@ -92,15 +92,15 @@ public class CourseUserController {
         filter.setSortField(sortField);
         filter.setIdCard(idCard);
 
-        // 所属部门
-        if (depId != null && depId > 0) { // 设置过滤部门
+        // 所屬部門
+        if (depId != null && depId > 0) { // 設置過濾部門
             filter.setDepIds(
                     new ArrayList<>() {
                         {
                             add(depId);
                         }
                     });
-        } else { // 默认读取课程关联的全部部门
+        } else { // 預設讀取課程關聯的全部部門
             List<Integer> depIds = courseService.getDepIdsByCourseId(courseId);
             if (depIds != null && !depIds.isEmpty()) {
                 filter.setDepIds(depIds);
@@ -142,7 +142,7 @@ public class CourseUserController {
                 userService.getDepIdsGroup(result.getData().stream().map(User::getId).toList()));
         data.put("departments", departmentService.id2name());
 
-        // 获取每个学员的最早学习时间
+        // 獲取每個學員的最早學習時間
         List<UserCourseHourRecord> perUserEarliestRecords =
                 userCourseHourRecordService.getCoursePerUserEarliestRecord(courseId);
         data.put(
@@ -150,7 +150,7 @@ public class CourseUserController {
                 perUserEarliestRecords.stream()
                         .collect(Collectors.toMap(UserCourseHourRecord::getUserId, e -> e)));
 
-        // 获取签名url
+        // 獲取簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -160,12 +160,12 @@ public class CourseUserController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE_USER_DESTROY)
     @PostMapping("/destroy")
-    @Log(title = "线上课-学习记录-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "線上課-學習記錄-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseUserDestroyRequest req) {
         if (req.getIds().isEmpty()) {
-            return JsonResponse.error("请选择需要删除的数据");
+            return JsonResponse.error("請選擇需要刪除的數據");
         }
         List<UserCourseRecord> records =
                 userCourseRecordService.chunks(

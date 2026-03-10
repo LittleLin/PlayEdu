@@ -75,7 +75,7 @@ const MemberPage = () => {
   const [refresh, setRefresh] = useState(false);
   const [dep_ids, setDepIds] = useState<number[]>([]);
   const [selLabel, setLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部部门"
+    result.get("label") ? String(result.get("label")) : "全部部門"
   );
   const [createVisible, setCreateVisible] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
@@ -98,7 +98,7 @@ const MemberPage = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "学员",
+      title: "學員",
       dataIndex: "name",
       width: 300,
       render: (_, record: any) => (
@@ -119,7 +119,7 @@ const MemberPage = () => {
       ),
     },
     {
-      title: "所属部门",
+      title: "所屬部門",
       dataIndex: "id",
       render: (id: number) => (
         <div className="float-left">
@@ -137,13 +137,13 @@ const MemberPage = () => {
       ),
     },
     {
-      title: "登录邮箱",
+      title: "登入電子郵件",
       width: 200,
       dataIndex: "email",
       render: (email: string) => <span>{email}</span>,
     },
     {
-      title: "加入时间",
+      title: "加入時間",
       width: 200,
       dataIndex: "created_at",
       render: (text: string) => <span>{dateFormat(text)}</span>,
@@ -160,7 +160,7 @@ const MemberPage = () => {
             label: (
               <PerButton
                 type="link"
-                text="编辑"
+                text="編輯"
                 class="b-link c-red"
                 icon={null}
                 p="user-update"
@@ -177,7 +177,7 @@ const MemberPage = () => {
             label: (
               <PerButton
                 type="link"
-                text="删除"
+                text="刪除"
                 class="b-link c-red"
                 icon={null}
                 p="user-destroy"
@@ -196,7 +196,7 @@ const MemberPage = () => {
             >
               <PerButton
                 type="link"
-                text="学习"
+                text="學習"
                 class="b-link c-red"
                 icon={null}
                 p="user-learn"
@@ -274,11 +274,11 @@ const MemberPage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -315,11 +315,11 @@ const MemberPage = () => {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此学员？",
+      content: "確認刪除此學員？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         user.destroyUser(id).then((res: any) => {
@@ -341,7 +341,7 @@ const MemberPage = () => {
             selected={dep_ids}
             refresh={refresh}
             showNum={true}
-            text={"部门"}
+            text={"部門"}
             onUpdate={(keys: any, title: any) => {
               resetLocalSearchParams({
                 page: 1,
@@ -359,14 +359,14 @@ const MemberPage = () => {
         </div>
         <div className="right-box">
           <div className="playedu-main-title float-left mb-24">
-            学员 | {selLabel}
+            學員 | {selLabel}
           </div>
           <div className="float-left j-b-flex mb-24">
             <div className="d-flex">
               {!ldapEnabled && (
                 <PerButton
                   type="primary"
-                  text="添加学员"
+                  text="添加學員"
                   class="mr-16"
                   icon={<PlusOutlined />}
                   p="user-store"
@@ -378,7 +378,7 @@ const MemberPage = () => {
                 <Link style={{ textDecoration: "none" }} to={`/member/import`}>
                   <PerButton
                     type="default"
-                    text="批量导入学员"
+                    text="批量導入學員"
                     class="mr-16"
                     icon={null}
                     p="user-store"
@@ -395,7 +395,7 @@ const MemberPage = () => {
                 >
                   <PerButton
                     type="default"
-                    text="部门学员进度"
+                    text="部門學員進度"
                     class="mr-16"
                     p="department-user-learn"
                     disabled={null}
@@ -414,12 +414,12 @@ const MemberPage = () => {
                     });
                   }}
                   style={{ width: 160 }}
-                  placeholder="请输入姓名关键字"
+                  placeholder="請輸入姓名關鍵字"
                   allowClear
                 />
               </div>
               <div className="d-flex mr-24">
-                <Typography.Text>邮箱：</Typography.Text>
+                <Typography.Text>電子郵件：</Typography.Text>
                 <Input
                   value={email || ""}
                   onChange={(e) => {
@@ -428,7 +428,7 @@ const MemberPage = () => {
                     });
                   }}
                   style={{ width: 160 }}
-                  placeholder="请输入邮箱账号"
+                  placeholder="請輸入電子郵件帳號"
                   allowClear
                 />
               </div>
@@ -445,7 +445,7 @@ const MemberPage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import xyz.playedu.common.util.StringUtil;
 
 /**
  * @author tengteng
- * @description 针对表【departments】的数据库操作Service实现
+ * @description 針對表【departments】的資料庫操作Service實現
  * @createDate 2023-02-19 10:39:57
  */
 @Service
@@ -59,7 +59,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     public Department findOrFail(Integer id) throws NotFoundException {
         Department department = getById(id);
         if (department == null) {
-            throw new NotFoundException("部门不存在");
+            throw new NotFoundException("部門不存在");
         }
         return department;
     }
@@ -76,7 +76,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     @Transactional
     public void update(Department department, String name, Integer parentId, Integer sort)
             throws NotFoundException {
-        // 计算该部门作为其它子部门的parentChain值
+        // 計算該部門作爲其它子部門的parentChain值
         String childrenChainPrefix = childrenParentChain(department);
 
         Department data = new Department();
@@ -85,18 +85,18 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
         if (!department.getParentId().equals(parentId)) {
             data.setParentId(parentId);
-            if (parentId.equals(0)) { // 重置一级部门
+            if (parentId.equals(0)) { // 重置一級部門
                 data.setParentChain("");
             } else {
                 Department parentDepartment = findOrFail(parentId);
                 data.setParentChain(childrenParentChain(parentDepartment));
             }
         }
-        if (!department.getSort().equals(sort)) { // 更换部门排序值
+        if (!department.getSort().equals(sort)) { // 更換部門排序值
             data.setSort(sort);
         }
 
-        // 提交更换
+        // 提交更換
         updateById(data);
 
         department = getById(department.getId());
@@ -115,7 +115,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
             Department tmpUpdateDepartment = new Department();
             tmpUpdateDepartment.setId(tmpDepartment.getId());
 
-            // parentChain计算
+            // parentChain計算
             String pc = newChildrenPC;
             if (!tmpDepartment.getParentChain().equals(oldChildrenPC)) {
                 pc =
@@ -129,7 +129,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
             }
             tmpUpdateDepartment.setParentChain(pc);
 
-            // parentId计算
+            // parentId計算
             int parentId = 0;
             if (pc != null && !pc.isEmpty()) {
                 String[] parentIds = pc.split(",");
@@ -148,7 +148,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         if (parentId != 0) {
             Department parentDepartment = getById(parentId);
             if (parentDepartment == null) {
-                throw new NotFoundException("父级部门不存在");
+                throw new NotFoundException("父級部門不存在");
             }
             String pc = parentDepartment.getParentChain();
             parentChain = pc == null || pc.isEmpty() ? parentId + "" : pc + "," + parentId;

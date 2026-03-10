@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/21 16:00
  */
@@ -33,11 +33,11 @@ public class AdminRoleRequest implements Serializable {
 
     @Serial private static final long serialVersionUID = 1L;
 
-    @NotBlank(message = "请输入管理角色名")
-    @Length(min = 1, max = 12, message = "管理角色名长度在1-16个字符之间")
+    @NotBlank(message = "請輸入管理角色名")
+    @Length(min = 1, max = 12, message = "管理角色名長度在1-16個字符之間")
     private String name;
 
     @JsonProperty("permission_ids")
-    @NotNull(message = "permission_ids参数不存在")
+    @NotNull(message = "permission_ids參數不存在")
     private Integer[] permissionIds;
 }

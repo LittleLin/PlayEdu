@@ -41,7 +41,7 @@ export const AdminLogDetailDialog: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="日志详情"
+          title="日誌詳情"
           centered
           forceRender
           open={true}

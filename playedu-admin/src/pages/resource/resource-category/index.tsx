@@ -176,27 +176,27 @@ const ResourceCategoryPage = () => {
       } else {
         if (res.data.children && res.data.children.length > 0) {
           modal.warning({
-            title: "操作确认",
+            title: "操作確認",
             centered: true,
             okText: "好的",
             content: (
               <p>
-                此分类下包含
+                此分類下包含
                 <span className="c-red">
-                  （{res.data.children.length}个子分类）
+                  （{res.data.children.length}個子分類）
                 </span>
-                ，请先解除关联再删除！
+                ，請先解除關聯再刪除！
               </p>
             ),
           });
         } else {
           modal.warning({
-            title: "操作确认",
+            title: "操作確認",
             centered: true,
             okText: "好的",
             content: (
               <p>
-                此分类已关联
+                此分類已關聯
                 {res.data.courses && res.data.courses.length > 0 && (
                   <Button
                     style={{ paddingLeft: 4, paddingRight: 4 }}
@@ -206,7 +206,7 @@ const ResourceCategoryPage = () => {
                       navigate("/course?cid=" + id + "&label=" + label)
                     }
                   >
-                    （{res.data.courses.length}个线上课程），
+                    （{res.data.courses.length}個線上課程），
                   </Button>
                 )}
                 {res.data.videos && res.data.videos.length > 0 && (
@@ -218,7 +218,7 @@ const ResourceCategoryPage = () => {
                       navigate("/videos?cid=" + id + "&label=" + label)
                     }
                   >
-                    （{res.data.videos.length}个视频文件），
+                    （{res.data.videos.length}個影片檔案），
                   </Button>
                 )}
                 {res.data.images && res.data.images.length > 0 && (
@@ -230,10 +230,10 @@ const ResourceCategoryPage = () => {
                       navigate("/images?cid=" + id + "&label=" + label)
                     }
                   >
-                    （{res.data.images.length}个图片文件），
+                    （{res.data.images.length}個圖片檔案），
                   </Button>
                 )}
-                请先解除关联再删除！
+                請先解除關聯再刪除！
               </p>
             ),
           });
@@ -244,11 +244,11 @@ const ResourceCategoryPage = () => {
 
   const delUser = (id: any) => {
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认删除此分类？",
+      content: "確認刪除此分類？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resourceCategory.destroyResourceCategory(id).then((res: any) => {
@@ -264,7 +264,7 @@ const ResourceCategoryPage = () => {
 
   const onDragEnter: TreeProps["onDragEnter"] = (info) => {
     console.log(info);
-    // expandedKeys 需要受控时设置
+    // expandedKeys 需要受控時設置
     // setExpandedKeys(info.expandedKeys)
   };
 
@@ -308,7 +308,7 @@ const ResourceCategoryPage = () => {
       // Drop on the content
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
       });
     } else if (
@@ -318,7 +318,7 @@ const ResourceCategoryPage = () => {
     ) {
       loop(data, dropKey, (item) => {
         item.children = item.children || [];
-        // where to insert 示例添加到头部，可以是随意位置
+        // where to insert 示例添加到頭部，可以是隨意位置
         item.children.unshift(dragObj);
         // in previous version, we use item.children.push(dragObj) to insert the
         // item to the tail of the children
@@ -386,7 +386,7 @@ const ResourceCategoryPage = () => {
         <div className="d-flex">
           <PerButton
             type="primary"
-            text="新建分类"
+            text="新增分類"
             class="mr-16"
             icon={<PlusOutlined />}
             p="resource-category"

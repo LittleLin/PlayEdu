@@ -11,7 +11,7 @@ export class UploadChunk {
   chunkIndex: number;
   uploadId: string;
   filename: string;
-  // 上传状态[0:等待上传,3:上传中,5:上传失败,7:上传成功]
+  // 上傳狀態[0:等待上傳,3:上傳中,5:上傳失敗,7:上傳成功]
   uploadStatus: number;
   uploadRemark: string;
 
@@ -29,7 +29,7 @@ export class UploadChunk {
     this.progress = 0;
     this.isStop = false;
     this.chunkIndex = 1;
-    this.chunkSize = 5 * 1024 * 1024; //分块大小-5mb
+    this.chunkSize = 5 * 1024 * 1024; //分塊大小-5mb
     this.chunkNumber = Math.ceil(file.size / this.chunkSize);
 
     this.uploadId = uploadId;
@@ -56,13 +56,13 @@ export class UploadChunk {
       return;
     }
 
-    // 检测是否上传完成
+    // 檢測是否上傳完成
     if (this.chunkIndex > this.chunkNumber) {
       this.uploadCompleted();
       return;
     }
 
-    // 进度更新
+    // 進度更新
     this.uploadProgressUpdated();
 
     let start = (this.chunkIndex - 1) * this.chunkSize;
@@ -70,10 +70,10 @@ export class UploadChunk {
     const boolname = this.file.name + "-" + this.chunkIndex;
     const tmpFile = new File([chunkData], boolname);
 
-    // 首先获取上传minio的签名
+    // 首先獲取上傳minio的簽名
     minioPreSignUrl(this.uploadId, this.filename, this.chunkIndex)
       .then((res: any) => {
-        // 拿到签名之后将分块内容上传到minio
+        // 拿到簽名之後將分塊內容上傳到minio
         return this.client.put(res.data.url, tmpFile, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -121,9 +121,9 @@ export class UploadChunk {
   }
 
   uploadedFail(e: any) {
-    console.log("上传失败,错误信息:", e);
+    console.log("上傳失敗,錯誤信息:", e);
     this.uploadStatus = 5;
-    this.onError && this.onError("失败.2");
+    this.onError && this.onError("失敗.2");
   }
 
   getUploadStatus(): number {

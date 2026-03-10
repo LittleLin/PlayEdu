@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ public class DepartmentController {
     @Autowired private UserDepartmentService userDepartmentService;
 
     @GetMapping("/index")
-    @Log(title = "部门-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "部門-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse index() {
         HashMap<String, Object> data = new HashMap<>();
         data.put("departments", departmentService.groupByParent());
@@ -89,7 +89,7 @@ public class DepartmentController {
                 } else {
                     parentChain = dep.getParentChain() + "," + dep.getId();
                 }
-                // 获取所有子部门ID
+                // 獲取所有子部門ID
                 List<Department> childDepartmentList =
                         departmentService.getChildDepartmentsByParentChain(
                                 dep.getId(), parentChain);
@@ -107,7 +107,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments")
-    @Log(title = "部门-全部部门", businessType = BusinessTypeConstant.GET)
+    @Log(title = "部門-全部部門", businessType = BusinessTypeConstant.GET)
     public JsonResponse index(
             @RequestParam(name = "parent_id", defaultValue = "0") Integer parentId) {
         List<Department> departments = departmentService.listByParentId(parentId);
@@ -116,7 +116,7 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/create")
-    @Log(title = "部门-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "部門-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create() {
         HashMap<String, Object> data = new HashMap<>();
         data.put("departments", departmentService.groupByParent());
@@ -125,11 +125,11 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @PostMapping("/create")
-    @Log(title = "部门-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "部門-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated DepartmentRequest req)
             throws NotFoundException {
         if (ldapBus.enabledLDAP()) {
-            return JsonResponse.error("已启用LDAP服务，禁止添加部门");
+            return JsonResponse.error("已啓用LDAP服務，禁止添加部門");
         }
         departmentService.create(req.getName(), req.getParentId(), req.getSort());
         return JsonResponse.success();
@@ -137,7 +137,7 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/{id}")
-    @Log(title = "部门-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "部門-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable Integer id) throws NotFoundException {
         Department department = departmentService.findOrFail(id);
         return JsonResponse.data(department);
@@ -145,11 +145,11 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @PutMapping("/{id}")
-    @Log(title = "部门-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "部門-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(@PathVariable Integer id, @RequestBody DepartmentRequest req)
             throws NotFoundException {
         if (ldapBus.enabledLDAP()) {
-            return JsonResponse.error("已启用LDAP服务，禁止添加部门");
+            return JsonResponse.error("已啓用LDAP服務，禁止添加部門");
         }
         Department department = departmentService.findOrFail(id);
         departmentService.update(department, req.getName(), req.getParentId(), req.getSort());
@@ -158,10 +158,10 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/{id}/destroy")
-    @Log(title = "部门-批量删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "部門-批量刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse preDestroy(@PathVariable Integer id) {
         if (ldapBus.enabledLDAP()) {
-            return JsonResponse.error("已启用LDAP服务，禁止添加部门");
+            return JsonResponse.error("已啓用LDAP服務，禁止添加部門");
         }
         List<Integer> courseIds = courseDepartmentUserService.getCourseIdsByDepId(id);
         List<Integer> userIds = departmentService.getUserIdsByDepId(id);
@@ -202,10 +202,10 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @DeleteMapping("/{id}")
-    @Log(title = "部门-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "部門-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable Integer id) throws NotFoundException {
         if (ldapBus.enabledLDAP()) {
-            return JsonResponse.error("已启用LDAP服务，禁止添加部门");
+            return JsonResponse.error("已啓用LDAP服務，禁止添加部門");
         }
         Department department = departmentService.findOrFail(id);
         departmentService.destroy(department.getId());
@@ -215,7 +215,7 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @PutMapping("/update/sort")
-    @Log(title = "部门-更新排序", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "部門-更新排序", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse resort(@RequestBody @Validated DepartmentSortRequest req) {
         departmentService.resetSort(req.getIds());
         return JsonResponse.success();
@@ -223,11 +223,11 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @PutMapping("/update/parent")
-    @Log(title = "部门-更新父级", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "部門-更新父級", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse updateParent(@RequestBody @Validated DepartmentParentRequest req)
             throws NotFoundException {
         if (ldapBus.enabledLDAP()) {
-            return JsonResponse.error("已启用LDAP服务，禁止添加部门");
+            return JsonResponse.error("已啓用LDAP服務，禁止添加部門");
         }
         departmentService.changeParent(req.getId(), req.getParentId(), req.getIds());
         return JsonResponse.success();
@@ -236,7 +236,7 @@ public class DepartmentController {
     @SneakyThrows
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_USER_LEARN)
     @GetMapping("/{id}/users")
-    @Log(title = "部门-学员", businessType = BusinessTypeConstant.GET)
+    @Log(title = "部門-學員", businessType = BusinessTypeConstant.GET)
     public JsonResponse users(
             @PathVariable(name = "id") Integer id, @RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
@@ -248,7 +248,7 @@ public class DepartmentController {
         String email = MapUtils.getString(params, "email");
         String idCard = MapUtils.getString(params, "id_card");
 
-        // 查询所有的父级部门ID
+        // 查詢所有的父級部門ID
         List<Integer> allDepIds = new ArrayList<>();
         allDepIds.add(id);
         Department department = departmentService.findOrFail(id);
@@ -280,19 +280,19 @@ public class DepartmentController {
 
         List<Course> courses;
         if (courseIdsStr != null && !courseIdsStr.trim().isEmpty()) {
-            // 指定了需要显示的线上课
+            // 指定了需要顯示的線上課
             courses =
                     courseService.chunks(
                             Arrays.stream(courseIdsStr.split(",")).map(Integer::valueOf).toList());
         } else {
             if ("only_open".equals(showMode)) {
-                // 公开(无关联部门)线上课
+                // 公開(無關聯部門)線上課
                 courses = courseService.getOpenCoursesAndShow(10000);
             } else if ("only_dep".equals(showMode)) {
-                // 部门关联线上课
+                // 部門關聯線上課
                 courses = courseService.getDepCoursesAndShow(allDepIds);
             } else {
-                // 部门关联线上课
+                // 部門關聯線上課
                 courses = courseService.getDepCoursesAndShow(allDepIds);
                 List<Course> openCourses = courseService.getOpenCoursesAndShow(10000);
                 if (openCourses != null) {
@@ -303,7 +303,7 @@ public class DepartmentController {
 
         List<Integer> courseIds = courses.stream().map(Course::getId).toList();
 
-        // 学员的课程学习进度
+        // 學員的課程學習進度
         Map<Integer, List<UserCourseRecord>> userCourseRecords =
                 userCourseRecordService
                         .chunk(users.getData().stream().map(User::getId).toList(), courseIds)
@@ -331,21 +331,21 @@ public class DepartmentController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @PostMapping("/ldap-sync")
-    @Log(title = "部门-LDAP同步", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "部門-LDAP同步", businessType = BusinessTypeConstant.INSERT)
     @SneakyThrows
     public JsonResponse ldapSync() {
         try {
-            // 检查是否启用LDAP
+            // 檢查是否啓用LDAP
             if (!ldapBus.enabledLDAP()) {
-                return JsonResponse.error("未配置LDAP服务");
+                return JsonResponse.error("未設定LDAP服務");
             }
 
-            // 检查是否有进行中的同步任务
+            // 檢查是否有進行中的同步任務
             if (ldapBus.hasSyncInProgress()) {
-                return JsonResponse.error("有正在进行的LDAP同步任务，请稍后再试");
+                return JsonResponse.error("有正在進行的LDAP同步任務，請稍後再試");
             }
 
-            // 使用当前管理员ID执行同步
+            // 使用當前管理員ID執行同步
             Integer recordId = ldapBus.syncAndRecord(BCtx.getId());
 
             Map<String, Object> data = new HashMap<>();
@@ -353,7 +353,7 @@ public class DepartmentController {
 
             return JsonResponse.data(data);
         } catch (Exception e) {
-            return JsonResponse.error("LDAP同步失败: " + e.getMessage());
+            return JsonResponse.error("LDAP同步失敗: " + e.getMessage());
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import xyz.playedu.course.service.UserLearnDurationStatsService;
 import xyz.playedu.resource.service.ResourceService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/7 13:55
  */
@@ -65,11 +65,11 @@ public class DashboardController {
         HashMap<String, Object> data = new HashMap<>();
         data.put("version", SystemConstant.VERSION);
 
-        data.put("user_total", userService.total()); // 总学员数量
-        data.put("user_today", userService.todayCount()); // 今日注册学员数量
-        data.put("user_yesterday", userService.yesterdayCount()); // 昨日注册学员数量
+        data.put("user_total", userService.total()); // 總學員數量
+        data.put("user_today", userService.todayCount()); // 今日註冊學員數量
+        data.put("user_yesterday", userService.yesterdayCount()); // 昨日註冊學員數量
 
-        data.put("course_total", courseService.total()); // 线上课数量
+        data.put("course_total", courseService.total()); // 線上課數量
 
         data.put("department_total", departmentService.total());
         data.put("resource_category_total", categoryService.total());

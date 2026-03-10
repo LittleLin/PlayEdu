@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import xyz.playedu.course.domain.UserCourseHourRecord;
 
 /**
  * @author tengteng
- * @description 针对表【user_course_hour_records】的数据库操作Mapper
+ * @description 針對表【user_course_hour_records】的資料庫操作Mapper
  * @createDate 2023-03-20 16:41:08
  */
 @Mapper

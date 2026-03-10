@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public class S3Util {
     @SneakyThrows
     private AmazonS3 getClient() {
         if (defaultConfig == null) {
-            throw new ServiceException("存储服务未配置");
+            throw new ServiceException("存儲服務未設定");
         }
         AWSCredentials credentials =
                 new BasicAWSCredentials(defaultConfig.getAccessKey(), defaultConfig.getSecretKey());
@@ -75,13 +75,13 @@ public class S3Util {
                         .withEndpointConfiguration(endpointConfiguration)
                         .build();
 
-        // 检查bucket是否存在
+        // 檢查bucket是否存在
         if (client.doesBucketExistV2(defaultConfig.getBucket())) {
-            // 确保bucket为私有访问权限
+            // 確保bucket爲私有訪問權限
             AccessControlList acl = client.getBucketAcl(defaultConfig.getBucket());
             boolean isPrivate = true;
 
-            // 检查是否有公开访问的权限
+            // 檢查是否有公開訪問的權限
             for (Grant grant : acl.getGrantsAsList()) {
                 if (grant.getGrantee() instanceof GroupGrantee
                         && (GroupGrantee.AllUsers.equals(grant.getGrantee())
@@ -92,11 +92,11 @@ public class S3Util {
             }
 
             if (!isPrivate) {
-                // 如果不是私有的，抛出异常
-                throw new ServiceException("Bucket " + defaultConfig.getBucket() + " 必须设置为私有访问权限");
+                // 如果不是私有的，拋出異常
+                throw new ServiceException("Bucket " + defaultConfig.getBucket() + " 必須設置爲私有訪問權限");
             }
         } else {
-            // 如果bucket不存在，抛出异常
+            // 如果bucket不存在，拋出異常
             throw new ServiceException("Bucket " + defaultConfig.getBucket() + " 不存在");
         }
 
@@ -144,7 +144,7 @@ public class S3Util {
                         .withInputStream(inputStream)
                         .withPartSize(file.length);
 
-        // 上传分段文件
+        // 上傳分段檔案
         UploadPartResult uploadPartResult = getClient().uploadPart(uploadPartRequest);
         return uploadPartResult;
     }
@@ -167,8 +167,8 @@ public class S3Util {
         GeneratePresignedUrlRequest request =
                 new GeneratePresignedUrlRequest(
                         defaultConfig.getBucket(), filename, HttpMethod.PUT);
-        request.setExpiration(new Date(System.currentTimeMillis() + 3600 * 1000)); // 一个小时有效期
-        request.addRequestParameter("partNumber", partNumber); // 分块索引
+        request.setExpiration(new Date(System.currentTimeMillis() + 3600 * 1000)); // 一個小時有效期
+        request.addRequestParameter("partNumber", partNumber); // 分塊索引
         request.addRequestParameter("uploadId", uploadId); // uploadId
         return getClient().generatePresignedUrl(request).toString();
     }
@@ -181,7 +181,7 @@ public class S3Util {
                 new ListPartsRequest(defaultConfig.getBucket(), filename, uploadId);
         PartListing parts = client.listParts(listPartsRequest);
         if (parts.getParts().isEmpty()) {
-            throw new ServiceException("没有已上传的分片文件");
+            throw new ServiceException("沒有已上傳的分片檔案");
         }
 
         List<PartETag> eTags = new ArrayList<>();
@@ -224,9 +224,9 @@ public class S3Util {
     public String generateEndpointPreSignUrl(String path, String name) {
         GeneratePresignedUrlRequest request =
                 new GeneratePresignedUrlRequest(defaultConfig.getBucket(), path, HttpMethod.GET);
-        request.setExpiration(new Date(System.currentTimeMillis() + 3600 * 3000)); // 三个小时有效期
+        request.setExpiration(new Date(System.currentTimeMillis() + 3600 * 3000)); // 三個小時有效期
 
-        // 文件名不为空
+        // 檔案名不爲空
         if (StringUtil.isNotEmpty(name)) {
             ResponseHeaderOverrides responseHeaders = new ResponseHeaderOverrides();
             responseHeaders.setContentDisposition("attachment; filename=\"" + name + "\"");

@@ -4,7 +4,7 @@ export function detail() {
   return client.get("/api/v1/user/detail", {});
 }
 
-// 修改密码
+// 修改密碼
 export function password(oldPassword: string, newPassword: string) {
   return client.put("/api/v1/user/password", {
     old_password: oldPassword,
@@ -12,7 +12,7 @@ export function password(oldPassword: string, newPassword: string) {
   });
 }
 
-// 学员课程
+// 學員課程
 export function coursesCategories() {
   return client.get("/api/v1/category/all", {});
 }
@@ -23,7 +23,7 @@ export function courses(depId: number, categoryId: number) {
   });
 }
 
-// 修改头像
+// 修改頭像
 export function avatar(params: any) {
   return client.put("/api/v1/user/avatar", params);
 }

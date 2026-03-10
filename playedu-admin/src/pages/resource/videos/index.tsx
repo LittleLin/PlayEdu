@@ -65,7 +65,7 @@ const ResourceVideosPage = () => {
   const [category_ids, setCategoryIds] = useState<number[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   const [selLabel, setLabel] = useState<string>(
-    result.get("label") ? String(result.get("label")) : "全部视频"
+    result.get("label") ? String(result.get("label")) : "全部影片"
   );
   const [cateId, setCateId] = useState(Number(result.get("cid")));
   const [updateVisible, setUpdateVisible] = useState(false);
@@ -86,7 +86,7 @@ const ResourceVideosPage = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "视频名称",
+      title: "影片名稱",
       dataIndex: "name",
       render: (text: string) => (
         <div className="d-flex">
@@ -102,14 +102,14 @@ const ResourceVideosPage = () => {
       ),
     },
     {
-      title: "视频时长",
+      title: "影片時長",
       dataIndex: "id",
       render: (id: number) => (
         <DurationText duration={videosExtra[id].duration}></DurationText>
       ),
     },
     {
-      title: "创建人",
+      title: "建立人",
       dataIndex: "admin_id",
       render: (admin_id: number) =>
         JSON.stringify(adminUsers) !== "{}" && (
@@ -117,7 +117,7 @@ const ResourceVideosPage = () => {
         ),
     },
     {
-      title: "创建时间",
+      title: "建立時間",
       dataIndex: "created_at",
       render: (created_at: string) => <span>{dateFormat(created_at)}</span>,
     },
@@ -139,7 +139,7 @@ const ResourceVideosPage = () => {
                   setUpdateVisible(true);
                 }}
               >
-                编辑
+                編輯
               </Button>
             ),
           },
@@ -151,7 +151,7 @@ const ResourceVideosPage = () => {
                 className="b-link c-red"
                 onClick={() => removeResource(record.id)}
               >
-                删除
+                刪除
               </Button>
             ),
           },
@@ -169,7 +169,7 @@ const ResourceVideosPage = () => {
                 setPlayeVisible(true);
               }}
             >
-              预览
+              預覽
             </Button>
             <div className="form-column"></div>
             <Dropdown menu={{ items }}>
@@ -190,21 +190,21 @@ const ResourceVideosPage = () => {
     },
   ];
 
-  // 删除图片
+  // 刪除圖片
   const removeResource = (id: number) => {
     if (id === 0) {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除前请检查选中视频文件无关联课程，确认删除？",
+      content: "刪除前請檢查選中影片檔案無關聯課程，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resource.destroyResource(id).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetVideoList();
         });
       },
@@ -219,15 +219,15 @@ const ResourceVideosPage = () => {
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "删除前请检查选中视频文件无关联课程，确认删除？",
+      content: "刪除前請檢查選中影片檔案無關聯課程，確認刪除？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         resource.destroyResourceMulti(selectedRowKeys).then(() => {
-          message.success("删除成功");
+          message.success("刪除成功");
           resetVideoList();
         });
       },
@@ -237,7 +237,7 @@ const ResourceVideosPage = () => {
     });
   };
 
-  // 获取视频列表
+  // 獲取影片列表
   const getVideoList = () => {
     setLoading(true);
     let categoryIds = category_ids.join(",");
@@ -252,7 +252,7 @@ const ResourceVideosPage = () => {
         setLoading(false);
       })
       .catch((err: any) => {
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
 
@@ -266,17 +266,17 @@ const ResourceVideosPage = () => {
     setRefresh(!refresh);
   };
 
-  // 加载视频列表
+  // 載入影片列表
   useEffect(() => {
     getVideoList();
   }, [category_ids, refresh, page, size]);
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -298,7 +298,7 @@ const ResourceVideosPage = () => {
           <TreeCategory
             selected={category_ids}
             type="no-cate"
-            text={"视频"}
+            text={"影片"}
             onUpdate={(keys: any, title: any) => {
               setPage(1);
               setCategoryIds(keys);
@@ -312,7 +312,7 @@ const ResourceVideosPage = () => {
         </div>
         <div className="right-box">
           <div className="d-flex playedu-main-title float-left mb-24">
-            视频 | {selLabel}
+            影片 | {selLabel}
           </div>
           <div className="float-left  j-b-flex  mb-24">
             <div>
@@ -338,12 +338,12 @@ const ResourceVideosPage = () => {
                 onClick={() => removeResourceMulti()}
                 disabled={selectedRowKeys.length === 0}
               >
-                删除
+                刪除
               </Button>
             </div>
             <div className="d-flex">
               <div className="d-flex mr-24">
-                <Typography.Text>名称：</Typography.Text>
+                <Typography.Text>名稱：</Typography.Text>
                 <Input
                   value={title}
                   onChange={(e) => {
@@ -351,7 +351,7 @@ const ResourceVideosPage = () => {
                   }}
                   allowClear
                   style={{ width: 160 }}
-                  placeholder="请输入名称关键字"
+                  placeholder="請輸入名稱關鍵字"
                 />
               </div>
               <div className="d-flex">
@@ -365,7 +365,7 @@ const ResourceVideosPage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

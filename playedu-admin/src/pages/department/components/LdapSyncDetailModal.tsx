@@ -46,7 +46,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
   return (
     <>
       <Modal
-        title="同步详情"
+        title="同步詳情"
         open={open}
         onCancel={onCancel}
         width={888}
@@ -61,22 +61,22 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                 </Col>
                 <Col span={8}>
                   <Statistic 
-                    title="同步状态" 
+                    title="同步狀態" 
                     value={
-                      detail.status === 0 ? "进行中" : 
-                      detail.status === 1 ? "成功" : "失败"
+                      detail.status === 0 ? "進行中" : 
+                      detail.status === 1 ? "成功" : "失敗"
                     } 
                   />
                 </Col>
                 <Col span={8}>
-                  <Statistic title="同步时间" value={dateFormat(detail.created_at)} />
+                  <Statistic title="同步時間" value={dateFormat(detail.created_at)} />
                 </Col>
               </Row>
             </Card>
 
             <Divider />
 
-            <Card title="部门同步统计" loading={loading}>
+            <Card title="部門同步統計" loading={loading}>
               <Row gutter={16}>
                 <Col span={6}>
                   <div 
@@ -84,7 +84,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="总部门数" 
+                      title="總部門數" 
                       value={detail.total_department_count} 
                     />
                   </div>
@@ -95,7 +95,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="新增部门" 
+                      title="新增部門" 
                       value={detail.created_department_count}
                     />
                   </div>
@@ -106,7 +106,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="更新部门" 
+                      title="更新部門" 
                       value={detail.updated_department_count}
                     />
                   </div>
@@ -117,7 +117,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="删除部门" 
+                      title="刪除部門" 
                       value={detail.deleted_department_count}
                     />
                   </div>
@@ -127,7 +127,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
 
             <Divider />
 
-            <Card title="用户同步统计" loading={loading}>
+            <Card title="使用者同步統計" loading={loading}>
               <Row gutter={16}>
                 <Col span={6}>
                   <div 
@@ -135,7 +135,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="总用户数" 
+                      title="總使用者數" 
                       value={detail.total_user_count}
                     />
                   </div>
@@ -146,7 +146,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="新增用户" 
+                      title="新增使用者" 
                       value={detail.created_user_count}
                     />
                   </div>
@@ -157,7 +157,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="更新用户" 
+                      title="更新使用者" 
                       value={detail.updated_user_count}
                     />
                   </div>
@@ -168,7 +168,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="删除用户" 
+                      title="刪除使用者" 
                       value={detail.deleted_user_count}
                     />
                   </div>
@@ -179,7 +179,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
                     className="clickable-stat"
                   >
                     <Statistic 
-                      title="禁止用户" 
+                      title="禁止使用者" 
                       value={detail.banned_user_count}
                     />
                   </div>
@@ -190,7 +190,7 @@ export const LdapSyncDetailModal: React.FC<LdapSyncDetailModalProps> = ({
             {detail.error_message && (
               <>
                 <Divider />
-                <Card title="错误信息" loading={loading}>
+                <Card title="錯誤信息" loading={loading}>
                   <pre>{detail.error_message}</pre>
                 </Card>
               </>

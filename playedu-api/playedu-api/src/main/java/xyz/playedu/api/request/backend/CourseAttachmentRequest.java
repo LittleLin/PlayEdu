@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,15 @@ import lombok.Data;
 @Data
 public class CourseAttachmentRequest {
 
-    @NotBlank(message = "请输入附件名称")
+    @NotBlank(message = "請輸入附件名稱")
     private String title;
 
-    @NotNull(message = "sort参数不存在")
+    @NotNull(message = "sort參數不存在")
     private Integer sort;
 
-    @NotBlank(message = "请选择附件类型")
+    @NotBlank(message = "請選擇附件類型")
     private String type;
 
-    @NotNull(message = "rid参数不存在")
+    @NotNull(message = "rid參數不存在")
     private Integer rid;
 }

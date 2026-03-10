@@ -49,7 +49,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   const [title, setTitle] = useState("");
 
-  // 加载列表
+  // 載入列表
   useEffect(() => {
     setInit(true);
     getvideoList();
@@ -61,7 +61,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
     }
   }, [props.defaultCheckedList]);
 
-  // 获取列表
+  // 獲取列表
   const getvideoList = () => {
     setLoading(true);
     let categoryIds = category_ids.join(",");
@@ -77,7 +77,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
       .catch((err) => {
         setLoading(false);
         setInit(false);
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
 
@@ -90,11 +90,11 @@ export const UploadVideoSub = (props: PropsInterface) => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -105,7 +105,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "视频",
+      title: "影片",
       render: (_, record: any) => (
         <div className="d-flex">
           <i
@@ -120,7 +120,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
       ),
     },
     {
-      title: "时长",
+      title: "時長",
       render: (_, record: any) => (
         <div>
           <DurationText
@@ -152,7 +152,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
       setSelectedRowKeys(selectedRowKeys);
     },
     getCheckboxProps: (record: any) => ({
-      disabled: props.defaultCheckedList.indexOf(record.id) !== -1, //禁用的条件
+      disabled: props.defaultCheckedList.indexOf(record.id) !== -1, //禁用的條件
     }),
   };
 
@@ -175,7 +175,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
               <div className="d-flex"></div>
               <div className="d-flex">
                 <div className="d-flex mr-24">
-                  <Typography.Text>名称：</Typography.Text>
+                  <Typography.Text>名稱：</Typography.Text>
                   <Input
                     value={title}
                     onChange={(e) => {
@@ -183,7 +183,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
                     }}
                     allowClear
                     style={{ width: 160 }}
-                    placeholder="请输入名称关键字"
+                    placeholder="請輸入名稱關鍵字"
                   />
                 </div>
                 <div className="d-flex">
@@ -197,7 +197,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
                       setRefresh(!refresh);
                     }}
                   >
-                    查 询
+                    查 詢
                   </Button>
                 </div>
               </div>
@@ -214,7 +214,7 @@ export const UploadVideoSub = (props: PropsInterface) => {
           >
             {videoList.length === 0 && (
               <Col span={24} style={{ marginTop: 150 }}>
-                <Empty description="暂无视频" />
+                <Empty description="暫無影片" />
               </Col>
             )}
             {videoList.length > 0 && (

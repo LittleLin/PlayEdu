@@ -24,8 +24,8 @@ export function createCourse() {
   return client.get("/backend/v1/course/create", {});
 }
 
-// depIds => 部门id数组，请用英文逗号连接
-// categoryIds => 所属分类数组，请用英文逗号连接
+// depIds => 部門id數組，請用英文逗號連接
+// categoryIds => 所屬分類數組，請用英文逗號連接
 export function storeCourse(
   title: string,
   thumb: string,
@@ -87,7 +87,7 @@ export function destroyCourse(id: number) {
   return client.destroy(`/backend/v1/course/${id}`);
 }
 
-//学员列表
+//學員列表
 export function courseUser(
   courseId: number,
   page: number,
@@ -109,7 +109,7 @@ export function courseUser(
   });
 }
 
-//删除学员
+//刪除學員
 export function destroyCourseUser(courseId: number, ids: number[]) {
   return client.post(`/backend/v1/course/${courseId}/user/destroy`, {
     ids: ids,

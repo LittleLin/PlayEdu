@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/24 13:56
  */
@@ -32,14 +32,14 @@ import org.hibernate.validator.constraints.Length;
 public class CourseCategoryRequest implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
 
-    @NotBlank(message = "请输入分类名")
-    @Length(min = 1, max = 20, message = "分类名长度在1-20个字符之间")
+    @NotBlank(message = "請輸入分類名")
+    @Length(min = 1, max = 20, message = "分類名長度在1-20個字符之間")
     private String name;
 
     @JsonProperty("parent_id")
-    @NotNull(message = "parent_id参数不存在")
+    @NotNull(message = "parent_id參數不存在")
     private Integer parentId;
 
-    @NotNull(message = "sort参数不存在")
+    @NotNull(message = "sort參數不存在")
     private Integer sort;
 }

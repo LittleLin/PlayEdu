@@ -24,12 +24,12 @@ export function timeFormat(dateStr: number) {
     return "-";
   }
   var d = moment.duration(dateStr, "seconds");
-  let value = d.hours() + "时" + d.minutes() + "分" + d.seconds() + "秒";
+  let value = d.hours() + "時" + d.minutes() + "分" + d.seconds() + "秒";
 
   if (d.hours() === 0) {
     value = d.minutes() + "分" + d.seconds() + "秒";
   } else {
-    value = d.hours() + "时" + d.minutes() + "分" + d.seconds() + "秒";
+    value = d.hours() + "時" + d.minutes() + "分" + d.seconds() + "秒";
   }
 
   return value;
@@ -66,22 +66,22 @@ export function parseVideo(file: File): Promise<VideoParseInfo> {
     video.muted = true;
     video.setAttribute("src", URL.createObjectURL(file));
     video.setAttribute("autoplay", "autoplay");
-    video.setAttribute("crossOrigin", "anonymous"); //设置跨域 否则toDataURL导出图片失败
-    video.setAttribute("width", "400"); //设置大小，如果不设置，下面的canvas就要按需设置
+    video.setAttribute("crossOrigin", "anonymous"); //設置跨域 否則toDataURL導出圖片失敗
+    video.setAttribute("width", "400"); //設置大小，如果不設置，下面的canvas就要按需設置
     video.setAttribute("height", "300");
-    video.currentTime = 7; //视频时长，一定要设置，不然大概率白屏
+    video.currentTime = 7; //影片時長，一定要設置，不然大概率白屏
     video.addEventListener("loadeddata", function () {
       let canvas = document.createElement("canvas"),
-        width = video.width, //canvas的尺寸和图片一样
+        width = video.width, //canvas的尺寸和圖片一樣
         height = video.height;
-      canvas.width = width; //画布大小，默认为视频宽高
+      canvas.width = width; //畫布大小，預設爲影片寬高
       canvas.height = height;
       let ctx = canvas.getContext("2d");
       if (!ctx) {
-        return reject("无法捕获视频帧");
+        return reject("無法捕獲影片幀");
       }
-      ctx.drawImage(video, 0, 0, width, height); //绘制canvas
-      let dataURL = canvas.toDataURL("image/png"); //转换为base64
+      ctx.drawImage(video, 0, 0, width, height); //繪製canvas
+      let dataURL = canvas.toDataURL("image/png"); //轉換爲base64
       video.remove();
       let info: VideoParseInfo = {
         poster: dataURL,
@@ -133,9 +133,9 @@ export function dateWholeFormat(dateStr: string) {
 
 export function transUtcTime(value: string) {
   const specifiedTime = value;
-  // 创建一个新的Date对象，传入指定时间
+  // 建立一個新的Date對象，傳入指定時間
   const specifiedDate = new Date(specifiedTime);
-  //将指定时间转换为UTC+0时间
+  //將指定時間轉換爲UTC+0時間
   const utcTime = specifiedDate.toISOString();
 
   return utcTime;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ import xyz.playedu.common.domain.LdapSyncRecord;
 import xyz.playedu.common.types.paginate.PaginationResult;
 
 public interface LdapSyncRecordService extends IService<LdapSyncRecord> {
-    // 创建同步记录
+    // 建立同步記錄
     LdapSyncRecord create(Integer adminId);
 
-    // 更新同步结果
+    // 更新同步結果
     void updateSyncResult(
             Integer id,
             Integer status,
@@ -38,15 +38,15 @@ public interface LdapSyncRecordService extends IService<LdapSyncRecord> {
             Integer deletedUserCount,
             Integer bannedUserCount);
 
-    // 更新同步状态为失败并记录错误信息
+    // 更新同步狀態爲失敗並記錄錯誤信息
     void updateSyncFailed(Integer id, String errorMessage);
 
-    // 分页查询
+    // 分頁查詢
     PaginationResult<LdapSyncRecord> paginate(Integer page, Integer size);
 
-    // 检查是否有进行中的同步任务
+    // 檢查是否有進行中的同步任務
     boolean hasSyncInProgress();
 
-    // 获取最近一次同步记录
+    // 獲取最近一次同步記錄
     LdapSyncRecord getLatestRecord();
 }

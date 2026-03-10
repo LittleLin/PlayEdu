@@ -24,7 +24,7 @@ function getItem(
 }
 const items = [
   getItem(
-    "首页概览",
+    "首頁概覽",
     "/",
     <i className={`iconfont icon-icon-home`} />,
     null,
@@ -32,7 +32,7 @@ const items = [
     null
   ),
   getItem(
-    "分类管理",
+    "分類管理",
     "/resource-category",
     <i className="iconfont icon-icon-category" />,
     null,
@@ -40,43 +40,43 @@ const items = [
     "resource-category-menu"
   ),
   getItem(
-    "资源管理",
+    "資源管理",
     "resource",
     <i className="iconfont icon-icon-file" />,
     [
-      getItem("视频", "/videos", null, null, null, "resource-menu"),
-      getItem("图片", "/images", null, null, null, "resource-menu"),
-      getItem("课件", "/courseware", null, null, null, "resource-menu"),
+      getItem("影片", "/videos", null, null, null, "resource-menu"),
+      getItem("圖片", "/images", null, null, null, "resource-menu"),
+      getItem("課件", "/courseware", null, null, null, "resource-menu"),
     ],
     null,
     null
   ),
   getItem(
-    "课程中心",
+    "課程中心",
     "courses",
     <i className="iconfont icon-icon-study" />,
-    [getItem("线上课", "/course", null, null, null, "course")],
+    [getItem("線上課", "/course", null, null, null, "course")],
     null,
     null
   ),
   getItem(
-    "学员管理",
+    "學員管理",
     "user",
     <i className="iconfont icon-icon-user" />,
     [
-      getItem("学员", "/member/index", null, null, null, "user-index"),
-      getItem("部门", "/department", null, null, null, "department-cud"),
+      getItem("學員", "/member/index", null, null, null, "user-index"),
+      getItem("部門", "/department", null, null, null, "department-cud"),
     ],
     null,
     null
   ),
   getItem(
-    "系统设置",
+    "系統設置",
     "system",
     <i className="iconfont icon-icon-setting" />,
     [
       getItem(
-        "系统配置",
+        "系統設定",
         "/system/config/index",
         null,
         null,
@@ -84,20 +84,20 @@ const items = [
         "system-config"
       ),
       getItem(
-        "管理人员",
+        "管理人員",
         "/system/administrator",
         null,
         null,
         null,
         "admin-user-index"
       ),
-      getItem("管理日志", "/system/adminlog", null, null, null, "admin-log"),
+      getItem("管理日誌", "/system/adminlog", null, null, null, "admin-log"),
     ],
     null,
     null
   ),
   getItem(
-    "使用许可",
+    "使用許可",
     "/licensing",
     <i className="iconfont icon-xuke" />,
     null,
@@ -146,11 +146,11 @@ export const LeftMenu: React.FC = () => {
     return newOpenKeys;
   };
 
-  // 选中的菜单
+  // 選中的菜單
   const [selectedKeys, setSelectedKeys] = useState<string[]>([
     location.pathname,
   ]);
-  // 展开菜单
+  // 展開菜單
   const [openKeys, setOpenKeys] = useState<string[]>(hit(location.pathname));
   const permissions = useSelector(
     (state: any) => state.loginUser.value.permissions
@@ -174,7 +174,7 @@ export const LeftMenu: React.FC = () => {
 
     for (let i in items) {
       let menuItem = items[i];
-      // 一级菜单=>没有子菜单&配置了权限
+      // 一級菜單=>沒有子菜單&設定了權限
       if (menuItem.children === null) {
         if (
           menuItem.permission !== null &&
@@ -194,7 +194,7 @@ export const LeftMenu: React.FC = () => {
           typeof permissions[childrenItem.permission] !== "undefined" ||
           !childrenItem.permission
         ) {
-          // 存在权限
+          // 存在權限
           children.push(childrenItem);
         }
       }
@@ -234,7 +234,7 @@ export const LeftMenu: React.FC = () => {
           window.location.href = "/";
         }}
       >
-        {/* 此处为版权标识，严禁删改 */}
+        {/* 此處爲版權標識，嚴禁刪改 */}
         <img src={logo} className={styles["App-logo"]} />
       </div>
       <div className={styles["menu-box"]}>

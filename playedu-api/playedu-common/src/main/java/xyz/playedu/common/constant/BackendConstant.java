@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@ public class BackendConstant {
     public static final String STORAGE_DRIVER_MINIO = "minio";
 
     public static final String[] COURSE_HOUR_TYPE_WHITELIST = {"VIDEO"};
-    public static final String[] COURSE_HOUR_TYPE_WHITELIST_TEXT = {"视频"};
+    public static final String[] COURSE_HOUR_TYPE_WHITELIST_TEXT = {"影片"};
 
     public static final String UPLOAD_IMAGE_DIR = "images/";
     public static final String UPLOAD_VIDEO_DIR = "videos/";

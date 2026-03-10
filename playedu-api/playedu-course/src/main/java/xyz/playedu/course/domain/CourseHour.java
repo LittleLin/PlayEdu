@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,33 +35,33 @@ public class CourseHour implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 课程ID */
+    /** 課程ID */
     @JsonProperty("course_id")
     private Integer courseId;
 
-    /** 章节ID */
+    /** 章節ID */
     @JsonProperty("chapter_id")
     private Integer chapterId;
 
     /** 升序 */
     private Integer sort;
 
-    /** 课时名 */
+    /** 課時名 */
     private String title;
 
-    /** 课时类型 */
+    /** 課時類型 */
     private String type;
 
-    /** 资源id */
+    /** 資源id */
     private Integer rid;
 
-    /** 时长[s] */
+    /** 時長[s] */
     private Integer duration;
 
     /** */
     @JsonIgnore private Date createdAt;
 
-    /** 删除标志[0:存在,1:删除] */
+    /** 刪除標誌[0:存在,1:刪除] */
     private Integer deleted;
 
     @TableField(exist = false)

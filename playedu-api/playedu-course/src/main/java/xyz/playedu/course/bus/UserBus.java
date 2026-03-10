@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import xyz.playedu.common.util.StringUtil;
 import xyz.playedu.course.service.CourseService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/20 14:56
  */
@@ -44,11 +44,11 @@ public class UserBus {
     public boolean canSeeCourse(Integer userId, Integer courseId) {
         List<Integer> courseDepIds = courseService.getDepIdsByCourseId(courseId);
         if (StringUtil.isEmpty(courseDepIds)) {
-            // 线上课全部部门=>任何学员都可以学习
+            // 線上課全部部門=>任何學員都可以學習
             return true;
         }
 
-        // 获取学员所属部门以及所有父级部门
+        // 獲取學員所屬部門以及所有父級部門
         List<Integer> allDepIds = new ArrayList<>();
         List<Integer> userDepIds = userService.getDepIdsByUserId(userId);
         if (StringUtil.isNotEmpty(userDepIds)) {

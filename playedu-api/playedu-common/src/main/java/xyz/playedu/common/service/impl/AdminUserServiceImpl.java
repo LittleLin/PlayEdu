@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
     public AdminUser findOrFail(Integer id) throws NotFoundException {
         AdminUser user = getOne(query().getWrapper().eq("id", id));
         if (user == null) {
-            throw new NotFoundException("管理员不存在");
+            throw new NotFoundException("管理員不存在");
         }
         return user;
     }
@@ -102,7 +102,7 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
             String name, String email, String password, Integer isBanLogin, Integer[] roleIds)
             throws ServiceException {
         if (emailExists(email)) {
-            throw new ServiceException("邮箱已存在");
+            throw new ServiceException("電子郵件已存在");
         }
 
         String salt = HelperUtil.randomString(6);
@@ -169,14 +169,14 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
         updateAdminUser.setName(name);
         updateAdminUser.setIsBanLogin(isBanLogin);
 
-        if (!user.getEmail().equals(email)) { // 更换了邮箱
+        if (!user.getEmail().equals(email)) { // 更換了電子郵件
             if (emailExists(email)) {
-                throw new ServiceException("邮箱已存在");
+                throw new ServiceException("電子郵件已存在");
             }
             updateAdminUser.setEmail(email);
         }
 
-        if (password != null && password.length() > 0) { // 更换了密码
+        if (password != null && password.length() > 0) { // 更換了密碼
             updateAdminUser.setPassword(HelperUtil.MD5(password + user.getSalt()));
         }
 

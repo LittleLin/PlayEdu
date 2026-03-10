@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import xyz.playedu.common.service.LdapSyncDepartmentDetailService;
 import xyz.playedu.common.service.LdapSyncUserDetailService;
 import xyz.playedu.common.types.JsonResponse;
 
-/** LDAP同步详情控制器 */
+/** LDAP同步詳情控制器 */
 @RestController
 @RequestMapping("/backend/v1/ldap")
 public class LdapSyncDetailController {
@@ -38,14 +38,14 @@ public class LdapSyncDetailController {
     @Autowired private LdapSyncUserDetailService ldapSyncUserDetailService;
 
     /**
-     * 获取同步详情
+     * 獲取同步詳情
      *
-     * @param id 同步记录ID
-     * @param type 详情类型：department-部门，user-用户
-     * @param action 操作类型： - 部门：1-新增，2-更新，3-删除，4-无变化 - 用户：1-新增，2-更新，3-删除，4-无变化，5-禁止
-     * @param page 页码
-     * @param size 每页数量
-     * @return 分页结果
+     * @param id 同步記錄ID
+     * @param type 詳情類型：department-部門，user-使用者
+     * @param action 操作類型： - 部門：1-新增，2-更新，3-刪除，4-無變化 - 使用者：1-新增，2-更新，3-刪除，4-無變化，5-禁止
+     * @param page 頁碼
+     * @param size 每頁數量
+     * @return 分頁結果
      */
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/sync-records/{id}/details")
@@ -57,7 +57,7 @@ public class LdapSyncDetailController {
             @RequestParam(defaultValue = "10") Integer size) {
 
         if ("department".equals(type)) {
-            // 部门同步详情
+            // 部門同步詳情
             QueryWrapper<LdapSyncDepartmentDetail> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("record_id", id);
             if (action > 0) {
@@ -70,7 +70,7 @@ public class LdapSyncDetailController {
 
             return JsonResponse.data(pageResult);
         } else if ("user".equals(type)) {
-            // 用户同步详情
+            // 使用者同步詳情
             QueryWrapper<LdapSyncUserDetail> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("record_id", id);
             if (action > 0) {
@@ -84,6 +84,6 @@ public class LdapSyncDetailController {
             return JsonResponse.data(pageResult);
         }
 
-        return JsonResponse.error("不支持的详情类型");
+        return JsonResponse.error("不支持的詳情類型");
     }
 }

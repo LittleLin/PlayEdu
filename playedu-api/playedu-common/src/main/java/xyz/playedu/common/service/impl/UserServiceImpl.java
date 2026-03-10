@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import xyz.playedu.common.util.HelperUtil;
 
 /**
  * @author tengteng
- * @description 针对表【users】的数据库操作Service实现
+ * @description 針對表【users】的資料庫操作Service實現
  * @createDate 2023-02-23 13:50:58
  */
 @Service
@@ -80,7 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User findOrFail(Integer id) throws NotFoundException {
         User user = getOne(query().getWrapper().eq("id", id));
         if (user == null) {
-            throw new NotFoundException("学员不存在");
+            throw new NotFoundException("學員不存在");
         }
         return user;
     }
@@ -187,7 +187,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void passwordChange(User user, String oldPassword, String newPassword)
             throws ServiceException {
         if (!HelperUtil.MD5(oldPassword + user.getSalt()).equals(user.getPassword())) {
-            throw new ServiceException("原密码不正确");
+            throw new ServiceException("原密碼不正確");
         }
         updateById(
                 new User() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,17 +60,17 @@ public class CommonConstant {
     public static final String SHOP = "SHOP";
     public static final String SHOP_ROLLBACK = "SHOP_ROLLBACK";
 
-    public static final String MANUAL_TIP = "手动调整";
-    public static final String LOGIN_TIP = "首次登录";
-    public static final String SHOP_TIP = "积分商城购物";
-    public static final String SHOP_ROLLBACK_TIP = "积分商城退还积分";
+    public static final String MANUAL_TIP = "手動調整";
+    public static final String LOGIN_TIP = "首次登入";
+    public static final String SHOP_TIP = "積分商城購物";
+    public static final String SHOP_ROLLBACK_TIP = "積分商城退還積分";
 
-    public static final String HOUR_FINISHED_TIP = "课时学习完成";
-    public static final String COURSE_FINISHED_TIP = "线上课程学习完成";
-    public static final String OFFLINE_COURSE_FINISHED_TIP = "线下课程签到完成";
-    public static final String EXAM_FINISHED_TIP = "考试首次合格";
-    public static final String TASK_EXAM_FINISHED_TIP = "考试任务首次合格";
-    public static final String TASK_STUDY_FINISHED_TIP = "学习任务学习完成";
+    public static final String HOUR_FINISHED_TIP = "課時學習完成";
+    public static final String COURSE_FINISHED_TIP = "線上課程學習完成";
+    public static final String OFFLINE_COURSE_FINISHED_TIP = "線下課程簽到完成";
+    public static final String EXAM_FINISHED_TIP = "考試首次合格";
+    public static final String TASK_EXAM_FINISHED_TIP = "考試任務首次合格";
+    public static final String TASK_STUDY_FINISHED_TIP = "學習任務學習完成";
 
     public static final String EXAM = "EXAM";
     public static final String EXAM_RANGE_BEGIN = "EXAM_RANGE_BEGIN";
@@ -86,7 +86,7 @@ public class CommonConstant {
     public static final String SEPARATOR = ".";
     public static final String JSON = "json";
 
-    public static final String OTHER_DEP = "其他（待设置部门）";
+    public static final String OTHER_DEP = "其他（待設置部門）";
 
     public static final Integer LOGIN_CHANNEL_LOCAL = 0;
     public static final Integer LOGIN_CHANNEL_WORK_WECHAT = 1;

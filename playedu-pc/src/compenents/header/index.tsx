@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
         {
           key: "1",
           type: "group",
-          label: "部门",
+          label: "部門",
           children: [],
         },
       ];
@@ -69,11 +69,11 @@ export const Header: React.FC = () => {
   const onClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "login_out") {
       confirm({
-        title: "操作确认",
+        title: "操作確認",
         icon: <ExclamationCircleFilled />,
-        content: "确认退出登录？",
+        content: "確認登出？",
         centered: true,
-        okText: "确认",
+        okText: "確認",
         cancelText: "取消",
         onOk() {
           dispatch(logoutAction());
@@ -92,14 +92,14 @@ export const Header: React.FC = () => {
 
   const items: MenuProps["items"] = [
     {
-      label: "个人信息",
+      label: "個人信息",
       key: "user_info",
       icon: (
         <i className="iconfont icon-icon-12 c-red" style={{ fontSize: 16 }} />
       ),
     },
     {
-      label: "修改密码",
+      label: "修改密碼",
       key: "change_password",
       icon: (
         <i
@@ -109,7 +109,7 @@ export const Header: React.FC = () => {
       ),
     },
     {
-      label: "退出登录",
+      label: "登出",
       key: "login_out",
       icon: (
         <i
@@ -130,11 +130,11 @@ export const Header: React.FC = () => {
       }
     });
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认切换部门？",
+      content: "確認切換部門？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         setCurrentDepartment(name);
@@ -146,7 +146,7 @@ export const Header: React.FC = () => {
           {
             key: "1",
             type: "group",
-            label: "部门",
+            label: "部門",
             children: [],
           },
         ];
@@ -168,11 +168,11 @@ export const Header: React.FC = () => {
   const navs = [
     {
       key: "/",
-      label: "首页",
+      label: "首頁",
     },
     {
       key: "/latest-learn",
-      label: "最近学习",
+      label: "最近學習",
     },
   ];
 
@@ -181,7 +181,7 @@ export const Header: React.FC = () => {
       <div className={styles["main-header"]}>
         <div className="d-flex">
           <Link to="/" className={styles["App-logo"]}>
-            {/* 此处为版权标识，严禁删改 */}
+            {/* 此處爲版權標識，嚴禁刪改 */}
             <img src={config.resourceUrl[config.systemLogo] || logo} />
           </Link>
           <div className={styles["navs"]}>

@@ -1,18 +1,18 @@
 import client from "./internal/httpClient";
 
-//params可选值如下：
+//params可選值如下：
 // name - 姓名
-// nickname - 昵称
-// email - 邮箱
-// id_card - 身份证号
+// nickname - 暱稱
+// email - 電子郵件
+// id_card - 身份證號
 // is_active - 是否激活[1:是,0:否]
-// is_lock - 是否锁定[1:是,0:否]
-// is_verify - 是否完成实名认证[1:是,0:否]
-// is_set_password - 是否设置密码[1:是,0:否]
-// created_at - 注册时间区间过滤 - 格式(字符串): "开始时间,结束时间"
-// dep_ids - 部门id字符串 - 格式(字符串): 1,2,3
-// sort_field - 排序字段(默认值:id) 可选值：id,created_at
-// sort_algo - 排序算法(默认值:desc) 可选值：asc,desc
+// is_lock - 是否鎖定[1:是,0:否]
+// is_verify - 是否完成實名認證[1:是,0:否]
+// is_set_password - 是否設置密碼[1:是,0:否]
+// created_at - 註冊時間區間過濾 - 格式(字符串): "開始時間,結束時間"
+// dep_ids - 部門id字符串 - 格式(字符串): 1,2,3
+// sort_field - 排序欄位(預設值:id) 可選值：id,created_at
+// sort_algo - 排序算法(預設值:desc) 可選值：asc,desc
 export function userList(page: number, size: number, params: object) {
   return client.get("/backend/v1/user/index", {
     page,
@@ -70,8 +70,8 @@ export function destroyUser(id: number) {
   return client.destroy(`/backend/v1/user/${id}`);
 }
 
-//startline是表格真是数据的起始行号-用于提示哪一行数据存在问题
-//users是一个二维字符串数组，每个数组的元素如下：[部门ids字符串,邮箱,昵称,密码,姓名,身份证]
+//startline是表格真是數據的起始行號-用於提示哪一行數據存在問題
+//users是一個二維字符串數組，每個數組的元素如下：[部門ids字符串,電子郵件,暱稱,密碼,姓名,身份證]
 export function storeBatch(startLine: number, users: string[][]) {
   return client.post("/backend/v1/user/store-batch", {
     start_line: startLine,

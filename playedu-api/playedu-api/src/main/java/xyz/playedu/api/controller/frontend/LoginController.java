@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,24 +66,24 @@ public class LoginController {
     public JsonResponse password(@RequestBody @Validated LoginPasswordRequest req)
             throws LimitException {
         if (appConfigService.enabledLdapLogin()) {
-            return JsonResponse.error("请使用LDAP登录");
+            return JsonResponse.error("請使用LDAP登入");
         }
 
         String email = req.getEmail();
 
         User user = userService.find(email);
         if (user == null) {
-            return JsonResponse.error("邮箱或密码错误");
+            return JsonResponse.error("電子郵件或密碼錯誤");
         }
 
         loginLimitCache.check(email);
 
         if (!HelperUtil.MD5(req.getPassword() + user.getSalt()).equals(user.getPassword())) {
-            return JsonResponse.error("邮箱或密码错误");
+            return JsonResponse.error("電子郵件或密碼錯誤");
         }
 
         if (user.getIsLock() == 1) {
-            return JsonResponse.error("当前学员已锁定无法登录");
+            return JsonResponse.error("當前學員已鎖定無法登入");
         }
 
         loginLimitCache.destroy(email);
@@ -109,29 +109,29 @@ public class LoginController {
         // 限流控制
         loginLimitCache.check(username);
 
-        // 锁控制-防止并发登录重复写入数据
+        // 鎖控制-防止併發登入重複寫入數據
         if (!loginLockCache.apply(username)) {
-            return JsonResponse.error("请稍候再试");
+            return JsonResponse.error("請稍候再試");
         }
 
         try {
             LdapTransformUser ldapTransformUser =
                     LdapUtil.loginByMailOrUid(ldapConfig, mail, uid, req.getPassword());
             if (ldapTransformUser == null) {
-                return JsonResponse.error("登录失败.请检查账号和密码");
+                return JsonResponse.error("登入失敗.請檢查帳號和密碼");
             }
 
             HashMap<String, Object> data = loginBus.tokenByLdapTransformUser(ldapTransformUser);
 
-            // 删除限流控制
+            // 刪除限流控制
             loginLimitCache.destroy(username);
 
             return JsonResponse.data(data);
         } catch (ServiceException e) {
             return JsonResponse.error(e.getMessage());
         } catch (Exception e) {
-            log.error("LDAP登录失败", e);
-            return JsonResponse.error("系统错误");
+            log.error("LDAP登入失敗", e);
+            return JsonResponse.error("系統錯誤");
         } finally {
             loginLockCache.release(username);
         }

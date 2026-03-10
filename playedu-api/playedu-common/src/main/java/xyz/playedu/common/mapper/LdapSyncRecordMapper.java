@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import xyz.playedu.common.domain.LdapSyncRecord;
 
 /**
- * @description 针对表【ldap_sync_record】的数据库操作Mapper
+ * @description 針對表【ldap_sync_record】的資料庫操作Mapper
  */
 public interface LdapSyncRecordMapper extends BaseMapper<LdapSyncRecord> {}

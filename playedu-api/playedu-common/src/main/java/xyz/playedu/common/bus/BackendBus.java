@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class BackendBus {
     }
 
     public HashMap<String, Boolean> adminUserPermissions(Integer userId) {
-        // 读取超级管理角色
+        // 讀取超級管理角色
         AdminRole superRole = adminRoleService.getBySlug(BackendConstant.SUPER_ADMIN_ROLE);
 
         HashMap<String, Boolean> permissions = new HashMap<>();
@@ -53,9 +53,9 @@ public class BackendBus {
 
         List<Integer> permissionIds;
 
-        if (roleIds.contains(superRole.getId())) { // 包含超级管理角色的话返回全部权限
+        if (roleIds.contains(superRole.getId())) { // 包含超級管理角色的話返回全部權限
             permissionIds = permissionService.allIds();
-        } else { // 根据相应的roleIds读取权限
+        } else { // 根據相應的roleIds讀取權限
             permissionIds = adminRoleService.getPermissionIdsByRoleIds(roleIds);
             if (permissionIds.size() == 0) {
                 return permissions;
@@ -66,7 +66,7 @@ public class BackendBus {
     }
 
     public static String valueHidden(String permissionSlug, String type, String value) {
-        if (BCtx.isNull() || value == null) { // 非后管环境直接返回 || 值为null不需要处理
+        if (BCtx.isNull() || value == null) { // 非後管環境直接返回 || 值爲null不需要處理
             return value;
         }
 

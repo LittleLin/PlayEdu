@@ -42,14 +42,14 @@ export const DepartmentCreate: React.FC<PropInterface> = ({
       if (JSON.stringify(departments) !== "{}") {
         const new_arr: Option[] = checkArr(departments, 0);
         new_arr.unshift({
-          label: "作为一级部门",
+          label: "作爲一級部門",
           value: 0,
         });
         setDepartments(new_arr);
       } else {
         const new_arr: Option[] = [];
         new_arr.unshift({
-          label: "作为一级部门",
+          label: "作爲一級部門",
           value: 0,
         });
         setDepartments(new_arr);
@@ -116,7 +116,7 @@ export const DepartmentCreate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="新建部门"
+          title="新增部門"
           centered
           forceRender
           open={true}
@@ -146,14 +146,14 @@ export const DepartmentCreate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="所属上级"
+                label="所屬上級"
                 name="parent_id"
-                rules={[{ required: true, message: "请选择所属上级!" }]}
+                rules={[{ required: true, message: "請選擇所屬上級!" }]}
               >
                 <Cascader
                   style={{ width: 200 }}
                   allowClear
-                  placeholder="请选择所属上级"
+                  placeholder="請選擇所屬上級"
                   onChange={handleChange}
                   options={departments}
                   changeOnSelect
@@ -162,14 +162,14 @@ export const DepartmentCreate: React.FC<PropInterface> = ({
                 />
               </Form.Item>
               <Form.Item
-                label="部门名称"
+                label="部門名稱"
                 name="name"
-                rules={[{ required: true, message: "请输入部门名称!" }]}
+                rules={[{ required: true, message: "請輸入部門名稱!" }]}
               >
                 <Input
                   style={{ width: 200 }}
                   allowClear
-                  placeholder="请输入部门名称"
+                  placeholder="請輸入部門名稱"
                 />
               </Form.Item>
             </Form>

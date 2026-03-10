@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import xyz.playedu.system.service.MigrationService;
 
 /**
  * @author tengyongzhi
- * @description 针对表【migrations】的数据库操作Service实现
+ * @description 針對表【migrations】的資料庫操作Service實現
  * @createDate 2023-08-27 12:40:00
  */
 @Service

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,18 @@ public enum BusinessTypeConstant {
     /** 修改 */
     UPDATE,
 
-    /** 删除 */
+    /** 刪除 */
     DELETE,
 
-    /** 查询 */
+    /** 查詢 */
     GET,
 
-    /** 登录 */
+    /** 登入 */
     LOGIN,
 
-    /** 退出登录 */
+    /** 登出 */
     LOGOUT,
 
-    /** 上传 */
+    /** 上傳 */
     UPLOAD
 }

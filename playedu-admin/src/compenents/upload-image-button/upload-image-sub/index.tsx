@@ -27,12 +27,12 @@ export const UploadImageSub = (props: PropsInterface) => {
       const { status, response } = info.file;
       if (status === "done") {
         if (response.code === 0) {
-          message.success(`${info.file.name} 上传成功`);
+          message.success(`${info.file.name} 上傳成功`);
         } else {
           message.error(response.msg);
         }
       } else if (status === "error") {
-        message.error(`${info.file.name} 上传失败`);
+        message.error(`${info.file.name} 上傳失敗`);
       }
     },
     showUploadList: {
@@ -49,7 +49,7 @@ export const UploadImageSub = (props: PropsInterface) => {
           setShowModal(true);
         }}
       >
-        上传图片
+        上傳圖片
       </Button>
 
       {showModal && (
@@ -69,9 +69,9 @@ export const UploadImageSub = (props: PropsInterface) => {
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
-            <p className="ant-upload-text">请将图片拖拽到此处上传</p>
+            <p className="ant-upload-text">請將圖片拖拽到此處上傳</p>
             <p className="ant-upload-hint">
-              支持一次上传多个 / 支持 png,jpg,jpeg,gif 格式图片
+              支持一次上傳多個 / 支持 png,jpg,jpeg,gif 格式圖片
             </p>
           </Dragger>
         </Modal>

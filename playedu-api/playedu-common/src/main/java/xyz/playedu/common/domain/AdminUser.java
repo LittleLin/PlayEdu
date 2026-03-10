@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,28 +44,28 @@ public class AdminUser implements Serializable {
     /** 姓名 */
     private String name;
 
-    /** 邮箱 */
+    /** 電子郵件 */
     private String email;
 
-    /** 密码 */
+    /** 密碼 */
     @JsonIgnore private String password;
 
     /** Salt */
     @JsonIgnore private String salt;
 
-    /** 登录IP */
+    /** 登入IP */
     @JsonProperty("login_ip")
     private String loginIp;
 
-    /** 登录时间 */
+    /** 登入時間 */
     @JsonProperty("login_at")
     private Date loginAt;
 
-    /** 1禁止登录,0否 */
+    /** 1禁止登入,0否 */
     @JsonProperty("is_ban_login")
     private Integer isBanLogin;
 
-    /** 登录次数 */
+    /** 登入次數 */
     @JsonProperty("login_times")
     private Integer loginTimes;
 

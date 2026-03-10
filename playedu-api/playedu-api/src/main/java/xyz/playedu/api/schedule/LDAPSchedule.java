@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,23 +31,23 @@ public class LDAPSchedule {
 
     @Scheduled(fixedRate = 3600000)
     public void sync() {
-        // 系统刚启动不执行
+        // 系統剛啓動不執行
         if (times == 0) {
             times++;
             return;
         }
 
         if (!ldapBus.enabledLDAP()) {
-            log.info("未配置LDAP服务");
+            log.info("未設定LDAP服務");
             return;
         }
 
         try {
-            // 使用新的同步记录功能
-            ldapBus.syncAndRecord(0); // 0表示系统自动执行
+            // 使用新的同步記錄功能
+            ldapBus.syncAndRecord(0); // 0表示系統自動執行
             log.info("LDAP同步成功");
         } catch (Exception e) {
-            log.error("LDAP同步失败", e);
+            log.error("LDAP同步失敗", e);
         }
     }
 }

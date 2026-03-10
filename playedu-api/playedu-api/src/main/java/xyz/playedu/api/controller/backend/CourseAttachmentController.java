@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,18 +43,18 @@ public class CourseAttachmentController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create")
-    @Log(title = "线上课-附件-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "線上課-附件-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseAttachmentRequest req)
             throws NotFoundException {
-        // 附件类型校验
+        // 附件類型校驗
         String type = req.getType();
         if (!BackendConstant.RESOURCE_TYPE_ATTACHMENT.contains(type)) {
-            return JsonResponse.error("附件类型不支持");
+            return JsonResponse.error("附件類型不支持");
         }
 
-        // 课时重复添加校验
+        // 課時重複添加校驗
         List<Integer> existsRids = attachmentService.getRidsByCourseId(courseId);
         if (existsRids != null) {
             if (existsRids.contains(req.getRid())) {
@@ -70,12 +70,12 @@ public class CourseAttachmentController {
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create-batch")
     @Transactional
-    @Log(title = "线上课-附件-批量新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "線上課-附件-批量新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse storeMulti(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseAttachmentMultiRequest req) {
         if (req.getAttachments().isEmpty()) {
-            return JsonResponse.error("参数为空");
+            return JsonResponse.error("參數爲空");
         }
 
         List<Integer> existsRids = attachmentService.getRidsByCourseId(courseId);
@@ -107,7 +107,7 @@ public class CourseAttachmentController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/{id}")
-    @Log(title = "线上课-附件-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-附件-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
@@ -118,7 +118,7 @@ public class CourseAttachmentController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PutMapping("/{id}")
-    @Log(title = "线上课-附件-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-附件-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id,
@@ -131,7 +131,7 @@ public class CourseAttachmentController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @DeleteMapping("/{id}")
-    @Log(title = "线上课-附件-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "線上課-附件-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
@@ -142,7 +142,7 @@ public class CourseAttachmentController {
     }
 
     @PutMapping("/update/sort")
-    @Log(title = "线上课-附件-排序调整", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-附件-排序調整", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse updateSort(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseAttachmentSortRequest req) {

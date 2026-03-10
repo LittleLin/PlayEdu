@@ -2,6 +2,6 @@ export {};
 
 declare global {
   interface Window {
-    $microWidgetProps: any; //全局变量名
+    $microWidgetProps: any; //全局變量名
   }
 }

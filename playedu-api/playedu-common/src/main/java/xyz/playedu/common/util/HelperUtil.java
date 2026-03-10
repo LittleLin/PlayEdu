@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class HelperUtil {
     }
 
     /**
-     * 制作UUID
+     * 製作UUID
      *
      * @return String
      * @author fzr
@@ -49,9 +49,9 @@ public class HelperUtil {
     }
 
     /**
-     * 返回随机字符串
+     * 返回隨機字符串
      *
-     * @param length 要生成的长度
+     * @param length 要生成的長度
      * @return String
      * @author fzr
      */
@@ -68,9 +68,9 @@ public class HelperUtil {
     }
 
     /**
-     * 返回随机数字字符串
+     * 返回隨機數字字符串
      *
-     * @param length 要生成的长度
+     * @param length 要生成的長度
      * @return String
      * @author fzr
      */
@@ -86,7 +86,7 @@ public class HelperUtil {
     }
 
     /**
-     * 转换存储单位: KB MB GB TB
+     * 轉換存儲單位: KB MB GB TB
      *
      * @return String
      * @author fzr
@@ -115,12 +115,12 @@ public class HelperUtil {
     }
 
     /**
-     * 下载文件
+     * 下載檔案
      *
-     * @param urlString (文件网址)
-     * @param savePath (保存路径,如: /www/uploads)
-     * @param filename (保存名称,如: aa.png)
-     * @throws IOException 异常
+     * @param urlString (檔案網址)
+     * @param savePath (保存路徑,如: /www/uploads)
+     * @param filename (保存名稱,如: aa.png)
+     * @throws IOException 異常
      * @author fzr
      */
     public static void download(String urlString, String savePath, String filename)
@@ -131,7 +131,7 @@ public class HelperUtil {
         File sf = new File(savePath);
         if (!sf.exists()) {
             if (sf.mkdirs()) {
-                throw new IOException("创建目录失败");
+                throw new IOException("建立目錄失敗");
             }
         }
         try (InputStream in = con.getInputStream();
@@ -147,9 +147,9 @@ public class HelperUtil {
     }
 
     /**
-     * 对象类型Map合并
+     * 對象類型Map合併
      *
-     * @param map 对象
+     * @param map 對象
      * @return Object
      * @author fzr
      */
@@ -162,9 +162,9 @@ public class HelperUtil {
     }
 
     /**
-     * 字符串类型Map合并
+     * 字符串類型Map合併
      *
-     * @param map 对象
+     * @param map 對象
      * @return Object
      * @author fzr
      */

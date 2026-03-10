@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,11 +57,11 @@ public class LoginController {
     @Autowired private PlayEduConfig playEduConfig;
 
     @PostMapping("/login")
-    @Log(title = "管理员-登录", businessType = BusinessTypeConstant.LOGIN)
+    @Log(title = "管理員-登入", businessType = BusinessTypeConstant.LOGIN)
     public JsonResponse login(@RequestBody @Validated LoginRequest loginRequest) {
         AdminUser adminUser = adminUserService.findByEmail(loginRequest.email);
         if (adminUser == null) {
-            return JsonResponse.error("邮箱或密码错误");
+            return JsonResponse.error("電子郵件或密碼錯誤");
         }
 
         String limitKey = "admin-login-limit:" + loginRequest.getEmail();
@@ -69,19 +69,19 @@ public class LoginController {
         if (reqCount > 10 && !playEduConfig.getTesting()) {
             Long exp = MemoryCacheUtil.ttlWithoutPrefix(limitKey);
             return JsonResponse.error(
-                    String.format("您的账号已被锁定，请%s后重试", exp > 60 ? exp / 60 + "分钟" : exp + "秒"));
+                    String.format("您的帳號已被鎖定，請%s後重試", exp > 60 ? exp / 60 + "分鐘" : exp + "秒"));
         }
 
         String password =
                 HelperUtil.MD5(loginRequest.getPassword() + adminUser.getSalt()).toLowerCase();
         if (!adminUser.getPassword().equals(password)) {
-            return JsonResponse.error("邮箱或密码错误");
+            return JsonResponse.error("電子郵件或密碼錯誤");
         }
 
         MemoryCacheUtil.del(limitKey);
 
         if (adminUser.getIsBanLogin().equals(1)) {
-            return JsonResponse.error("当前管理员已禁止登录");
+            return JsonResponse.error("當前管理員已禁止登入");
         }
 
         String token = authService.loginUsingId(adminUser.getId(), RequestUtil.url());
@@ -101,14 +101,14 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    @Log(title = "管理员-登出", businessType = BusinessTypeConstant.LOGOUT)
+    @Log(title = "管理員-登出", businessType = BusinessTypeConstant.LOGOUT)
     public JsonResponse logout() {
         authService.logout();
         return JsonResponse.success("success");
     }
 
     @GetMapping("/detail")
-    @Log(title = "管理员-详情", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員-詳情", businessType = BusinessTypeConstant.GET)
     public JsonResponse detail() {
         AdminUser user = BCtx.getAdminUser();
         HashMap<String, Boolean> permissions = backendBus.adminUserPermissions(user.getId());
@@ -122,12 +122,12 @@ public class LoginController {
 
     @BackendPermission(slug = BPermissionConstant.PASSWORD_CHANGE)
     @PutMapping("/password")
-    @Log(title = "管理员-密码修改", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "管理員-密碼修改", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse changePassword(@RequestBody @Validated PasswordChangeRequest req) {
         AdminUser user = BCtx.getAdminUser();
         String password = HelperUtil.MD5(req.getOldPassword() + user.getSalt());
         if (!password.equals(user.getPassword())) {
-            return JsonResponse.error("原密码不正确");
+            return JsonResponse.error("原密碼不正確");
         }
         adminUserService.passwordChange(user, req.getNewPassword());
         return JsonResponse.success();

@@ -50,7 +50,7 @@ const IndexPage = () => {
     Number(result.get("cid") || 0)
   );
   const [categoryText, setCategoryText] = useState<string>(
-    String(result.get("catName") || "所有分类")
+    String(result.get("catName") || "所有分類")
   );
   const [selectKey, setSelectKey] = useState<any>([0]);
   const [learnCourseRecords, setLearnCourseRecords] =
@@ -80,7 +80,7 @@ const IndexPage = () => {
   }, [tabKey, currentDepId, categoryId]);
 
   useEffect(() => {
-    document.title = systemConfig.systemName || "首页";
+    document.title = systemConfig.systemName || "首頁";
   }, [systemConfig]);
 
   const hide = () => {
@@ -144,7 +144,7 @@ const IndexPage = () => {
         const new_arr: CategoryModel[] = checkArr(categories, 0);
         new_arr.unshift({
           key: 0,
-          title: "所有分类",
+          title: "所有分類",
         });
         setCategories(new_arr);
       }
@@ -185,19 +185,19 @@ const IndexPage = () => {
     },
     {
       key: 1,
-      label: `必修课`,
+      label: `必修課`,
     },
     {
       key: 2,
-      label: `选修课`,
+      label: `選修課`,
     },
     {
       key: 3,
-      label: `已学完`,
+      label: `已學完`,
     },
     {
       key: 4,
-      label: `未学完`,
+      label: `未學完`,
     },
   ];
 
@@ -267,17 +267,17 @@ const IndexPage = () => {
           <div className={styles["top-item"]}>
             <div className={styles["title"]}>
               <img className={styles["icon"]} src={myLesoon} />
-              <span>课程进度</span>
+              <span>課程進度</span>
             </div>
             <div className={styles["info"]}>
               <div className={styles["info-item"]}>
-                <span>必修课：已学完课程</span>
+                <span>必修課：已學完課程</span>
                 <strong> {stats?.required_finished_course_count || 0} </strong>
                 <span>/ {stats?.required_course_count || 0}</span>
               </div>
               {stats && stats.nun_required_course_count > 0 && (
                 <div className={styles["info-item"]}>
-                  <span>选修课：已学完课程</span>
+                  <span>選修課：已學完課程</span>
                   <strong>
                     {" "}
                     {stats?.nun_required_finished_course_count || 0}{" "}
@@ -290,7 +290,7 @@ const IndexPage = () => {
           <div className={styles["top-item"]}>
             <div className={styles["title"]}>
               <img className={styles["icon"]} src={studyTime} />
-              <span>学习时长</span>
+              <span>學習時長</span>
             </div>
             {stats ? (
               <div className={styles["info"]}>
@@ -303,17 +303,17 @@ const IndexPage = () => {
                         {studyTimeFormat(stats.today_learn_duration)[0] ||
                           0}{" "}
                       </strong>
-                      小时
+                      小時
                     </>
                   )}
                   <strong>
                     {" "}
                     {studyTimeFormat(stats.today_learn_duration)[1] || 0}{" "}
                   </strong>
-                  分钟
+                  分鐘
                 </div>
                 <div className={styles["info-item"]}>
-                  累计：
+                  累計：
                   {studyTimeFormat(stats.learn_duration || 0)[0] !== 0 && (
                     <>
                       <strong>
@@ -321,14 +321,14 @@ const IndexPage = () => {
                         {studyTimeFormat(stats.learn_duration || 0)[0] ||
                           0}{" "}
                       </strong>
-                      小时
+                      小時
                     </>
                   )}
                   <strong>
                     {" "}
                     {studyTimeFormat(stats.learn_duration || 0)[1] || 0}{" "}
                   </strong>
-                  分钟
+                  分鐘
                 </div>
               </div>
             ) : null}

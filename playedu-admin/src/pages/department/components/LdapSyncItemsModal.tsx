@@ -50,14 +50,14 @@ export const LdapSyncItemsModal: React.FC<LdapSyncItemsModalProps> = ({
       department: {
         1: "新增",
         2: "更新",
-        3: "删除",
-        4: "无变化"
+        3: "刪除",
+        4: "無變化"
       },
       user: {
         1: "新增",
         2: "更新",
-        3: "删除",
-        4: "无变化",
+        3: "刪除",
+        4: "無變化",
         5: "禁止"
       }
     };
@@ -69,8 +69,8 @@ export const LdapSyncItemsModal: React.FC<LdapSyncItemsModalProps> = ({
     const colors: {[key: number]: string} = {
       1: "green",  // 新增
       2: "blue",   // 更新
-      3: "red",    // 删除
-      4: "gray",   // 无变化
+      3: "red",    // 刪除
+      4: "gray",   // 無變化
       5: "orange"  // 禁止
     };
     
@@ -79,11 +79,11 @@ export const LdapSyncItemsModal: React.FC<LdapSyncItemsModalProps> = ({
 
   const departmentColumns = [
     { title: "ID", dataIndex: "id", key: "id", width: 60 },
-    { title: "部门名称", dataIndex: "name", key: "name" },
+    { title: "部門名稱", dataIndex: "name", key: "name" },
     { title: "DN", dataIndex: "dn", key: "dn", ellipsis: true },
     { title: "UUID", dataIndex: "uuid", key: "uuid", width: 280 },
     { 
-      title: "操作类型", 
+      title: "操作類型", 
       dataIndex: "action", 
       key: "action",
       width: 100,
@@ -97,12 +97,12 @@ export const LdapSyncItemsModal: React.FC<LdapSyncItemsModalProps> = ({
 
   const userColumns = [
     { title: "ID", dataIndex: "id", key: "id", width: 60 },
-    { title: "用户名", dataIndex: "cn", key: "cn" },
-    { title: "登录名", dataIndex: "uid", key: "uid" },
-    { title: "邮箱", dataIndex: "email", key: "email" },
-    { title: "部门", dataIndex: "ou", key: "ou", ellipsis: true },
+    { title: "使用者名", dataIndex: "cn", key: "cn" },
+    { title: "登入名", dataIndex: "uid", key: "uid" },
+    { title: "電子郵件", dataIndex: "email", key: "email" },
+    { title: "部門", dataIndex: "ou", key: "ou", ellipsis: true },
     { 
-      title: "操作类型", 
+      title: "操作類型", 
       dataIndex: "action", 
       key: "action",
       width: 100,
@@ -115,7 +115,7 @@ export const LdapSyncItemsModal: React.FC<LdapSyncItemsModalProps> = ({
   ];
 
   const columns = type === "department" ? departmentColumns : userColumns;
-  const title = type === "department" ? "部门同步详情" : "用户同步详情";
+  const title = type === "department" ? "部門同步詳情" : "使用者同步詳情";
   const actionText = action > 0 ? ` - ${getActionText(action)}` : "";
 
   return (

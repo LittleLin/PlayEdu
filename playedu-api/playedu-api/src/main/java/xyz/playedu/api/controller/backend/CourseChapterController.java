@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class CourseChapterController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PostMapping("/create")
-    @Log(title = "线上课-章节-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-章節-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse store(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseChapterRequest req) {
@@ -55,7 +55,7 @@ public class CourseChapterController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @GetMapping("/{id}")
-    @Log(title = "线上课-章节-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "線上課-章節-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
@@ -66,7 +66,7 @@ public class CourseChapterController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @PutMapping("/{id}")
-    @Log(title = "线上课-章节-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-章節-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id,
@@ -79,14 +79,14 @@ public class CourseChapterController {
 
     @BackendPermission(slug = BPermissionConstant.COURSE)
     @DeleteMapping("/{id}")
-    @Log(title = "线上课-章节-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "線上課-章節-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(
             @PathVariable(name = "courseId") Integer courseId,
             @PathVariable(name = "id") Integer id)
             throws NotFoundException {
         CourseChapter chapter = chapterService.findOrFail(id, courseId);
         if (hourService.getCountByChapterId(chapter.getId()) > 0) {
-            return JsonResponse.error("当前章节下面存在课时无法删除");
+            return JsonResponse.error("當前章節下面存在課時無法刪除");
         }
         chapterService.removeById(chapter.getId());
         ctx.publishEvent(
@@ -96,7 +96,7 @@ public class CourseChapterController {
     }
 
     @PutMapping("/update/sort")
-    @Log(title = "线上课-章节-更新排序", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "線上課-章節-更新排序", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse updateSort(
             @PathVariable(name = "courseId") Integer courseId,
             @RequestBody @Validated CourseChapterSortRequest req) {

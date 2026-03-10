@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
 
   const items: MenuProps["items"] = [
     {
-      label: "修改密码",
+      label: "修改密碼",
       key: "change_password",
       icon: (
         <i
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
       ),
     },
     {
-      label: "退出登录",
+      label: "登出",
       key: "login_out",
       icon: (
         <i

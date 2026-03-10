@@ -223,14 +223,14 @@ export const CourseUpdate: React.FC<PropInterface> = ({
   };
 
   const disabledDate = (current: any) => {
-    return current && current >= moment().add(0, "days"); // 选择时间要大于等于当前天。若今天不能被选择，去掉等号即可。
+    return current && current >= moment().add(0, "days"); // 選擇時間要大於等於當前天。若今天不能被選擇，去掉等號即可。
   };
 
   return (
     <>
       {open ? (
         <Drawer
-          title="编辑课程"
+          title="編輯課程"
           onClose={onCancel}
           maskClosable={false}
           open={true}
@@ -242,7 +242,7 @@ export const CourseUpdate: React.FC<PropInterface> = ({
                 onClick={() => form.submit()}
                 type="primary"
               >
-                确 认
+                確 認
               </Button>
             </Space>
           }
@@ -282,9 +282,9 @@ export const CourseUpdate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="课程分类"
+                label="課程分類"
                 name="category_ids"
-                rules={[{ required: true, message: "请选择课程分类!" }]}
+                rules={[{ required: true, message: "請選擇課程分類!" }]}
               >
                 <TreeSelect
                   showCheckedStrategy={TreeSelect.SHOW_ALL}
@@ -292,49 +292,49 @@ export const CourseUpdate: React.FC<PropInterface> = ({
                   multiple
                   style={{ width: 424 }}
                   treeData={categories}
-                  placeholder="请选择课程分类"
+                  placeholder="請選擇課程分類"
                   treeDefaultExpandAll
                 />
               </Form.Item>
               <Form.Item
-                label="课程名称"
+                label="課程名稱"
                 name="title"
-                rules={[{ required: true, message: "请在此处输入课程名称!" }]}
+                rules={[{ required: true, message: "請在此處輸入課程名稱!" }]}
               >
                 <Input
                   allowClear
                   style={{ width: 424 }}
-                  placeholder="请在此处输入课程名称"
+                  placeholder="請在此處輸入課程名稱"
                 />
               </Form.Item>
               <Form.Item
-                label="课程属性"
+                label="課程屬性"
                 name="isRequired"
-                rules={[{ required: true, message: "请选择课程属性!" }]}
+                rules={[{ required: true, message: "請選擇課程屬性!" }]}
               >
                 <Radio.Group>
-                  <Radio value={1}>必修课</Radio>
+                  <Radio value={1}>必修課</Radio>
                   <Radio value={0} style={{ marginLeft: 22 }}>
-                    选修课
+                    選修課
                   </Radio>
                 </Radio.Group>
               </Form.Item>
               <Form.Item
-                label="指派部门"
+                label="指派部門"
                 name="type"
-                rules={[{ required: true, message: "请选择指派部门!" }]}
+                rules={[{ required: true, message: "請選擇指派部門!" }]}
               >
                 <Radio.Group onChange={getType}>
-                  <Radio value="open">全部部门</Radio>
-                  <Radio value="elective">选择部门</Radio>
+                  <Radio value="open">全部部門</Radio>
+                  <Radio value="elective">選擇部門</Radio>
                 </Radio.Group>
               </Form.Item>
               {type === "elective" && (
                 <>
                   <Form.Item
-                    label="选择部门"
+                    label="選擇部門"
                     name="ids"
-                    rules={[{ required: true, message: "请选择部门!" }]}
+                    rules={[{ required: true, message: "請選擇部門!" }]}
                   >
                     <div
                       className="d-flex"
@@ -349,7 +349,7 @@ export const CourseUpdate: React.FC<PropInterface> = ({
                         style={{ marginBottom: 14 }}
                         onClick={() => setIdsVisible(true)}
                       >
-                        添加范围
+                        添加範圍
                       </Button>
                       <div
                         className="d-flex"
@@ -396,9 +396,9 @@ export const CourseUpdate: React.FC<PropInterface> = ({
               )}
 
               <Form.Item
-                label="课程封面"
+                label="課程封面"
                 name="thumb"
-                rules={[{ required: true, message: "请上传课程封面!" }]}
+                rules={[{ required: true, message: "請上傳課程封面!" }]}
               >
                 <div className="d-flex">
                   <Image
@@ -476,28 +476,28 @@ export const CourseUpdate: React.FC<PropInterface> = ({
                     </div>
                     <div className="d-flex">
                       <UploadImageButton
-                        text="更换封面"
+                        text="更換封面"
                         onSelected={(url, id) => {
                           setThumb(url);
                           form.setFieldsValue({ thumb: id });
                         }}
                       ></UploadImageButton>
                       <span className="helper-text ml-8">
-                        （推荐尺寸:400x300px）
+                        （推薦尺寸:400x300px）
                       </span>
                     </div>
                   </div>
                 </div>
               </Form.Item>
-              <Form.Item label="课程简介" name="short_desc">
+              <Form.Item label="課程簡介" name="short_desc">
                 <Input.TextArea
                   style={{ width: 424, minHeight: 80 }}
                   allowClear
-                  placeholder="请输入课程简介（最多200字）"
+                  placeholder="請輸入課程簡介（最多200字）"
                   maxLength={200}
                 />
               </Form.Item>
-              <Form.Item label="上架时间">
+              <Form.Item label="上架時間">
                 <Space align="baseline" style={{ height: 32 }}>
                   <Form.Item name="published_at">
                     <DatePicker
@@ -505,11 +505,11 @@ export const CourseUpdate: React.FC<PropInterface> = ({
                       format="YYYY-MM-DD HH:mm:ss"
                       style={{ width: 240 }}
                       showTime
-                      placeholder="请选择上架时间"
+                      placeholder="請選擇上架時間"
                     />
                   </Form.Item>
                   <div className="helper-text">
-                    （上架时间越晚，排序越靠前）
+                    （上架時間越晚，排序越靠前）
                   </div>
                 </Space>
               </Form.Item>

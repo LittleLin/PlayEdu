@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import xyz.playedu.resource.domain.Resource;
 import xyz.playedu.resource.service.ResourceService;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/3/20 14:59
  */
@@ -76,7 +76,7 @@ public class HourController {
 
         UserCourseHourRecord userCourseHourRecord = null;
         if (FCtx.getId() != null && FCtx.getId() > 0) {
-            // 学员已登录
+            // 學員已登入
             userCourseHourRecord = userCourseHourRecordService.find(FCtx.getId(), courseId, id);
         }
 
@@ -98,7 +98,7 @@ public class HourController {
         Resource resource = resourceService.findOrFail(hour.getRid());
 
         HashMap<String, Object> data = new HashMap<>();
-        // 获取资源签名url
+        // 獲取資源簽名url
         data.put(
                 "resource_url",
                 resourceService.chunksPreSignUrlByIds(
@@ -107,8 +107,8 @@ public class HourController {
                                 add(resource.getId());
                             }
                         }));
-        data.put("extension", resource.getExtension()); // 视频格式
-        data.put("duration", resourceService.duration(resource.getId())); // 视频时长
+        data.put("extension", resource.getExtension()); // 影片格式
+        data.put("duration", resourceService.duration(resource.getId())); // 影片時長
 
         return JsonResponse.data(data);
     }
@@ -121,13 +121,13 @@ public class HourController {
             @RequestBody @Validated CourseHourRecordRequest req) {
         Integer duration = req.getDuration();
         if (duration <= 0) {
-            return JsonResponse.error("duration参数错误");
+            return JsonResponse.error("duration參數錯誤");
         }
 
         CourseHour hour = hourService.findOrFail(id, courseId);
         userCanSeeCourseCache.check(FCtx.getId(), courseId, true);
 
-        // 获取锁
+        // 獲取鎖
         String lockKey = String.format("record:%d", FCtx.getId());
         boolean tryLock = distributedLock.tryLock(lockKey, 5, TimeUnit.SECONDS);
         if (!tryLock) {
@@ -144,7 +144,7 @@ public class HourController {
                                 this, FCtx.getId(), courseId, hour.getId()));
             }
         } finally {
-            // 此处未考虑上面代码执行失败释放锁
+            // 此處未考慮上面代碼執行失敗釋放鎖
             distributedLock.releaseLock(lockKey);
         }
 
@@ -158,7 +158,7 @@ public class HourController {
             @PathVariable(name = "id") Integer id) {
         userCanSeeCourseCache.check(FCtx.getId(), courseId, true);
 
-        // 获取锁
+        // 獲取鎖
         String lockKey = String.format("ping:%d", FCtx.getId());
         boolean tryLock = distributedLock.tryLock(lockKey, 5, TimeUnit.SECONDS);
         if (!tryLock) {
@@ -168,9 +168,9 @@ public class HourController {
         try {
             Long curTime = System.currentTimeMillis();
 
-            // 最近一次学习时间
+            // 最近一次學習時間
             Long lastTime = userLastLearnTimeCache.get(FCtx.getId());
-            // 最大周期为10s+0.5s的网络延迟
+            // 最大週期爲10s+0.5s的網絡延遲
             if (lastTime == null || curTime - lastTime > 10500) {
                 lastTime = curTime - 10000;
             }
@@ -181,7 +181,7 @@ public class HourController {
                     new UserLearnCourseUpdateEvent(
                             this, FCtx.getId(), courseId, id, lastTime, curTime));
         } finally {
-            // 此处未考虑上面代码执行失败释放锁
+            // 此處未考慮上面代碼執行失敗釋放鎖
             distributedLock.releaseLock(lockKey);
         }
 

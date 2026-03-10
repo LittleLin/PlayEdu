@@ -14,19 +14,19 @@ export const CreateResourceCategory = (props: PropInterface) => {
 
   const confirm = () => {
     if (name.length == 0) {
-      message.error("请输入分类名");
+      message.error("請輸入分類名");
       return;
     }
     resourceCategory
       .storeResourceCategory(name, 0, 0)
       .then(() => {
         setName("");
-        message.success("分类添加成功");
+        message.success("分類添加成功");
         setShowModal(false);
         props.onUpdate();
       })
       .catch((err) => {
-        console.log("错误", err);
+        console.log("錯誤", err);
       });
   };
 
@@ -47,10 +47,10 @@ export const CreateResourceCategory = (props: PropInterface) => {
           }}
           onOk={confirm}
           open={true}
-          title="创建分类"
+          title="建立分類"
         >
           <Input
-            placeholder="请输入分类名"
+            placeholder="請輸入分類名"
             value={name}
             onChange={(e) => {
               setName(e.target.value);

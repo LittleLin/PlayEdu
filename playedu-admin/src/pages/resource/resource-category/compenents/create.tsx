@@ -42,14 +42,14 @@ export const ResourceCategoryCreate: React.FC<PropInterface> = ({
       if (JSON.stringify(categories) !== "{}") {
         const new_arr: Option[] = checkArr(categories, 0);
         new_arr.unshift({
-          label: "作为一级分类",
+          label: "作爲一級分類",
           value: 0,
         });
         setCategories(new_arr);
       } else {
         const new_arr: Option[] = [];
         new_arr.unshift({
-          label: "作为一级分类",
+          label: "作爲一級分類",
           value: 0,
         });
         setCategories(new_arr);
@@ -116,7 +116,7 @@ export const ResourceCategoryCreate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="新建分类"
+          title="新增分類"
           centered
           forceRender
           maskClosable={false}
@@ -146,14 +146,14 @@ export const ResourceCategoryCreate: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="所属上级"
+                label="所屬上級"
                 name="parent_id"
-                rules={[{ required: true, message: "请选择所属上级!" }]}
+                rules={[{ required: true, message: "請選擇所屬上級!" }]}
               >
                 <Cascader
                   style={{ width: 200 }}
                   allowClear
-                  placeholder="请选择所属上级"
+                  placeholder="請選擇所屬上級"
                   onChange={handleChange}
                   options={categories}
                   changeOnSelect
@@ -162,14 +162,14 @@ export const ResourceCategoryCreate: React.FC<PropInterface> = ({
                 />
               </Form.Item>
               <Form.Item
-                label="分类名称"
+                label="分類名稱"
                 name="name"
-                rules={[{ required: true, message: "请输入分类名称!" }]}
+                rules={[{ required: true, message: "請輸入分類名稱!" }]}
               >
                 <Input
                   style={{ width: 200 }}
                   allowClear
-                  placeholder="请输入分类名称"
+                  placeholder="請輸入分類名稱"
                 />
               </Form.Item>
             </Form>

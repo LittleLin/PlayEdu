@@ -54,11 +54,11 @@ export const UserInfoModel: React.FC<PropInterface> = ({ open, onCancel }) => {
         file.type === "image/jpg" ||
         file.type === "image/jpeg";
       if (!isPNG) {
-        message.error(`${file.name}不是图片文件`);
+        message.error(`${file.name}不是圖片檔案`);
       }
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
-        message.error("超过2M限制，不允许上传");
+        message.error("超過2M限制，不允許上傳");
       }
       return (isPNG && isLt2M) || Upload.LIST_IGNORE;
     },
@@ -71,7 +71,7 @@ export const UserInfoModel: React.FC<PropInterface> = ({ open, onCancel }) => {
           message.error(response.msg);
         }
       } else if (status === "error") {
-        message.error(`${info.file.name} 上传失败`);
+        message.error(`${info.file.name} 上傳失敗`);
       }
     },
   };
@@ -80,7 +80,7 @@ export const UserInfoModel: React.FC<PropInterface> = ({ open, onCancel }) => {
     <>
       {open ? (
         <Modal
-          title="个人信息"
+          title="個人信息"
           centered
           forceRender
           open={true}
@@ -99,7 +99,7 @@ export const UserInfoModel: React.FC<PropInterface> = ({ open, onCancel }) => {
               autoComplete="off"
             >
               <Form.Item
-                label="学员头像"
+                label="學員頭像"
                 labelCol={{ style: { marginTop: 15, marginLeft: 52 } }}
               >
                 <div className="d-flex">
@@ -119,18 +119,18 @@ export const UserInfoModel: React.FC<PropInterface> = ({ open, onCancel }) => {
                   )}
                   <div className="d-flex ml-16">
                     <Upload {...props} showUploadList={false}>
-                      <Button>更换头像</Button>
+                      <Button>更換頭像</Button>
                     </Upload>
                   </div>
                 </div>
               </Form.Item>
               {name && (
-                <Form.Item label="学员姓名">
+                <Form.Item label="學員姓名">
                   <div>{name}</div>
                 </Form.Item>
               )}
               {idCard && (
-                <Form.Item label="身份证号" style={{ marginBottom: 16 }}>
+                <Form.Item label="身份證號" style={{ marginBottom: 16 }}>
                   <div>{idCard}</div>
                 </Form.Item>
               )}

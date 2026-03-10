@@ -103,7 +103,7 @@ const MemberPage = () => {
 
   // const beforeUpload = (file: File) => {
   //   if (file.size > 2 * 1024 * 1024) {
-  //     Toast.show("超过2M限制，不允许上传");
+  //     Toast.show("超過2M限制，不允許上傳");
   //     return null;
   //   }
   //   return file;
@@ -116,11 +116,11 @@ const MemberPage = () => {
     try {
       let res = await member.avatar(data);
       if (res) {
-        Toast.show("头像更换成功");
-        await getUser(); //获取登录用户的信息并写入store
+        Toast.show("頭像更換成功");
+        await getUser(); //獲取登入使用者的信息並寫入store
       }
     } catch (e) {
-      console.error("上传失败", e);
+      console.error("上傳失敗", e);
     }
     return {
       url: URL.createObjectURL(file),
@@ -202,26 +202,26 @@ const MemberPage = () => {
         <div className={styles["stats-content"]}>
           <div className={styles["stat-item"]}>
             <span className={styles["time"]}>
-              <strong> {learnTodayHour} </strong>时
+              <strong> {learnTodayHour} </strong>時
               <strong> {learnTodayMin} </strong>分
             </span>
-            <span className={styles["tit"]}>今日学习</span>
+            <span className={styles["tit"]}>今日學習</span>
           </div>
           <div className={styles["stat-item"]}>
             <span className={styles["time"]}>
-              <strong> {learnTotalHour} </strong>时
+              <strong> {learnTotalHour} </strong>時
               <strong> {learnTotalMin} </strong>分
             </span>
-            <span className={styles["tit"]}>累计学习</span>
+            <span className={styles["tit"]}>累計學習</span>
           </div>
         </div>
         <div className={styles["records-content"]}>
           <div className={styles["record-item"]}>
-            <div className={styles["name"]}>所在部门</div>
+            <div className={styles["name"]}>所在部門</div>
             <div className={styles["value"]}>{currentDepartment}</div>
           </div>
           <div className={styles["record-item"]}>
-            <div className={styles["name"]}>课时总进度</div>
+            <div className={styles["name"]}>課時總進度</div>
             <div className={styles["value"]}>
               <strong>
                 {getTotal(
@@ -237,19 +237,19 @@ const MemberPage = () => {
             </div>
           </div>
           <div className={styles["record-item"]}>
-            <div className={styles["name"]}>必修课</div>
+            <div className={styles["name"]}>必修課</div>
             <div className={styles["value"]}>
-              已学完{" "}
+              已學完{" "}
               <strong>{stats.required_finished_course_count || 0} </strong>/{" "}
               {stats.required_course_count || 0}
             </div>
           </div>
 
           <div className={styles["record-item"]}>
-            <div className={styles["name"]}>选修课</div>
+            <div className={styles["name"]}>選修課</div>
             {stats.nun_required_course_count > 0 ? (
               <div className={styles["value"]}>
-                已学完{" "}
+                已學完{" "}
                 <strong>
                   {stats.nun_required_finished_course_count || 0}{" "}
                 </strong>
@@ -257,7 +257,7 @@ const MemberPage = () => {
               </div>
             ) : (
               <div className={styles["value"]}>
-                已学完 <strong>0 </strong>/ 0
+                已學完 <strong>0 </strong>/ 0
               </div>
             )}
           </div>
@@ -277,14 +277,14 @@ const MemberPage = () => {
                 setVisible(false);
                 if (departments.length === 1) {
                   Toast.show({
-                    content: "暂无可切换部门",
+                    content: "暫無可切換部門",
                   });
                   return;
                 }
                 navigate("/change-department");
               }}
             >
-              切换部门
+              切換部門
             </div>
             <ImageUploader
               value={fileList}
@@ -293,7 +293,7 @@ const MemberPage = () => {
               preview={false}
               showFailed={false}
             >
-              <div className={styles["button-item"]}>更换头像</div>
+              <div className={styles["button-item"]}>更換頭像</div>
             </ImageUploader>
             <div
               className={styles["button-item"]}
@@ -302,7 +302,7 @@ const MemberPage = () => {
                 navigate("/change-password");
               }}
             >
-              修改密码
+              修改密碼
             </div>
           </div>
           <div
@@ -313,7 +313,7 @@ const MemberPage = () => {
               window.location.href = "/login";
             }}
           >
-            退出登录
+            登出
           </div>
         </div>
       </Mask>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
-/** LDAP用户同步详情实体 */
+/** LDAP使用者同步詳情實體 */
 @Data
 @TableName("ldap_sync_user_detail")
 public class LdapSyncUserDetail implements Serializable {
@@ -56,7 +56,7 @@ public class LdapSyncUserDetail implements Serializable {
     private String ou;
 
     @TableField("action")
-    private Integer action; // 1-新增，2-更新，3-删除，4-无变化
+    private Integer action; // 1-新增，2-更新，3-刪除，4-無變化
 
     @TableField("created_at")
     private Date createdAt;

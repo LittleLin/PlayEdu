@@ -58,7 +58,7 @@ export const UploadVideoFloatButton = () => {
     } else {
       window.clearInterval(intervalId.current);
       window.clearInterval(intervalId2.current);
-      console.log("定时器已销毁");
+      console.log("定時器已銷燬");
     }
   }, [uploadStatus]);
 
@@ -66,20 +66,20 @@ export const UploadVideoFloatButton = () => {
     multiple: true,
     beforeUpload: async (file: File, fileList: any) => {
       if (file.size > 2 * 1024 * 1024 * 1024) {
-        message.error(`${file.name} 大小超过2G`);
+        message.error(`${file.name} 大小超過2G`);
         return Upload.LIST_IGNORE;
       }
       if (fileList.length > 10) {
         message.config({ maxCount: 1 });
-        message.error("单次最多上传10个视频");
+        message.error("單次最多上傳10個影片");
         return Upload.LIST_IGNORE;
       } else {
         message.config({ maxCount: 10 });
       }
       if (file.type === "video/mp4") {
-        // 视频封面解析 || 视频时长解析
+        // 影片封面解析 || 影片時長解析
         let videoInfo = await parseVideo(file);
-        // 添加到本地待上传
+        // 添加到本地待上傳
         let data = await getMinioUploadId();
         let run = new UploadChunk(file, data["upload_id"], data["filename"]);
         let item: FileItem = {
@@ -128,7 +128,7 @@ export const UploadVideoFloatButton = () => {
         // 再更新list
         setFileList([...localFileList.current]);
       } else {
-        message.error(`${file.name} 并不是 mp4 视频文件`);
+        message.error(`${file.name} 並不是 mp4 影片檔案`);
       }
       return Upload.LIST_IGNORE;
     },
@@ -165,12 +165,12 @@ export const UploadVideoFloatButton = () => {
           >
             <img src={upIcon} />
             <span>
-              视频上传成功 ({successNum}/{fileList.length})
+              影片上傳成功 ({successNum}/{fileList.length})
             </span>
           </div>
           <Modal
             width={800}
-            title="上传视频"
+            title="上傳影片"
             open={showModal}
             maskClosable={false}
             footer={null}
@@ -184,9 +184,9 @@ export const UploadVideoFloatButton = () => {
                   <p className="ant-upload-drag-icon">
                     <InboxOutlined />
                   </p>
-                  <p className="ant-upload-text">请将视频拖拽到此处上传</p>
+                  <p className="ant-upload-text">請將影片拖拽到此處上傳</p>
                   <p className="ant-upload-hint">
-                    支持一次上传多个 / 支持2G以内的mp4文件
+                    支持一次上傳多個 / 支持2G以內的mp4檔案
                   </p>
                 </Dragger>
               </Col>
@@ -196,7 +196,7 @@ export const UploadVideoFloatButton = () => {
                   rowKey="id"
                   columns={[
                     {
-                      title: "视频",
+                      title: "影片",
                       dataIndex: "name",
                       key: "name",
                       render: (_, record) => <span>{record.file.name}</span>,
@@ -212,13 +212,13 @@ export const UploadVideoFloatButton = () => {
                       ),
                     },
                     {
-                      title: "进度",
+                      title: "進度",
                       dataIndex: "progress",
                       key: "progress",
                       render: (_, record: FileItem) => (
                         <>
                           {record.upload.status === 0 ? (
-                            "等待上传"
+                            "等待上傳"
                           ) : (
                             <Progress
                               size="small"
@@ -244,13 +244,13 @@ export const UploadVideoFloatButton = () => {
                                   record.upload.handler.retry();
                                 }}
                               >
-                                失败.重试
+                                失敗.重試
                               </Button>
                             </>
                           ) : null}
 
                           {record.upload.status === 7 ? (
-                            <Tag color="success">上传成功</Tag>
+                            <Tag color="success">上傳成功</Tag>
                           ) : null}
                         </>
                       ),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,15 +49,15 @@ public class FrontInterceptor implements HandlerInterceptor {
         }
 
         if (!authService.check()) {
-            return responseTransform(response, 401, "请登录");
+            return responseTransform(response, 401, "請登入");
         }
 
         User user = userService.find(authService.userId());
         if (user == null) {
-            return responseTransform(response, 401, "请重新登录");
+            return responseTransform(response, 401, "請重新登入");
         }
         if (user.getIsLock() == 1) {
-            return responseTransform(response, 403, "当前学员已锁定无法登录");
+            return responseTransform(response, 403, "當前學員已鎖定無法登入");
         }
 
         FCtx.setUser(user);

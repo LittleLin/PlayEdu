@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import xyz.playedu.common.domain.AdminUser;
 @Mapper
 /**
  * @author tengteng
- * @description 针对表【admin_users】的数据库操作Mapper
+ * @description 針對表【admin_users】的資料庫操作Mapper
  * @createDate 2023-02-11 10:58:52
  */
 public interface AdminUserMapper extends BaseMapper<AdminUser> {}

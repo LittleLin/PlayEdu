@@ -48,7 +48,7 @@ const MemberDepartmentProgressPage = () => {
   const [exportLoading, setExportLoading] = useState(false);
   const modes = [
     { label: "全部", value: "all" },
-    { label: "不显示公开课", value: "only_dep" },
+    { label: "不顯示公開課", value: "only_dep" },
   ];
 
   useEffect(() => {
@@ -104,11 +104,11 @@ const MemberDepartmentProgressPage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -156,14 +156,14 @@ const MemberDepartmentProgressPage = () => {
     };
     member.departmentProgress(did, page, total, filter).then((res: any) => {
       if (res.data.total === 0) {
-        message.error("数据为空");
+        message.error("數據爲空");
         setExportLoading(false);
         return;
       }
-      let filename = title + "学习进度.xlsx";
+      let filename = title + "學習進度.xlsx";
       let sheetName = "sheet1";
       let data = [];
-      let arr = ["学员"];
+      let arr = ["學員"];
       let data2 = res.data.courses;
       let arr2: any = [];
       let value = 0;
@@ -177,7 +177,7 @@ const MemberDepartmentProgressPage = () => {
       w_courses.map((item: any) => {
         arr.push(item.title);
       });
-      arr.push("总计课时");
+      arr.push("總計課時");
       data.push(arr);
 
       res.data.data.forEach((item: any) => {
@@ -185,7 +185,7 @@ const MemberDepartmentProgressPage = () => {
         w_courses.map((it: any) => {
           if (w_records && w_records[item.id] && w_records[item.id][it.id]) {
             if (w_records && w_records[item.id][it.id].is_finished === 1) {
-              arr.push("已学完");
+              arr.push("已學完");
             } else {
               arr.push(
                 w_records &&
@@ -217,15 +217,15 @@ const MemberDepartmentProgressPage = () => {
   return (
     <div className="playedu-main-body">
       <div className="float-left mb-24">
-        <BackBartment title={title + "学习进度"} />
+        <BackBartment title={title + "學習進度"} />
       </div>
       <div className="float-left j-b-flex mb-24">
         <div className="d-flex">
           <Button type="default" onClick={() => exportExcel()}>
-            批量导出表格
+            批量導出表格
           </Button>
           <div className="helper-text ml-24">
-            （以下表格内数字对应的是表头课程的“已学完课时数/总课时数”）
+            （以下表格內數字對應的是表頭課程的“已學完課時數/總課時數”）
           </div>
         </div>
         <div className="d-flex">
@@ -238,11 +238,11 @@ const MemberDepartmentProgressPage = () => {
               }}
               allowClear
               style={{ width: 160 }}
-              placeholder="请输入姓名关键字"
+              placeholder="請輸入姓名關鍵字"
             />
           </div>
           {/* <div className="d-flex mr-24">
-            <Typography.Text>邮箱：</Typography.Text>
+            <Typography.Text>電子郵件：</Typography.Text>
             <Input
               value={email}
               onChange={(e) => {
@@ -250,7 +250,7 @@ const MemberDepartmentProgressPage = () => {
               }}
               allowClear
               style={{ width: 160 }}
-              placeholder="请输入邮箱"
+              placeholder="請輸入電子郵件"
             />
           </div>
           <div className="d-flex mr-24">
@@ -258,7 +258,7 @@ const MemberDepartmentProgressPage = () => {
             <Select
               style={{ width: 160 }}
               allowClear
-              placeholder="请选择"
+              placeholder="請選擇"
               value={showMode}
               onChange={(value: string) => setShowMode(value)}
               options={modes}
@@ -275,7 +275,7 @@ const MemberDepartmentProgressPage = () => {
                 setRefresh(!refresh);
               }}
             >
-              查 询
+              查 詢
             </Button>
           </div>
         </div>
@@ -291,7 +291,7 @@ const MemberDepartmentProgressPage = () => {
         >
           <Column
             fixed="left"
-            title="学员"
+            title="學員"
             dataIndex="name"
             key="name"
             width={150}
@@ -319,7 +319,7 @@ const MemberDepartmentProgressPage = () => {
                 <>
                   {records[record.id] && records[record.id][item.id] ? (
                     records[record.id][item.id].is_finished === 1 ? (
-                      <span>已学完</span>
+                      <span>已學完</span>
                     ) : (
                       <>
                         <span>
@@ -339,7 +339,7 @@ const MemberDepartmentProgressPage = () => {
           ))}
           <Column
             fixed="right"
-            title="总计课时"
+            title="總計課時"
             dataIndex="id"
             key="id"
             width={150}

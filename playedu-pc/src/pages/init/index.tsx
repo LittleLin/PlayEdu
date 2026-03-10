@@ -23,7 +23,7 @@ export const InitPage = (props: Props) => {
     }
     if (props.configData) {
       let config: SystemConfigStoreInterface = {
-        //系统配置
+        //系統設定
         "ldap-enabled": props.configData["ldap-enabled"],
         systemH5Url: props.configData["system-h5-url"],
         systemLogo: props.configData["system-logo"],
@@ -31,7 +31,7 @@ export const InitPage = (props: Props) => {
         systemPcUrl: props.configData["system-pc-url"],
         resourceUrl: props.configData["resource_url"],
         pcIndexFooterMsg: props.configData["system-pc-index-footer-msg"],
-        //播放器配置
+        //播放器設定
         playerPoster: props.configData["player-poster"],
         playerIsEnabledBulletSecret:
           props.configData["player-is-enabled-bullet-secret"] &&

@@ -8,21 +8,21 @@ const LicensingPage = () => {
   return (
     <>
       <div className="playedu-main-top">
-        <div className={styles["main-title"]}>当前版本信息</div>
+        <div className={styles["main-title"]}>當前版本信息</div>
         <div className="float-left mt-24">
-          <div className={styles["persion"]}>PlayEdu开源版 v2.0</div>
+          <div className={styles["persion"]}>PlayEdu開源版 v2.0</div>
         </div>
         <div className="float-left mt-16">
           <div className={styles["content"]}>
-            1.版权归属：PlayEdu开源版版权归杭州白书科技有限公司所有，保留全部使用权。
+            1.版權歸屬：PlayEdu開源版版權歸杭州白書科技有限公司所有，保留全部使用權。
           </div>
           <div className={styles["content"]}>
-            2.代码修改：允许在遵守开源协议的前提下修改代码，但需在修改处添加明确备注，详细说明修改内容。
+            2.代碼修改：允許在遵守開源協議的前提下修改代碼，但需在修改處添加明確備註，詳細說明修改內容。
           </div>
           <div className={styles["content"]}>
-            3.版权保护：任何场景下均需保留
-            PlayEdu开源版页面及代码中的原有版权信息（如 “Designed By PlayEdu”
-            标识、官网链接、开源说明等），严禁删除、修改或篡改，违者需承担法律责任及赔偿。
+            3.版權保護：任何場景下均需保留
+            PlayEdu開源版頁面及代碼中的原有版權信息（如 “Designed By PlayEdu”
+            標識、官網連結、開源說明等），嚴禁刪除、修改或篡改，違者需承擔法律責任及賠償。
           </div>
         </div>
         <div className="float-left mt-24">
@@ -32,60 +32,60 @@ const LicensingPage = () => {
               window.open("https://www.playeduos.com/");
             }}
           >
-            采购企业版本
+            採購企業版本
           </Button>
         </div>
       </div>
       <div className="playedu-main-top mt-24" style={{ position: "relative" }}>
-        <div className={styles["main-title"]}>版本功能对比</div>
+        <div className={styles["main-title"]}>版本功能對比</div>
         <div className="float-left mt-24">
           <div className={styles["contrast-box1"]}>
             <div className={styles["name"]}>功能特性</div>
-            <div className={styles["ex"]}>开源版</div>
-            <div className={styles["ex2"]}>企业版</div>
+            <div className={styles["ex"]}>開源版</div>
+            <div className={styles["ex2"]}>企業版</div>
           </div>
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>系统支持</div>
+            <div className={styles["name"]}>系統支持</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
               <span>功能支持</span>
             </div>
-            <div className={styles["ex"]}>基础功能</div>
+            <div className={styles["ex"]}>基礎功能</div>
             <div className={styles["ex2"]}>全部功能</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>技术支持</span>
+              <span>技術支持</span>
             </div>
-            <div className={styles["ex"]}>无</div>
+            <div className={styles["ex"]}>無</div>
             <Tooltip
               className={styles["ex2"]}
-              title="专属售后群以及远程排障服务"
+              title="專屬售後羣以及遠程排障服務"
             >
               <img src={fangIcon} className={styles["icon"]} />
-              7*10h专业技术服务
+              7*10h專業技術服務
             </Tooltip>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>安全认证</span>
+              <span>安全認證</span>
             </div>
-            <div className={styles["ex"]}>无</div>
-            <div className={styles["ex2"]}>CMA国家资质安全认证</div>
+            <div className={styles["ex"]}>無</div>
+            <div className={styles["ex2"]}>CMA國家資質安全認證</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>部署服务</span>
+              <span>部署服務</span>
             </div>
-            <div className={styles["ex"]}>无</div>
-            <div className={styles["ex2"]}>内外网单机及集群部署</div>
+            <div className={styles["ex"]}>無</div>
+            <div className={styles["ex2"]}>內外網單機及集羣部署</div>
           </div>
           <div
             className={styles["contrast-box3"]}
@@ -93,20 +93,20 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>性能负载</span>
+              <span>性能負載</span>
             </div>
             <div className={styles["ex"]}>低</div>
-            <div className={styles["ex2"]}>企业级全链路高性能场景</div>
+            <div className={styles["ex2"]}>企業級全鏈路高性能場景</div>
           </div>
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>资源类型</div>
+            <div className={styles["name"]}>資源類型</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>视频库</span>
+              <span>影片庫</span>
             </div>
             <div className={styles["ex"]}>MP4(H264)</div>
             <div className={styles["ex2"]}>MP4|MOV|AVI|WMV|FLV</div>
@@ -114,7 +114,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>图片库</span>
+              <span>圖片庫</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -126,8 +126,8 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>附件库</span>
-              <span className={styles["sp"]}>（仅支持上传下载）</span>
+              <span>附件庫</span>
+              <span className={styles["sp"]}>（僅支持上傳下載）</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -139,9 +139,9 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>文档库</span>
+              <span>文檔庫</span>
               <span className={styles["sp"]}>
-                （支持Word、PPT、PDF在线预览）
+                （支持Word、PPT、PDF在線預覽）
               </span>
             </div>
             <div className={styles["ex"]}></div>
@@ -152,7 +152,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>音频库</span>
+              <span>音訊庫</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -162,8 +162,8 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>证书库</span>
-              <span className={styles["sp"]}>（支持自定义证书设计）</span>
+              <span>證書庫</span>
+              <span className={styles["sp"]}>（支持自定義證書設計）</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -176,7 +176,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>讲师资料</span>
+              <span>講師資料</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -186,14 +186,14 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>考试中心</div>
+            <div className={styles["name"]}>考試中心</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>试题库</span>
+              <span>試題庫</span>
               <span className={styles["sp"]}>
-                （支持六大题型，支持批量导入）
+                （支持六大題型，支持批量導入）
               </span>
             </div>
             <div className={styles["ex"]}></div>
@@ -207,8 +207,8 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>试卷库</span>
-              <span className={styles["sp"]}>（支持手动组卷，随机组卷）</span>
+              <span>試卷庫</span>
+              <span className={styles["sp"]}>（支持手動組卷，隨機組卷）</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -218,12 +218,12 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>考试中心</div>
+            <div className={styles["name"]}>考試中心</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>线上课</span>
+              <span>線上課</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -235,7 +235,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>线下课</span>
+              <span>線下課</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -245,9 +245,9 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学习任务</span>
+              <span>學習任務</span>
               <span className={styles["sp"]}>
-                （支持指派部门以及独立学员、支持多阶段学习、支持闯关模式、支持关联证书奖励）
+                （支持指派部門以及獨立學員、支持多階段學習、支持闖關模式、支持關聯證書獎勵）
               </span>
             </div>
             <div className={styles["ex"]}></div>
@@ -258,9 +258,9 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>考试任务</span>
+              <span>考試任務</span>
               <span className={styles["sp"]}>
-                （支持指派部门以及独立学员、支持试题/选项乱序、支持补考、支持关联证书奖励）
+                （支持指派部門以及獨立學員、支持試題/選項亂序、支持補考、支持關聯證書獎勵）
               </span>
             </div>
             <div className={styles["ex"]}></div>
@@ -276,18 +276,18 @@ const LicensingPage = () => {
               <strong></strong>
               <span>指派方式</span>
             </div>
-            <div className={styles["ex"]}>部门</div>
-            <div className={styles["ex2"]}>部门|学员|用户组</div>
+            <div className={styles["ex"]}>部門</div>
+            <div className={styles["ex2"]}>部門|學員|使用者組</div>
           </div>
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>积分激励</div>
+            <div className={styles["name"]}>積分激勵</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>积分规则</span>
+              <span>積分規則</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -297,7 +297,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>积分调整</span>
+              <span>積分調整</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -310,7 +310,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>积分排行</span>
+              <span>積分排行</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -320,12 +320,12 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>数据统计</div>
+            <div className={styles["name"]}>數據統計</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>数据概览</span>
+              <span>數據概覽</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -337,7 +337,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学习排行</span>
+              <span>學習排行</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -349,7 +349,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>资源统计</span>
+              <span>資源統計</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -361,7 +361,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学员信息导出</span>
+              <span>學員信息導出</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -371,7 +371,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>课程学习导出</span>
+              <span>課程學習導出</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -381,7 +381,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学员学习导出</span>
+              <span>學員學習導出</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -391,7 +391,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>部门学习导出</span>
+              <span>部門學習導出</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -401,7 +401,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学习任务统计</span>
+              <span>學習任務統計</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -411,7 +411,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>考试任务统计</span>
+              <span>考試任務統計</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -424,7 +424,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>考生答卷导出</span>
+              <span>考生答卷導出</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -451,7 +451,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>防挂机</span>
+              <span>防掛機</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -474,12 +474,12 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>系统配置</div>
+            <div className={styles["name"]}>系統設定</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>网站设置</span>
+              <span>網站設置</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -491,7 +491,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>播放设置</span>
+              <span>播放設置</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -506,7 +506,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>学员设置</span>
+              <span>學員設置</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -518,7 +518,7 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>单点登录</div>
+            <div className={styles["name"]}>單點登入</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
@@ -535,7 +535,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>企业微信</span>
+              <span>企業微信</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -545,7 +545,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>钉钉</span>
+              <span>釘釘</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -555,7 +555,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>飞书</span>
+              <span>飛書</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -565,7 +565,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>云之家（金蝶）</span>
+              <span>雲之家（金蝶）</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -588,7 +588,7 @@ const LicensingPage = () => {
               <span>泛微</span>
             </div>
             <div className={styles["ex"]}></div>
-            <div className={styles["ex2"]}>免费支持</div>
+            <div className={styles["ex2"]}>免費支持</div>
           </div>
           <div
             className={styles["contrast-box3"]}
@@ -599,12 +599,12 @@ const LicensingPage = () => {
               <span>用友</span>
             </div>
             <div className={styles["ex"]}></div>
-            <div className={styles["ex2"]}>免费支持</div>
+            <div className={styles["ex2"]}>免費支持</div>
           </div>
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>存储方案</div>
+            <div className={styles["name"]}>存儲方案</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
@@ -619,7 +619,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>阿里云oss</span>
+              <span>阿里雲oss</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -634,7 +634,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>腾讯云cos</span>
+              <span>騰訊雲cos</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -646,12 +646,12 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>安全保护</div>
+            <div className={styles["name"]}>安全保護</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>视频跑马灯</span>
+              <span>影片跑馬燈</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -663,7 +663,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>HLS视频加密</span>
+              <span>HLS影片加密</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -673,7 +673,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>视频防嗅探下载</span>
+              <span>影片防嗅探下載</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -683,7 +683,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>文档水印</span>
+              <span>文檔水印</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -693,7 +693,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>考试水印</span>
+              <span>考試水印</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -706,7 +706,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>试题防复制</span>
+              <span>試題防複製</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -716,12 +716,12 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>多终端</div>
+            <div className={styles["name"]}>多終端</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>PC独立网站</span>
+              <span>PC獨立網站</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -736,7 +736,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>移动端H5</span>
+              <span>移動端H5</span>
             </div>
             <div className={styles["ex"]}>
               <img src={ex1Icon} className={styles["pic"]} />
@@ -748,15 +748,15 @@ const LicensingPage = () => {
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>版权信息</div>
+            <div className={styles["name"]}>版權信息</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>代码协议文件</span>
+              <span>代碼協議檔案</span>
             </div>
             <div className={styles["ex"]}>不可移除</div>
-            <div className={styles["ex2"]}>企业授权</div>
+            <div className={styles["ex2"]}>企業授權</div>
           </div>
           <div
             className={styles["contrast-box3"]}
@@ -764,20 +764,20 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>页脚版权链接</span>
+              <span>頁腳版權連結</span>
             </div>
             <div className={styles["ex"]}>不可移除</div>
-            <div className={styles["ex2"]}>企业授权</div>
+            <div className={styles["ex2"]}>企業授權</div>
           </div>
         </div>
         <div className="float-left mt-30">
           <div className={styles["contrast-box2"]}>
-            <div className={styles["name"]}>售后服务</div>
+            <div className={styles["name"]}>售後服務</div>
           </div>
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>安装部署</span>
+              <span>安裝部署</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -787,7 +787,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>使用手册</span>
+              <span>使用手冊</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -797,7 +797,7 @@ const LicensingPage = () => {
           <div className={styles["contrast-box3"]}>
             <div className={styles["name"]}>
               <strong></strong>
-              <span>系统升级</span>
+              <span>系統升級</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>
@@ -810,7 +810,7 @@ const LicensingPage = () => {
           >
             <div className={styles["name"]}>
               <strong></strong>
-              <span>专属服务群</span>
+              <span>專屬服務羣</span>
             </div>
             <div className={styles["ex"]}></div>
             <div className={styles["ex2"]}>

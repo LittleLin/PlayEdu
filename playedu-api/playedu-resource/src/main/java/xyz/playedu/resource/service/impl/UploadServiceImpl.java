@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,39 +46,39 @@ public class UploadServiceImpl implements UploadService {
     @SneakyThrows
     public UploadFileInfo upload(S3Config s3Config, MultipartFile file, String dir) {
         if (file == null || file.isEmpty() || StringUtil.isEmpty(file.getOriginalFilename())) {
-            throw new ServiceException("请上传文件");
+            throw new ServiceException("請上傳檔案");
         }
 
-        // 上传上来的文件名名
+        // 上傳上來的檔案名名
         String filename = file.getOriginalFilename();
 
         UploadFileInfo fileInfo = new UploadFileInfo();
-        // 文件大小
+        // 檔案大小
         fileInfo.setSize(file.getSize());
-        // 解析扩展名
+        // 解析擴展名
         fileInfo.setExtension(HelperUtil.fileExt(filename).toLowerCase());
-        // 解析扩展名称对应的系统资源类型
+        // 解析擴展名稱對應的系統資源類型
         String type = BackendConstant.RESOURCE_EXT_2_TYPE.get(fileInfo.getExtension());
-        // 附件模块上传文件 非系统格式统一为OTHER
+        // 附件模塊上傳檔案 非系統格式統一爲OTHER
         if (StringUtil.isEmpty(type)) {
             type = BackendConstant.RESOURCE_TYPE_OTHER;
         }
         fileInfo.setResourceType(type);
-        // 检测是否为系统不支持的资源类型
+        // 檢測是否爲系統不支持的資源類型
         if (StringUtil.isEmpty(fileInfo.getResourceType())) {
-            throw new ServiceException("当前格式不支持");
+            throw new ServiceException("當前格式不支持");
         }
 
-        // 上传原文件的文件名
+        // 上傳原檔案的檔案名
         fileInfo.setOriginalName(filename.replaceAll("(?i)." + fileInfo.getExtension(), ""));
-        // 自定义新的存储文件名
+        // 自定義新的存儲檔案名
         fileInfo.setSaveName(HelperUtil.randomString(32) + "." + fileInfo.getExtension());
-        // 生成保存的相对路径
+        // 生成保存的相對路徑
         if (StringUtil.isEmpty(dir)) {
             dir = BackendConstant.RESOURCE_TYPE_2_DIR.get(fileInfo.getResourceType());
         }
         fileInfo.setSavePath(dir + fileInfo.getSaveName());
-        // 保存文件
+        // 保存檔案
         new S3Util(s3Config)
                 .saveFile(
                         file,
@@ -97,24 +97,24 @@ public class UploadServiceImpl implements UploadService {
         // 解析出content-type
         String contentType =
                 base64Rows[0].replaceAll("data:", "").replaceAll(";base64", "").toLowerCase();
-        // 解析出文件格式
+        // 解析出檔案格式
         String ext = contentType.replaceAll("image/", "");
-        // 通过文件格式解析资源类型
+        // 通過檔案格式解析資源類型
         String type = BackendConstant.RESOURCE_EXT_2_TYPE.get(ext);
-        // 资源类型必须存在
+        // 資源類型必須存在
         if (StringUtil.isEmpty(type)) {
-            throw new ServiceException("当前格式不支持");
+            throw new ServiceException("當前格式不支持");
         }
         byte[] binary = Base64Util.decode(base64Rows[1]);
 
         String filename = HelperUtil.randomString(32) + "." + ext;
         String savePath = BackendConstant.RESOURCE_TYPE_2_DIR.get(type) + filename;
 
-        // 保存文件
+        // 保存檔案
         new S3Util(s3Config)
                 .saveBytes(binary, savePath, BackendConstant.RESOURCE_EXT_2_CONTENT_TYPE.get(ext));
 
-        // 上传记录
+        // 上傳記錄
         return resourceService.create(
                 adminId,
                 categoryIds,

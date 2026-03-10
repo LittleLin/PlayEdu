@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * @Author 杭州白书科技有限公司
+ * @Author 杭州白書科技有限公司
  *
  * @create 2023/2/23 16:12
  */
@@ -39,7 +39,7 @@ public class UserImportRequest {
         private String idCard;
     }
 
-    @NotNull(message = "请导入数据")
+    @NotNull(message = "請導入數據")
     private List<UserItem> users;
 
     @NotNull(message = "起始行")

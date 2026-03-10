@@ -101,7 +101,7 @@ const CourseUserPage = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "学员",
+      title: "學員",
       render: (_, record: any) => (
         <div className="d-flex">
           <Image
@@ -120,11 +120,11 @@ const CourseUserPage = () => {
       ),
     },
     {
-      title: "邮箱",
+      title: "電子郵件",
       render: (_, record: any) => <span>{record.email}</span>,
     },
     {
-      title: "部门",
+      title: "部門",
       render: (_, record: any) => (
         <div className="float-left">
           {userDepIds[record.id] &&
@@ -141,11 +141,11 @@ const CourseUserPage = () => {
       ),
     },
     {
-      title: "课程进度",
+      title: "課程進度",
       dataIndex: "progress",
       render: (_, record: any) => (
         <span>
-          已完成课时：
+          已完成課時：
           {(records[record.id] && records[record.id].finished_count) ||
             0} /{" "}
           {(records[record.id] && records[record.id].hour_count) ||
@@ -154,7 +154,7 @@ const CourseUserPage = () => {
       ),
     },
     {
-      title: "第一次学习时间",
+      title: "第一次學習時間",
       dataIndex: "created_at",
       render: (_, record: any) => (
         <>
@@ -169,7 +169,7 @@ const CourseUserPage = () => {
       ),
     },
     {
-      title: "学习完成时间",
+      title: "學習完成時間",
       dataIndex: "id",
       render: (_, record: any) => (
         <>
@@ -182,7 +182,7 @@ const CourseUserPage = () => {
       ),
     },
     {
-      title: "学习进度",
+      title: "學習進度",
       dataIndex: "progress",
       render: (_, record: any) => (
         <>
@@ -244,7 +244,7 @@ const CourseUserPage = () => {
         setLoading(false);
       })
       .catch((err: any) => {
-        console.log("错误,", err);
+        console.log("錯誤,", err);
       });
   };
 
@@ -260,11 +260,11 @@ const CourseUserPage = () => {
   };
 
   const paginationProps = {
-    current: page, //当前页码
+    current: page, //當前頁碼
     pageSize: size,
-    total: total, // 总条数
+    total: total, // 總條數
     onChange: (page: number, pageSize: number) =>
-      handlePageChange(page, pageSize), //改变页码的函数
+      handlePageChange(page, pageSize), //改變頁碼的函數
     showSizeChanger: true,
   };
 
@@ -273,18 +273,18 @@ const CourseUserPage = () => {
     setSize(pageSize);
   };
 
-  // 删除学员
+  // 刪除學員
   const delItem = () => {
     if (selectedRowKeys.length === 0) {
-      message.error("请选择学员后再重置");
+      message.error("請選擇學員後再重置");
       return;
     }
     confirm({
-      title: "操作确认",
+      title: "操作確認",
       icon: <ExclamationCircleFilled />,
-      content: "确认重置选中学员学习记录？",
+      content: "確認重置選中學員學習記錄？",
       centered: true,
-      okText: "确认",
+      okText: "確認",
       cancelText: "取消",
       onOk() {
         Course.destroyCourseUser(Number(params.courseId), selectedRowKeys).then(
@@ -311,13 +311,13 @@ const CourseUserPage = () => {
       <Row className="playedu-main-body">
         <Col span={24}>
           <div className="float-left mb-24">
-            <BackBartment title={title || "线上课学员"} />
+            <BackBartment title={title || "線上課學員"} />
           </div>
           <div className="float-left j-b-flex mb-24">
             <div className="d-flex">
               <PerButton
                 type="primary"
-                text="重置学习记录"
+                text="重置學習記錄"
                 class="mr-16"
                 icon={null}
                 p="course"
@@ -327,7 +327,7 @@ const CourseUserPage = () => {
             </div>
             <div className="d-flex">
               <div className="d-flex mr-24">
-                <Typography.Text>学员姓名：</Typography.Text>
+                <Typography.Text>學員姓名：</Typography.Text>
                 <Input
                   value={name}
                   onChange={(e) => {
@@ -335,11 +335,11 @@ const CourseUserPage = () => {
                   }}
                   allowClear
                   style={{ width: 160 }}
-                  placeholder="请输入姓名关键字"
+                  placeholder="請輸入姓名關鍵字"
                 />
               </div>
               <div className="d-flex mr-24">
-                <Typography.Text>学员邮箱：</Typography.Text>
+                <Typography.Text>學員電子郵件：</Typography.Text>
                 <Input
                   value={email}
                   onChange={(e) => {
@@ -347,18 +347,18 @@ const CourseUserPage = () => {
                   }}
                   allowClear
                   style={{ width: 160 }}
-                  placeholder="请输入学员邮箱"
+                  placeholder="請輸入學員電子郵件"
                 />
               </div>
               {/* <div className="d-flex mr-24">
-                <Typography.Text>身份证号：</Typography.Text>
+                <Typography.Text>身份證號：</Typography.Text>
                 <Input
                   value={idCard}
                   onChange={(e) => {
                     setIdCard(e.target.value);
                   }}
                   style={{ width: 160 }}
-                  placeholder="请输入身份证号"
+                  placeholder="請輸入身份證號"
                 />
               </div> */}
               <div className="d-flex">
@@ -372,7 +372,7 @@ const CourseUserPage = () => {
                     setRefresh(!refresh);
                   }}
                 >
-                  查 询
+                  查 詢
                 </Button>
               </div>
             </div>

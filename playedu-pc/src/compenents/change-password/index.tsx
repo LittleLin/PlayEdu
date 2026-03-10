@@ -25,7 +25,7 @@ export const ChangePasswordModel: React.FC<PropInterface> = ({
 
   const onFinish = (values: any) => {
     if (values.again_new_password !== values.new_password) {
-      message.error("再次输入的新密码错误");
+      message.error("再次輸入的新密碼錯誤");
       return;
     }
     user.password(values.old_password, values.new_password).then((res: any) => {
@@ -42,7 +42,7 @@ export const ChangePasswordModel: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="修改密码"
+          title="修改密碼"
           centered
           forceRender
           open={true}
@@ -63,36 +63,36 @@ export const ChangePasswordModel: React.FC<PropInterface> = ({
               autoComplete="off"
             >
               <Form.Item
-                label="请输入原密码"
+                label="請輸入原密碼"
                 name="old_password"
-                rules={[{ required: true, message: "请输入原密码!" }]}
+                rules={[{ required: true, message: "請輸入原密碼!" }]}
               >
                 <Input.Password
                   style={{ width: 200 }}
                   autoComplete="off"
-                  placeholder="请输入原密码"
+                  placeholder="請輸入原密碼"
                 />
               </Form.Item>
               <Form.Item
-                label="输入新密码"
+                label="輸入新密碼"
                 name="new_password"
-                rules={[{ required: true, message: "请输入新密码!" }]}
+                rules={[{ required: true, message: "請輸入新密碼!" }]}
               >
                 <Input.Password
                   style={{ width: 200 }}
                   autoComplete="off"
-                  placeholder="请输入新密码"
+                  placeholder="請輸入新密碼"
                 />
               </Form.Item>
               <Form.Item
-                label="再次输入新密码"
+                label="再次輸入新密碼"
                 name="again_new_password"
-                rules={[{ required: true, message: "再次输入新密码!" }]}
+                rules={[{ required: true, message: "再次輸入新密碼!" }]}
               >
                 <Input.Password
                   style={{ width: 200 }}
                   autoComplete="off"
-                  placeholder="再次输入新密码"
+                  placeholder="再次輸入新密碼"
                 />
               </Form.Item>
             </Form>

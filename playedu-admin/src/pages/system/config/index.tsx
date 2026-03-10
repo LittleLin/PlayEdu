@@ -282,7 +282,7 @@ const SystemConfigPage = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: `网站设置`,
+      label: `網站設置`,
       children: (
         <Form
           form={form}
@@ -297,7 +297,7 @@ const SystemConfigPage = () => {
           {logo && (
             <Form.Item
               style={{ marginBottom: 30 }}
-              label="PC学员端Logo"
+              label="PC學員端Logo"
               name="system.logo"
               labelCol={{ style: { marginTop: 4, marginLeft: 24 } }}
             >
@@ -305,7 +305,7 @@ const SystemConfigPage = () => {
                 <Image preview={false} height={40} src={logo} />
                 <div className="d-flex ml-24">
                   <UploadImageButton
-                    text="更换Logo"
+                    text="更換Logo"
                     onSelected={(url, id) => {
                       setLogo(url);
                       form.setFieldsValue({ "system.logo": id });
@@ -313,7 +313,7 @@ const SystemConfigPage = () => {
                   ></UploadImageButton>
                 </div>
                 <div className="helper-text ml-8">
-                  （推荐尺寸:240x80px，支持JPG、PNG）
+                  （推薦尺寸:240x80px，支持JPG、PNG）
                 </div>
               </div>
             </Form.Item>
@@ -321,13 +321,13 @@ const SystemConfigPage = () => {
           {!logo && (
             <Form.Item
               style={{ marginBottom: 30 }}
-              label="PC学员端Logo"
+              label="PC學員端Logo"
               name="system.logo"
             >
               <div className="d-flex">
                 <div className="d-flex ml-24">
                   <UploadImageButton
-                    text="更换Logo"
+                    text="更換Logo"
                     onSelected={(url, id) => {
                       setLogo(url);
                       form.setFieldsValue({ "system.logo": id });
@@ -335,45 +335,45 @@ const SystemConfigPage = () => {
                   ></UploadImageButton>
                 </div>
                 <div className="helper-text ml-8">
-                  （推荐尺寸:240x80px，支持JPG、PNG）
+                  （推薦尺寸:240x80px，支持JPG、PNG）
                 </div>
               </div>
             </Form.Item>
           )}
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="PC学员端地址"
+            label="PC學員端地址"
             name="system.pc_url"
           >
-            <Input style={{ width: 274 }} placeholder="请填写PC学员端地址" />
+            <Input style={{ width: 274 }} placeholder="請填寫PC學員端地址" />
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="H5学员端地址"
+            label="H5學員端地址"
             name="system.h5_url"
           >
-            <Input style={{ width: 274 }} placeholder="请填写H5学员端地址" />
+            <Input style={{ width: 274 }} placeholder="請填寫H5學員端地址" />
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="学员端标题"
+            label="學員端標題"
             name="system.name"
           >
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写学员端标题"
+              placeholder="請填寫學員端標題"
             />
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="学员端页脚"
+            label="學員端頁腳"
             name="system.pc_index_footer_msg"
           >
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写学员端页脚"
+              placeholder="請填寫學員端頁腳"
             />
           </Form.Item>
           <Form.Item
@@ -389,7 +389,7 @@ const SystemConfigPage = () => {
     },
     {
       key: "2",
-      label: `播放设置`,
+      label: `播放設置`,
       children: (
         <Form
           form={form}
@@ -401,17 +401,17 @@ const SystemConfigPage = () => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item style={{ marginBottom: 30 }} label="禁止拖动进度条">
+          <Form.Item style={{ marginBottom: 30 }} label="禁止拖動進度條">
             <Space align="baseline" style={{ height: 32 }}>
               <Form.Item name="player.disabled_drag" valuePropName="checked">
                 <Switch onChange={onDragChange} />
               </Form.Item>
               <div className="helper-text">
-                （打开后禁止学员在首次学习中拖动进度条，以防刷课）
+                （打開後禁止學員在首次學習中拖動進度條，以防刷課）
               </div>
             </Space>
           </Form.Item>
-          <Form.Item style={{ marginBottom: 30 }} label="播放器跑马灯">
+          <Form.Item style={{ marginBottom: 30 }} label="播放器跑馬燈">
             <Space align="baseline" style={{ height: 32 }}>
               <Form.Item
                 name="player.is_enabled_bullet_secret"
@@ -420,17 +420,17 @@ const SystemConfigPage = () => {
                 <Switch onChange={onSwitchChange} />
               </Form.Item>
               <div className="helper-text">
-                （打开后播放器会随机出现跑马灯水印，以防录屏传播）
+                （打開後播放器會隨機出現跑馬燈水印，以防錄屏傳播）
               </div>
             </Space>
           </Form.Item>
-          <Form.Item style={{ marginBottom: 30 }} label="跑马灯内容">
+          <Form.Item style={{ marginBottom: 30 }} label="跑馬燈內容">
             <Space align="baseline" style={{ height: 32 }}>
               <Form.Item name="player.bullet_secret_text">
                 <Input
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="自定义跑马灯内容"
+                  placeholder="自定義跑馬燈內容"
                   onChange={(e) => {
                     const { value } = e.target;
                     if (!value && e.type !== "change") {
@@ -453,20 +453,20 @@ const SystemConfigPage = () => {
                 className="ml-24"
                 onChange={addEmail}
               >
-                邮箱
+                電子郵件
               </Checkbox>
             </Space>
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="跑马灯文字颜色"
+            label="跑馬燈文字顏色"
             name="player.bullet_secret_color"
           >
             <Input type="color" style={{ width: 32, padding: 0 }} />
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="跑马灯不透明度"
+            label="跑馬燈不透明度"
             name="player.bullet_secret_opacity"
           >
             <Slider style={{ width: 400 }} range defaultValue={[0, 100]} />
@@ -487,14 +487,14 @@ const SystemConfigPage = () => {
                 />
                 <div className="d-flex ml-24">
                   <UploadImageButton
-                    text="更换封面"
+                    text="更換封面"
                     onSelected={(url, id) => {
                       setThumb(url);
                       form.setFieldsValue({ "player.poster": id });
                     }}
                   ></UploadImageButton>
                   <div className="helper-text ml-8">
-                    （推荐尺寸:1920x1080px，视频播放未开始时展示）
+                    （推薦尺寸:1920x1080px，影片播放未開始時展示）
                   </div>
                 </div>
               </div>
@@ -509,14 +509,14 @@ const SystemConfigPage = () => {
               <div className="d-flex">
                 <div className="d-flex">
                   <UploadImageButton
-                    text="更换封面"
+                    text="更換封面"
                     onSelected={(url, id) => {
                       setThumb(url);
                       form.setFieldsValue({ "player.poster": id });
                     }}
                   ></UploadImageButton>
                   <div className="helper-text ml-8">
-                    （推荐尺寸:1920x1080px，视频播放未开始时展示）
+                    （推薦尺寸:1920x1080px，影片播放未開始時展示）
                   </div>
                 </div>
               </div>
@@ -535,7 +535,7 @@ const SystemConfigPage = () => {
     },
     {
       key: "3",
-      label: `学员设置`,
+      label: `學員設置`,
       children: (
         <Form
           form={form}
@@ -550,7 +550,7 @@ const SystemConfigPage = () => {
           {avatar && (
             <Form.Item
               style={{ marginBottom: 30 }}
-              label="学员默认头像"
+              label="學員預設頭像"
               name="member.default_avatar"
               labelCol={{ style: { marginTop: 14, marginLeft: 28 } }}
             >
@@ -564,13 +564,13 @@ const SystemConfigPage = () => {
                 />
                 <div className="d-flex ml-24">
                   <UploadImageButton
-                    text="更换头像"
+                    text="更換頭像"
                     onSelected={(url, id) => {
                       setAvatar(url);
                       form.setFieldsValue({ "member.default_avatar": id });
                     }}
                   ></UploadImageButton>
-                  <div className="helper-text ml-8">（新学员的默认头像）</div>
+                  <div className="helper-text ml-8">（新學員的預設頭像）</div>
                 </div>
               </div>
             </Form.Item>
@@ -578,19 +578,19 @@ const SystemConfigPage = () => {
           {!avatar && (
             <Form.Item
               style={{ marginBottom: 30 }}
-              label="学员默认头像"
+              label="學員預設頭像"
               name="member.default_avatar"
             >
               <div className="d-flex">
                 <div className="d-flex">
                   <UploadImageButton
-                    text="更换头像"
+                    text="更換頭像"
                     onSelected={(url, id) => {
                       setAvatar(url);
                       form.setFieldsValue({ "member.default_avatar": id });
                     }}
                   ></UploadImageButton>
-                  <div className="helper-text ml-8">（新学员的默认头像）</div>
+                  <div className="helper-text ml-8">（新學員的預設頭像）</div>
                 </div>
               </div>
             </Form.Item>
@@ -608,7 +608,7 @@ const SystemConfigPage = () => {
     },
     {
       key: "4",
-      label: `S3存储`,
+      label: `S3存儲`,
       children: (
         <Form
           form={form}
@@ -628,7 +628,7 @@ const SystemConfigPage = () => {
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写AccessKey"
+              placeholder="請填寫AccessKey"
             />
           </Form.Item>
           <Form.Item
@@ -639,7 +639,7 @@ const SystemConfigPage = () => {
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写SecretKey"
+              placeholder="請填寫SecretKey"
             />
           </Form.Item>
           <Form.Item
@@ -650,7 +650,7 @@ const SystemConfigPage = () => {
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写Bucket"
+              placeholder="請填寫Bucket"
             />
           </Form.Item>
           <Form.Item
@@ -661,7 +661,7 @@ const SystemConfigPage = () => {
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写Region"
+              placeholder="請填寫Region"
             />
           </Form.Item>
           <Form.Item
@@ -672,7 +672,7 @@ const SystemConfigPage = () => {
             <Input
               style={{ width: 274 }}
               allowClear
-              placeholder="请填写Endpoint"
+              placeholder="請填寫Endpoint"
             />
           </Form.Item>
           <Form.Item
@@ -688,7 +688,7 @@ const SystemConfigPage = () => {
     },
     {
       key: "5",
-      label: `LDAP配置`,
+      label: `LDAP設定`,
       children: (
         <Form
           form={form}
@@ -702,46 +702,46 @@ const SystemConfigPage = () => {
         >
           <Form.Item
             style={{ marginBottom: 30 }}
-            label="启用"
+            label="啓用"
             name="ldap.enabled"
             valuePropName="checked"
           >
             <Switch onChange={onLDAPChange} />
           </Form.Item>
-          <Form.Item style={{ marginBottom: 30 }} label="服务地址">
+          <Form.Item style={{ marginBottom: 30 }} label="服務地址">
             <Space align="baseline" style={{ height: 32 }}>
               <Form.Item name="ldap.url">
                 <Input
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="请填写服务地址"
+                  placeholder="請填寫服務地址"
                 />
               </Form.Item>
               <div className="helper-text">
-                （LDAP的对外服务地址。例如：ldap://ldap.example.com:389）
+                （LDAP的對外服務地址。例如：ldap://ldap.example.com:389）
               </div>
             </Space>
           </Form.Item>
-          <Form.Item style={{ marginBottom: 30 }} label="用户名">
+          <Form.Item style={{ marginBottom: 30 }} label="使用者名">
             <Space align="baseline" style={{ height: 32 }}>
               <Form.Item name="ldap.admin_user">
                 <Input
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="请填写用户名"
+                  placeholder="請填寫使用者名"
                 />
               </Form.Item>
               <div className="helper-text">
-                （用户登录到LDAP。例子：cn=admin,dc=playedu,dc=xyz）
+                （使用者登入到LDAP。例子：cn=admin,dc=playedu,dc=xyz）
               </div>
             </Space>
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 30 }}
             name="ldap.admin_pass"
-            label="密码"
+            label="密碼"
           >
-            <Input style={{ width: 274 }} allowClear placeholder="请填写密码" />
+            <Input style={{ width: 274 }} allowClear placeholder="請填寫密碼" />
           </Form.Item>
           <Form.Item style={{ marginBottom: 30 }} label="基本DN">
             <Space align="baseline" style={{ height: 32 }}>
@@ -749,10 +749,10 @@ const SystemConfigPage = () => {
                 <Input
                   style={{ width: 274 }}
                   allowClear
-                  placeholder="请填写基本DN"
+                  placeholder="請填寫基本DN"
                 />
               </Form.Item>
-              <div className="helper-text">（从此节点搜索用户）</div>
+              <div className="helper-text">（從此節點搜索使用者）</div>
             </Space>
           </Form.Item>
           <Form.Item

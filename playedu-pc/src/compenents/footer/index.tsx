@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
       }}
     >
       <Link to="https://www.playeduos.com/" target="_blank">
-        {/* 此处为版权标识，严禁删改 */}
+        {/* 此處爲版權標識，嚴禁刪改 */}
         <i
           style={{ fontSize: 30, color: "#cccccc" }}
           className="iconfont icon-waterprint"

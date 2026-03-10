@@ -19,11 +19,11 @@ const LoginPage: React.FC = () => {
 
   const loginSubmit = (e: any) => {
     if (!email) {
-      message.error("请输入邮箱或UID");
+      message.error("請輸入電子郵件或UID");
       return;
     }
     if (!password) {
-      message.error("请输入密码");
+      message.error("請輸入密碼");
       return;
     }
     if (loading) {
@@ -80,7 +80,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className={styles["login-content"]}>
       <div className={styles["top-content"]}>
-        <div className={styles["title"]}>学员登录</div>
+        <div className={styles["title"]}>學員登入</div>
         <div className={styles["login-box"]}>
           <div className={styles["left-box"]}>
             <img className={styles["icon"]} src={banner} alt="" />
@@ -93,7 +93,7 @@ const LoginPage: React.FC = () => {
                   setEmail(e.target.value);
                 }}
                 style={{ width: 400, height: 54 }}
-                placeholder={"请输入邮箱或UID"}
+                placeholder={"請輸入電子郵件或UID"}
                 onKeyUp={(e) => keyUp(e)}
               />
             </div>
@@ -104,7 +104,7 @@ const LoginPage: React.FC = () => {
                   setPassword(e.target.value);
                 }}
                 style={{ width: 400, height: 54 }}
-                placeholder="请输入密码"
+                placeholder="請輸入密碼"
                 onKeyUp={(e) => keyUp(e)}
               />
             </div>
@@ -115,7 +115,7 @@ const LoginPage: React.FC = () => {
                 onClick={loginSubmit}
                 loading={loading}
               >
-                立即登录
+                立即登入
               </Button>
             </div>
           </div>

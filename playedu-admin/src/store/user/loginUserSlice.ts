@@ -43,7 +43,7 @@ const loginUserSlice = createSlice({
         stage.value.uploadStatus === true &&
         e.payload.uploadStatus === true
       ) {
-        message.error("请点击右下角悬浮窗");
+        message.error("請點選右下角懸浮窗");
       }
       stage.value.uploadStatus = e.payload.uploadStatus;
       stage.value.uploadCateIds = e.payload.uploadCateIds;

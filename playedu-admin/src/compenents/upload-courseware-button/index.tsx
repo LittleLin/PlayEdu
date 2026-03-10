@@ -48,10 +48,10 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
           }
         }
       }, 1000);
-      console.log("定时器已创建", intervalId.current);
+      console.log("定時器已建立", intervalId.current);
     } else {
       window.clearInterval(intervalId.current);
-      console.log("定时器已销毁");
+      console.log("定時器已銷燬");
     }
   }, [showModal]);
 
@@ -59,7 +59,7 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
     multiple: true,
     beforeUpload: async (file: File) => {
       if (file.size === 0) {
-        message.error(`文件 ${file.name} 为空文件`);
+        message.error(`檔案 ${file.name} 爲空檔案`);
         return Upload.LIST_IGNORE;
       }
       let extension: any = file.name.split(".");
@@ -98,7 +98,7 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
           "application/vnd.ms-powerpoint.presentation.macroEnabled.12" ||
         file.type === "application/vnd.ms-powerpoint.slideshow.macroEnabled.12"
       ) {
-        // 添加到本地待上传
+        // 添加到本地待上傳
         let data = await getMinioUploadId(extension);
         let run = new UploadChunk(file, data["upload_id"], data["filename"]);
         let item: FileItem = {
@@ -142,7 +142,7 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
         // 再更新list
         setFileList([...localFileList.current]);
       } else {
-        message.error(`${file.name} 并不是可上传文件`);
+        message.error(`${file.name} 並不是可上傳檔案`);
       }
       return Upload.LIST_IGNORE;
     },
@@ -170,13 +170,13 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
           setShowModal(true);
         }}
       >
-        上传课件
+        上傳課件
       </Button>
 
       {showModal ? (
         <Modal
           width={800}
-          title="上传课件"
+          title="上傳課件"
           open={true}
           onCancel={() => {
             closeWin();
@@ -194,10 +194,10 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
-                <p className="ant-upload-text">请将文件拖拽到此处上传</p>
+                <p className="ant-upload-text">請將檔案拖拽到此處上傳</p>
                 <p className="ant-upload-hint">
-                  支持一次上传多个 /
-                  支持word、excel、ppt、pdf、zip、rar、txt格式文件
+                  支持一次上傳多個 /
+                  支持word、excel、ppt、pdf、zip、rar、txt格式檔案
                 </p>
               </Dragger>
             </Col>
@@ -207,7 +207,7 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
                 rowKey="id"
                 columns={[
                   {
-                    title: "课件",
+                    title: "課件",
                     dataIndex: "name",
                     key: "name",
                     render: (_, record) => <span>{record.file.name}</span>,
@@ -223,13 +223,13 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
                     ),
                   },
                   {
-                    title: "进度",
+                    title: "進度",
                     dataIndex: "progress",
                     key: "progress",
                     render: (_, record: FileItem) => (
                       <>
                         {record.upload.status === 0 ? (
-                          "等待上传"
+                          "等待上傳"
                         ) : (
                           <Progress
                             size="small"
@@ -250,7 +250,7 @@ export const UploadCoursewareButton = (props: PropsInterface) => {
                         ) : null}
 
                         {record.upload.status === 7 ? (
-                          <Tag color="success">上传成功</Tag>
+                          <Tag color="success">上傳成功</Tag>
                         ) : null}
                       </>
                     ),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class CacheController {
     @Autowired private MemoryCacheUtil memoryCacheUtil;
 
     @GetMapping("/list")
-    @Log(title = "缓存列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "緩存列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse list() {
         Map<String, Object> data = new HashMap<>();
         data.put("keys", memoryCacheUtil.getAllKeys());
@@ -44,7 +44,7 @@ public class CacheController {
     }
 
     @DeleteMapping("/clear")
-    @Log(title = "缓存删除key", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "緩存刪除key", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse clear(@RequestParam HashMap<String, Object> params) {
         String cache_key = MapUtils.getString(params, "cache_key");
         memoryCacheUtil.del(cache_key);
@@ -52,7 +52,7 @@ public class CacheController {
     }
 
     @DeleteMapping("/clear/all")
-    @Log(title = "缓存清空", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "緩存清空", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse clearAll() {
         List<String> keys = memoryCacheUtil.getAllKeys();
         for (String key : keys) {

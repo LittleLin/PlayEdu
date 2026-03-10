@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_INDEX)
     @GetMapping("/index")
-    @Log(title = "管理员-列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員-列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse Index(@RequestParam HashMap<String, Object> params) {
         Integer page = MapUtils.getInteger(params, "page", 1);
         Integer size = MapUtils.getInteger(params, "size", 10);
@@ -83,7 +83,7 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_CUD)
     @GetMapping("/create")
-    @Log(title = "管理员-新建", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員-新增", businessType = BusinessTypeConstant.GET)
     public JsonResponse create() {
         List<AdminRole> roles = roleService.list();
 
@@ -95,11 +95,11 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_CUD)
     @PostMapping("/create")
-    @Log(title = "管理员-新建", businessType = BusinessTypeConstant.INSERT)
+    @Log(title = "管理員-新增", businessType = BusinessTypeConstant.INSERT)
     public JsonResponse store(@RequestBody @Validated AdminUserRequest req)
             throws ServiceException {
         if (req.getPassword().isEmpty()) {
-            return JsonResponse.error("请输入密码");
+            return JsonResponse.error("請輸入密碼");
         }
 
         adminUserService.createWithRoleIds(
@@ -114,7 +114,7 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_CUD)
     @GetMapping("/{id}")
-    @Log(title = "管理员-编辑", businessType = BusinessTypeConstant.GET)
+    @Log(title = "管理員-編輯", businessType = BusinessTypeConstant.GET)
     public JsonResponse edit(@PathVariable Integer id) throws NotFoundException {
         AdminUser adminUser = adminUserService.findOrFail(id);
         List<Integer> roleIds = adminUserService.getRoleIdsByUserId(adminUser.getId());
@@ -128,7 +128,7 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_CUD)
     @PutMapping("/{id}")
-    @Log(title = "管理员-编辑", businessType = BusinessTypeConstant.UPDATE)
+    @Log(title = "管理員-編輯", businessType = BusinessTypeConstant.UPDATE)
     public JsonResponse update(
             @PathVariable Integer id, @RequestBody @Validated AdminUserRequest req)
             throws NotFoundException, ServiceException {
@@ -145,7 +145,7 @@ public class AdminUserController {
 
     @BackendPermission(slug = BPermissionConstant.ADMIN_USER_CUD)
     @DeleteMapping("/{id}")
-    @Log(title = "管理员-删除", businessType = BusinessTypeConstant.DELETE)
+    @Log(title = "管理員-刪除", businessType = BusinessTypeConstant.DELETE)
     public JsonResponse destroy(@PathVariable Integer id) {
         adminUserService.removeWithRoleIds(id);
         return JsonResponse.success();

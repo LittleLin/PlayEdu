@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 import xyz.playedu.common.domain.LdapSyncUserDetail;
 
-/** LDAP用户同步详情服务接口 */
+/** LDAP使用者同步詳情服務接口 */
 public interface LdapSyncUserDetailService extends IService<LdapSyncUserDetail> {
 
     /**
-     * 批量创建用户同步详情记录
+     * 批量建立使用者同步詳情記錄
      *
-     * @param details 用户同步详情记录列表
+     * @param details 使用者同步詳情記錄列表
      */
     void batchCreate(List<LdapSyncUserDetail> details);
 
     /**
-     * 根据同步记录ID和操作类型获取用户同步详情
+     * 根據同步記錄ID和操作類型獲取使用者同步詳情
      *
-     * @param recordId 同步记录ID
-     * @param action 操作类型，1-新增，2-更新，3-删除，4-无变化
-     * @return 用户同步详情列表
+     * @param recordId 同步記錄ID
+     * @param action 操作類型，1-新增，2-更新，3-刪除，4-無變化
+     * @return 使用者同步詳情列表
      */
     List<LdapSyncUserDetail> getByRecordIdAndAction(Integer recordId, Integer action);
 }

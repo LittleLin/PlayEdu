@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class LdapController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/sync-records")
-    @Log(title = "LDAP-同步记录列表", businessType = BusinessTypeConstant.GET)
+    @Log(title = "LDAP-同步記錄列表", businessType = BusinessTypeConstant.GET)
     public JsonResponse syncRecords(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -55,11 +55,11 @@ public class LdapController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/sync-records/{id}")
-    @Log(title = "LDAP-同步记录详情", businessType = BusinessTypeConstant.GET)
+    @Log(title = "LDAP-同步記錄詳情", businessType = BusinessTypeConstant.GET)
     public JsonResponse syncRecordDetail(@PathVariable Integer id) {
         LdapSyncRecord record = ldapSyncRecordService.getById(id);
         if (record == null) {
-            return JsonResponse.error("记录不存在");
+            return JsonResponse.error("記錄不存在");
         }
 
         return JsonResponse.data(record);
@@ -67,19 +67,19 @@ public class LdapController {
 
     @BackendPermission(slug = BPermissionConstant.DEPARTMENT_CUD)
     @GetMapping("/sync-records/{id}/download")
-    @Log(title = "LDAP-同步记录下载", businessType = BusinessTypeConstant.GET)
+    @Log(title = "LDAP-同步記錄下載", businessType = BusinessTypeConstant.GET)
     public JsonResponse syncRecordDownload(@PathVariable Integer id) {
         LdapSyncRecord record = ldapSyncRecordService.getById(id);
         if (record == null) {
-            return JsonResponse.error("记录不存在");
+            return JsonResponse.error("記錄不存在");
         }
 
         if (record.getS3FilePath() == null || record.getS3FilePath().isEmpty()) {
-            return JsonResponse.error("同步记录文件不存在");
+            return JsonResponse.error("同步記錄檔案不存在");
         }
 
         try {
-            // 生成下载URL
+            // 生成下載URL
             S3Config s3Config = appConfigService.getS3Config();
             S3Util s3Util = new S3Util(s3Config);
             String url = s3Util.generateEndpointPreSignUrl(record.getS3FilePath());
@@ -89,7 +89,7 @@ public class LdapController {
 
             return JsonResponse.data(data);
         } catch (Exception e) {
-            return JsonResponse.error("生成下载链接失败: " + e.getMessage());
+            return JsonResponse.error("生成下載連結失敗: " + e.getMessage());
         }
     }
 }

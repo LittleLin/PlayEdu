@@ -37,19 +37,19 @@ export const SelectRange = (props: PropsInterface) => {
     <>
       {props.open ? (
         <Modal
-          title="选择部门"
+          title="選擇部門"
           centered
           closable={false}
           onCancel={() => {
             props.onCancel();
           }}
-          okText="确定"
+          okText="確定"
           open={true}
           width={800}
           maskClosable={false}
           onOk={() => {
             if (selectKeys.length === 0) {
-              message.error("请选择至少一个部门对象");
+              message.error("請選擇至少一個部門對象");
               return;
             }
             props.onSelected(selectKeys, selectVideos);
@@ -70,7 +70,7 @@ export const SelectRange = (props: PropsInterface) => {
             </div>
             <div className={styles["user-content"]}>
               <div className={styles["title"]}>
-                <div className={styles["tit"]}>已选择：</div>
+                <div className={styles["tit"]}>已選擇：</div>
                 <div
                   className={styles["link"]}
                   onClick={() => {

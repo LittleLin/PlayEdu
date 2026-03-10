@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ public class LdapUser implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     private String uuid;
 
-    /** 用户ID */
+    /** 使用者ID */
     private Integer userId;
 
     /** cn */
@@ -49,7 +49,7 @@ public class LdapUser implements Serializable {
     /** uid */
     private String uid;
 
-    /** 邮箱 */
+    /** 電子郵件 */
     private String email;
 
     /** */
@@ -71,22 +71,22 @@ public class LdapUser implements Serializable {
         this.id = id;
     }
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     public String getUuid() {
         return uuid;
     }
 
-    /** 唯一特征值 */
+    /** 唯一特徵值 */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    /** 用户ID */
+    /** 使用者ID */
     public Integer getUserId() {
         return userId;
     }
 
-    /** 用户ID */
+    /** 使用者ID */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -131,12 +131,12 @@ public class LdapUser implements Serializable {
         this.uid = uid;
     }
 
-    /** 邮箱 */
+    /** 電子郵件 */
     public String getEmail() {
         return email;
     }
 
-    /** 邮箱 */
+    /** 電子郵件 */
     public void setEmail(String email) {
         this.email = email;
     }

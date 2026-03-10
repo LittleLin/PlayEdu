@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import xyz.playedu.common.util.ldap.LdapTransformUser;
 
 /**
  * @author tengyongzhi
- * @description 针对表【ldap_user】的数据库操作Service实现
+ * @description 針對表【ldap_user】的資料庫操作Service實現
  * @createDate 2023-08-31 11:59:27
  */
 @Service
@@ -47,7 +47,7 @@ public class LdapUserServiceImpl extends ServiceImpl<LdapUserMapper, LdapUser>
         user.setUid(ldapTransformUser.getUid());
         // ou
         user.setOu(String.join(",", ldapTransformUser.getOu()));
-        // 邮箱可能不存在
+        // 電子郵件可能不存在
         if (StringUtil.isNotEmpty(ldapTransformUser.getEmail())) {
             user.setEmail(ldapTransformUser.getEmail());
         }

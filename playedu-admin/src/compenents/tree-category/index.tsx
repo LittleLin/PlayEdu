@@ -34,7 +34,7 @@ export const TreeCategory = (props: PropInterface) => {
       if (props.type === "no-cate") {
         new_arr.unshift({
           key: 0,
-          title: <span className="tree-title-elli">未分类</span>,
+          title: <span className="tree-title-elli">未分類</span>,
         });
       }
       setTreeData(new_arr);

@@ -41,7 +41,7 @@ export const ResourceCategoryUpdate: React.FC<PropInterface> = ({
       if (JSON.stringify(categories) !== "{}") {
         const new_arr: Option[] = checkArr(categories, 0);
         new_arr.unshift({
-          label: "作为一级分类",
+          label: "作爲一級分類",
           value: 0,
         });
         setCategories(new_arr);
@@ -129,8 +129,8 @@ export const ResourceCategoryUpdate: React.FC<PropInterface> = ({
     if (selectedOptions && selectedOptions[0]) {
       let current = selectedOptions[selectedOptions.length - 1].value;
       if (current === id) {
-        message.error("不能选择自己作为父类");
-        return "无";
+        message.error("不能選擇自己作爲父類");
+        return "無";
       }
     }
 
@@ -141,7 +141,7 @@ export const ResourceCategoryUpdate: React.FC<PropInterface> = ({
     <>
       {open ? (
         <Modal
-          title="编辑分类"
+          title="編輯分類"
           centered
           forceRender
           open={true}
@@ -169,14 +169,14 @@ export const ResourceCategoryUpdate: React.FC<PropInterface> = ({
                 autoComplete="off"
               >
                 <Form.Item
-                  label="所属上级"
+                  label="所屬上級"
                   name="parent_id"
-                  rules={[{ required: true, message: "请选择所属上级!" }]}
+                  rules={[{ required: true, message: "請選擇所屬上級!" }]}
                 >
                   <Cascader
                     style={{ width: 200 }}
                     allowClear
-                    placeholder="请选择所属上级"
+                    placeholder="請選擇所屬上級"
                     onChange={handleChange}
                     options={categories}
                     changeOnSelect
@@ -185,14 +185,14 @@ export const ResourceCategoryUpdate: React.FC<PropInterface> = ({
                   />
                 </Form.Item>
                 <Form.Item
-                  label="分类名称"
+                  label="分類名稱"
                   name="name"
-                  rules={[{ required: true, message: "请输入分类名称!" }]}
+                  rules={[{ required: true, message: "請輸入分類名稱!" }]}
                 >
                   <Input
                     style={{ width: 200 }}
                     allowClear
-                    placeholder="请输入分类名称"
+                    placeholder="請輸入分類名稱"
                   />
                 </Form.Item>
               </Form>

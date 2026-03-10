@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 杭州白书科技有限公司
+ * Copyright (C) 2023 杭州白書科技有限公司
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import xyz.playedu.course.service.CourseService;
 
 /**
  * @author tengteng
- * @description 针对表【courses】的数据库操作Service实现
+ * @description 針對表【courses】的資料庫操作Service實現
  * @createDate 2023-02-24 14:14:01
  */
 @Service
@@ -70,7 +70,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             Integer[] categoryIds,
             Integer[] depIds,
             Integer adminId) {
-        // 创建课程
+        // 建立課程
         Course course = new Course();
         course.setTitle(title);
         course.setThumb(thumb);
@@ -82,9 +82,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         course.setUpdatedAt(new Date());
         course.setAdminId(adminId);
         save(course);
-        // 关联分类
+        // 關聯分類
         relateCategories(course, categoryIds);
-        // 关联部门
+        // 關聯部門
         relateDepartments(course, depIds);
 
         return course;
@@ -174,7 +174,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public Course findOrFail(Integer id) throws NotFoundException {
         Course course = getOne(query().getWrapper().eq("id", id));
         if (course == null) {
-            throw new NotFoundException("课程不存在");
+            throw new NotFoundException("課程不存在");
         }
         return course;
     }
@@ -231,20 +231,20 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         if (StringUtil.isEmpty(depIds)) {
             return new ArrayList<>();
         }
-        // 获取部门课程ID
+        // 獲取部門課程ID
         List<Integer> courseIds = courseDepartmentUserService.getCourseIdsByDepIds(depIds);
         if (StringUtil.isEmpty(courseIds)) {
             return new ArrayList<>();
         }
 
         if (StringUtil.isNotEmpty(categoryIds)) {
-            // 获取分类课程ID
+            // 獲取分類課程ID
             List<Integer> catCourseIds =
                     courseCategoryService.getCourseIdsByCategoryIds(categoryIds);
             if (StringUtil.isEmpty(catCourseIds)) {
                 return new ArrayList<>();
             }
-            // 求课程ID交集
+            // 求課程ID交集
             courseIds = courseIds.stream().filter(catCourseIds::contains).toList();
             if (StringUtil.isEmpty(courseIds)) {
                 return new ArrayList<>();
@@ -258,7 +258,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         if (StringUtil.isEmpty(depIds)) {
             return new ArrayList<>();
         }
-        // 获取部门课程ID
+        // 獲取部門課程ID
         List<Integer> courseIds = courseDepartmentUserService.getCourseIdsByDepIds(depIds);
         if (StringUtil.isEmpty(courseIds)) {
             return new ArrayList<>();
