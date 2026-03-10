@@ -15,7 +15,11 @@
  */
 package xyz.playedu.common.config;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -34,4 +38,15 @@ public class PlayEduConfig {
 
     @Value("${playedu.limiter.limit}")
     private Long limiterLimit;
+
+    @Value(
+            "${playedu.cors.allowed-origins:http://localhost:9900,http://localhost:9800,http://localhost:9801}")
+    private String corsAllowedOrigins;
+
+    public List<String> corsAllowedOriginList() {
+        return Arrays.stream(corsAllowedOrigins.split(","))
+                .map(String::trim)
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.toList());
+    }
 }

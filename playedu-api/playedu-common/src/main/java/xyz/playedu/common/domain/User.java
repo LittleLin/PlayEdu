@@ -220,8 +220,6 @@ public class User implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", name=").append(name);
         sb.append(", avatar=").append(avatar);
-        sb.append(", password=").append(password);
-        sb.append(", salt=").append(salt);
         sb.append(", idCard=").append(idCard);
         sb.append(", credit1=").append(credit1);
         sb.append(", createIp=").append(createIp);

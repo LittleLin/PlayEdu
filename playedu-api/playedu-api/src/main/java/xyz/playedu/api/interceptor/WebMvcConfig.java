@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import xyz.playedu.common.config.PlayEduConfig;
 
 @Configuration
 @Slf4j
@@ -32,6 +33,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired private ApiInterceptor apiInterceptor;
 
+    @Autowired private PlayEduConfig playEduConfig;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(apiInterceptor).addPathPatterns("/**");
@@ -42,7 +45,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins(playEduConfig.corsAllowedOriginList().toArray(new String[0]))
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .maxAge(1_296_000);

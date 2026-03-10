@@ -158,8 +158,6 @@ public class AdminUser implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", email=").append(email);
-        sb.append(", password=").append(password);
-        sb.append(", salt=").append(salt);
         sb.append(", loginIp=").append(loginIp);
         sb.append(", loginAt=").append(loginAt);
         sb.append(", isBanLogin=").append(isBanLogin);
